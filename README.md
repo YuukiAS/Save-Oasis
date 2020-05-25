@@ -1,2 +1,2 @@
 # VG100_Project1
-Project1 -- Pinball
+Project1 -- A breakout game
