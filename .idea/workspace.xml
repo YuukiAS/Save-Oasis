@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3edad3ad-0371-41b1-a7b2-4efa31bd61d4" name="Default Changelist" comment="Basic Structure v0">
+    <list default="true" id="3edad3ad-0371-41b1-a7b2-4efa31bd61d4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +16,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
+        <entry key="$PROJECT_DIR$" value="feature-HMC" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -63,12 +62,20 @@
       <option name="project" value="LOCAL" />
       <updated>1590561589847</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Basic Structure v0.01">
+      <created>1590562250208</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1590562250208</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Basic Structure v0" />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic Structure v0" />
+    <MESSAGE value="Basic Structure v0.01" />
+    <option name="LAST_COMMIT_MESSAGE" value="Basic Structure v0.01" />
   </component>
   <component name="WindowStateProjectService">
     <state x="367" y="75" key="#Notifications" timestamp="1590562148662">
@@ -83,9 +90,9 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="284" y="58" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1590561900153" />
-    <state x="367" y="145" key="Vcs.Push.Dialog.v2" timestamp="1590561910776">
+    <state x="367" y="145" key="Vcs.Push.Dialog.v2" timestamp="1590562471469">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="367" y="145" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1590561910776" />
+    <state x="367" y="145" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1590562471469" />
   </component>
 </project>
