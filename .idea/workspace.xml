@@ -2,6 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3edad3ad-0371-41b1-a7b2-4efa31bd61d4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Breakout.elmi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Breakout.elmo" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Breakout.elm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Color.elm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Message.elm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Model.elm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Update.elm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -11,7 +20,14 @@
   </component>
   <component name="ElmWorkspace">
     <elmProjects />
-    <settings elmCompilerPath="" elmFormatPath="" elmTestPath="" isElmFormatOnSaveEnabled="false" />
+    <settings elmCompilerPath="C:\Program Files\Elm\0.19.1\bin\elm.exe" elmFormatPath="C:\Program Files (x86)\Elm\0.19.1\bin\elm-format.exe" elmTestPath="" isElmFormatOnSaveEnabled="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Elm Module" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -22,15 +38,37 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1cTnWG3mbnw7apXvzTQqdKEO5J3" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/elm.json" />
+    <property name="settings.editor.selected.configurable" value="org.elm.workspace.ui.ElmWorkspaceConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Run Elm" type="ShConfigurationType">
+      <option name="SCRIPT_PATH" value="C:/Program Files/Elm/0.19.1/bin/elm.exe" />
+      <option name="SCRIPT_OPTIONS" value=";cd $PROJECT_DIR$/;elm make src/Breakout.elm; start-process index.html;exit" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="INTERPRETER_PATH" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="ShConfigurationType">
+      <option name="SCRIPT_PATH" value="C:/Program Files/Elm/0.19.1/bin/elm.exe" />
+      <option name="SCRIPT_OPTIONS" value=";cd lecture/Tetris/elm-tetris/;elm make src/Basic.elm; start-process index.html;exit" />
+      <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="INTERPRETER_PATH" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -69,30 +107,47 @@
       <option name="project" value="LOCAL" />
       <updated>1590562250208</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Basic Structure v0.011">
+      <created>1590562582387</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1590562582387</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Basic Structure v0" />
     <MESSAGE value="Basic Structure v0.01" />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic Structure v0.01" />
+    <MESSAGE value="Basic Structure v0.011" />
+    <option name="LAST_COMMIT_MESSAGE" value="Basic Structure v0.011" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="367" y="75" key="#Notifications" timestamp="1590562148662">
+    <state x="367" y="75" key="#Notifications" timestamp="1590562602296">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="367" y="75" key="#Notifications/0.0.1549.831@0.0.1549.831" timestamp="1590562148662" />
-    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1590561962144">
+    <state x="367" y="75" key="#Notifications/0.0.1549.831@0.0.1549.831" timestamp="1590562602296" />
+    <state x="197" y="86" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590563487544">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1590561962144" />
-    <state x="284" y="58" key="SettingsEditor" timestamp="1590561900153">
+    <state x="197" y="86" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1590563487544" />
+    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1590562581824">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="284" y="58" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1590561900153" />
-    <state x="367" y="145" key="Vcs.Push.Dialog.v2" timestamp="1590562471469">
+    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1590562581824" />
+    <state x="555" y="171" key="FileChooserDialogImpl" timestamp="1590563482616">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="367" y="145" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1590562471469" />
+    <state x="555" y="171" key="FileChooserDialogImpl/0.0.1549.831@0.0.1549.831" timestamp="1590563482616" />
+    <state x="284" y="58" key="SettingsEditor" timestamp="1590563323460">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state x="284" y="58" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1590563323460" />
+    <state x="367" y="145" key="Vcs.Push.Dialog.v2" timestamp="1590562586821">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state x="367" y="145" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1590562586821" />
   </component>
 </project>
