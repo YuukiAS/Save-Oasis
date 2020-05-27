@@ -1,6 +1,7 @@
 module Breakout exposing (main)
 
-import Html exposing (text)
+import Html exposing (..)
+import Playground exposing (..)
 
 main =
   text "Hello, VG100!"
