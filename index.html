@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Object</title>
+  <title>Breakout</title>
   <style>body { padding: 0; margin: 0; }</style>
 </head>
 
@@ -6723,18 +6723,17 @@ var $evancz$elm_playground$Playground$game = F3(
 		return $elm$browser$Browser$document(
 			{init: init, subscriptions: subscriptions, update: update, view: view});
 	});
-var $evancz$elm_playground$Playground$toX = function (keyboard) {
-	return (keyboard.right ? 1 : 0) - (keyboard.left ? 1 : 0);
-};
-var $evancz$elm_playground$Playground$toY = function (keyboard) {
-	return (keyboard.up ? 1 : 0) - (keyboard.down ? 1 : 0);
-};
-var $author$project$Object$update = F2(
-	function (computer, shapes) {
-		var y = (_Utils_cmp(shapes.y, -100) < 1) ? shapes.y : (computer.keyboard.down ? (shapes.y + (2 * $evancz$elm_playground$Playground$toY(computer.keyboard))) : (shapes.y - 0.5));
-		var x = shapes.x + $evancz$elm_playground$Playground$toX(computer.keyboard);
-		var angle = computer.keyboard.up ? (shapes.angle + $elm$core$Basics$pi) : shapes.angle;
-		return {angle: angle, x: x, y: y};
+var $author$project$Model$initial = {ball_vx: 0, ball_vy: 0, ball_x: 0, ball_y: 0, pad_vx: 0, pad_x: 0, pad_y: 0};
+var $author$project$Update$update = F2(
+	function (computer, pb) {
+		var pad_y = pb.pad_y;
+		var pad_x = pb.pad_x;
+		var pad_vx = pb.pad_vx;
+		var ball_y = pb.ball_y;
+		var ball_x = pb.ball_x;
+		var ball_vy = pb.ball_vy;
+		var ball_vx = pb.ball_vx;
+		return {ball_vx: ball_vx, ball_vy: ball_vy, ball_x: ball_x, ball_y: ball_y, pad_vx: pad_vx, pad_x: pad_x, pad_y: pad_y};
 	});
 var $evancz$elm_playground$Playground$Circle = F2(
 	function (a, b) {
@@ -6776,7 +6775,7 @@ var $evancz$elm_playground$Playground$rgb = F3(
 			$evancz$elm_playground$Playground$colorClamp(b));
 	});
 var $author$project$Object$cus_yellow = A3($evancz$elm_playground$Playground$rgb, 254, 202, 87);
-var $author$project$Object$ball = A2($evancz$elm_playground$Playground$circle, $author$project$Object$cus_yellow, 3);
+var $author$project$Object$ball = A2($evancz$elm_playground$Playground$circle, $author$project$Object$cus_yellow, 15);
 var $author$project$Object$cus_blue = A3($evancz$elm_playground$Playground$rgb, 84, 160, 255);
 var $evancz$elm_playground$Playground$Rectangle = F3(
 	function (a, b, c) {
@@ -6793,13 +6792,7 @@ var $evancz$elm_playground$Playground$rectangle = F3(
 			1,
 			A3($evancz$elm_playground$Playground$Rectangle, color, width, height));
 	});
-var $author$project$Object$brick1 = A3($evancz$elm_playground$Playground$rectangle, $author$project$Object$cus_blue, 35, 10);
-var $author$project$Object$cus_cyan = A3($evancz$elm_playground$Playground$rgb, 0, 210, 211);
-var $author$project$Object$brick2 = A3($evancz$elm_playground$Playground$rectangle, $author$project$Object$cus_cyan, 35, 10);
-var $author$project$Object$cus_pink = A3($evancz$elm_playground$Playground$rgb, 255, 159, 243);
-var $author$project$Object$brick3 = A3($evancz$elm_playground$Playground$rectangle, $author$project$Object$cus_pink, 35, 10);
-var $author$project$Object$cus_red = A3($evancz$elm_playground$Playground$rgb, 255, 107, 107);
-var $author$project$Object$brick4 = A3($evancz$elm_playground$Playground$rectangle, $author$project$Object$cus_red, 35, 10);
+var $author$project$Object$brick1 = A3($evancz$elm_playground$Playground$rectangle, $author$project$Object$cus_blue, 100, 40);
 var $evancz$elm_playground$Playground$Group = function (a) {
 	return {$: 'Group', a: a};
 };
@@ -6813,16 +6806,6 @@ var $evancz$elm_playground$Playground$group = function (shapes) {
 		1,
 		$evancz$elm_playground$Playground$Group(shapes));
 };
-var $evancz$elm_playground$Playground$moveLeft = F2(
-	function (dx, _v0) {
-		var x = _v0.a;
-		var y = _v0.b;
-		var a = _v0.c;
-		var s = _v0.d;
-		var o = _v0.e;
-		var f = _v0.f;
-		return A6($evancz$elm_playground$Playground$Shape, x - dx, y, a, s, o, f);
-	});
 var $evancz$elm_playground$Playground$moveX = F2(
 	function (dx, _v0) {
 		var x = _v0.a;
@@ -6834,70 +6817,170 @@ var $evancz$elm_playground$Playground$moveX = F2(
 		return A6($evancz$elm_playground$Playground$Shape, x + dx, y, a, s, o, f);
 	});
 var $evancz$elm_playground$Playground$moveRight = $evancz$elm_playground$Playground$moveX;
-var $author$project$Object$cus_orange = A3($evancz$elm_playground$Playground$rgb, 255, 159, 67);
-var $author$project$Object$paddle = A3($evancz$elm_playground$Playground$rectangle, $author$project$Object$cus_orange, 55, 3);
-var $author$project$Object$lshape = $evancz$elm_playground$Playground$group(
+var $author$project$Object$grid = $evancz$elm_playground$Playground$group(
 	_List_fromArray(
 		[
-			A2($evancz$elm_playground$Playground$moveLeft, 75, $author$project$Object$brick1),
-			A2($evancz$elm_playground$Playground$moveRight, 75, $author$project$Object$brick2),
-			A2($evancz$elm_playground$Playground$moveRight, 150, $author$project$Object$brick3),
-			A2($evancz$elm_playground$Playground$moveRight, 225, $author$project$Object$brick4),
-			A2($evancz$elm_playground$Playground$moveLeft, 150, $author$project$Object$ball),
-			A2($evancz$elm_playground$Playground$moveLeft, 225, $author$project$Object$paddle)
+			$author$project$Object$brick1,
+			A2($evancz$elm_playground$Playground$moveRight, 102, $author$project$Object$brick1),
+			A2($evancz$elm_playground$Playground$moveRight, 204, $author$project$Object$brick1),
+			A2($evancz$elm_playground$Playground$moveRight, 306, $author$project$Object$brick1),
+			A2($evancz$elm_playground$Playground$moveRight, 408, $author$project$Object$brick1),
+			A2($evancz$elm_playground$Playground$moveRight, 510, $author$project$Object$brick1),
+			A2($evancz$elm_playground$Playground$moveRight, 612, $author$project$Object$brick1),
+			A2($evancz$elm_playground$Playground$moveRight, 714, $author$project$Object$brick1),
+			A2($evancz$elm_playground$Playground$moveRight, 816, $author$project$Object$brick1),
+			A2($evancz$elm_playground$Playground$moveRight, 918, $author$project$Object$brick1),
+			A2($evancz$elm_playground$Playground$moveRight, 1020, $author$project$Object$brick1),
+			A2($evancz$elm_playground$Playground$moveRight, 1122, $author$project$Object$brick1)
 		]));
-var $evancz$elm_playground$Playground$move = F3(
-	function (dx, dy, _v0) {
+var $evancz$elm_playground$Playground$moveDown = F2(
+	function (dy, _v0) {
 		var x = _v0.a;
 		var y = _v0.b;
 		var a = _v0.c;
 		var s = _v0.d;
 		var o = _v0.e;
 		var f = _v0.f;
-		return A6($evancz$elm_playground$Playground$Shape, x + dx, y + dy, a, s, o, f);
+		return A6($evancz$elm_playground$Playground$Shape, x, y - dy, a, s, o, f);
 	});
-var $evancz$elm_playground$Playground$rotate = F2(
-	function (da, _v0) {
+var $evancz$elm_playground$Playground$moveLeft = F2(
+	function (dx, _v0) {
 		var x = _v0.a;
 		var y = _v0.b;
 		var a = _v0.c;
 		var s = _v0.d;
 		var o = _v0.e;
 		var f = _v0.f;
-		return A6($evancz$elm_playground$Playground$Shape, x, y, a + da, s, o, f);
+		return A6($evancz$elm_playground$Playground$Shape, x - dx, y, a, s, o, f);
 	});
-var $evancz$elm_playground$Playground$scale = F2(
-	function (ns, _v0) {
+var $evancz$elm_playground$Playground$moveY = F2(
+	function (dy, _v0) {
 		var x = _v0.a;
 		var y = _v0.b;
 		var a = _v0.c;
 		var s = _v0.d;
 		var o = _v0.e;
 		var f = _v0.f;
-		return A6($evancz$elm_playground$Playground$Shape, x, y, a, s * ns, o, f);
+		return A6($evancz$elm_playground$Playground$Shape, x, y + dy, a, s, o, f);
 	});
-var $author$project$Object$view = F2(
-	function (computer, shapes) {
+var $evancz$elm_playground$Playground$moveUp = $evancz$elm_playground$Playground$moveY;
+var $author$project$Object$cus_orange = A3($evancz$elm_playground$Playground$rgb, 255, 159, 67);
+var $author$project$Object$paddle = A3($evancz$elm_playground$Playground$rectangle, $author$project$Object$cus_orange, 210, 15);
+var $evancz$elm_playground$Playground$Hex = function (a) {
+	return {$: 'Hex', a: a};
+};
+var $evancz$elm_playground$Playground$red = $evancz$elm_playground$Playground$Hex('#cc0000');
+var $evancz$elm_playground$Playground$Words = F2(
+	function (a, b) {
+		return {$: 'Words', a: a, b: b};
+	});
+var $evancz$elm_playground$Playground$words = F2(
+	function (color, string) {
+		return A6(
+			$evancz$elm_playground$Playground$Shape,
+			0,
+			0,
+			0,
+			1,
+			1,
+			A2($evancz$elm_playground$Playground$Words, color, string));
+	});
+var $evancz$elm_playground$Playground$yellow = $evancz$elm_playground$Playground$Hex('#edd400');
+var $author$project$View$view = F2(
+	function (computer, pb) {
+		var top = computer.screen.top;
+		var rig = computer.screen.right;
+		var lef = computer.screen.left;
+		var bot = computer.screen.bottom;
 		return _List_fromArray(
 			[
+				A3(
+				$evancz$elm_playground$Playground$rectangle,
+				A3($evancz$elm_playground$Playground$rgb, 255, 255, 255),
+				(rig - lef) - 300,
+				(top - bot) - 300),
 				A2(
-				$evancz$elm_playground$Playground$scale,
-				3,
+				$evancz$elm_playground$Playground$moveUp,
+				bot + 10,
+				A3(
+					$evancz$elm_playground$Playground$rectangle,
+					A3($evancz$elm_playground$Playground$rgb, 95, 39, 205),
+					(rig - lef) - 310,
+					10)),
 				A2(
-					$evancz$elm_playground$Playground$rotate,
-					shapes.angle,
-					A3($evancz$elm_playground$Playground$move, shapes.x, shapes.y, $author$project$Object$lshape)))
+				$evancz$elm_playground$Playground$moveUp,
+				top - 80,
+				A3(
+					$evancz$elm_playground$Playground$rectangle,
+					A3($evancz$elm_playground$Playground$rgb, 95, 39, 205),
+					(rig - lef) - 310,
+					10)),
+				A2(
+				$evancz$elm_playground$Playground$moveUp,
+				((bot + top) - 70) / 2,
+				A2(
+					$evancz$elm_playground$Playground$moveLeft,
+					((rig - lef) - 314) / 2,
+					A3(
+						$evancz$elm_playground$Playground$rectangle,
+						A3($evancz$elm_playground$Playground$rgb, 95, 39, 205),
+						10,
+						(top - bot) - 80))),
+				A2(
+				$evancz$elm_playground$Playground$moveUp,
+				((bot + top) - 70) / 2,
+				A2(
+					$evancz$elm_playground$Playground$moveRight,
+					((rig - lef) - 314) / 2,
+					A3(
+						$evancz$elm_playground$Playground$rectangle,
+						A3($evancz$elm_playground$Playground$rgb, 95, 39, 205),
+						10,
+						(top - bot) - 80))),
+				A2($evancz$elm_playground$Playground$moveUp, bot + 50, $author$project$Object$paddle),
+				A2($evancz$elm_playground$Playground$moveUp, bot + 75, $author$project$Object$ball),
+				A2($evancz$elm_playground$Playground$circle, $evancz$elm_playground$Playground$red, 5),
+				A2(
+				$evancz$elm_playground$Playground$moveUp,
+				300,
+				A2(
+					$evancz$elm_playground$Playground$moveRight,
+					620,
+					A2($evancz$elm_playground$Playground$words, $evancz$elm_playground$Playground$yellow, '620,300'))),
+				A2(
+				$evancz$elm_playground$Playground$moveDown,
+				370,
+				A2(
+					$evancz$elm_playground$Playground$moveLeft,
+					615,
+					A2($evancz$elm_playground$Playground$words, $evancz$elm_playground$Playground$yellow, '-615,-370'))),
+				A2(
+				$evancz$elm_playground$Playground$moveUp,
+				276,
+				A2($evancz$elm_playground$Playground$moveLeft, 561, $author$project$Object$grid)),
+				A2(
+				$evancz$elm_playground$Playground$moveUp,
+				234,
+				A2($evancz$elm_playground$Playground$moveLeft, 561, $author$project$Object$grid)),
+				A2(
+				$evancz$elm_playground$Playground$moveUp,
+				192,
+				A2($evancz$elm_playground$Playground$moveLeft, 561, $author$project$Object$grid)),
+				A2(
+				$evancz$elm_playground$Playground$moveUp,
+				150,
+				A2($evancz$elm_playground$Playground$moveLeft, 561, $author$project$Object$grid)),
+				A2(
+				$evancz$elm_playground$Playground$moveUp,
+				108,
+				A2($evancz$elm_playground$Playground$moveLeft, 561, $author$project$Object$grid))
 			]);
 	});
-var $author$project$Object$main = A3(
-	$evancz$elm_playground$Playground$game,
-	$author$project$Object$view,
-	$author$project$Object$update,
-	{angle: 0, x: 0, y: 0});
-_Platform_export({'Object':{'init':$author$project$Object$main(
+var $author$project$Breakout$main = A3($evancz$elm_playground$Playground$game, $author$project$View$view, $author$project$Update$update, $author$project$Model$initial);
+_Platform_export({'Breakout':{'init':$author$project$Breakout$main(
 	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));
 
-  var app = Elm.Object.init({ node: document.getElementById("elm") });
+  var app = Elm.Breakout.init({ node: document.getElementById("elm") });
 }
 catch (e)
 {

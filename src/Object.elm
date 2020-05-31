@@ -9,57 +9,37 @@ cus_blue = rgb 84 160 255
 cus_cyan  = rgb 0 210 211
 cus_pink = rgb 255 159 243
 
-main = game view update { x = 0, y = 0, angle = 0 }
+ball = circle cus_yellow 15
+paddle = rectangle cus_orange 210 15
+brick1 = rectangle cus_blue 100 40
+brick2 = rectangle cus_cyan 100 40  --加速*1.1
+brick3 = rectangle cus_pink 100 40  -- 加血,但是加速*1.5
+brick4 = rectangle cus_red 100 40   -- 掉血,但是减速*0.8
 
-ball = circle cus_yellow 3
-paddle = rectangle cus_orange 55 3
-brick1 = rectangle cus_blue 35 10
-brick2 = rectangle cus_cyan 35 10  --加速*1.1
-brick3 = rectangle cus_pink 35 10  -- 加血,但是加速*1.5
-brick4 = rectangle cus_red 35 10   -- 掉血,但是减速*0.8
-
-lshape =      -- 全部相对于brick1
+grid =
     group
     [
-         brick1
-            |> moveLeft 75
-        ,brick2
-            |> moveRight 75
-        ,brick3
-            |> moveRight 150
-        ,brick4
-            |> moveRight 225
-        ,ball
-            |> moveLeft 150
-        ,paddle
-            |> moveLeft 225
+        brick1
+        ,brick1
+            |> moveRight 102
+        ,brick1
+            |> moveRight 204
+        ,brick1
+            |> moveRight 306
+        ,brick1
+            |> moveRight 408
+        ,brick1
+            |> moveRight 510
+        ,brick1
+            |> moveRight 612
+        ,brick1
+            |> moveRight 714
+        ,brick1
+            |> moveRight 816
+        ,brick1
+            |> moveRight 918
+        ,brick1
+            |> moveRight 1020
+        ,brick1
+            |> moveRight 1122
     ]
-
-view computer shapes =
-    [ lshape
-        |> move shapes.x shapes.y
-        |> rotate shapes.angle
-        |> scale 3
-    ]
-
-update computer shapes =
-    let
-        x =
-            shapes.x + toX computer.keyboard
-        y =
-            if shapes.y <= -100 then
-                shapes.y
-            else if computer.keyboard.down then
-                shapes.y + 2 * toY computer.keyboard
-            else
-                shapes.y - 0.5
-        angle =
-            if computer.keyboard.up then
-                shapes.angle + pi
-            else
-                shapes.angle
-    in
-    { x = x
-    , y = y
-    , angle = angle
-    }

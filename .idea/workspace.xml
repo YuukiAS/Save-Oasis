@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3edad3ad-0371-41b1-a7b2-4efa31bd61d4" name="Default Changelist" comment="Basic Structure v0.013">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/terminal.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Object.elm" afterDir="false" />
+    <list default="true" id="3edad3ad-0371-41b1-a7b2-4efa31bd61d4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/favicon.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Breakout.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Breakout.elmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Breakout.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Breakout.elmo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/d.dat" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/d.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/i.dat" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/i.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/o.dat" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/o.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm.json" beforeDir="false" afterPath="$PROJECT_DIR$/elm.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Breakout.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Breakout.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Color.elm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Object.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Object.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Update.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Update.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/View.elm" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +56,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/elm.json" />
-    <property name="settings.editor.selected.configurable" value="terminal" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="ELM_TEST_RUN_CONFIGURATION" factoryName="Elm Test configuration factory">
@@ -57,7 +65,7 @@
     </configuration>
     <configuration name="Run Elm" type="ShConfigurationType">
       <option name="SCRIPT_PATH" value="C:/Program Files/Elm/0.19.1/bin/elm.exe" />
-      <option name="SCRIPT_OPTIONS" value=";cd $PROJECT_DIR$/;elm make src/Object.elm; start-process index.html;exit" />
+      <option name="SCRIPT_OPTIONS" value=";cd $PROJECT_DIR$/;elm make src/Breakout.elm; start-process index.html;exit" />
       <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="INTERPRETER_PATH" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -130,7 +138,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590563653961</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Basic Structure v0.10&#10;- Some new objects">
+      <created>1590731205707</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1590731205707</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -140,21 +155,22 @@
     <MESSAGE value="Basic Structure v0.011" />
     <MESSAGE value="Basic Structure v0.012" />
     <MESSAGE value="Basic Structure v0.013" />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic Structure v0.013" />
+    <MESSAGE value="Basic Structure v0.10&#10;- Some new objects" />
+    <option name="LAST_COMMIT_MESSAGE" value="Basic Structure v0.10&#10;- Some new objects" />
   </component>
   <component name="WindowStateProjectService">
     <state x="367" y="75" key="#Notifications" timestamp="1590563789642">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="367" y="75" key="#Notifications/0.0.1549.831@0.0.1549.831" timestamp="1590563789642" />
-    <state x="197" y="86" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590730276355">
+    <state x="197" y="86" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590927769237">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="197" y="86" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1590730276355" />
-    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1590730427058">
+    <state x="197" y="86" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1590927769237" />
+    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1590731204975">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1590730427058" />
+    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1590731204975" />
     <state x="520" y="307" key="EnvironmentVariablesDialog" timestamp="1590727828040">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -163,13 +179,13 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="555" y="171" key="FileChooserDialogImpl/0.0.1549.831@0.0.1549.831" timestamp="1590727649074" />
-    <state x="335" y="117" key="SettingsEditor" timestamp="1590727828676">
+    <state x="335" y="117" key="SettingsEditor" timestamp="1590927544606">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="335" y="117" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1590727828676" />
-    <state x="367" y="145" key="Vcs.Push.Dialog.v2" timestamp="1590563658018">
+    <state x="335" y="117" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1590927544606" />
+    <state x="367" y="145" key="Vcs.Push.Dialog.v2" timestamp="1590731211145">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="367" y="145" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1590563658018" />
+    <state x="367" y="145" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1590731211145" />
   </component>
 </project>
