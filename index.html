@@ -6725,15 +6725,19 @@ var $evancz$elm_playground$Playground$game = F3(
 	});
 var $author$project$Model$initial = {ball_vx: 0, ball_vy: 0, ball_x: 0, ball_y: 0, pad_vx: 0, pad_x: 0, pad_y: 0};
 var $author$project$Update$update = F2(
-	function (computer, pb) {
-		var pad_y = pb.pad_y;
-		var pad_x = pb.pad_x;
-		var pad_vx = pb.pad_vx;
-		var ball_y = pb.ball_y;
-		var ball_x = pb.ball_x;
-		var ball_vy = pb.ball_vy;
-		var ball_vx = pb.ball_vx;
+	function (computer, memory) {
+		var pad_y = memory.pad_y;
+		var pad_x = memory.pad_x;
+		var pad_vx = memory.pad_vx;
+		var ball_y = memory.ball_y;
+		var ball_x = memory.ball_x;
+		var ball_vy = memory.ball_vy;
+		var ball_vx = memory.ball_vx;
 		return {ball_vx: ball_vx, ball_vy: ball_vy, ball_x: ball_x, ball_y: ball_y, pad_vx: pad_vx, pad_x: pad_x, pad_y: pad_y};
+	});
+var $author$project$View$Axis = F4(
+	function (top, bot, lef, rig) {
+		return {bot: bot, lef: lef, rig: rig, top: top};
 	});
 var $evancz$elm_playground$Playground$Circle = F2(
 	function (a, b) {
@@ -6775,7 +6779,13 @@ var $evancz$elm_playground$Playground$rgb = F3(
 			$evancz$elm_playground$Playground$colorClamp(b));
 	});
 var $author$project$Object$cus_yellow = A3($evancz$elm_playground$Playground$rgb, 254, 202, 87);
-var $author$project$Object$ball = A2($evancz$elm_playground$Playground$circle, $author$project$Object$cus_yellow, 15);
+var $author$project$Object$ball = function (ball_height) {
+	return A2($evancz$elm_playground$Playground$circle, $author$project$Object$cus_yellow, ball_height);
+};
+var $evancz$elm_playground$Playground$Hex = function (a) {
+	return {$: 'Hex', a: a};
+};
+var $evancz$elm_playground$Playground$blue = $evancz$elm_playground$Playground$Hex('#3465a4');
 var $author$project$Object$cus_blue = A3($evancz$elm_playground$Playground$rgb, 84, 160, 255);
 var $evancz$elm_playground$Playground$Rectangle = F3(
 	function (a, b, c) {
@@ -6792,7 +6802,10 @@ var $evancz$elm_playground$Playground$rectangle = F3(
 			1,
 			A3($evancz$elm_playground$Playground$Rectangle, color, width, height));
 	});
-var $author$project$Object$brick1 = A3($evancz$elm_playground$Playground$rectangle, $author$project$Object$cus_blue, 100, 40);
+var $author$project$Object$brick1 = F2(
+	function (brick_width, brick_height) {
+		return A3($evancz$elm_playground$Playground$rectangle, $author$project$Object$cus_blue, brick_width, brick_height);
+	});
 var $evancz$elm_playground$Playground$Group = function (a) {
 	return {$: 'Group', a: a};
 };
@@ -6817,22 +6830,58 @@ var $evancz$elm_playground$Playground$moveX = F2(
 		return A6($evancz$elm_playground$Playground$Shape, x + dx, y, a, s, o, f);
 	});
 var $evancz$elm_playground$Playground$moveRight = $evancz$elm_playground$Playground$moveX;
-var $author$project$Object$grid = $evancz$elm_playground$Playground$group(
-	_List_fromArray(
-		[
-			$author$project$Object$brick1,
-			A2($evancz$elm_playground$Playground$moveRight, 102, $author$project$Object$brick1),
-			A2($evancz$elm_playground$Playground$moveRight, 204, $author$project$Object$brick1),
-			A2($evancz$elm_playground$Playground$moveRight, 306, $author$project$Object$brick1),
-			A2($evancz$elm_playground$Playground$moveRight, 408, $author$project$Object$brick1),
-			A2($evancz$elm_playground$Playground$moveRight, 510, $author$project$Object$brick1),
-			A2($evancz$elm_playground$Playground$moveRight, 612, $author$project$Object$brick1),
-			A2($evancz$elm_playground$Playground$moveRight, 714, $author$project$Object$brick1),
-			A2($evancz$elm_playground$Playground$moveRight, 816, $author$project$Object$brick1),
-			A2($evancz$elm_playground$Playground$moveRight, 918, $author$project$Object$brick1),
-			A2($evancz$elm_playground$Playground$moveRight, 1020, $author$project$Object$brick1),
-			A2($evancz$elm_playground$Playground$moveRight, 1122, $author$project$Object$brick1)
-		]));
+var $author$project$Object$grid = F3(
+	function (brick_width, brick_height, move) {
+		return $evancz$elm_playground$Playground$group(
+			_List_fromArray(
+				[
+					A2($author$project$Object$brick1, brick_width, brick_height),
+					A2(
+					$evancz$elm_playground$Playground$moveRight,
+					move * 1,
+					A2($author$project$Object$brick1, brick_width, brick_height)),
+					A2(
+					$evancz$elm_playground$Playground$moveRight,
+					move * 2,
+					A2($author$project$Object$brick1, brick_width, brick_height)),
+					A2(
+					$evancz$elm_playground$Playground$moveRight,
+					move * 3,
+					A2($author$project$Object$brick1, brick_width, brick_height)),
+					A2(
+					$evancz$elm_playground$Playground$moveRight,
+					move * 4,
+					A2($author$project$Object$brick1, brick_width, brick_height)),
+					A2(
+					$evancz$elm_playground$Playground$moveRight,
+					move * 5,
+					A2($author$project$Object$brick1, brick_width, brick_height)),
+					A2(
+					$evancz$elm_playground$Playground$moveRight,
+					move * 6,
+					A2($author$project$Object$brick1, brick_width, brick_height)),
+					A2(
+					$evancz$elm_playground$Playground$moveRight,
+					move * 7,
+					A2($author$project$Object$brick1, brick_width, brick_height)),
+					A2(
+					$evancz$elm_playground$Playground$moveRight,
+					move * 8,
+					A2($author$project$Object$brick1, brick_width, brick_height)),
+					A2(
+					$evancz$elm_playground$Playground$moveRight,
+					move * 9,
+					A2($author$project$Object$brick1, brick_width, brick_height)),
+					A2(
+					$evancz$elm_playground$Playground$moveRight,
+					move * 10,
+					A2($author$project$Object$brick1, brick_width, brick_height)),
+					A2(
+					$evancz$elm_playground$Playground$moveRight,
+					move * 11,
+					A2($author$project$Object$brick1, brick_width, brick_height))
+				]));
+	});
 var $evancz$elm_playground$Playground$moveDown = F2(
 	function (dy, _v0) {
 		var x = _v0.a;
@@ -6865,11 +6914,10 @@ var $evancz$elm_playground$Playground$moveY = F2(
 	});
 var $evancz$elm_playground$Playground$moveUp = $evancz$elm_playground$Playground$moveY;
 var $author$project$Object$cus_orange = A3($evancz$elm_playground$Playground$rgb, 255, 159, 67);
-var $author$project$Object$paddle = A3($evancz$elm_playground$Playground$rectangle, $author$project$Object$cus_orange, 210, 15);
-var $evancz$elm_playground$Playground$Hex = function (a) {
-	return {$: 'Hex', a: a};
-};
-var $evancz$elm_playground$Playground$red = $evancz$elm_playground$Playground$Hex('#cc0000');
+var $author$project$Object$paddle = F2(
+	function (pad_width, pad_height) {
+		return A3($evancz$elm_playground$Playground$rectangle, $author$project$Object$cus_orange, pad_width, pad_height);
+	});
 var $evancz$elm_playground$Playground$Words = F2(
 	function (a, b) {
 		return {$: 'Words', a: a, b: b};
@@ -6885,95 +6933,117 @@ var $evancz$elm_playground$Playground$words = F2(
 			1,
 			A2($evancz$elm_playground$Playground$Words, color, string));
 	});
-var $evancz$elm_playground$Playground$yellow = $evancz$elm_playground$Playground$Hex('#edd400');
-var $author$project$View$view = F2(
-	function (computer, pb) {
-		var top = computer.screen.top;
-		var rig = computer.screen.right;
-		var lef = computer.screen.left;
-		var bot = computer.screen.bottom;
-		return _List_fromArray(
+var $author$project$View$draw = function (axis) {
+	var top = axis.top;
+	var rig = axis.rig;
+	var ratio = 1.85;
+	var pillar = 3;
+	var lef = axis.lef;
+	var bot = axis.bot;
+	var back_width = rig - lef;
+	var back_height = top - bot;
+	var pillar_width = (0.001 * back_width) * back_height;
+	var brick_height = pillar_width * 0.035;
+	var brick_width = pillar_width * 0.082;
+	var pillar_height = pillar_width / ratio;
+	return $evancz$elm_playground$Playground$group(
+		_List_fromArray(
 			[
 				A3(
 				$evancz$elm_playground$Playground$rectangle,
 				A3($evancz$elm_playground$Playground$rgb, 255, 255, 255),
-				(rig - lef) - 300,
-				(top - bot) - 300),
-				A2(
-				$evancz$elm_playground$Playground$moveUp,
-				bot + 10,
-				A3(
-					$evancz$elm_playground$Playground$rectangle,
-					A3($evancz$elm_playground$Playground$rgb, 95, 39, 205),
-					(rig - lef) - 310,
-					10)),
-				A2(
-				$evancz$elm_playground$Playground$moveUp,
-				top - 80,
-				A3(
-					$evancz$elm_playground$Playground$rectangle,
-					A3($evancz$elm_playground$Playground$rgb, 95, 39, 205),
-					(rig - lef) - 310,
-					10)),
-				A2(
-				$evancz$elm_playground$Playground$moveUp,
-				((bot + top) - 70) / 2,
-				A2(
-					$evancz$elm_playground$Playground$moveLeft,
-					((rig - lef) - 314) / 2,
-					A3(
-						$evancz$elm_playground$Playground$rectangle,
-						A3($evancz$elm_playground$Playground$rgb, 95, 39, 205),
-						10,
-						(top - bot) - 80))),
-				A2(
-				$evancz$elm_playground$Playground$moveUp,
-				((bot + top) - 70) / 2,
-				A2(
-					$evancz$elm_playground$Playground$moveRight,
-					((rig - lef) - 314) / 2,
-					A3(
-						$evancz$elm_playground$Playground$rectangle,
-						A3($evancz$elm_playground$Playground$rgb, 95, 39, 205),
-						10,
-						(top - bot) - 80))),
-				A2($evancz$elm_playground$Playground$moveUp, bot + 50, $author$project$Object$paddle),
-				A2($evancz$elm_playground$Playground$moveUp, bot + 75, $author$project$Object$ball),
-				A2($evancz$elm_playground$Playground$circle, $evancz$elm_playground$Playground$red, 5),
-				A2(
-				$evancz$elm_playground$Playground$moveUp,
-				300,
-				A2(
-					$evancz$elm_playground$Playground$moveRight,
-					620,
-					A2($evancz$elm_playground$Playground$words, $evancz$elm_playground$Playground$yellow, '620,300'))),
+				back_width,
+				back_height),
 				A2(
 				$evancz$elm_playground$Playground$moveDown,
-				370,
+				pillar_height * 0.55,
+				A3(
+					$evancz$elm_playground$Playground$rectangle,
+					A3($evancz$elm_playground$Playground$rgb, 95, 39, 205),
+					pillar_width,
+					pillar)),
+				A2(
+				$evancz$elm_playground$Playground$moveUp,
+				pillar_height * 0.45,
+				A3(
+					$evancz$elm_playground$Playground$rectangle,
+					A3($evancz$elm_playground$Playground$rgb, 95, 39, 205),
+					pillar_width,
+					pillar)),
+				A2(
+				$evancz$elm_playground$Playground$moveLeft,
+				pillar_width / 2,
+				A2(
+					$evancz$elm_playground$Playground$moveDown,
+					pillar_height * 0.05,
+					A3(
+						$evancz$elm_playground$Playground$rectangle,
+						A3($evancz$elm_playground$Playground$rgb, 95, 39, 205),
+						pillar,
+						pillar_height * 1.002))),
+				A2(
+				$evancz$elm_playground$Playground$moveRight,
+				pillar_width / 2,
+				A2(
+					$evancz$elm_playground$Playground$moveDown,
+					pillar_height * 0.05,
+					A3(
+						$evancz$elm_playground$Playground$rectangle,
+						A3($evancz$elm_playground$Playground$rgb, 95, 39, 205),
+						pillar,
+						pillar_height * 1.002))),
+				A2($evancz$elm_playground$Playground$words, $evancz$elm_playground$Playground$blue, 'Origin'),
+				A2(
+				$evancz$elm_playground$Playground$moveDown,
+				pillar_height * 0.45,
+				$author$project$Object$ball(pillar_width * 0.01)),
+				A2(
+				$evancz$elm_playground$Playground$moveDown,
+				pillar_height * 0.5,
+				A2($author$project$Object$paddle, pillar_width * 0.12, pillar_width * 0.01)),
+				A2(
+				$evancz$elm_playground$Playground$moveUp,
+				pillar_height * 0.415,
 				A2(
 					$evancz$elm_playground$Playground$moveLeft,
-					615,
-					A2($evancz$elm_playground$Playground$words, $evancz$elm_playground$Playground$yellow, '-615,-370'))),
+					pillar_width * 0.4575,
+					A3($author$project$Object$grid, brick_width, brick_height, pillar_width * 0.0832))),
 				A2(
 				$evancz$elm_playground$Playground$moveUp,
-				276,
-				A2($evancz$elm_playground$Playground$moveLeft, 561, $author$project$Object$grid)),
+				(pillar_height * 0.415) - (brick_height * 1.02),
+				A2(
+					$evancz$elm_playground$Playground$moveLeft,
+					pillar_width * 0.4575,
+					A3($author$project$Object$grid, brick_width, brick_height, pillar_width * 0.0832))),
 				A2(
 				$evancz$elm_playground$Playground$moveUp,
-				234,
-				A2($evancz$elm_playground$Playground$moveLeft, 561, $author$project$Object$grid)),
+				(pillar_height * 0.415) - (brick_height * 2.04),
+				A2(
+					$evancz$elm_playground$Playground$moveLeft,
+					pillar_width * 0.4575,
+					A3($author$project$Object$grid, brick_width, brick_height, pillar_width * 0.0832))),
 				A2(
 				$evancz$elm_playground$Playground$moveUp,
-				192,
-				A2($evancz$elm_playground$Playground$moveLeft, 561, $author$project$Object$grid)),
+				(pillar_height * 0.415) - (brick_height * 3.06),
+				A2(
+					$evancz$elm_playground$Playground$moveLeft,
+					pillar_width * 0.4575,
+					A3($author$project$Object$grid, brick_width, brick_height, pillar_width * 0.0832))),
 				A2(
 				$evancz$elm_playground$Playground$moveUp,
-				150,
-				A2($evancz$elm_playground$Playground$moveLeft, 561, $author$project$Object$grid)),
+				(pillar_height * 0.415) - (brick_height * 4.08),
 				A2(
-				$evancz$elm_playground$Playground$moveUp,
-				108,
-				A2($evancz$elm_playground$Playground$moveLeft, 561, $author$project$Object$grid))
+					$evancz$elm_playground$Playground$moveLeft,
+					pillar_width * 0.4575,
+					A3($author$project$Object$grid, brick_width, brick_height, pillar_width * 0.0832)))
+			]));
+};
+var $author$project$View$view = F2(
+	function (computer, memory) {
+		var axis = A4($author$project$View$Axis, computer.screen.top, computer.screen.bottom, computer.screen.left, computer.screen.right);
+		return _List_fromArray(
+			[
+				$author$project$View$draw(axis)
 			]);
 	});
 var $author$project$Breakout$main = A3($evancz$elm_playground$Playground$game, $author$project$View$view, $author$project$Update$update, $author$project$Model$initial);

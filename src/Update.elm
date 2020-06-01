@@ -1,15 +1,15 @@
 module Update exposing (..)
 import Playground exposing (..)
 
-update computer pb =            --* 传入的是pb,不能直接用
+update computer memory =            --* 传入的是pb,不能直接用
     let                         -- let的语法好怪..有的要逗号有的不要
-         pad_x = pb.pad_x
-         pad_y = pb.pad_y
-         pad_vx = pb.pad_vx
-         ball_x = pb.ball_x
-         ball_y = pb.ball_y
-         ball_vx = pb.ball_vx
-         ball_vy = pb.ball_vy
+         pad_x = memory.pad_x
+         pad_y = memory.pad_y
+         pad_vx = memory.pad_vx
+         ball_x = memory.ball_x
+         ball_y = memory.ball_y
+         ball_vx = memory.ball_vx
+         ball_vy = memory.ball_vy
     in
     {
          pad_x = pad_x
