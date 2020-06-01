@@ -1,4 +1,4 @@
 # VG100_Project1
 Project1 -- A breakout game
 
-Test: A modification from feature branch.
+Version 0.3 : A basic implementation

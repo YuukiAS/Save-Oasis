@@ -52,7 +52,7 @@ draw axis=
         ,   rectangle (rgb 95 39 205)  pillar  (pillar_height*1.002)
             |> moveDown (pillar_height*0.05)
             |> moveRight (pillar_width/2)
-        ,   words blue "Origin"    -- 原点
+        ,   words blue "Origin point"    -- 原点
         ------------------------------ Others
         ,   Object.ball (pillar_width*0.01)
             |> moveDown (pillar_height*0.45)
