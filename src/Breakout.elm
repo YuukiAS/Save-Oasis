@@ -1,27 +1,30 @@
 module Breakout exposing (main)
 ----------------------- From Internet
 import Html exposing (..)
+import Message exposing (Msg)
 import Playground exposing (..)
+import Browser
+import Task
 import Ionicon exposing (..) -- some svg icons, may be helpful later
 ----------------------- From src
-import Object
-import View
 import Update
 import Model
+import View
 
--- pb -> paddle + ball
+main : Program () Model.Model Msg
 main =
-  game View.view Update.update Model.initial
-  {--
-        pad_x = 0
-      , pad_y = 0
-      , pad_vx = 0  -- 加速度
-      , ball_x = 0
-      , ball_y = 0
-      , ball_vx = 0
-      , ball_vy = 0
-  --}
-
-
+    Browser.element
+    {
+        init  = Model.initial
+    ,   update = Update.update
+    ,   view = View.view
+    ,   subscriptions = subscriptions
+    }
+  --game View.view Update.update Model.initial
+subscriptions : Model.Model -> Sub Msg
+subscriptions model =
+    Sub.batch
+        [
+        ]
 
 
