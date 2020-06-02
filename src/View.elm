@@ -26,6 +26,7 @@ view model =
         ,   renderPillar (Point 10 45) (Point 90 45)
         ,   renderPillar (Point 10 8) (Point 10 45)
         ,   renderPillar (Point 90 8) (Point 90 45)
-        ,   renderPaddle (Point 44 40) 12 1
+        --,   renderPaddle (Point 44 40) 12 1
+        ,   renderPaddle (Point model.pad_x 40) 12 1
         ] (renderTotalGrid (Point 10 8) 6.5 2.5 5))   --* List可直接++
     ]

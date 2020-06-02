@@ -8,22 +8,30 @@ type alias Point =
     ,   y: Float
     }
 
+type alias Keys =
+    {
+        left: Bool
+    ,   right: Bool
+    }
+nokeys: Keys
+nokeys =
+    Keys False False
 
 type alias Model =
-    { pad_x : Int
-    , pad_y : Int
-    , pad_vx : Int  -- 加速度
-    , ball_x : Int
-    , ball_y : Int
-    , ball_vx : Int
-    , ball_vy :Int
+    { keys : Keys
+    , pad_x : Float
+    , pad_vx : Float  -- 加速度
+    , ball_x : Float
+    , ball_y : Float
+    , ball_vx : Float
+    , ball_vy :Float
     }
 
 initial : () -> (Model, Cmd Msg)
 initial _ =
     ({
-        pad_x = 0
-      , pad_y = 0
+        keys = nokeys
+      , pad_x = 44
       , pad_vx = 0  -- 加速度
       , ball_x = 0
       , ball_y = 0
