@@ -1,17 +1,3 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Breakout</title>
-  <style>body { padding: 0; margin: 0; }</style>
-</head>
-
-<body>
-
-<pre id="elm"></pre>
-
-<script>
-try {
 (function(scope){
 'use strict';
 
@@ -5833,10 +5819,7 @@ var $elm$core$List$append = F2(
 var $elm$core$Basics$ge = _Utils_ge;
 var $author$project$Check$r = 1;
 var $author$project$Check$cDownPaddle = function (model) {
-	return (((_Utils_cmp(model.ball_x, model.pad_x) > -1) && (_Utils_cmp(model.ball_x, model.pad_x + 12) < 1)) && (((model.ball_y + $author$project$Check$r) > 40) && ((model.ball_y + $author$project$Check$r) <= 40.5))) ? true : false;
-};
-var $author$project$Check$cGameOver = function (model) {
-	return ((((model.ball_x + $author$project$Check$r) <= 90) && ((model.ball_x - $author$project$Check$r) >= 10)) && ((model.ball_y + $author$project$Check$r) >= 45)) ? true : false;
+	return (((_Utils_cmp(model.ball_x - $author$project$Check$r, model.pad_x) > -1) && (_Utils_cmp(model.ball_x + $author$project$Check$r, model.pad_x + 12) < 1)) && ((model.ball_y + $author$project$Check$r) > 40)) ? true : false;
 };
 var $author$project$Calculate$r = 1;
 var $author$project$Calculate$leftCoordinate = function (model) {
@@ -5878,13 +5861,13 @@ var $elm$core$Basics$round = _Basics_round;
 var $author$project$Check$cLeftBricks = function (model) {
 	return ((_Utils_cmp(
 		((model.ball_x - $author$project$Check$r) - 16.5) / 6.675,
-		$elm$core$Basics$round(((model.ball_x - $author$project$Check$r) - 16.5) / 6.675)) < 0) && ((((model.ball_y - $author$project$Check$r) > 8) && (model.ball_y < 21.2)) && (!A2(
+		$elm$core$Basics$round(((model.ball_x - $author$project$Check$r) - 16.5) / 6.675)) < 0) && (((model.ball_y > 8) && (model.ball_y <= 21.2)) && (!A2(
 		$elm$core$List$member,
 		$author$project$Calculate$leftCoordinate(model),
 		model.emptyBricks)))) ? true : false;
 };
 var $author$project$Check$cLeftPillar = function (model) {
-	return (((model.ball_y + $author$project$Check$r) < 45) && (((model.ball_y - $author$project$Check$r) > 8) && ((model.ball_x - $author$project$Check$r) <= 10))) ? true : false;
+	return (((model.ball_y + $author$project$Check$r) <= 45) && (((model.ball_y - $author$project$Check$r) >= 8) && ((model.ball_x - $author$project$Check$r) === 10))) ? true : false;
 };
 var $author$project$Calculate$rightCoordinate = function (model) {
 	return _Utils_Tuple2(
@@ -5894,13 +5877,13 @@ var $author$project$Calculate$rightCoordinate = function (model) {
 var $author$project$Check$cRightBricks = function (model) {
 	return (((((model.ball_x + $author$project$Check$r) - 10) / 6.675) <= 11) && (((((model.ball_x + $author$project$Check$r) - 10) / 6.675) >= 0) && ((_Utils_cmp(
 		((model.ball_x + $author$project$Check$r) - 10) / 6.675,
-		$elm$core$Basics$round(((model.ball_x + $author$project$Check$r) - 10) / 6.675)) > 0) && ((((model.ball_y - $author$project$Check$r) > 8) && (model.ball_y < 21.2)) && (!A2(
+		$elm$core$Basics$round(((model.ball_x + $author$project$Check$r) - 10) / 6.675)) > 0) && (((model.ball_y > 8) && (model.ball_y <= 21.2)) && (!A2(
 		$elm$core$List$member,
 		$author$project$Calculate$rightCoordinate(model),
 		model.emptyBricks)))))) ? true : false;
 };
 var $author$project$Check$cRightPillar = function (model) {
-	return (((model.ball_y + $author$project$Check$r) < 45) && (((model.ball_y - $author$project$Check$r) > 8) && ((model.ball_x + $author$project$Check$r) >= 90))) ? true : false;
+	return (((model.ball_y + $author$project$Check$r) <= 45) && (((model.ball_y - $author$project$Check$r) >= 8) && ((model.ball_x + $author$project$Check$r) === 90))) ? true : false;
 };
 var $author$project$Calculate$upCoordinate = function (model) {
 	return _Utils_Tuple2(
@@ -5910,18 +5893,18 @@ var $author$project$Calculate$upCoordinate = function (model) {
 var $author$project$Check$cUpBricks = function (model) {
 	return ((_Utils_cmp(
 		((model.ball_y - $author$project$Check$r) - 10.5) / 2.675,
-		$elm$core$Basics$round(((model.ball_y - $author$project$Check$r) - 10.5) / 2.675)) < 0) && ((((model.ball_y - $author$project$Check$r) > 8) && ((model.ball_y - $author$project$Check$r) < 21.2)) && (!A2(
+		$elm$core$Basics$round(((model.ball_x - $author$project$Check$r) - 10.5) / 2.675)) < 0) && (((model.ball_y > 8) && (model.ball_y <= 21.2)) && (!A2(
 		$elm$core$List$member,
 		$author$project$Calculate$upCoordinate(model),
 		model.emptyBricks)))) ? true : false;
 };
 var $author$project$Check$cUpPillar = function (model) {
-	return ((((model.ball_x + $author$project$Check$r) <= 90) && ((model.ball_x - $author$project$Check$r) >= 10)) && ((model.ball_y - $author$project$Check$r) <= 8)) ? true : false;
+	return ((((model.ball_x + $author$project$Check$r) <= 90) && ((model.ball_x - $author$project$Check$r) >= 10)) && ((model.ball_y + $author$project$Check$r) === 8)) ? true : false;
 };
 var $author$project$Update$r = 1;
 var $author$project$Update$updateTime = F2(
 	function (model, dt) {
-		var empty = $author$project$Check$cGameOver(model) ? _List_Nil : ($author$project$Check$cUpBricks(model) ? (A2(
+		var empty = $author$project$Check$cUpBricks(model) ? (A2(
 			$elm$core$List$member,
 			$author$project$Calculate$upCoordinate(model),
 			model.cyanBricks) ? A2(
@@ -5948,14 +5931,14 @@ var $author$project$Update$updateTime = F2(
 			_List_fromArray(
 				[
 					$author$project$Calculate$rightCoordinate(model)
-				])) : model.emptyBricks) : model.emptyBricks)));
-		var dyb = $author$project$Check$cGameOver(model) ? 0 : (($author$project$Check$cUpBricks(model) || ($author$project$Check$cUpPillar(model) || $author$project$Check$cDownPaddle(model))) ? ((-1) * model.ball_vy) : model.ball_vy);
-		var yb = $author$project$Check$cGameOver(model) ? 37.5 : ((_Utils_cmp(model.ball_y + (dt * dyb), 8 + $author$project$Update$r) < 0) ? (8 + $author$project$Update$r) : ((_Utils_cmp(model.ball_y + (dt * dyb), 45 - $author$project$Update$r) > 0) ? (45 - $author$project$Update$r) : (model.ball_y + (dt * dyb))));
-		var dxp = $author$project$Check$cGameOver(model) ? 0 : (model.keys.left ? (-7.0) : (model.keys.right ? 7.0 : 0.0));
-		var xp = $author$project$Check$cGameOver(model) ? 44 : (((model.pad_x + (dt * dxp)) > 78) ? 78 : (((model.pad_x + (dt * dxp)) < 10) ? 10 : (model.pad_x + (dt * dxp))));
-		var dxb = $author$project$Check$cGameOver(model) ? 0 : (($author$project$Check$cLeftBricks(model) || ($author$project$Check$cLeftPillar(model) || ($author$project$Check$cRightBricks(model) || $author$project$Check$cRightPillar(model)))) ? ((-1) * model.ball_vx) : ($author$project$Check$cDownPaddle(model) ? (model.ball_vx + (0.1 * model.pad_vx)) : model.ball_vx));
-		var xb = $author$project$Check$cGameOver(model) ? 50 : ((_Utils_cmp(model.ball_x + (dt * dxb), 90 - $author$project$Update$r) > 0) ? (90 - $author$project$Update$r) : ((_Utils_cmp(model.ball_x + (dt * dxb), 10 + $author$project$Update$r) < 0) ? (10 + $author$project$Update$r) : (model.ball_x + (dt * dxb))));
-		var cyan = $author$project$Check$cGameOver(model) ? _List_Nil : ($author$project$Check$cUpBricks(model) ? (A2(
+				])) : model.emptyBricks) : model.emptyBricks));
+		var dyb = ($author$project$Check$cUpBricks(model) || ($author$project$Check$cUpPillar(model) || $author$project$Check$cDownPaddle(model))) ? ((-1) * model.ball_vy) : model.ball_vy;
+		var yb = (_Utils_cmp(model.ball_y + (dt * dyb), 8 + $author$project$Update$r) < 0) ? (8 + $author$project$Update$r) : ((_Utils_cmp(model.ball_y + (dt * dyb), 45 - $author$project$Update$r) > 0) ? (45 - $author$project$Update$r) : (model.ball_y + (dt * dyb)));
+		var dxp = model.keys.left ? (-7.0) : (model.keys.right ? 7.0 : 0.0);
+		var xp = ((model.pad_x + (dt * dxp)) > 78) ? 78 : (((model.pad_x + (dt * dxp)) < 10) ? 10 : (model.pad_x + (dt * dxp)));
+		var dxb = ($author$project$Check$cLeftBricks(model) || ($author$project$Check$cLeftPillar(model) || ($author$project$Check$cRightBricks(model) || $author$project$Check$cRightPillar(model)))) ? ((-1) * model.ball_vx) : ($author$project$Check$cDownPaddle(model) ? (model.ball_vx + (0.1 * model.pad_vx)) : model.ball_vx);
+		var xb = (_Utils_cmp(model.ball_x + (dt * dxb), 90 - $author$project$Update$r) > 0) ? (90 - $author$project$Update$r) : ((_Utils_cmp(model.ball_x + (dt * dxb), 10 + $author$project$Update$r) < 0) ? (10 + $author$project$Update$r) : (model.ball_x + (dt * dxb)));
+		var cyan = $author$project$Check$cUpBricks(model) ? (A2(
 			$elm$core$List$member,
 			$author$project$Calculate$upCoordinate(model),
 			model.blueBricks) ? A2(
@@ -5982,10 +5965,19 @@ var $author$project$Update$updateTime = F2(
 			_List_fromArray(
 				[
 					$author$project$Calculate$rightCoordinate(model)
-				])) : model.cyanBricks) : model.cyanBricks)));
+				])) : model.cyanBricks) : model.cyanBricks));
 		return _Utils_update(
 			model,
-			{ball_vx: dxb, ball_vy: dyb, ball_x: xb, ball_y: yb, cyanBricks: cyan, emptyBricks: empty, pad_vx: dxp, pad_x: xp});
+			{
+				ball_vx: dxb,
+				ball_vy: dyb,
+				ball_x: xb,
+				ball_y: yb,
+				cyanBricks: A2($elm$core$List$append, model.cyanBricks, cyan),
+				emptyBricks: A2($elm$core$List$append, model.emptyBricks, empty),
+				pad_vx: dxp,
+				pad_x: xp
+			});
 	});
 var $author$project$Update$update = F2(
 	function (msg, model) {
@@ -6260,21 +6252,3 @@ var $author$project$Breakout$main = $elm$browser$Browser$element(
 	{init: $author$project$Model$initial, subscriptions: $author$project$Breakout$subscriptions, update: $author$project$Update$update, view: $author$project$View$view});
 _Platform_export({'Breakout':{'init':$author$project$Breakout$main(
 	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));
-
-  var app = Elm.Breakout.init({ node: document.getElementById("elm") });
-}
-catch (e)
-{
-  // display initialization errors (e.g. bad flags, infinite recursion)
-  var header = document.createElement("h1");
-  header.style.fontFamily = "monospace";
-  header.innerText = "Initialization Error";
-  var pre = document.getElementById("elm");
-  document.body.insertBefore(header, pre);
-  pre.innerText = e;
-  throw e;
-}
-</script>
-
-</body>
-</html>

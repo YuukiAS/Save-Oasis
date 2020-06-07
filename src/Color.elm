@@ -1,7 +1,5 @@
 module Color exposing (cus_red,cus_orange,cus_yellow,cus_blue,cus_cyan,cus_pink,cus_purple)
 
-import Playground exposing (..)
-import Svg
 
 
 cus_red = "#ff6b6b"

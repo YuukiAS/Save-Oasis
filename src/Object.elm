@@ -3,7 +3,6 @@ module Object exposing (..)
 import Svg exposing (svg,rect,circle,line)
 import Svg.Attributes exposing (..)
 import Html exposing (..)
-import Html.Attributes as HtmlAt exposing (style)   --* import!
 import Model exposing (..)
 import Message exposing (..)
 import Color exposing (..)
@@ -24,38 +23,54 @@ renderPaddle: Point->Float->Float->Html Msg
 renderPaddle point wid hei=
     rect [x ((String.fromFloat point.x)++"%"), y ((String.fromFloat point.y)++"%"), width ((String.fromFloat wid)++"%"), height ((String.fromFloat hei)++"%"), fill cus_orange][]
 
-renderBrick: Point->Float->Float->String->Html Msg
-renderBrick point wid hei color=
-    rect [x ((String.fromFloat point.x)++"%"), y ((String.fromFloat point.y)++"%"), width ((String.fromFloat wid)++"%"), height ((String.fromFloat hei)++"%"), fill color][]
 
-renderBrick1 point wid hei = renderBrick point wid hei cus_blue
-renderBrick2 point wid hei = renderBrick point wid hei cus_cyan --加速*1.1
-renderBrick3 point wid hei = renderBrick point wid hei cus_pink  -- 加血,但是加速*1.5
-renderBrick4 point wid hei = renderBrick point wid hei cus_red -- 掉血,但是减速*0.8
+    --Tuple.second & Tuple.First
+    --cyanBricks = [(1,0), (2,0), (3,6), (4,2), (0,8)]
 
-renderGrid: Point->Float->Float-> List(Html Msg)
-renderGrid point wid hei=
-    [
-        renderBrick1 point wid hei
-    ,   renderBrick1 (Point (point.x+wid+0.175) point.y) wid hei
-    ,   renderBrick1 (Point (point.x+(wid+0.175)*2) point.y) wid hei
-    ,   renderBrick1 (Point (point.x+(wid+0.175)*3) point.y) wid hei
-    ,   renderBrick1 (Point (point.x+(wid+0.175)*4) point.y) wid hei
-    ,   renderBrick1 (Point (point.x+(wid+0.175)*5) point.y) wid hei
-    ,   renderBrick1 (Point (point.x+(wid+0.175)*6) point.y) wid hei
-    ,   renderBrick1 (Point (point.x+(wid+0.175)*7) point.y) wid hei
-    ,   renderBrick1 (Point (point.x+(wid+0.175)*8) point.y) wid hei
-    ,   renderBrick1 (Point (point.x+(wid+0.175)*9) point.y) wid hei
-    ,   renderBrick1 (Point (point.x+(wid+0.175)*10) point.y) wid hei
-    ,   renderBrick1 (Point (point.x+(wid+0.175)*11) point.y) wid hei
-    ]
-
-
-renderTotalGrid : Point->Float->Float->Int->List (Html Msg)   -- 得到n行Grid
-renderTotalGrid point wid hei num =
-    if num > 0 then        -- case of 后不需重复变量
-            interweave (renderGrid point wid hei) (renderTotalGrid (Point point.x (point.y+hei+0.175)) wid hei (num- 1))
+renderRowBrick : Model -> Point -> Float -> Float -> Int -> Int -> List (Html Msg)
+renderRowBrick model point wid hei num1 num2 =
+    if num2 >= 0 then
+            interweave ( renderColumnBrick model point wid hei num1 num2 )( renderRowBrick model point wid hei num1 (num2 - 1) )
     else
         []
+
+renderColumnBrick : Model -> Point -> Float -> Float -> Int -> Int -> List (Html Msg)   -- 得到n行Grid
+renderColumnBrick model point wid hei num1 num2   = --num1 = 4, num2 = 11
+
+    if num1 >= 0 then
+            interweave ( renderABrick model (num1, num2) point wid hei ) ( renderColumnBrick model point wid hei (num1 - 1) num2 )
+    else
+        []
+
+
+
+renderABrick : Model -> (Int, Int) -> Point -> Float -> Float -> List (Html Msg) --put into the context where the brick exists
+renderABrick model a point wid hei =  --a = (Int, Int) from cyanBricks
+    if (List.member a model.cyanBricks && (List.member a model.emptyBricks == False) )
+    then [renderCyanBrick (Tuple.second a) (Tuple.first a) point wid hei]
+    else if ( (List.member a model.cyanBricks == False) && (List.member a model.emptyBricks == False) )
+    then [renderBlueBrick (Tuple.second a) (Tuple.first a) point wid hei]
+    else [div [] []]
+
+renderCyanBrick : Int -> Int -> Point -> Float -> Float -> Html Msg
+renderCyanBrick num1 num2 point wid hei =
+    let
+        a = point.x + ( wid + 0.175 ) * ( toFloat num1 )
+        b = point.y + ( hei + 0.175 ) * ( toFloat num2 )
+        c = cus_cyan
+    in
+        rect [x ((String.fromFloat a)++"%"), y ((String.fromFloat b)++"%"), width ((String.fromFloat wid)++"%"), height ((String.fromFloat hei)++"%"), fill c][]
+
+renderBlueBrick : Int -> Int -> Point -> Float -> Float -> Html Msg
+renderBlueBrick num1 num2 point wid hei =
+    let
+        a = point.x + ( wid + 0.175 ) * ( toFloat num1 )
+        b = point.y + ( hei + 0.175 ) * ( toFloat num2 )
+        c = cus_blue
+    in
+        rect [x ((String.fromFloat a)++"%"), y ((String.fromFloat b)++"%"), width ((String.fromFloat wid)++"%"), height ((String.fromFloat hei)++"%"), fill c][]
+
+
+
 
 
