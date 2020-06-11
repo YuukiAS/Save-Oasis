@@ -2,11 +2,9 @@ module Calculate exposing (..)
 
 
 import Model exposing (Model,Keys)
-import Message exposing (..)
-import Playground exposing (..)
+import Object exposing (r)
 
-
-r = 1
+-- 计算坐标,与碰撞无关
 
 upCoordinate: Model -> (Int, Int)
 upCoordinate model = ( floor((model.ball_y - r - 8)/2.675), floor((model.ball_x - 10)/6.675) )

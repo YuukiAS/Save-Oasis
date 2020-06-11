@@ -1,8 +1,7 @@
 module Breakout exposing (main)
------------------------ From Internet
+
 import Html exposing (..)
 import Message exposing (..)
-import Playground exposing (..)
 import Browser
 import Browser.Events
 import Json.Decode as D
@@ -12,6 +11,15 @@ import Ionicon exposing (..) -- some svg icons, may be helpful later
 import Update
 import Model
 import View
+import Browser
+import Browser.Dom exposing (getViewport)
+import Browser.Events exposing (onAnimationFrameDelta, onKeyDown, onKeyUp, onResize)
+import Json.Decode as Decode
+import Model exposing (Model)
+import Task
+import Update
+import View
+import Time
 
 main : Program () Model.Model Msg
 main =
@@ -25,10 +33,13 @@ main =
 subscriptions : Model.Model -> Sub Msg
 subscriptions model =
     Sub.batch
-        [
-            Browser.Events.onKeyUp (D.map (KeyChanged False) (D.field "key" D.string))  -- 读取输入
-        ,   Browser.Events.onKeyDown  (D.map (KeyChanged True) (D.field "key" D.string))
-        ,   Browser.Events.onAnimationFrameDelta TimeDelta
+        [  if model.state == Model.Playing then
+          Browser.Events.onAnimationFrameDelta TimeDelta
+          else Sub.none
+          ,if model.state == Model.Playing then  Time.every 1000 Tick
+          else Sub.none
+          ,   Browser.Events.onKeyUp (D.map (KeyChanged False) (D.field "key" D.string))  -- 读取输入
+          ,   Browser.Events.onKeyDown  (D.map (KeyChanged True) (D.field "key" D.string))
         ]
 
 
