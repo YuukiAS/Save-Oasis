@@ -1,47 +1,94 @@
 module Object exposing (..)
 
-import Playground exposing (..)
-
-cus_red = rgb 255 107 107
-cus_orange = rgb 255 159 67
-cus_yellow = rgb 254 202 87
-cus_blue = rgb 84 160 255
-cus_cyan  = rgb 0 210 211
-cus_pink = rgb 255 159 243
-
+import Svg exposing (image)
+import Svg.Attributes exposing (..)
+import Html exposing (..)
+import Model exposing (..)
+import Message exposing (..)
+import Outlooks exposing (..)
+import List.Extra exposing (interweave)
 
 
-ball ball_height = circle cus_yellow ball_height
-paddle pad_width pad_height= rectangle cus_orange pad_width pad_height
-brick1 brick_width brick_height= rectangle cus_blue brick_width brick_height
-brick2 brick_width brick_height = rectangle cus_cyan brick_width brick_height  --加速*1.1
-brick3 brick_width brick_height = rectangle cus_pink brick_width brick_height  -- 加血,但是加速*1.5
-brick4 brick_width brick_height = rectangle cus_red brick_width brick_height   -- 掉血,但是减速*0.8
 
-grid brick_width brick_height move=
-    group
-    [
-        brick1 brick_width brick_height
-        ,brick1 brick_width brick_height
-            |> moveRight (move*1)
-        ,brick1 brick_width brick_height
-            |> moveRight (move*2)
-        ,brick1 brick_width brick_height
-            |> moveRight (move*3)
-        ,brick1 brick_width brick_height
-            |> moveRight (move*4)
-        ,brick1 brick_width brick_height
-            |> moveRight (move*5)
-        ,brick1 brick_width brick_height
-            |> moveRight (move*6)
-        ,brick1 brick_width brick_height
-            |> moveRight (move*7)
-        ,brick1 brick_width brick_height
-            |> moveRight (move*8)
-        ,brick1 brick_width brick_height
-            |> moveRight (move*9)
-        ,brick1 brick_width brick_height
-            |> moveRight (move*10)
-        ,brick1 brick_width brick_height
-            |> moveRight (move*11)
-    ]
+
+renderBackground: Point -> Float -> Float -> String -> Html msg
+renderBackground point wid hei pic =
+    image [xlinkHref pic, x ((String.fromFloat point.x)++"%"), y ((String.fromFloat point.y)++"%"), width ((String.fromFloat wid)++"%"), height ((String.fromFloat hei)++"%")][]
+
+
+renderBall: Point -> Float -> Float -> String -> Html msg
+renderBall point side1 side2 pic =
+    image [xlinkHref pic, x ((String.fromFloat ( point.x - 1 ))++"%"), y ((String.fromFloat ( point.y - 1 ))++"%"), width ((String.fromFloat side1)++"%"), height ((String.fromFloat side2)++"%")][]
+
+r = 1
+
+renderPaddle: Point -> Float -> Float -> String -> Html Msg
+renderPaddle point wid hei pic=
+    image [xlinkHref pic, x ((String.fromFloat point.x)++"%"), y ((String.fromFloat point.y)++"%"), width ((String.fromFloat wid)++"%"), height ((String.fromFloat hei)++"%")][]
+
+
+
+renderBlueBrick : Int -> Int -> Point -> Float -> Float -> Html Msg
+renderBlueBrick num1 num2 point wid hei =
+    let
+        a = point.x + ( wid + 0.175 ) * ( toFloat num1 )   --* 这里修改位置!!
+        b = point.y + ( hei + 0.175 ) * ( toFloat num2 )
+    in       --* xlinkHref 调用图片
+        image [xlinkHref outOriginal, x ((String.fromFloat a)++"%"), y ((String.fromFloat b)++"%"), width ((String.fromFloat wid)++"%"), height ((String.fromFloat hei)++"%")][]
+
+renderCyanBrick : Int -> Int -> Point -> Float -> Float -> Html Msg
+renderCyanBrick num1 num2 point wid hei =
+    let
+        a = point.x + ( wid + 0.175 ) * ( toFloat num1 )
+        b = point.y + ( hei + 0.175 ) * ( toFloat num2 )
+    in
+        image [xlinkHref outHit, x ((String.fromFloat a)++"%"), y ((String.fromFloat b)++"%"), width ((String.fromFloat wid)++"%"), height ((String.fromFloat hei)++"%")][]
+
+
+renderPinkBrick : Int -> Int -> Point -> Float -> Float -> Html Msg   -- 加速度加命
+renderPinkBrick num1 num2 point wid hei =
+    let
+        a = point.x + ( wid + 0.175 ) * ( toFloat num1 )
+        b = point.y + ( hei + 0.175 ) * ( toFloat num2 )
+    in
+        image [xlinkHref outIncrease, x ((String.fromFloat a)++"%"), y ((String.fromFloat b)++"%"), width ((String.fromFloat wid)++"%"), height ((String.fromFloat hei)++"%")][]
+
+renderRedBrick : Int -> Int -> Point -> Float -> Float -> Html Msg  -- 减速度减命
+renderRedBrick num1 num2 point wid hei =
+    let
+        a = point.x + ( wid + 0.175 ) * ( toFloat num1 )
+        b = point.y + ( hei + 0.175 ) * ( toFloat num2 )
+    in
+        image [xlinkHref outDecrease, x ((String.fromFloat a)++"%"), y ((String.fromFloat b)++"%"), width ((String.fromFloat wid)++"%"), height ((String.fromFloat hei)++"%")][]
+
+
+renderABrick : Model -> (Int, Int) -> Point -> Float -> Float -> List (Html Msg) --* 生成单个方块
+renderABrick model a point wid hei =  --a = (Int, Int) from cyanBricks
+
+    if ((List.member a model.cyanBricks == True) && (List.member a model.emptyBricks == False) )
+    then [renderCyanBrick (Tuple.second a) (Tuple.first a) point wid hei]   -- 第一项为y,第二项为x
+    else if ((List.member a model.pinkBricks == True) && (List.member a model.emptyBricks == False))
+    then [renderPinkBrick (Tuple.second a) (Tuple.first a) point wid hei]
+    else if ((List.member a model.redBricks == True) && (List.member a model.emptyBricks == False))
+    then [renderRedBrick (Tuple.second a) (Tuple.first a) point wid hei]
+    else if ( (List.member a model.cyanBricks == False) && (List.member a model.pinkBricks == False) && (List.member a model.redBricks == False) && (List.member a model.emptyBricks == False) )  --* 放在最后
+    then [renderBlueBrick (Tuple.second a) (Tuple.first a) point wid hei]
+    else [div [] []]
+
+renderColumnBrick : Model -> Point -> Float -> Float -> Int -> Int -> List (Html Msg)   -- 得到n行Grid
+renderColumnBrick model point wid hei num1 num2   = --num1 = 4, num2 = 11
+    if num1 >= 0 then    --* interweave 使得参数不用改变!!!
+            interweave ( renderABrick model (num1, num2) point wid hei ) ( renderColumnBrick model point wid hei (num1 - 1) num2 )
+    else
+        []
+
+renderRowBrick : Model -> Point -> Float -> Float -> Int -> Int -> List (Html Msg)   -- 先调用这个,沿水平方向
+renderRowBrick model point wid hei num1 num2 =
+    if num2 >= 0 then
+            interweave ( renderColumnBrick model point wid hei num1 num2 )( renderRowBrick model point wid hei num1 (num2 - 1) )
+    else
+        []
+
+
+
+
