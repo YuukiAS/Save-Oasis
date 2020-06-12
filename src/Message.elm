@@ -12,4 +12,3 @@ type Msg
     | Draw Time.Posix  -- 该参数无实际效果
     | NewBrick Outlooks.Brick
     | Tick Time.Posix
-    | AdjustTimeZone Time.Zone

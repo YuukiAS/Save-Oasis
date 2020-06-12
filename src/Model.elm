@@ -25,6 +25,7 @@ nokeys: Keys
 nokeys =
     Keys False False False
 
+
 type State
     = Paused
     | Playing
@@ -53,11 +54,14 @@ type alias Model =
     , emptyBricks: List (Int, Int)
     , nextBrick : Outlooks.Brick
     , life: Int
+    , max_life : Int
+    , exp : Int --todo 经验值
+    , leaf : Int  --todo 打掉的行数
     , state : State
-    , combo : Int
-    , start : Time.Posix
-    , now : Time.Posix
-    , zone : Time.Zone
+    , combo : Int --todo 获得更多经验值
+    , minute : Int
+    , second : Int
+    , skills : List(Bool) -- todo 拥有的技能
     }
 
 initial : () -> (Model, Cmd Msg)
@@ -83,10 +87,13 @@ initial _ =
       , emptyBricks = []
       , nextBrick = Outlooks.Red
       , life = 3
+      , max_life = 3
+      , exp = 0
+      , leaf = 0
+      , skills = [False,False,False,False,False,False,False,False,False,False,False]
       , combo = 0
       , state = Stopped
-      , start = (Time.millisToPosix 0)
-      , now =  (Time.millisToPosix 0)
-      , zone = Time.utc
-    }, Task.perform Message.AdjustTimeZone Time.here)
+      , minute = 0
+      , second =  0
+    }, Cmd.none)
 

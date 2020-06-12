@@ -14,9 +14,9 @@ import Outlooks exposing (..)
 brickGenerator: Random.Generator Brick
 brickGenerator =
     Random.weighted
-    (50, Cyan)
-    [ (25, Red)
-    , (25, Pink)
+    (80, Cyan)
+    [ (10, Red)
+    , (10, Pink)
     ]
 
 update: Message.Msg -> Model -> (Model, Cmd Msg)
@@ -34,7 +34,7 @@ update msg model =
 
         Resume ->
                      ( { model
-                         | state = Playing
+                         | state = Paused
                          , blueBricks =
                          [ (0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (0, 9), (0, 10), (0, 11)
                          , (1, 0), (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11)
@@ -50,17 +50,25 @@ update msg model =
                          , ball_vy = -1
                          , ball_x = 50
                          , ball_y = 37.5
+                         , pad_x = 44
+                         , pad_vx = 0
                        }
                      , Cmd.none
                      )
 
-        Pause ->
+        Pause ->    -- 开始时是Pause
                     ({ model | state = Paused
+                    , cyanBricks = []
+                     , redBricks = []
+                     , pinkBricks = []
+                     , emptyBricks = []
                     , ball_x = 50
                     , pad_x = 44
-                    , pad_vx = 0  -- 加速度
+                    , pad_vx = 0
                     , ball_y = 37.5
-                    , life = 3}, Cmd.none)
+                    , life = 3
+                    , exp = 0
+                    }, Cmd.none)
 
         Start ->
                     ({ model |
@@ -76,13 +84,14 @@ update msg model =
            ({ model | state = Playing }, Cmd.none )
 
         Tick newTime ->
-          ( { model | now = newTime }
-          , Task.perform Draw Time.now
-          )
-        AdjustTimeZone newZone ->
-          ( { model | zone = newZone }
-          , Cmd.none
-          )
+            let
+                nextMinute = if model.second == 59 then True else False
+                second = if nextMinute then 0 else model.second+1
+                minute = if nextMinute then model.minute+1 else model.minute
+            in
+              ( { model | minute = minute, second = second  }
+              , Task.perform Draw Time.now
+              )
 
         --* 改成Cmd Msg后不需要这个
         {-_ ->
@@ -198,12 +207,6 @@ updateTime model dt =
                    else if isPink == True then model.life +1
                    else model.life
 
-        combo =
-                if ((cUpBricks model || cLeftBricks model || cRightBricks model)  && cDownPaddle model == False)
-                then model.combo + 1
-                else if (cDownPaddle model) then 0
-                else model.combo
-
         state =
              if cWin model then
                 Stopped
@@ -212,6 +215,17 @@ updateTime model dt =
              else if life <= 0 then
                  Stopped
              else Playing
+
+
+        combo =
+                if ((cUpBricks model || cLeftBricks model || cRightBricks model)  && cDownPaddle model == False)
+                then model.combo + 1
+                else if (cDownPaddle model) then 0
+                else model.combo
+        exp = if ((cUpBricks model || cLeftBricks model || cRightBricks model)  && cDownPaddle model == False)
+                then if model.combo > 0 then model.exp+ 2 + (model.combo - 1)*3 else model.exp + 2
+                else model.exp
+
 
         dxp =
             if cGameOver model then 0
@@ -277,4 +291,5 @@ updateTime model dt =
                 , life = life
                 , state = state
                 , combo = combo
+                , exp = exp
         }

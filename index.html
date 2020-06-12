@@ -5241,27 +5241,8 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$element = _Browser_element;
-var $author$project$Message$AdjustTimeZone = function (a) {
-	return {$: 'AdjustTimeZone', a: a};
-};
 var $author$project$Outlooks$Red = {$: 'Red'};
 var $author$project$Model$Stopped = {$: 'Stopped'};
-var $elm$time$Time$Name = function (a) {
-	return {$: 'Name', a: a};
-};
-var $elm$time$Time$Offset = function (a) {
-	return {$: 'Offset', a: a};
-};
-var $elm$time$Time$Zone = F2(
-	function (a, b) {
-		return {$: 'Zone', a: a, b: b};
-	});
-var $elm$time$Time$customZone = $elm$time$Time$Zone;
-var $elm$time$Time$here = _Time_here(_Utils_Tuple0);
-var $elm$time$Time$Posix = function (a) {
-	return {$: 'Posix', a: a};
-};
-var $elm$time$Time$millisToPosix = $elm$time$Time$Posix;
 var $elm$core$Basics$negate = function (n) {
 	return -n;
 };
@@ -5270,7 +5251,8 @@ var $author$project$Model$Keys = F3(
 		return {enter: enter, left: left, right: right};
 	});
 var $author$project$Model$nokeys = A3($author$project$Model$Keys, false, false, false);
-var $elm$time$Time$utc = A2($elm$time$Time$Zone, 0, _List_Nil);
+var $elm$core$Platform$Cmd$batch = _Platform_batch;
+var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Model$initial = function (_v0) {
 	return _Utils_Tuple2(
 		{
@@ -5344,19 +5326,23 @@ var $author$project$Model$initial = function (_v0) {
 			combo: 0,
 			cyanBricks: _List_Nil,
 			emptyBricks: _List_Nil,
+			exp: 0,
 			keys: $author$project$Model$nokeys,
+			leaf: 0,
 			life: 3,
+			max_life: 3,
+			minute: 0,
 			nextBrick: $author$project$Outlooks$Red,
-			now: $elm$time$Time$millisToPosix(0),
 			pad_vx: 0,
 			pad_x: 44,
 			pinkBricks: _List_Nil,
 			redBricks: _List_Nil,
-			start: $elm$time$Time$millisToPosix(0),
-			state: $author$project$Model$Stopped,
-			zone: $elm$time$Time$utc
+			second: 0,
+			skills: _List_fromArray(
+				[false, false, false, false, false, false, false, false, false, false, false]),
+			state: $author$project$Model$Stopped
 		},
-		A2($elm$core$Task$perform, $author$project$Message$AdjustTimeZone, $elm$time$Time$here));
+		$elm$core$Platform$Cmd$none);
 };
 var $author$project$Message$KeyChanged = F2(
 	function (a, b) {
@@ -5631,6 +5617,17 @@ var $elm$core$Dict$merge = F6(
 			leftovers);
 	});
 var $elm$core$Platform$sendToSelf = _Platform_sendToSelf;
+var $elm$time$Time$Name = function (a) {
+	return {$: 'Name', a: a};
+};
+var $elm$time$Time$Offset = function (a) {
+	return {$: 'Offset', a: a};
+};
+var $elm$time$Time$Zone = F2(
+	function (a, b) {
+		return {$: 'Zone', a: a, b: b};
+	});
+var $elm$time$Time$customZone = $elm$time$Time$Zone;
 var $elm$time$Time$setInterval = _Time_setInterval;
 var $elm$core$Process$spawn = _Scheduler_spawn;
 var $elm$time$Time$spawnHelp = F3(
@@ -5721,6 +5718,10 @@ var $elm$time$Time$onEffects = F3(
 				},
 				killTask));
 	});
+var $elm$time$Time$Posix = function (a) {
+	return {$: 'Posix', a: a};
+};
+var $elm$time$Time$millisToPosix = $elm$time$Time$Posix;
 var $elm$time$Time$now = _Time_now($elm$time$Time$millisToPosix);
 var $elm$time$Time$onSelfMsg = F3(
 	function (router, interval, state) {
@@ -6223,11 +6224,11 @@ var $elm$random$Random$weighted = F2(
 	});
 var $author$project$Update$brickGenerator = A2(
 	$elm$random$Random$weighted,
-	_Utils_Tuple2(50, $author$project$Outlooks$Cyan),
+	_Utils_Tuple2(80, $author$project$Outlooks$Cyan),
 	_List_fromArray(
 		[
-			_Utils_Tuple2(25, $author$project$Outlooks$Red),
-			_Utils_Tuple2(25, $author$project$Outlooks$Pink)
+			_Utils_Tuple2(10, $author$project$Outlooks$Red),
+			_Utils_Tuple2(10, $author$project$Outlooks$Pink)
 		]));
 var $elm$random$Random$Generate = function (a) {
 	return {$: 'Generate', a: a};
@@ -6294,8 +6295,6 @@ var $elm$random$Random$generate = F2(
 			$elm$random$Random$Generate(
 				A2($elm$random$Random$map, tagger, generator)));
 	});
-var $elm$core$Platform$Cmd$batch = _Platform_batch;
-var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Update$updateKeys = F3(
 	function (isDown, key, keys) {
 		switch (key) {
@@ -6687,6 +6686,7 @@ var $author$project$Update$updateTime = F2(
 			$elm$core$List$member,
 			$author$project$Calculate$rightCoordinate(model),
 			model.cyanBricks)))) ? true : false;
+		var exp = (($author$project$Check$cUpBricks(model) || ($author$project$Check$cLeftBricks(model) || $author$project$Check$cRightBricks(model))) && (!$author$project$Check$cDownPaddle(model))) ? ((model.combo > 0) ? ((model.exp + 2) + ((model.combo - 1) * 3)) : (model.exp + 2)) : model.exp;
 		var empty = $author$project$Check$cGameOver(model) ? model.emptyBricks : ($author$project$Check$cUpBricks(model) ? ((A2(
 			$elm$core$List$member,
 			$author$project$Calculate$upCoordinate(model),
@@ -6770,7 +6770,7 @@ var $author$project$Update$updateTime = F2(
 		var combo = (($author$project$Check$cUpBricks(model) || ($author$project$Check$cLeftBricks(model) || $author$project$Check$cRightBricks(model))) && (!$author$project$Check$cDownPaddle(model))) ? (model.combo + 1) : ($author$project$Check$cDownPaddle(model) ? 0 : model.combo);
 		return _Utils_update(
 			model,
-			{ball_vx: dxb, ball_vy: dyb, ball_x: xb, ball_y: yb, combo: combo, cyanBricks: cyan, emptyBricks: empty, life: life, pad_vx: dxp, pad_x: xp, pinkBricks: pink, redBricks: red, state: state});
+			{ball_vx: dxb, ball_vy: dyb, ball_x: xb, ball_y: yb, combo: combo, cyanBricks: cyan, emptyBricks: empty, exp: exp, life: life, pad_vx: dxp, pad_x: xp, pinkBricks: pink, redBricks: red, state: state});
 	});
 var $author$project$Update$update = F2(
 	function (msg, model) {
@@ -6876,16 +6876,18 @@ var $author$project$Update$update = F2(
 								]),
 							cyanBricks: _List_Nil,
 							emptyBricks: _List_Nil,
+							pad_vx: 0,
+							pad_x: 44,
 							pinkBricks: _List_Nil,
 							redBricks: _List_Nil,
-							state: $author$project$Model$Playing
+							state: $author$project$Model$Paused
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 'Pause':
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{ball_x: 50, ball_y: 37.5, life: 3, pad_vx: 0, pad_x: 44, state: $author$project$Model$Paused}),
+						{ball_x: 50, ball_y: 37.5, cyanBricks: _List_Nil, emptyBricks: _List_Nil, exp: 0, life: 3, pad_vx: 0, pad_x: 44, pinkBricks: _List_Nil, redBricks: _List_Nil, state: $author$project$Model$Paused}),
 					$elm$core$Platform$Cmd$none);
 			case 'Start':
 				return _Utils_Tuple2(
@@ -6899,20 +6901,16 @@ var $author$project$Update$update = F2(
 						model,
 						{state: $author$project$Model$Playing}),
 					$elm$core$Platform$Cmd$none);
-			case 'Tick':
-				var newTime = msg.a;
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{now: newTime}),
-					A2($elm$core$Task$perform, $author$project$Message$Draw, $elm$time$Time$now));
 			default:
-				var newZone = msg.a;
+				var newTime = msg.a;
+				var nextMinute = (model.second === 59) ? true : false;
+				var second = nextMinute ? 0 : (model.second + 1);
+				var minute = nextMinute ? (model.minute + 1) : model.minute;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{zone: newZone}),
-					$elm$core$Platform$Cmd$none);
+						{minute: minute, second: second}),
+					A2($elm$core$Task$perform, $author$project$Message$Draw, $elm$time$Time$now));
 		}
 	});
 var $author$project$Model$Point = F2(
@@ -7010,6 +7008,28 @@ var $author$project$Object$renderBall = F4(
 				]),
 			_List_Nil);
 	});
+var $elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
+var $elm$svg$Svg$Attributes$opacity = _VirtualDom_attribute('opacity');
+var $elm$svg$Svg$rect = $elm$svg$Svg$trustedNode('rect');
+var $author$project$Dashboard$renderDashboard = F3(
+	function (point, wid, hei) {
+		return A2(
+			$elm$svg$Svg$rect,
+			_List_fromArray(
+				[
+					$elm$svg$Svg$Attributes$x(
+					$elm$core$String$fromFloat(point.x) + '%'),
+					$elm$svg$Svg$Attributes$y(
+					$elm$core$String$fromFloat(point.y) + '%'),
+					$elm$svg$Svg$Attributes$width(
+					$elm$core$String$fromFloat(wid) + '%'),
+					$elm$svg$Svg$Attributes$height(
+					$elm$core$String$fromFloat(hei) + '%'),
+					$elm$svg$Svg$Attributes$fill('white'),
+					$elm$svg$Svg$Attributes$opacity('0.5')
+				]),
+			_List_Nil);
+	});
 var $author$project$Message$Keep = {$: 'Keep'};
 var $author$project$Message$Pause = {$: 'Pause'};
 var $author$project$Message$Resume = {$: 'Resume'};
@@ -7051,7 +7071,7 @@ var $author$project$View$renderGameButton = function (model) {
 				return (model.life > 1) ? _Utils_Tuple2(
 					'Continue, you still have ' + ($elm$core$Debug$toString(model.life) + ' lives.'),
 					$author$project$Message$Start) : ((model.life === 1) ? _Utils_Tuple2(
-					'Continue, you still have ' + ($elm$core$Debug$toString(model.life) + ' lives.'),
+					'Continue, you still have ' + ($elm$core$Debug$toString(model.life) + ' life.'),
 					$author$project$Message$Start) : _Utils_Tuple2('Game Over. Click here to restart.', $author$project$Message$Resume));
 		}
 	}();
@@ -7229,100 +7249,382 @@ var $author$project$Object$renderRowBrick = F6(
 			A6($author$project$Object$renderColumnBrick, model, point, wid, hei, num1, num2),
 			A6($author$project$Object$renderRowBrick, model, point, wid, hei, num1, num2 - 1)) : _List_Nil;
 	});
-var $elm$html$Html$h1 = _VirtualDom_node('h1');
-var $elm$core$Basics$modBy = _Basics_modBy;
-var $elm$time$Time$flooredDiv = F2(
-	function (numerator, denominator) {
-		return $elm$core$Basics$floor(numerator / denominator);
+var $author$project$Color$RGBA = F4(
+	function (red, green, blue, alpha) {
+		return {alpha: alpha, blue: blue, green: green, red: red};
 	});
-var $elm$time$Time$toAdjustedMinutesHelp = F3(
-	function (defaultOffset, posixMinutes, eras) {
-		toAdjustedMinutesHelp:
-		while (true) {
-			if (!eras.b) {
-				return posixMinutes + defaultOffset;
-			} else {
-				var era = eras.a;
-				var olderEras = eras.b;
-				if (_Utils_cmp(era.start, posixMinutes) < 0) {
-					return posixMinutes + era.offset;
-				} else {
-					var $temp$defaultOffset = defaultOffset,
-						$temp$posixMinutes = posixMinutes,
-						$temp$eras = olderEras;
-					defaultOffset = $temp$defaultOffset;
-					posixMinutes = $temp$posixMinutes;
-					eras = $temp$eras;
-					continue toAdjustedMinutesHelp;
-				}
-			}
-		}
+var $author$project$Color$grey = A4($author$project$Color$RGBA, 200 / 255, 214 / 255, 229 / 255, 1);
+var $elm$svg$Svg$Attributes$d = _VirtualDom_attribute('d');
+var $elm$core$Basics$clamp = F3(
+	function (low, high, number) {
+		return (_Utils_cmp(number, low) < 0) ? low : ((_Utils_cmp(number, high) > 0) ? high : number);
 	});
-var $elm$time$Time$toAdjustedMinutes = F2(
-	function (_v0, time) {
-		var defaultOffset = _v0.a;
-		var eras = _v0.b;
-		return A3(
-			$elm$time$Time$toAdjustedMinutesHelp,
-			defaultOffset,
-			A2(
-				$elm$time$Time$flooredDiv,
-				$elm$time$Time$posixToMillis(time),
-				60000),
-			eras);
-	});
-var $elm$time$Time$toMinute = F2(
-	function (zone, time) {
-		return A2(
-			$elm$core$Basics$modBy,
-			60,
-			A2($elm$time$Time$toAdjustedMinutes, zone, time));
-	});
-var $elm$time$Time$toSecond = F2(
-	function (_v0, time) {
-		return A2(
-			$elm$core$Basics$modBy,
-			60,
-			A2(
-				$elm$time$Time$flooredDiv,
-				$elm$time$Time$posixToMillis(time),
-				1000));
-	});
-var $author$project$View$renderTime = function (model) {
-	var second2 = A2($elm$time$Time$toSecond, $elm$time$Time$utc, model.start);
-	var second1 = A2($elm$time$Time$toSecond, $elm$time$Time$utc, model.now);
-	var out_second = $elm$core$String$fromInt(second1 - second2);
-	var minute2 = A2($elm$time$Time$toMinute, $elm$time$Time$utc, model.start);
-	var minute1 = A2($elm$time$Time$toMinute, $elm$time$Time$utc, model.now);
-	var out_minute = $elm$core$String$fromInt(minute1 - minute2);
+var $j_panasiuk$elm_ionicons$Ionicon$Internal$toAlphaString = function (value) {
 	return A2(
-		$elm$html$Html$h1,
+		$elm$core$String$left,
+		5,
+		$elm$core$String$fromFloat(
+			A3($elm$core$Basics$clamp, 0, 1, value)));
+};
+var $j_panasiuk$elm_ionicons$Ionicon$Internal$toColorString = function (value) {
+	return A2(
+		$elm$core$String$left,
+		5,
+		$elm$core$String$fromFloat(
+			A3($elm$core$Basics$clamp, 0, 255, 255 * value)));
+};
+var $j_panasiuk$elm_ionicons$Ionicon$Internal$fill = function (_v0) {
+	var red = _v0.red;
+	var green = _v0.green;
+	var blue = _v0.blue;
+	var alpha = _v0.alpha;
+	var _v1 = ((0 <= alpha) && (alpha < 1)) ? _Utils_Tuple2(
+		'rgba',
 		_List_fromArray(
 			[
-				A2($elm$html$Html$Attributes$style, 'background', '#f8f4f4'),
-				A2($elm$html$Html$Attributes$style, 'border', '0'),
-				A2($elm$html$Html$Attributes$style, 'bottom', '30px'),
-				A2($elm$html$Html$Attributes$style, 'color', '#0ca101'),
-				A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
-				A2($elm$html$Html$Attributes$style, 'display', 'block'),
-				A2($elm$html$Html$Attributes$style, 'font-family', 'Helvetica, Arial, sans-serif'),
-				A2($elm$html$Html$Attributes$style, 'font-size', '18px'),
-				A2($elm$html$Html$Attributes$style, 'font-weight', '300'),
-				A2($elm$html$Html$Attributes$style, 'height', '400x'),
-				A2($elm$html$Html$Attributes$style, 'left', '130px'),
-				A2($elm$html$Html$Attributes$style, 'line-height', '60px'),
-				A2($elm$html$Html$Attributes$style, 'outline', 'none'),
-				A2($elm$html$Html$Attributes$style, 'padding', '0'),
-				A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
-				A2($elm$html$Html$Attributes$style, 'width', '200px')
+				$j_panasiuk$elm_ionicons$Ionicon$Internal$toColorString(red),
+				$j_panasiuk$elm_ionicons$Ionicon$Internal$toColorString(green),
+				$j_panasiuk$elm_ionicons$Ionicon$Internal$toColorString(blue),
+				$j_panasiuk$elm_ionicons$Ionicon$Internal$toAlphaString(alpha)
+			])) : _Utils_Tuple2(
+		'rgb',
+		_List_fromArray(
+			[
+				$j_panasiuk$elm_ionicons$Ionicon$Internal$toColorString(red),
+				$j_panasiuk$elm_ionicons$Ionicon$Internal$toColorString(green),
+				$j_panasiuk$elm_ionicons$Ionicon$Internal$toColorString(blue)
+			]));
+	var colorSpace = _v1.a;
+	var values = _v1.b;
+	return colorSpace + ('(' + (A2($elm$core$String$join, ',', values) + ')'));
+};
+var $elm$svg$Svg$g = $elm$svg$Svg$trustedNode('g');
+var $elm$svg$Svg$path = $elm$svg$Svg$trustedNode('path');
+var $elm$svg$Svg$Attributes$enableBackground = _VirtualDom_attribute('enable-background');
+var $elm$svg$Svg$svg = $elm$svg$Svg$trustedNode('svg');
+var $elm$svg$Svg$Attributes$version = _VirtualDom_attribute('version');
+var $elm$svg$Svg$Attributes$viewBox = _VirtualDom_attribute('viewBox');
+var $j_panasiuk$elm_ionicons$Ionicon$Internal$svg = function (size) {
+	return $elm$svg$Svg$svg(
+		_List_fromArray(
+			[
+				$elm$svg$Svg$Attributes$version('1.1'),
+				$elm$svg$Svg$Attributes$x('0px'),
+				$elm$svg$Svg$Attributes$y('0px'),
+				$elm$svg$Svg$Attributes$width(
+				$elm$core$String$fromInt(size)),
+				$elm$svg$Svg$Attributes$height(
+				$elm$core$String$fromInt(size)),
+				$elm$svg$Svg$Attributes$viewBox('0 0 512 512'),
+				$elm$svg$Svg$Attributes$enableBackground('new 0 0 512 512')
+			]));
+};
+var $j_panasiuk$elm_ionicons$Ionicon$Internal$ps = F3(
+	function (ds, size, color) {
+		return A2(
+			$j_panasiuk$elm_ionicons$Ionicon$Internal$svg,
+			size,
+			_List_fromArray(
+				[
+					A2(
+					$elm$svg$Svg$g,
+					_List_Nil,
+					A2(
+						$elm$core$List$map,
+						function (d) {
+							return A2(
+								$elm$svg$Svg$path,
+								_List_fromArray(
+									[
+										$elm$svg$Svg$Attributes$d(d),
+										$elm$svg$Svg$Attributes$fill(
+										$j_panasiuk$elm_ionicons$Ionicon$Internal$fill(color))
+									]),
+								_List_Nil);
+						},
+						ds))
+				]));
+	});
+var $j_panasiuk$elm_ionicons$Ionicon$pause = $j_panasiuk$elm_ionicons$Ionicon$Internal$ps(
+	_List_fromArray(
+		['M224,435.8V76.1c0-6.7-5.4-12.1-12.2-12.1h-71.6c-6.8,0-12.2,5.4-12.2,12.1v359.7c0,6.7,5.4,12.2,12.2,12.2h71.6C218.6,448,224,442.6,224,435.8z', 'M371.8,64h-71.6c-6.7,0-12.2,5.4-12.2,12.1v359.7c0,6.7,5.4,12.2,12.2,12.2h71.6c6.7,0,12.2-5.4,12.2-12.2V76.1 C384,69.4,378.6,64,371.8,64z']));
+var $j_panasiuk$elm_ionicons$Ionicon$Internal$p = F3(
+	function (d, size, color) {
+		return A2(
+			$j_panasiuk$elm_ionicons$Ionicon$Internal$svg,
+			size,
+			_List_fromArray(
+				[
+					A2(
+					$elm$svg$Svg$path,
+					_List_fromArray(
+						[
+							$elm$svg$Svg$Attributes$d(d),
+							$elm$svg$Svg$Attributes$fill(
+							$j_panasiuk$elm_ionicons$Ionicon$Internal$fill(color))
+						]),
+					_List_Nil)
+				]));
+	});
+var $j_panasiuk$elm_ionicons$Ionicon$refresh = $j_panasiuk$elm_ionicons$Ionicon$Internal$p('M416,352l96-111.9h-64.7c-2.3-27.9-10.5-54-23.5-77.3c-27.4-49.2-75.8-85.1-133-95.6c-0.7-0.1-1.5-0.3-2.2-0.4c-0.5-0.1-0.9-0.2-1.4-0.2C277.1,64.9,266.6,64,256,64c-0.1,0-0.3,0-0.4,0c0,0,0,0,0,0c-90.9,0.2-167,63.6-186.7,148.6c0,0,0,0.1,0,0.1c-0.3,1.1-0.5,2.2-0.7,3.3c-0.1,0.5-0.2,0.9-0.3,1.4c-0.1,0.7-0.3,1.4-0.4,2.1c-0.2,0.9-0.3,1.7-0.5,2.6c-0.1,0.4-0.1,0.7-0.2,1.1c-0.2,1.2-0.4,2.4-0.6,3.6c0,0.1,0,0.1,0,0.2c-1,6.3-1.6,12.7-1.9,19.1c0,0.3,0,0.6,0,0.8c-0.1,1.4-0.1,2.7-0.2,4.1c0,1.6-0.1,3.3-0.1,5c0,1.7,0,3.3,0.1,5c0,1.4,0.1,2.7,0.2,4.1c0,0.3,0,0.6,0,0.9c0.3,6.5,1,12.9,1.9,19.1c0,0.1,0,0.1,0,0.2c0.2,1.2,0.4,2.4,0.6,3.6c0.1,0.4,0.1,0.7,0.2,1.1c0.2,0.9,0.3,1.8,0.5,2.6c0.1,0.7,0.3,1.4,0.4,2.1c0.1,0.5,0.2,1,0.3,1.4c0.2,1.1,0.5,2.2,0.7,3.2c0,0,0,0.1,0,0.1c19.7,85,96.1,148.4,187.1,148.6c42.9-0.1,83.1-14.2,116.9-40.7l7.5-5.9l-43.2-46.2l-6.2,4.6c-22.1,16.3-47.5,24.2-75,24.2c-70.6,0-128-57-128-128c0-71,57.4-128,128-128c66.4,0,122.8,46.6,129.5,112H312L416,352z');
+var $j_panasiuk$elm_ionicons$Ionicon$Internal$g = F3(
+	function (elements, size, color) {
+		return A2(
+			$j_panasiuk$elm_ionicons$Ionicon$Internal$svg,
+			size,
+			_List_fromArray(
+				[
+					A2(
+					$elm$svg$Svg$g,
+					_List_Nil,
+					A2(
+						$elm$core$List$map,
+						function (el) {
+							return el(color);
+						},
+						elements))
+				]));
+	});
+var $j_panasiuk$elm_ionicons$Ionicon$Internal$p1 = F2(
+	function (d, color) {
+		return A2(
+			$elm$svg$Svg$path,
+			_List_fromArray(
+				[
+					$elm$svg$Svg$Attributes$d(d),
+					$elm$svg$Svg$Attributes$fill(
+					$j_panasiuk$elm_ionicons$Ionicon$Internal$fill(color))
+				]),
+			_List_Nil);
+	});
+var $elm$svg$Svg$Attributes$points = _VirtualDom_attribute('points');
+var $elm$svg$Svg$polygon = $elm$svg$Svg$trustedNode('polygon');
+var $j_panasiuk$elm_ionicons$Ionicon$Internal$pg1 = F2(
+	function (points, color) {
+		return A2(
+			$elm$svg$Svg$polygon,
+			_List_fromArray(
+				[
+					$elm$svg$Svg$Attributes$points(points),
+					$elm$svg$Svg$Attributes$fill(
+					$j_panasiuk$elm_ionicons$Ionicon$Internal$fill(color))
+				]),
+			_List_Nil);
+	});
+var $j_panasiuk$elm_ionicons$Ionicon$volumeMedium = $j_panasiuk$elm_ionicons$Ionicon$Internal$g(
+	_List_fromArray(
+		[
+			$j_panasiuk$elm_ionicons$Ionicon$Internal$pg1('270,407.7 270,104.4 175.3,192 71,192 71,320 175.3,320'),
+			$j_panasiuk$elm_ionicons$Ionicon$Internal$p1('M326.3,355.6c20.5-27.8,32.8-62.3,32.8-99.6c0-37.4-12.3-71.8-32.8-99.6l-20.4,15.3c17.4,23.6,27.8,52.7,27.8,84.3 c0,31.6-10.4,60.7-27.8,84.3L326.3,355.6z'),
+			$j_panasiuk$elm_ionicons$Ionicon$Internal$p1('M392.8,401.6c30-40.7,48-91,48-145.6s-18-104.9-48-145.6l-20.4,15.3c26.9,36.4,43,81.4,43,130.3c0,48.9-16.1,93.8-43,130.3 L392.8,401.6z')
+		]));
+var $j_panasiuk$elm_ionicons$Ionicon$volumeMute = $j_panasiuk$elm_ionicons$Ionicon$Internal$g(
+	_List_fromArray(
+		[
+			$j_panasiuk$elm_ionicons$Ionicon$Internal$pg1('255.9,217 191,217 191,295 255.9,295 303,346.3 303,165.7'),
+			$j_panasiuk$elm_ionicons$Ionicon$Internal$p1('M364.5,60.1c-0.4-0.2-0.7-0.4-1.1-0.6C331.5,42,294.9,32,256,32C132.3,32,32,132.3,32,256c0,84.3,46.6,157.6,115.4,195.9 c0.4,0.2,0.7,0.5,1.1,0.7C180.5,470,217.1,480,256,480c123.7,0,224-100.3,224-224C480,171.7,433.4,98.3,364.5,60.1z M393.9,355.4 L336,297.1v76.7l19.6,19.9c-28,20.3-62.3,32.7-99.5,32.7c-21.6,0-42.3-4.2-61.3-11.5c-6.5-2.5-12.9-5.3-19-8.6 c-53.6-28.7-90.1-85.2-90.1-150.3c0-37.2,12.4-71.4,32.7-99.4l35.3,35.4h76.7l-73.6-73.8c28-20.2,62.1-32.6,99.4-32.6 c21.6,0,42.2,4.2,61.3,11.5c6.1,2.4,12.2,5,17.9,8c54.2,28.5,91.3,85.3,91.3,150.8C426.5,293.3,414.2,327.4,393.9,355.4z')
+		]));
+var $author$project$Dashboard$renderSettings = function () {
+	var volumeOn = A2(
+		$elm$svg$Svg$svg,
+		_List_fromArray(
+			[
+				$elm$svg$Svg$Attributes$x('60%'),
+				$elm$svg$Svg$Attributes$y('0.8%')
 			]),
 		_List_fromArray(
 			[
-				$elm$html$Html$text('Time Played' + (':' + (out_minute + (':' + out_second))))
+				A2($j_panasiuk$elm_ionicons$Ionicon$volumeMedium, 7, $author$project$Color$grey)
 			]));
+	var volumeOff = A2(
+		$elm$svg$Svg$svg,
+		_List_fromArray(
+			[
+				$elm$svg$Svg$Attributes$x('60%'),
+				$elm$svg$Svg$Attributes$y('0.8%')
+			]),
+		_List_fromArray(
+			[
+				A2($j_panasiuk$elm_ionicons$Ionicon$volumeMute, 7, $author$project$Color$grey)
+			]));
+	var refresh = A2(
+		$elm$svg$Svg$svg,
+		_List_fromArray(
+			[
+				$elm$svg$Svg$Attributes$x('60%'),
+				$elm$svg$Svg$Attributes$y('4.8%')
+			]),
+		_List_fromArray(
+			[
+				A2($j_panasiuk$elm_ionicons$Ionicon$refresh, 7, $author$project$Color$grey)
+			]));
+	var pause = A2(
+		$elm$svg$Svg$svg,
+		_List_fromArray(
+			[
+				$elm$svg$Svg$Attributes$x('60%'),
+				$elm$svg$Svg$Attributes$y('2.8%')
+			]),
+		_List_fromArray(
+			[
+				A2($j_panasiuk$elm_ionicons$Ionicon$pause, 7, $author$project$Color$grey)
+			]));
+	return _List_fromArray(
+		[volumeOn, pause, refresh]);
+}();
+var $j_panasiuk$elm_ionicons$Ionicon$clock = $j_panasiuk$elm_ionicons$Ionicon$Internal$ps(
+	_List_fromArray(
+		['M255.988,32C132.285,32,32,132.298,32,256c0,123.715,100.285,224,223.988,224C379.703,480,480,379.715,480,256C480,132.298,379.703,32,255.988,32zM391.761,391.765c-10.099,10.098-21.126,18.928-32.886,26.42l-15.946-27.62l-13.856,8l15.955,27.636c-24.838,13.03-52.372,20.455-81.027,21.624V416h-16v31.825c-28.656-1.166-56.191-8.59-81.03-21.62l15.958-27.641l-13.856-8l-15.949,27.625c-11.761-7.492-22.79-16.324-32.889-26.424c-10.099-10.099-18.93-21.127-26.422-32.889l27.624-15.949l-8-13.855L85.796,345.03c-13.03-24.839-20.454-52.374-21.621-81.03H96v-16H64.175c1.167-28.655,8.592-56.19,21.623-81.029l27.638,15.958l8-13.856l-27.623-15.948c7.492-11.76,16.322-22.787,26.419-32.885c10.1-10.101,21.129-18.933,32.89-26.426l15.949,27.624l13.856-8l-15.958-27.64C191.81,72.765,219.345,65.34,248,64.175V96h16V64.176c28.654,1.169,56.188,8.595,81.026,21.626l-15.954,27.634l13.856,8l15.945-27.618c11.76,7.492,22.787,16.323,32.886,26.421c10.1,10.099,18.931,21.126,26.424,32.887l-27.619,15.946l8,13.856l27.636-15.956c13.031,24.839,20.457,52.373,21.624,81.027H416v16h31.824c-1.167,28.655-8.592,56.189-21.622,81.028l-27.637-15.957l-8,13.856l27.621,15.947C410.693,370.637,401.861,381.665,391.761,391.765z', 'M400,241H284.268c-2.818-5.299-7.083-9.708-12.268-12.708V160h-32v68.292c-9.562,5.534-16,15.866-16,27.708 c0,17.673,14.327,32,32,32c11.425,0,21.444-5.992,27.106-15H400V241z']));
+var $author$project$Color$deep_grey = A4($author$project$Color$RGBA, 87 / 255, 101 / 255, 116 / 255, 1);
+var $elm$svg$Svg$Attributes$fontSize = _VirtualDom_attribute('font-size');
+var $author$project$Color$green = A4($author$project$Color$RGBA, 29 / 255, 209 / 255, 161 / 255, 1);
+var $j_panasiuk$elm_ionicons$Ionicon$heart = $j_panasiuk$elm_ionicons$Ionicon$Internal$p('M429.9,95.6c-40.4-42.1-106-42.1-146.4,0L256,124.1l-27.5-28.6c-40.5-42.1-106-42.1-146.4,0c-45.5,47.3-45.5,124.1,0,171.4L256,448l173.9-181C475.4,219.7,475.4,142.9,429.9,95.6z');
+var $j_panasiuk$elm_ionicons$Ionicon$leaf = $j_panasiuk$elm_ionicons$Ionicon$Internal$p('M456.7,378.7c-52.5-8-56.5-15.7-56.5-15.7c10.8-64.9-22.7-147.1-77.4-191.6c-72.8-59.2-183.5-16.2-269.7-106.2c-20.1-21-8.4,235.5,99.5,332.7c78.9,71,171.8,49.2,197.3,37.6c23.1-10.6,39.3-29.9,39.3-29.9c42.1,13,62.9,12.2,62.9,12.2C466.9,419.6,474.4,381.4,456.7,378.7zM360.6,383.1c-138.2-40.9-242.1-184.5-242.1-184.5s91.2,107.7,252,160.2C370.7,366.9,365.9,378.5,360.6,383.1z');
+var $author$project$Color$red = A4($author$project$Color$RGBA, 255 / 255, 107 / 255, 107 / 255, 1);
+var $j_panasiuk$elm_ionicons$Ionicon$Internal$pg = F3(
+	function (points, size, color) {
+		return A2(
+			$j_panasiuk$elm_ionicons$Ionicon$Internal$svg,
+			size,
+			_List_fromArray(
+				[
+					A2(
+					$elm$svg$Svg$polygon,
+					_List_fromArray(
+						[
+							$elm$svg$Svg$Attributes$points(points),
+							$elm$svg$Svg$Attributes$fill(
+							$j_panasiuk$elm_ionicons$Ionicon$Internal$fill(color))
+						]),
+					_List_Nil)
+				]));
+	});
+var $j_panasiuk$elm_ionicons$Ionicon$star = $j_panasiuk$elm_ionicons$Ionicon$Internal$pg('480,200 308.519,200 256.029,32 203.519,200 32,200 170.946,304.209 116,480 256,368 396,480 341.073,304.195');
+var $elm$svg$Svg$text_ = $elm$svg$Svg$trustedNode('text');
+var $author$project$Color$yellow = A4($author$project$Color$RGBA, 254 / 255, 202 / 255, 87 / 255, 1);
+var $author$project$Dashboard$renderStatus = function (model) {
+	var star = A2(
+		$elm$svg$Svg$svg,
+		_List_fromArray(
+			[
+				$elm$svg$Svg$Attributes$x('40%'),
+				$elm$svg$Svg$Attributes$y('4%')
+			]),
+		_List_fromArray(
+			[
+				A2($j_panasiuk$elm_ionicons$Ionicon$star, 7, $author$project$Color$yellow)
+			]));
+	var out_second = $elm$core$String$fromInt(model.second);
+	var out_minute = $elm$core$String$fromInt(model.minute);
+	var life = A2(
+		$elm$svg$Svg$svg,
+		_List_fromArray(
+			[
+				$elm$svg$Svg$Attributes$x('40%'),
+				$elm$svg$Svg$Attributes$y('1%')
+			]),
+		_List_fromArray(
+			[
+				A2($j_panasiuk$elm_ionicons$Ionicon$heart, 7, $author$project$Color$red)
+			]));
+	var leaf = A2(
+		$elm$svg$Svg$svg,
+		_List_fromArray(
+			[
+				$elm$svg$Svg$Attributes$x('48%'),
+				$elm$svg$Svg$Attributes$y('1%')
+			]),
+		_List_fromArray(
+			[
+				A2($j_panasiuk$elm_ionicons$Ionicon$leaf, 7, $author$project$Color$green)
+			]));
+	var clock = A2(
+		$elm$svg$Svg$svg,
+		_List_fromArray(
+			[
+				$elm$svg$Svg$Attributes$x('48%'),
+				$elm$svg$Svg$Attributes$y('4%')
+			]),
+		_List_fromArray(
+			[
+				A2($j_panasiuk$elm_ionicons$Ionicon$clock, 7, $author$project$Color$deep_grey)
+			]));
+	return _List_fromArray(
+		[
+			life,
+			A2(
+			$elm$svg$Svg$text_,
+			_List_fromArray(
+				[
+					$elm$svg$Svg$Attributes$x('42%'),
+					$elm$svg$Svg$Attributes$y('2.5%'),
+					$elm$svg$Svg$Attributes$fill('black'),
+					$elm$svg$Svg$Attributes$fontSize('4')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(
+					'Life: ' + ($elm$core$String$fromInt(model.life) + ('/' + $elm$core$String$fromInt(model.max_life))))
+				])),
+			star,
+			A2(
+			$elm$svg$Svg$text_,
+			_List_fromArray(
+				[
+					$elm$svg$Svg$Attributes$x('42%'),
+					$elm$svg$Svg$Attributes$y('5.5%'),
+					$elm$svg$Svg$Attributes$fill('black'),
+					$elm$svg$Svg$Attributes$fontSize('4')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(
+					'Exp: ' + $elm$core$String$fromInt(model.exp))
+				])),
+			leaf,
+			(model.leaf !== 1) ? A2(
+			$elm$svg$Svg$text_,
+			_List_fromArray(
+				[
+					$elm$svg$Svg$Attributes$x('50%'),
+					$elm$svg$Svg$Attributes$y('2.5%'),
+					$elm$svg$Svg$Attributes$fill('black'),
+					$elm$svg$Svg$Attributes$fontSize('4')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(
+					$elm$core$String$fromInt(model.leaf) + ' Lines cleared')
+				])) : A2(
+			$elm$svg$Svg$text_,
+			_List_fromArray(
+				[
+					$elm$svg$Svg$Attributes$x('50%'),
+					$elm$svg$Svg$Attributes$y('2.5%'),
+					$elm$svg$Svg$Attributes$fill('black'),
+					$elm$svg$Svg$Attributes$fontSize('4')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(
+					$elm$core$String$fromInt(model.leaf) + ' Line cleared')
+				])),
+			clock,
+			A2(
+			$elm$svg$Svg$text_,
+			_List_fromArray(
+				[
+					$elm$svg$Svg$Attributes$x('50%'),
+					$elm$svg$Svg$Attributes$y('5.5%'),
+					$elm$svg$Svg$Attributes$fill('black'),
+					$elm$svg$Svg$Attributes$fontSize('4')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Time Played' + (':' + (out_minute + (':' + out_second))))
+				]))
+		]);
 };
-var $elm$svg$Svg$svg = $elm$svg$Svg$trustedNode('svg');
-var $elm$svg$Svg$Attributes$viewBox = _VirtualDom_attribute('viewBox');
 var $author$project$View$view = function (model) {
 	return A2(
 		$elm$html$Html$div,
@@ -7340,56 +7642,59 @@ var $author$project$View$view = function (model) {
 					]),
 				A2(
 					$elm_community$list_extra$List$Extra$interweave,
-					_List_fromArray(
-						[
-							A4(
-							$author$project$Object$renderBackground,
-							A2($author$project$Model$Point, 0, 0),
-							100,
-							65,
-							$author$project$Outlooks$outBkg),
-							A4(
-							$author$project$Object$renderBackground,
-							A2($author$project$Model$Point, 9, 8),
-							82,
-							37,
-							$author$project$Outlooks$outInterface),
-							A4(
-							$author$project$Object$renderBall,
-							A2($author$project$Model$Point, model.ball_x, model.ball_y),
-							2,
-							2,
-							$author$project$Outlooks$outBall),
-							A4(
-							$author$project$Object$renderPaddle,
-							A2($author$project$Model$Point, model.pad_x, 40),
-							12,
-							1,
-							$author$project$Outlooks$outPaddle)
-						]),
-					A6(
-						$author$project$Object$renderRowBrick,
-						model,
-						A2($author$project$Model$Point, 10, 8),
-						6.5,
-						2.5,
-						4,
-						11))),
+					A2(
+						$elm_community$list_extra$List$Extra$interweave,
+						A2(
+							$elm_community$list_extra$List$Extra$interweave,
+							_List_fromArray(
+								[
+									A4(
+									$author$project$Object$renderBackground,
+									A2($author$project$Model$Point, 0, 0),
+									100,
+									65,
+									$author$project$Outlooks$outBkg),
+									A4(
+									$author$project$Object$renderBackground,
+									A2($author$project$Model$Point, 9, 8),
+									82,
+									37,
+									$author$project$Outlooks$outInterface),
+									A4(
+									$author$project$Object$renderBall,
+									A2($author$project$Model$Point, model.ball_x, model.ball_y),
+									2,
+									2,
+									$author$project$Outlooks$outBall),
+									A4(
+									$author$project$Object$renderPaddle,
+									A2($author$project$Model$Point, model.pad_x, 40),
+									12,
+									1,
+									$author$project$Outlooks$outPaddle),
+									A3(
+									$author$project$Dashboard$renderDashboard,
+									A2($author$project$Model$Point, 40, 0.5),
+									50,
+									6)
+								]),
+							A6(
+								$author$project$Object$renderRowBrick,
+								model,
+								A2($author$project$Model$Point, 10, 8),
+								6.5,
+								2.5,
+								4,
+								11)),
+						$author$project$Dashboard$renderStatus(model)),
+					$author$project$Dashboard$renderSettings)),
 				A2(
 				$elm$html$Html$div,
 				_List_Nil,
 				_List_fromArray(
 					[
 						$author$project$View$renderGameButton(model)
-					])),
-				A2(
-				$elm$html$Html$div,
-				_List_Nil,
-				_List_fromArray(
-					[
-						$author$project$View$renderTime(model)
-					])),
-				A2($elm$html$Html$div, _List_Nil, _List_Nil)
+					]))
 			]));
 };
 var $author$project$Breakout$main = $elm$browser$Browser$element(

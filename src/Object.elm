@@ -31,7 +31,7 @@ renderPaddle point wid hei pic=
 renderBlueBrick : Int -> Int -> Point -> Float -> Float -> Html Msg
 renderBlueBrick num1 num2 point wid hei =
     let
-        a = point.x + ( wid + 0.175 ) * ( toFloat num1 )
+        a = point.x + ( wid + 0.175 ) * ( toFloat num1 )   --* 这里修改位置!!
         b = point.y + ( hei + 0.175 ) * ( toFloat num2 )
     in       --* xlinkHref 调用图片
         image [xlinkHref outOriginal, x ((String.fromFloat a)++"%"), y ((String.fromFloat b)++"%"), width ((String.fromFloat wid)++"%"), height ((String.fromFloat hei)++"%")][]

@@ -6,7 +6,6 @@ import Browser
 import Browser.Events
 import Json.Decode as D
 import Task
-import Ionicon exposing (..) -- some svg icons, may be helpful later
 ----------------------- From src
 import Update
 import Model
@@ -16,7 +15,6 @@ import Browser.Dom exposing (getViewport)
 import Browser.Events exposing (onAnimationFrameDelta, onKeyDown, onKeyUp, onResize)
 import Json.Decode as Decode
 import Model exposing (Model)
-import Task
 import Update
 import View
 import Time
@@ -32,7 +30,7 @@ main =
     }
 subscriptions : Model.Model -> Sub Msg
 subscriptions model =
-    Sub.batch
+    Sub.batch  --todo 允许A和D移动踏板;允许数字键选技能
         [  if model.state == Model.Playing then
           Browser.Events.onAnimationFrameDelta TimeDelta
           else Sub.none
