@@ -6,24 +6,35 @@ import Task
 import Message
 import Json.Decode as Decode
 import Json.Encode as Encode
-
-
-type alias Point =
+type alias Point =  --*这个不是给方块用的
     {
         x : Float
     ,   y: Float
     }
 
+
+
 type alias Keys =
     {
-        left: Bool
+        enter: Bool
+    ,   left: Bool
     ,   right: Bool
-    ,   enter: Bool
+    ,   one : Bool
+    ,   two : Bool
+    ,   three : Bool
+    ,   four : Bool
+    ,   five : Bool
+    ,   six : Bool
+    ,   seven : Bool
+    ,   eight : Bool
+    ,   nine : Bool
+    ,   ten : Bool
     }
 
 nokeys: Keys
 nokeys =
-    Keys False False False
+    Keys False False False False False False False False False False False False False
+
 
 
 type State
@@ -53,15 +64,17 @@ type alias Model =
     , redBricks: List (Int, Int)
     , emptyBricks: List (Int, Int)
     , nextBrick : Outlooks.Brick
+    , nextPoint : (Int,Int)
     , life: Int
     , max_life : Int
-    , exp : Int --todo 经验值
-    , leaf : Int  --todo 打掉的行数
+    , exp : Int
+    , leaf : Int
     , state : State
-    , combo : Int --todo 获得更多经验值
+    , combo : Int
     , minute : Int
     , second : Int
-    , skills : List(Bool) -- todo 拥有的技能
+    , skills_ok : List(Bool)
+    , skills_cost : List(Int)
     }
 
 initial : () -> (Model, Cmd Msg)
@@ -86,11 +99,13 @@ initial _ =
       , redBricks = []
       , emptyBricks = []
       , nextBrick = Outlooks.Red
-      , life = 3
-      , max_life = 3
+      , nextPoint = (0, 0)
+      , life = 5
+      , max_life = 5
       , exp = 0
       , leaf = 0
-      , skills = [False,False,False,False,False,False,False,False,False,False,False]
+      , skills_ok = [False,False,False,False,False,False,False,False,False,False]
+      , skills_cost = [25,27,29,31,33,35,40,45,50,55,80]
       , combo = 0
       , state = Stopped
       , minute = 0

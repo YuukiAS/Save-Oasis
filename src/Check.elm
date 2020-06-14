@@ -92,6 +92,23 @@ cGameOver model =
     then True
     else False
 
+
+cClearLine : Model -> Int ->Bool
+cClearLine model num =  -- num: 0~4
+     if ( List.member (num , 0) model.emptyBricks &&
+        List.member (num , 1) model.emptyBricks &&
+        List.member (num , 2) model.emptyBricks &&
+        List.member (num , 3) model.emptyBricks &&
+        List.member (num , 4) model.emptyBricks &&
+        List.member (num , 5) model.emptyBricks &&
+        List.member (num , 6) model.emptyBricks &&
+        List.member (num , 7) model.emptyBricks &&
+        List.member (num , 8) model.emptyBricks &&
+        List.member (num , 9) model.emptyBricks &&
+        List.member (num , 10) model.emptyBricks &&
+        List.member (num , 11) model.emptyBricks ) then True else False
+
+
 cWin: Model -> Bool    -- 判断是否胜利
 cWin model =
     if ( List.member (0, 0) model.emptyBricks &&

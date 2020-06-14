@@ -30,7 +30,7 @@ main =
     }
 subscriptions : Model.Model -> Sub Msg
 subscriptions model =
-    Sub.batch  --todo 允许A和D移动踏板;允许数字键选技能
+    Sub.batch
         [  if model.state == Model.Playing then
           Browser.Events.onAnimationFrameDelta TimeDelta
           else Sub.none

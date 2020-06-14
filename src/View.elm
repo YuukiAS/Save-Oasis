@@ -5,8 +5,8 @@ import Model exposing (..)
 import Message exposing (..)
 import Outlooks exposing (..)
 import Html exposing (..)
-import Html.Attributes exposing (style)
-import List.Extra exposing (interweave)
+import Html.Attributes exposing (style,src,controls,loop,autoplay,start)
+import List.Extra exposing (interweave,intercalate)
 import Svg exposing (svg)
 import Svg.Attributes exposing (viewBox)
 import Html exposing (Html, button, div, text)
@@ -16,7 +16,6 @@ import Model exposing (Model)
 import Svg.Attributes as SvgAttrs
 import Dashboard exposing (..)
 
-
 view: Model -> Html Msg
 view model =
 
@@ -24,22 +23,20 @@ view model =
         [ style "backgroundColor" "#1d1d1d"
         ]
         [
-
-            --renderSettings,
-            --renderSkills model,
             svg
             [ viewBox "0 0 400 400" ]
-            (interweave(interweave (interweave     --* 用于合并两个list(++不能对Html Msg使用)
+            (interweave  --? List.append会导致无法加载brick,但interweave可以
+            (List.append (List.append(List.append renderSettings (renderStatus model)) (renderRowBrick model (Point 10 8) 6.5 2.5 4 11)) (renderSkills model))
             [
-                renderBackground (Point 0 0) 100 65 outBkg
-            ,   renderBackground (Point 9 8) 82 37 outInterface
-            ,   renderBall (Point model.ball_x model.ball_y) 2 2 outBall
-            ,   renderPaddle (Point model.pad_x 40) 12 1 outPaddle
-            ,   renderDashboard (Point 40 0.5) 50 6
-            ]
-            (renderRowBrick model (Point 10 8) 6.5 2.5 4 11) -- todo 解决灰色方块问题
-             )  (renderStatus model)) renderSettings)
+                (renderBackground (Point 0 0) 100 65 outBkg),
+                (renderBackground (Point 9 8) 82 37 outInterface),
+                (renderBall (Point model.ball_x model.ball_y) 2 2 outBall),
+                (renderPaddle (Point model.pad_x 40) 12 1 outPaddle),
+                (renderDashboard (Point 40 0.5) 50 6)
+            ])
+
          , div [][renderGameButton model]
+         , div [style "top" "700px" , style "left" "1000px", style "position" "absolute"][audio [src "src/assets/musics/Return of Ancients.mp3",controls True][]]
         ]
 
 
@@ -75,7 +72,7 @@ renderGameButton model =
                   , style "font-size" "18px"
                   , style "font-weight" "300"
                   , style "height" "600x"
-                  , style "left" "230px"
+                  , style "left" "330px"
                   , style "line-height" "60px"
                   , style "outline" "none"
                   , style "padding" "0"

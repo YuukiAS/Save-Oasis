@@ -2,35 +2,65 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3edad3ad-0371-41b1-a7b2-4efa31bd61d4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Color.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Dashboard.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Test.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/materials/ball2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/materials/button.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/materials/paddle2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/materials/skills/Trait_charismatic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/materials/skills/Trait_cybernetic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/materials/skills/Trait_enduring.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/materials/skills/Trait_erudite.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/materials/skills/Trait_intelligent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/materials/skills/Trait_psionic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/materials/skills/Trait_strong.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/materials/skills/Trait_very_cybernetic.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/materials/skills/Trait_very_enduring.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/materials/skills/Trait_very_intelligent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/materials/skills/Trait_very_strong.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/materials/trans.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/game.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/help.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Help.elm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Main.elm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/main/acceleration.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/main/addBall.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/main/ball.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/main/bkp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/main/boss.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/main/frozen.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/main/gameinter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/musics/Return of Ancients.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/musics/The Oasis.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/skills/Trait_boss.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/skills/Trait_rapid_speed.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Breakout.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Breakout.elmi" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/d.dat" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/d.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/i.dat" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/i.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/o.dat" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/o.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm.json" beforeDir="false" afterPath="$PROJECT_DIR$/elm.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Breakout.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Breakout.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Check.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Check.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dashboard.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dashboard.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Message.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Message.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Object.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Object.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Outlooks.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Outlooks.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test.elm" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Update.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Update.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/View.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/acceleration.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/ball.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/ball2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/bkp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/button.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/frozen.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/gameinter.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/n.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/main/n.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/o.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/main/o.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/paddle.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/main/paddle.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/paddle2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/main/addPaddle.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/pd.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/main/pd.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/skills/Trait_charismatic.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/skills/Trait_charismatic.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/skills/Trait_cybernetic.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/skills/Trait_cybernetic.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/skills/Trait_enduring.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/skills/Trait_enduring.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/skills/Trait_erudite.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/skills/Trait_erudite.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/skills/Trait_intelligent.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/skills/Trait_intelligent.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/skills/Trait_psionic.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/skills/Trait_psionic.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/skills/Trait_strong.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/skills/Trait_strong.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/skills/Trait_very_cybernetic.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/skills/Trait_very_cybernetic.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/skills/Trait_very_enduring.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/skills/Trait_very_enduring.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/skills/Trait_very_intelligent.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/skills/Trait_very_intelligent.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/skills/Trait_very_strong.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/skills/Trait_very_strong.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/materials/trans.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/main/trans.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +96,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -91,17 +121,26 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/elm.json" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Comments" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Shell Script.Run Elm">
     <configuration default="true" type="ELM_TEST_RUN_CONFIGURATION" factoryName="Elm Test configuration factory">
       <ElmTestRunConfiguration elm-folder="D:\Projects\VG100_Project1" />
       <method v="2" />
     </configuration>
+    <configuration name="all" type="MAKEFILE_TARGET_RUN_CONFIGURATION" factoryName="Makefile" temporary="true">
+      <makefile filename="$PROJECT_DIR$/Makefile" target="all" workingDirectory="D:\Projects\VG100_Project1" arguments="">
+        <envs />
+      </makefile>
+      <method v="2" />
+    </configuration>
     <configuration name="Run Elm" type="ShConfigurationType">
       <option name="SCRIPT_PATH" value="C:/Program Files/Elm/0.19.1/bin/elm.exe" />
-      <option name="SCRIPT_OPTIONS" value=";cd $PROJECT_DIR$/;elm make src/Breakout.elm; start-process index.html;exit" />
+      <option name="SCRIPT_OPTIONS" value=";cd $PROJECT_DIR$/;elm make src/Main.elm; start-process index.html;exit" />
       <option name="SCRIPT_WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="INTERPRETER_PATH" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -115,6 +154,15 @@
       <option name="INTERPRETER_OPTIONS" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Makefile.all" />
+      <item itemvalue="Shell Script.Run Elm" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Makefile.all" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -237,7 +285,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591854576932</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Version 0.80 Dashboard">
+      <created>1591937635515</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1591937635515</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -269,57 +324,62 @@
     <MESSAGE value="Basic Structure v0.51&#10;- update README.md" />
     <MESSAGE value="Milestone2" />
     <MESSAGE value="Version 0.7 Random Bricks" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 0.7 Random Bricks" />
+    <MESSAGE value="Version 0.80 Dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 0.80 Dashboard" />
   </component>
   <component name="WindowStateProjectService">
     <state x="367" y="75" key="#Notifications" timestamp="1590563789642">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="367" y="75" key="#Notifications/0.0.1549.831@0.0.1549.831" timestamp="1590563789642" />
-    <state x="30" y="74" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1590942094357">
+    <state x="278" y="131" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592031393146">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="30" y="74" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1590942094357" />
-    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1591854575776">
+    <state x="278" y="131" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1592031393146" />
+    <state x="489" y="206" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1592025661751">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1591854575776" />
+    <state x="489" y="206" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1549.831@0.0.1549.831" timestamp="1592025661751" />
+    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1591937634193">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1591937634193" />
     <state x="148" y="72" key="DiffContextDialog" timestamp="1591004755006">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="148" y="72" key="DiffContextDialog/0.0.1549.831@0.0.1549.831" timestamp="1591004755006" />
-    <state x="520" y="307" key="EnvironmentVariablesDialog" timestamp="1590727828040">
+    <state x="520" y="307" key="EnvironmentVariablesDialog" timestamp="1592013242114">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="520" y="307" key="EnvironmentVariablesDialog/0.0.1549.831@0.0.1549.831" timestamp="1590727828040" />
-    <state x="555" y="171" key="FileChooserDialogImpl" timestamp="1590727649074">
+    <state x="520" y="307" key="EnvironmentVariablesDialog/0.0.1549.831@0.0.1549.831" timestamp="1592013242114" />
+    <state x="555" y="171" key="FileChooserDialogImpl" timestamp="1591979204421">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="555" y="171" key="FileChooserDialogImpl/0.0.1549.831@0.0.1549.831" timestamp="1590727649074" />
+    <state x="555" y="171" key="FileChooserDialogImpl/0.0.1549.831@0.0.1549.831" timestamp="1591979204421" />
     <state x="148" y="72" key="MergeDialog" timestamp="1591496193334">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="148" y="72" key="MergeDialog/0.0.1549.831@0.0.1549.831" timestamp="1591496193334" />
-    <state x="479" y="122" key="MultipleFileMergeDialog" timestamp="1591496214573">
+    <state x="479" y="122" key="MultipleFileMergeDialog" timestamp="1591938584074">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="479" y="122" key="MultipleFileMergeDialog/0.0.1549.831@0.0.1549.831" timestamp="1591496214573" />
-    <state x="335" y="117" key="SettingsEditor" timestamp="1591804052274">
+    <state x="479" y="122" key="MultipleFileMergeDialog/0.0.1549.831@0.0.1549.831" timestamp="1591938584074" />
+    <state x="335" y="0" width="981" height="711" key="SettingsEditor" timestamp="1592052059367">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="335" y="117" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1591804052274" />
-    <state x="367" y="145" key="Vcs.Push.Dialog.v2" timestamp="1591079579027">
+    <state x="335" y="0" width="981" height="711" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1592052059367" />
+    <state x="367" y="145" key="Vcs.Push.Dialog.v2" timestamp="1591938550863">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="367" y="145" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1591079579027" />
-    <state x="746" y="114" width="774" height="632" key="find.popup" timestamp="1591867762545">
+    <state x="367" y="145" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1591938550863" />
+    <state x="746" y="114" width="774" height="632" key="find.popup" timestamp="1592061122787">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="746" y="114" width="774" height="632" key="find.popup/0.0.1549.831@0.0.1549.831" timestamp="1591867762545" />
-    <state x="563" y="46" key="git4idea.branch.GitSmartOperationDialog" timestamp="1591496209127">
+    <state x="746" y="114" width="774" height="632" key="find.popup/0.0.1549.831@0.0.1549.831" timestamp="1592061122787" />
+    <state x="563" y="46" key="git4idea.branch.GitSmartOperationDialog" timestamp="1591938580400">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="563" y="46" key="git4idea.branch.GitSmartOperationDialog/0.0.1549.831@0.0.1549.831" timestamp="1591496209127" />
+    <state x="563" y="46" key="git4idea.branch.GitSmartOperationDialog/0.0.1549.831@0.0.1549.831" timestamp="1591938580400" />
     <state x="488" y="189" key="git4idea.merge.GitPullDialog" timestamp="1591496154792">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -332,9 +392,9 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="432" y="189" key="run.anything.popup/0.0.1549.831@0.0.1549.831" timestamp="1591859339739" />
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1591074019335">
+    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup" timestamp="1592105991226">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1591074019335" />
+    <state x="437" y="152" width="672" height="678" key="search.everywhere.popup/0.0.1549.831@0.0.1549.831" timestamp="1592105991226" />
   </component>
 </project>
