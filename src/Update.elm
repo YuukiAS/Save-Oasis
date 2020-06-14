@@ -6,16 +6,26 @@ import Check exposing (..)
 import Calculate exposing (..)
 import Object exposing (r)
 import Model exposing (Model, State(..))
+import Browser.Navigation as Nav
 import Time
 import Random
 import Task
 import Outlooks exposing (..)
+import List.Extra exposing (getAt,count,setAt)
+import Dashboard
+
+pointGenerator: Random.Generator (Int,Int)
+pointGenerator =
+    Random.map2 Tuple.pair
+       (Random.int 0 4)
+       (Random.int 0 11)
+
 
 brickGenerator: Random.Generator Brick
 brickGenerator =
     Random.weighted
-    (80, Cyan)
-    [ (10, Red)
+    (85, Cyan)
+    [ (5, Red)
     , (10, Pink)
     ]
 
@@ -28,9 +38,13 @@ update msg model =
         TimeDelta dt ->                          --* 参数无用,改变此处数值以改变游戏速度
             (updateTime model 0.06, Cmd.none ) --* 这里将Msg转化为Cmd Msg
 
-        Draw time-> (model, Random.generate NewBrick brickGenerator)   --* 注意传递了一个cmd命令!
+        DrawBrick time-> (model, Random.generate NewBrick brickGenerator)   --* 注意传递了一个cmd命令!
 
         NewBrick newBrick-> ({model|nextBrick = newBrick},Cmd.none)
+
+        DrawPoint time -> (model, Random.generate NewPoint pointGenerator)
+
+        NewPoint newPoint ->({model|nextPoint = newPoint},Cmd.none)
 
         Resume ->
                      ( { model
@@ -66,8 +80,11 @@ update msg model =
                     , pad_x = 44
                     , pad_vx = 0
                     , ball_y = 37.5
-                    , life = 3
+                    , life = 5
                     , exp = 0
+                    , max_life = 5
+                    , skills_ok = [False,False,False,False,False,False,False,False,False,False]
+                    , skills_cost = [25,27,29,31,33,35,37,39,41,43,45]
                     }, Cmd.none)
 
         Start ->
@@ -90,12 +107,14 @@ update msg model =
                 minute = if nextMinute then model.minute+1 else model.minute
             in
               ( { model | minute = minute, second = second  }
-              , Task.perform Draw Time.now
+              , Cmd.batch[Task.perform DrawBrick Time.now,Task.perform DrawPoint Time.now]
               )
 
-        --* 改成Cmd Msg后不需要这个
-        {-_ ->
-            (model, Cmd.none)-}
+        GoHome -> ( model, Nav.load "/VG100_Project1/home.html" )
+
+        GoHelp -> ( model, Nav.load "/VG100_Project1/help.html" )
+
+
 
 updateKeys : Bool -> String -> Keys -> Keys
 updateKeys isDown key keys =
@@ -103,21 +122,90 @@ updateKeys isDown key keys =
         "ArrowLeft" -> { keys | left  = isDown }
         "ArrowRight" -> { keys | right = isDown }
         "Enter" -> { keys | enter = isDown }  -- 启动游戏
+        "a" -> { keys | left  = isDown}
+        "d" -> { keys | right = isDown }
+        "1" -> { keys | one = isDown }
+        "2" -> { keys | two = isDown }
+        "3" -> { keys | three = isDown }
+        "4" -> { keys | four = isDown }
+        "5" -> { keys | five = isDown }
+        "6" -> { keys | six = isDown }
+        "7" -> { keys | seven = isDown }
+        "8" -> { keys | eight = isDown }
+        "9" -> { keys | nine = isDown }
+        "0" -> { keys | ten = isDown }
         _ -> keys
-
-
-
-
 
 
 updateTime: Model -> Float -> Model
 updateTime model dt =
     let
+        ski_3_eff = if getAt 2 model.skills_ok == Just True then True else False
+        ski_5_eff = if getAt 4 model.skills_ok == Just True then True else False
+        ski_6_eff = if getAt 5 model.skills_ok == Just True && (model.second > 40 && model.second == 50)then True else False
+        ski_7_eff = if getAt 6 model.skills_ok == Just True && (model.second == 0 || model.second == 30)then True else False
+        ski_8_eff = if getAt 7 model.skills_ok == Just True then True else False
+        ski_9_eff = if getAt 8 model.skills_ok == Just True  && (model.second == 10 || model.second == 20 ||model.second == 40) then True else False
+        ski_10_eff = if getAt 9 model.skills_ok == Just True then True else False
+
+
+
+        skills_ok =
+            if model.keys.one then if (Dashboard.fromJust (getAt 0 model.skills_cost) < model.exp) && (getAt 0 model.skills_ok /= Just True) then (setAt 0 True model.skills_ok) else model.skills_ok
+            else if model.keys.two then if (Dashboard.fromJust (getAt 1 model.skills_cost) < model.exp) && (getAt 1 model.skills_ok /= Just True) then (setAt 1 True model.skills_ok) else model.skills_ok
+            else if model.keys.three then if (Dashboard.fromJust (getAt 2 model.skills_cost) < model.exp) && (getAt 2 model.skills_ok /= Just True) then (setAt 2 True model.skills_ok) else model.skills_ok
+            else if model.keys.four then if (Dashboard.fromJust (getAt 3 model.skills_cost) < model.exp) && (getAt 3 model.skills_ok /= Just True) then (setAt 3 True model.skills_ok) else model.skills_ok
+            else if model.keys.five then if (Dashboard.fromJust (getAt 4 model.skills_cost) < model.exp) && (getAt 4 model.skills_ok /= Just True) then (setAt 4 True model.skills_ok) else model.skills_ok
+            else if model.keys.six then if (Dashboard.fromJust (getAt 5 model.skills_cost) < model.exp) && (getAt 5 model.skills_ok /= Just True) then (setAt 5 True model.skills_ok) else model.skills_ok
+            else if model.keys.seven then if (Dashboard.fromJust (getAt 6 model.skills_cost) < model.exp) && (getAt 6 model.skills_ok /= Just True) then (setAt 6 True model.skills_ok) else model.skills_ok
+            else if model.keys.eight then if (Dashboard.fromJust (getAt 7 model.skills_cost) < model.exp) && (getAt 7 model.skills_ok /= Just True) then (setAt 7 True model.skills_ok) else model.skills_ok
+            else if model.keys.nine then if (Dashboard.fromJust (getAt 8 model.skills_cost) < model.exp) && (getAt 8 model.skills_ok /= Just True) then (setAt 8 True model.skills_ok) else model.skills_ok
+            else if model.keys.ten then if (Dashboard.fromJust (getAt 9 model.skills_cost) < model.exp) && (getAt 9 model.skills_ok /= Just True) then (setAt 9 True model.skills_ok) else model.skills_ok
+            else model.skills_ok
+
+        ski_1_get = if getAt 0 skills_ok /= (getAt 0 model.skills_ok) then True else False
+        ski_2_get = if getAt 1 skills_ok /= (getAt 1 model.skills_ok) then True else False
+        ski_4_get = if getAt 3 skills_ok /= (getAt 3 model.skills_ok) then True else False
+
+
+        exp0 =  if ((cUpBricks model || cLeftBricks model || cRightBricks model)  && cDownPaddle model == False) then  -- skill 技能5
+                    if ski_5_eff then if model.combo > 0 then model.exp+ 2 + (model.combo - 1)*3 + model.leaf+1  else model.exp + 2 + model.leaf+1
+                    else if model.combo > 0 then model.exp+ 2 + (model.combo - 1)*3 + model.leaf  else model.exp + 2 + model.leaf
+                else model.exp
+
+
+        exp = if(skills_ok /= model.skills_ok) then
+                if getAt 0 skills_ok /= (getAt 0 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 0 skills_cost)
+                else if  getAt 1 skills_ok /= (getAt 1 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 1 skills_cost)
+                else if  getAt 2 skills_ok /= (getAt 2 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 2 skills_cost)
+                else if  getAt 3 skills_ok /= (getAt 3 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 3 skills_cost)
+                else if  getAt 4 skills_ok /= (getAt 4 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 4 skills_cost)
+                else if  getAt 5 skills_ok /= (getAt 5 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 5 skills_cost)
+                else if  getAt 6 skills_ok /= (getAt 6 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 6 skills_cost)
+                else if  getAt 7 skills_ok /= (getAt 7 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 7 skills_cost)
+                else if  getAt 8 skills_ok /= (getAt 8 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 8 skills_cost)
+                else if  getAt 9 skills_ok /= (getAt 9 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 9 skills_cost)
+                else exp0
+              else exp0
+
+
+        skills_cost0 =
+            if(skills_ok /= model.skills_ok) then
+                let
+                    tot_skill = count ((==) True) skills_ok
+                in
+                    List.map (\a->a+tot_skill*4+2) model.skills_cost
+            else model.skills_cost
+
+        skills_cost = if ski_4_get == True then (List.map(\a->a- 10) skills_cost0) else skills_cost0  -- skill 技能4
+
+        ---- 前置
+
         isCyan =
-            if (cUpBricks model && (List.member (upCoordinate model) model.cyanBricks))
-            || (cLeftBricks model && (List.member (leftCoordinate model) model.cyanBricks))
-            || (cRightBricks model && (List.member (rightCoordinate model) model.cyanBricks)) then True
-            else False
+                    if (cUpBricks model && (List.member (upCoordinate model) model.cyanBricks))
+                    || (cLeftBricks model && (List.member (leftCoordinate model) model.cyanBricks))
+                    || (cRightBricks model && (List.member (rightCoordinate model) model.cyanBricks)) then True
+                    else False
         isRed =
                     if (cUpBricks model && (List.member (upCoordinate model) model.redBricks))
                     || (cLeftBricks model && (List.member (leftCoordinate model) model.redBricks))
@@ -129,21 +217,28 @@ updateTime model dt =
                     || (cRightBricks model && (List.member (rightCoordinate model) model.pinkBricks)) then True
                     else False
 
-        empty =
+        empty0 =  -- skill 技能10一击致命
             if cGameOver model then model.emptyBricks
             else if cUpBricks model then
-                if (List.member (upCoordinate model) model.cyanBricks) || (List.member (upCoordinate model) model.pinkBricks) || (List.member (upCoordinate model) model.redBricks)
+                if (List.member (upCoordinate model) model.cyanBricks) || (List.member (upCoordinate model) model.pinkBricks) || (List.member (upCoordinate model) model.redBricks) || ((List.member (upCoordinate model) model.blueBricks)&&ski_10_eff)
                     then List.append model.emptyBricks [upCoordinate model]
                 else model.emptyBricks
             else if cLeftBricks model then
-                if List.member (leftCoordinate model) model.cyanBricks || (List.member (leftCoordinate model) model.pinkBricks) || (List.member (leftCoordinate model) model.redBricks)
+                if List.member (leftCoordinate model) model.cyanBricks || (List.member (leftCoordinate model) model.pinkBricks) || (List.member (leftCoordinate model) model.redBricks)  || ((List.member (leftCoordinate model) model.blueBricks)&&ski_10_eff)
                     then List.append model.emptyBricks [leftCoordinate model]
                 else model.emptyBricks
             else if cRightBricks model then
-                if List.member (rightCoordinate model) model.cyanBricks || (List.member (rightCoordinate model) model.pinkBricks) || (List.member (rightCoordinate model) model.redBricks)
+                if List.member (rightCoordinate model) model.cyanBricks || (List.member (rightCoordinate model) model.pinkBricks) || (List.member (rightCoordinate model) model.redBricks)  || ((List.member (rightCoordinate model) model.blueBricks)&&ski_10_eff)
                     then List.append model.emptyBricks [rightCoordinate model]
                 else model.emptyBricks
             else model.emptyBricks
+
+        -- skill 技能9定期消失
+        empty =
+            if ski_9_eff then if (List.member (model.nextPoint) model.cyanBricks == False) then List.append empty0 [model.nextPoint]else empty0
+            else empty0
+
+
 
         cyan =           -- 生成cyan
             if cGameOver model then model.cyanBricks
@@ -197,15 +292,23 @@ updateTime model dt =
              else model.redBricks
 
 
-        life =
+        life0 =
               if cGameOver model && model.life > 0 then
                     if isRed == True then model.life - 2
                     else if isPink == True then model.life
                     else  model.life - 1
               else
                    if isRed == True then model.life - 1
-                   else if isPink == True then model.life +1
+                   else if isPink == True then if model.life +1 <= model.max_life then model.life+1 else model.life
                    else model.life
+
+        life = if ski_6_eff && (life0 < model.life) then if ski_7_eff then min (life0+2) (max model.life model.max_life - 2) else model.life -- skill 技能6
+               else
+                    if ski_7_eff then min (life0+1) (max model.life model.max_life - 2) else life0  -- skill技能7
+
+
+        max_life = if ski_1_get == True then 7   --skill 技能1
+                    else model.max_life
 
         state =
              if cWin model then
@@ -222,15 +325,16 @@ updateTime model dt =
                 then model.combo + 1
                 else if (cDownPaddle model) then 0
                 else model.combo
-        exp = if ((cUpBricks model || cLeftBricks model || cRightBricks model)  && cDownPaddle model == False)
-                then if model.combo > 0 then model.exp+ 2 + (model.combo - 1)*3 else model.exp + 2
-                else model.exp
 
+
+        leaf = if((cUpBricks model || cLeftBricks model || cRightBricks model)  && cDownPaddle model == False)
+                then if cClearLine model (4- model.leaf) == True then model.leaf+1 else model.leaf
+                else model.leaf
 
         dxp =
-            if cGameOver model then 0
-            else if model.keys.left then -7.0
-            else if model.keys.right then 7.0
+            if cGameOver model then 0       -- skill 技能4
+            else if model.keys.left then if ski_3_eff then -10.0 else -7.0
+            else if model.keys.right then if ski_3_eff then 10.0 else 7.0
             else
                 0.0
         xp =
@@ -240,14 +344,14 @@ updateTime model dt =
             else model.pad_x + dt*dxp
 -----------* 开始计算碰撞
         --ball
-        dxb =
+        dxb0 =
             if cGameOver model then 0
 
             else if (cLeftBricks model || cLeftPillar model || cRightBricks model || cRightPillar model)
             then
-                if isCyan == True then -1.2 * model.ball_vx
+                if isCyan == True then -1.05 * model.ball_vx
                 else if isRed == True then -0.8 * model.ball_vx
-                else if isPink == True then -1.5 * model.ball_vx
+                else if isPink == True then -1.2 * model.ball_vx
                 else -1 * model.ball_vx
 
             else if cDownPaddle model
@@ -255,17 +359,20 @@ updateTime model dt =
 
             else model.ball_vx
 
-        dyb =
+        dyb0 =
             if cGameOver model then 0
 
             else if ( cUpBricks model || cUpPillar model || cDownPaddle model )
             then
-                 if isCyan == True then -1.2 * model.ball_vy
+                 if isCyan == True then -1.05 * model.ball_vy
                  else if isRed == True then -0.8 * model.ball_vy
-                 else if isPink == True then -1.5 * model.ball_vy
+                 else if isPink == True then -1.2 * model.ball_vy
                  else -1 * model.ball_vy
 
             else model.ball_vy
+
+        dxb = if ski_2_get then dxb0 * 0.5 else dxb0  -- skill 技能2
+        dyb = if ski_2_get then dyb0 *0.5 else dyb0
 
         xb =
             if cGameOver model then 50
@@ -289,7 +396,11 @@ updateTime model dt =
                 , pinkBricks = pink
                 , redBricks = red
                 , life = life
+                , max_life = max_life
                 , state = state
                 , combo = combo
                 , exp = exp
+                , leaf = leaf
+                , skills_ok = skills_ok
+                , skills_cost = skills_cost
         }
