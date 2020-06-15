@@ -84,7 +84,7 @@ update msg model =
                     , exp = 0
                     , max_life = 5
                     , skills_ok = [False,False,False,False,False,False,False,False,False,False]
-                    , skills_cost = [25,27,29,31,33,35,40,45,50,55,80]
+                    , skills_cost = [25,27,29,31,33,35,40,45,50,100]
                     }, Cmd.none)
 
         Start ->
