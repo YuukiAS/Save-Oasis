@@ -28,7 +28,8 @@ view model =
       renderDifficulty1,
       renderDifficulty2,
       renderDifficulty3,
-      renderHome
+      renderHome,
+      renderDifficulty model
     ]
 
 
@@ -58,6 +59,10 @@ renderInfo  =
 
         ## The skills
         There are more than 10 skills for you to choose. Of course, you must pay some price for them!
+        Skill1: You will gain 1 life and 1 max_life; Skill2: The speed of ball will be half immediately; Skill3: Your paddle will move faster;
+        Skill4: The cost of all skills - 10; Skills5: The gain of exp will be faster; Skills6: You will not lose life when being frozen;
+        Skill7: You will periodically gain some life(depending on the current one); Skill8: The acceleration of ball will be slower; Skill9: Some bricks will disappear randomly.
+        Skill10: You can get the kernel by one hit!
 
         ## About the game
         This game is powered by **Team Clover**!
@@ -125,6 +130,22 @@ renderButton4 =
         ]
         [ text "Try \"The Chord of Spring\"! (From game \"Arknights\")" ]
 
+renderDifficulty : Model -> Html Msg
+renderDifficulty model =
+    let
+        content =
+            case model.difficulty of
+                Normal -> "Normal"
+                Hard -> "Hard"
+                Nightmare -> "Nightmare"
+    in
+    div[
+        style "left" "500px"
+      , style "top" "600px"
+      , style "position" "absolute"
+      ]
+      [text ("Current Difficulty: " ++content)]
+
 renderDifficulty1 : Html Msg
 renderDifficulty1 =
         button
@@ -139,7 +160,7 @@ renderDifficulty1 =
           , onClick (ChangeDifficulty Normal)
           , title "A wise choice."
         ]
-        [ text "Try \"The Chord of Spring\"! (From game \"Arknights\")" ]
+        [ text "Normal" ]
 renderDifficulty2 : Html Msg
 renderDifficulty2 =
         button
@@ -154,7 +175,8 @@ renderDifficulty2 =
           , onClick (ChangeDifficulty Hard)
           , title "Emm."
         ]
-        [ text "Try \"The Chord of Spring\"! (From game \"Arknights\")" ]
+        [ text "Hard" ]
+
 renderDifficulty3 : Html Msg
 renderDifficulty3 =
         button
@@ -167,9 +189,9 @@ renderDifficulty3 =
           , style "width" "200px"
           , style "position" "absolute"
           , onClick (ChangeDifficulty Nightmare)
-          , title "Do'nt try it."
+          , title "Do not try it."
         ]
-        [ text "Try \"The Chord of Spring\"! (From game \"Arknights\")" ]
+        [ text "Nightmare" ]
 
 
 

@@ -73,21 +73,35 @@ update msg model =
                      )
 
         Pause ->    -- 开始时是Pause
-                    ({ model | state = Paused
-                    , cyanBricks = []
-                     , redBricks = []
-                     , pinkBricks = []
-                     , emptyBricks = []
-                    , ball_x = 50
-                    , pad_x = 44
-                    , pad_vx = 0
-                    , ball_y = 37.5
-                    , life = 5
-                    , exp = 0
-                    , max_life = 5
-                    , skills_ok = [False,False,False,False,False,False,False,False,False,False]
-                    , skills_cost = [25,27,29,31,33,35,40,45,50,100]
-                    }, Cmd.none)
+            let
+                life = case model.difficulty of
+                        Normal -> 5
+                        Hard -> 3
+                        Nightmare -> 1
+                max_life = case model.difficulty of
+                        Normal -> 5
+                        Hard -> 3
+                        Nightmare -> 1
+                expN = case model.difficulty of
+                       Normal -> 1
+                       Hard -> 2
+                       Nightmare -> 3
+            in
+                ({ model | state = Paused
+                , cyanBricks = []
+                 , redBricks = []
+                 , pinkBricks = []
+                 , emptyBricks = []
+                , ball_x = 50
+                , pad_x = 44
+                , pad_vx = 0
+                , ball_y = 37.5
+                , life = life
+                , exp = 0
+                , max_life = max_life
+                , skills_ok = [False,False,False,False,False,False,False,False,False,False]
+                , skills_cost = [25*expN,27*expN,29*expN,31*expN,33*expN,35*expN,40*expN,45*expN,50*expN,100*expN]
+                }, Cmd.none)
 
         Start ->
                     ({ model |
@@ -96,6 +110,7 @@ update msg model =
                      , ball_x = 50
                      , ball_vx = 3
                      , ball_vy = -3
+                     , se = Quite
                      }, Cmd.none
                      )
 
@@ -134,9 +149,27 @@ update msg model =
 
         ChangeMusic music -> ({model|music = music},Cmd.none)
 
-        ChangeDifficulty difficulty -> ({model|difficulty = difficulty},Cmd.none)
-
-
+        ChangeDifficulty difficulty ->
+            let
+                life = case model.difficulty of
+                        Normal -> 5
+                        Hard -> 3
+                        Nightmare -> 1
+                max_life = case model.difficulty of
+                        Normal -> 5
+                        Hard -> 3
+                        Nightmare -> 1
+                expN = case model.difficulty of
+                       Normal -> 1
+                       Hard -> 2
+                       Nightmare -> 3
+            in
+                ({model|
+                      difficulty = difficulty
+                    , life = life
+                    , max_life = max_life
+                    , skills_cost = [25*expN,27*expN,29*expN,31*expN,33*expN,35*expN,40*expN,45*expN,50*expN,100*expN]
+                },Cmd.none)
 
 
 updateKeys : Bool -> String -> Keys -> Keys
@@ -240,6 +273,14 @@ updateTime model dt =
                     || (cRightBricks model && (List.member (rightCoordinate model) model.pinkBricks)) then True
                     else False
 
+
+        se = if isPink == True then Fire
+             else if isRed == True then Frozen
+             else if isCyan == True then Ordinary
+             else if cDownPaddle model then Quite
+             else model.se
+
+
         empty0 =  -- skill 技能10一击致命
             if cGameOver model then model.emptyBricks
             else if cUpBricks model then
@@ -330,7 +371,7 @@ updateTime model dt =
         life = if ski_1_get then life1 + 1 else life1
 
 
-        max_life = if ski_1_get == True then 6   --skill 技能1
+        max_life = if ski_1_get == True then model.max_life+1   --skill 技能1
                     else model.max_life
 
         state =
@@ -396,8 +437,11 @@ updateTime model dt =
 
             else model.ball_vy
 
-        dxb = if ski_2_get then dxb0 * 0.5 else dxb0  -- skill 技能2
-        dyb = if ski_2_get then dyb0 *0.5 else dyb0
+        dxb1 = if ski_2_get then dxb0 * 0.5 else dxb0  -- skill 技能2
+        dyb1 = if ski_2_get then dyb0 *0.5 else dyb0
+
+        dxb = if ski_8_eff && (isCyan||isCyan) then dxb0 * 0.97 else dxb1  -- skill 技能2
+        dyb = if ski_8_eff && (isCyan||isCyan) then dyb0 *0.97 else dyb1
 
         xb =
             if cGameOver model then 50
@@ -428,4 +472,5 @@ updateTime model dt =
                 , leaf = leaf
                 , skills_ok = skills_ok
                 , skills_cost = skills_cost
+                , se = se
         }

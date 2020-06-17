@@ -36,9 +36,6 @@ type Brick   --* 放在update或model中会导致import cycle!!
     | Cyan
     | Pink
     | Red
-    | APaddle
-    | ABall
-    | Boss
 
 type Music
     = Null
@@ -46,6 +43,12 @@ type Music
     | ReturnOfAncients
     | InSearchOfLife
     | TheChordOfSpring
+
+type SE
+    = Quite
+    | Frozen
+    | Fire
+    | Ordinary
 
 type Difficulty
     = Normal

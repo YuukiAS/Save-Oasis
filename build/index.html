@@ -5348,6 +5348,7 @@ var $elm$core$Task$perform = F2(
 var $elm$browser$Browser$application = _Browser_application;
 var $author$project$Model$Home = {$: 'Home'};
 var $author$project$Outlooks$Normal = {$: 'Normal'};
+var $author$project$Outlooks$Quite = {$: 'Quite'};
 var $author$project$Outlooks$Red = {$: 'Red'};
 var $author$project$Outlooks$ReturnOfAncients = {$: 'ReturnOfAncients'};
 var $author$project$Model$Stopped = {$: 'Stopped'};
@@ -5474,6 +5475,7 @@ var $author$project$Model$initial = F3(
 				page: $author$project$Model$Home,
 				pinkBricks: _List_Nil,
 				redBricks: _List_Nil,
+				se: $author$project$Outlooks$Quite,
 				second: 0,
 				skills_cost: _List_fromArray(
 					[25, 27, 29, 31, 33, 35, 40, 45, 50, 100]),
@@ -6614,6 +6616,9 @@ var $author$project$Update$updateKeys = F3(
 				return keys;
 		}
 	});
+var $author$project$Outlooks$Fire = {$: 'Fire'};
+var $author$project$Outlooks$Frozen = {$: 'Frozen'};
+var $author$project$Outlooks$Ordinary = {$: 'Ordinary'};
 var $elm$core$List$append = F2(
 	function (xs, ys) {
 		if (!ys.b) {
@@ -7311,7 +7316,7 @@ var $author$project$Update$updateTime = F2(
 				[
 					$author$project$Calculate$rightCoordinate(model)
 				])) : model.pinkBricks) : model.pinkBricks))));
-		var max_life = ski_1_get ? 6 : model.max_life;
+		var max_life = ski_1_get ? (model.max_life + 1) : model.max_life;
 		var leaf = function () {
 			if (($author$project$Check$cUpBricks(model) || ($author$project$Check$cLeftBricks(model) || $author$project$Check$cRightBricks(model))) && (!$author$project$Check$cDownPaddle(model))) {
 				var next_leaf = ((A2($author$project$Check$cClearLine, model, 1) + A2($author$project$Check$cClearLine, model, 2)) + A2($author$project$Check$cClearLine, model, 3)) + A2($author$project$Check$cClearLine, model, 4);
@@ -7357,6 +7362,7 @@ var $author$project$Update$updateTime = F2(
 			$elm$core$List$member,
 			$author$project$Calculate$rightCoordinate(model),
 			model.cyanBricks)))) ? true : false;
+		var se = isPink ? $author$project$Outlooks$Fire : (isRed ? $author$project$Outlooks$Frozen : (isCyan ? $author$project$Outlooks$Ordinary : ($author$project$Check$cDownPaddle(model) ? $author$project$Outlooks$Quite : model.se)));
 		var exp0 = (($author$project$Check$cUpBricks(model) || ($author$project$Check$cLeftBricks(model) || $author$project$Check$cRightBricks(model))) && (!$author$project$Check$cDownPaddle(model))) ? (ski_5_eff ? ((model.combo > 0) ? ((((model.exp + 2) + ((model.combo - 1) * 3)) + model.leaf) + 1) : (((model.exp + 2) + model.leaf) + 1)) : ((model.combo > 0) ? (((model.exp + 2) + ((model.combo - 1) * 3)) + model.leaf) : ((model.exp + 2) + model.leaf))) : model.exp;
 		var exp = (!_Utils_eq(skills_ok, model.skills_ok)) ? ((!_Utils_eq(
 			A2($elm_community$list_extra$List$Extra$getAt, 0, skills_ok),
@@ -7450,12 +7456,14 @@ var $author$project$Update$updateTime = F2(
 			_List_fromArray(
 				[model.nextPoint])) : empty0) : empty0;
 		var dyb0 = $author$project$Check$cGameOver(model) ? 0 : (($author$project$Check$cUpBricks(model) || ($author$project$Check$cUpPillar(model) || $author$project$Check$cDownPaddle(model))) ? (isCyan ? ((-1.05) * model.ball_vy) : (isRed ? ((-0.8) * model.ball_vy) : (isPink ? ((-1.2) * model.ball_vy) : ((-1) * model.ball_vy)))) : model.ball_vy);
-		var dyb = ski_2_get ? (dyb0 * 0.5) : dyb0;
+		var dyb1 = ski_2_get ? (dyb0 * 0.5) : dyb0;
+		var dyb = (ski_8_eff && (isCyan || isCyan)) ? (dyb0 * 0.97) : dyb1;
 		var yb = $author$project$Check$cGameOver(model) ? 37.5 : ((_Utils_cmp(model.ball_y + (dt * dyb), 8 + $author$project$Object$r) < 0) ? (8 + $author$project$Object$r) : ((_Utils_cmp(model.ball_y + (dt * dyb), 45 - $author$project$Object$r) > 0) ? (45 - $author$project$Object$r) : (model.ball_y + (dt * dyb))));
 		var dxp = $author$project$Check$cGameOver(model) ? 0 : (model.keys.left ? (ski_3_eff ? (-10.0) : (-7.0)) : (model.keys.right ? (ski_3_eff ? 10.0 : 7.0) : 0.0));
 		var xp = $author$project$Check$cGameOver(model) ? 44 : (((model.pad_x + (dt * dxp)) > 78) ? 78 : (((model.pad_x + (dt * dxp)) < 10) ? 10 : (model.pad_x + (dt * dxp))));
 		var dxb0 = $author$project$Check$cGameOver(model) ? 0 : (($author$project$Check$cLeftBricks(model) || ($author$project$Check$cLeftPillar(model) || ($author$project$Check$cRightBricks(model) || $author$project$Check$cRightPillar(model)))) ? (isCyan ? ((-1.05) * model.ball_vx) : (isRed ? ((-0.8) * model.ball_vx) : (isPink ? ((-1.2) * model.ball_vx) : ((-1) * model.ball_vx)))) : ($author$project$Check$cDownPaddle(model) ? (model.ball_vx + (0.05 * model.pad_vx)) : model.ball_vx));
-		var dxb = ski_2_get ? (dxb0 * 0.5) : dxb0;
+		var dxb1 = ski_2_get ? (dxb0 * 0.5) : dxb0;
+		var dxb = (ski_8_eff && (isCyan || isCyan)) ? (dxb0 * 0.97) : dxb1;
 		var xb = $author$project$Check$cGameOver(model) ? 50 : ((_Utils_cmp(model.ball_x + (dt * dxb), 90 - $author$project$Object$r) > 0) ? (90 - $author$project$Object$r) : ((_Utils_cmp(model.ball_x + (dt * dxb), 10 + $author$project$Object$r) < 0) ? (10 + $author$project$Object$r) : (model.ball_x + (dt * dxb))));
 		var cyan = $author$project$Check$cGameOver(model) ? model.cyanBricks : ((!_Utils_eq(model.nextBrick, $author$project$Outlooks$Cyan)) ? model.cyanBricks : ($author$project$Check$cUpBricks(model) ? (A2(
 			$elm$core$List$member,
@@ -7488,7 +7496,7 @@ var $author$project$Update$updateTime = F2(
 		var combo = (($author$project$Check$cUpBricks(model) || ($author$project$Check$cLeftBricks(model) || $author$project$Check$cRightBricks(model))) && (!$author$project$Check$cDownPaddle(model))) ? (model.combo + 1) : ($author$project$Check$cDownPaddle(model) ? 0 : model.combo);
 		return _Utils_update(
 			model,
-			{ball_vx: dxb, ball_vy: dyb, ball_x: xb, ball_y: yb, combo: combo, cyanBricks: cyan, emptyBricks: empty, exp: exp, leaf: leaf, life: life, max_life: max_life, pad_vx: dxp, pad_x: xp, pinkBricks: pink, redBricks: red, skills_cost: skills_cost, skills_ok: skills_ok, state: state});
+			{ball_vx: dxb, ball_vy: dyb, ball_x: xb, ball_y: yb, combo: combo, cyanBricks: cyan, emptyBricks: empty, exp: exp, leaf: leaf, life: life, max_life: max_life, pad_vx: dxp, pad_x: xp, pinkBricks: pink, redBricks: red, se: se, skills_cost: skills_cost, skills_ok: skills_ok, state: state});
 	});
 var $author$project$Update$update = F2(
 	function (msg, model) {
@@ -7614,6 +7622,39 @@ var $author$project$Update$update = F2(
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 'Pause':
+				var max_life = function () {
+					var _v3 = model.difficulty;
+					switch (_v3.$) {
+						case 'Normal':
+							return 5;
+						case 'Hard':
+							return 3;
+						default:
+							return 1;
+					}
+				}();
+				var life = function () {
+					var _v2 = model.difficulty;
+					switch (_v2.$) {
+						case 'Normal':
+							return 5;
+						case 'Hard':
+							return 3;
+						default:
+							return 1;
+					}
+				}();
+				var expN = function () {
+					var _v1 = model.difficulty;
+					switch (_v1.$) {
+						case 'Normal':
+							return 1;
+						case 'Hard':
+							return 2;
+						default:
+							return 3;
+					}
+				}();
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
@@ -7623,14 +7664,14 @@ var $author$project$Update$update = F2(
 							cyanBricks: _List_Nil,
 							emptyBricks: _List_Nil,
 							exp: 0,
-							life: 5,
-							max_life: 5,
+							life: life,
+							max_life: max_life,
 							pad_vx: 0,
 							pad_x: 44,
 							pinkBricks: _List_Nil,
 							redBricks: _List_Nil,
 							skills_cost: _List_fromArray(
-								[25, 27, 29, 31, 33, 35, 40, 45, 50, 100]),
+								[25 * expN, 27 * expN, 29 * expN, 31 * expN, 33 * expN, 35 * expN, 40 * expN, 45 * expN, 50 * expN, 100 * expN]),
 							skills_ok: _List_fromArray(
 								[false, false, false, false, false, false, false, false, false, false]),
 							state: $author$project$Model$Paused
@@ -7640,7 +7681,7 @@ var $author$project$Update$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{ball_vx: 3, ball_vy: -3, ball_x: 50, ball_y: 37.5, state: $author$project$Model$Playing}),
+						{ball_vx: 3, ball_vy: -3, ball_x: 50, ball_y: 37.5, se: $author$project$Outlooks$Quite, state: $author$project$Model$Playing}),
 					$elm$core$Platform$Cmd$none);
 			case 'Keep':
 				return _Utils_Tuple2(
@@ -7713,10 +7754,49 @@ var $author$project$Update$update = F2(
 					$elm$core$Platform$Cmd$none);
 			default:
 				var difficulty = msg.a;
+				var max_life = function () {
+					var _v7 = model.difficulty;
+					switch (_v7.$) {
+						case 'Normal':
+							return 5;
+						case 'Hard':
+							return 3;
+						default:
+							return 1;
+					}
+				}();
+				var life = function () {
+					var _v6 = model.difficulty;
+					switch (_v6.$) {
+						case 'Normal':
+							return 5;
+						case 'Hard':
+							return 3;
+						default:
+							return 1;
+					}
+				}();
+				var expN = function () {
+					var _v5 = model.difficulty;
+					switch (_v5.$) {
+						case 'Normal':
+							return 1;
+						case 'Hard':
+							return 2;
+						default:
+							return 3;
+					}
+				}();
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{difficulty: difficulty}),
+						{
+							difficulty: difficulty,
+							life: life,
+							max_life: max_life,
+							skills_cost: _List_fromArray(
+								[25 * expN, 27 * expN, 29 * expN, 31 * expN, 33 * expN, 35 * expN, 40 * expN, 45 * expN, 50 * expN, 100 * expN])
+						}),
 					$elm$core$Platform$Cmd$none);
 		}
 	});
@@ -7824,6 +7904,32 @@ var $author$project$Help$renderButton4 = A2(
 		[
 			$elm$html$Html$text('Try \"The Chord of Spring\"! (From game \"Arknights\")')
 		]));
+var $elm$html$Html$div = _VirtualDom_node('div');
+var $author$project$Help$renderDifficulty = function (model) {
+	var content = function () {
+		var _v0 = model.difficulty;
+		switch (_v0.$) {
+			case 'Normal':
+				return 'Normal';
+			case 'Hard':
+				return 'Hard';
+			default:
+				return 'Nightmare';
+		}
+	}();
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'left', '500px'),
+				A2($elm$html$Html$Attributes$style, 'top', '600px'),
+				A2($elm$html$Html$Attributes$style, 'position', 'absolute')
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text('Current Difficulty: ' + content)
+			]));
+};
 var $author$project$Message$ChangeDifficulty = function (a) {
 	return {$: 'ChangeDifficulty', a: a};
 };
@@ -7854,7 +7960,7 @@ var $author$project$Help$renderDifficulty1 = A2(
 		]),
 	_List_fromArray(
 		[
-			$elm$html$Html$text('Try \"The Chord of Spring\"! (From game \"Arknights\")')
+			$elm$html$Html$text('Normal')
 		]));
 var $author$project$Outlooks$Hard = {$: 'Hard'};
 var $author$project$Help$renderDifficulty2 = A2(
@@ -7875,7 +7981,7 @@ var $author$project$Help$renderDifficulty2 = A2(
 		]),
 	_List_fromArray(
 		[
-			$elm$html$Html$text('Try \"The Chord of Spring\"! (From game \"Arknights\")')
+			$elm$html$Html$text('Hard')
 		]));
 var $author$project$Outlooks$Nightmare = {$: 'Nightmare'};
 var $author$project$Help$renderDifficulty3 = A2(
@@ -7892,14 +7998,13 @@ var $author$project$Help$renderDifficulty3 = A2(
 			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
 			$elm$html$Html$Events$onClick(
 			$author$project$Message$ChangeDifficulty($author$project$Outlooks$Nightmare)),
-			$elm$html$Html$Attributes$title('Do\'nt try it.')
+			$elm$html$Html$Attributes$title('Do not try it.')
 		]),
 	_List_fromArray(
 		[
-			$elm$html$Html$text('Try \"The Chord of Spring\"! (From game \"Arknights\")')
+			$elm$html$Html$text('Nightmare')
 		]));
 var $author$project$Message$GoHome = {$: 'GoHome'};
-var $elm$html$Html$div = _VirtualDom_node('div');
 var $author$project$Color$RGBA = F4(
 	function (red, green, blue, alpha) {
 		return {alpha: alpha, blue: blue, green: green, red: red};
@@ -8045,7 +8150,7 @@ var $author$project$Help$renderInfo = A2(
 		]),
 	_List_fromArray(
 		[
-			A2($elm_explorations$markdown$Markdown$toHtml, _List_Nil, '\r\n        # This is the page of help.\r\n\r\n        ## Background\r\n        This is the background.\r\n\r\n        ## How to play the game\r\n        The method to play the game.\r\n\r\n        ## The status\r\n        Status includes life, exp, leaf, and so on\r\n\r\n        ## The skills\r\n        There are more than 10 skills for you to choose. Of course, you must pay some price for them!\r\n\r\n        ## About the game\r\n        This game is powered by **Team Clover**!\r\n\r\n        ')
+			A2($elm_explorations$markdown$Markdown$toHtml, _List_Nil, '\r\n        # This is the page of help.\r\n\r\n        ## Background\r\n        This is the background.\r\n\r\n        ## How to play the game\r\n        The method to play the game.\r\n\r\n        ## The status\r\n        Status includes life, exp, leaf, and so on\r\n\r\n        ## The skills\r\n        There are more than 10 skills for you to choose. Of course, you must pay some price for them!\r\n        Skill1: You will gain 1 life and 1 max_life; Skill2: The speed of ball will be half immediately; Skill3: Your paddle will move faster;\r\n        Skill4: The cost of all skills - 10; Skills5: The gain of exp will be faster; Skills6: You will not lose life when being frozen;\r\n        Skill7: You will periodically gain some life(depending on the current one); Skill8: The acceleration of ball will be slower; Skill9: Some bricks will disappear randomly.\r\n        Skill10: You can get the kernel by one hit!\r\n\r\n        ## About the game\r\n        This game is powered by **Team Clover**!\r\n\r\n        ')
 		]));
 var $elm$html$Html$audio = _VirtualDom_node('audio');
 var $elm$json$Json$Encode$bool = _Json_wrap;
@@ -8111,7 +8216,8 @@ var $author$project$Help$view = function (model) {
 			$author$project$Help$renderDifficulty1,
 			$author$project$Help$renderDifficulty2,
 			$author$project$Help$renderDifficulty3,
-			$author$project$Help$renderHome
+			$author$project$Help$renderHome,
+			$author$project$Help$renderDifficulty(model)
 		]);
 };
 var $author$project$Message$GoGame = {$: 'GoGame'};
@@ -8330,11 +8436,12 @@ var $author$project$View$renderGameButton = function (model) {
 				A2($elm$html$Html$Attributes$style, 'font-family', 'Helvetica, Arial, sans-serif'),
 				A2($elm$html$Html$Attributes$style, 'font-size', '18px'),
 				A2($elm$html$Html$Attributes$style, 'font-weight', '300'),
-				A2($elm$html$Html$Attributes$style, 'height', '600x'),
-				A2($elm$html$Html$Attributes$style, 'left', '330px'),
+				A2($elm$html$Html$Attributes$style, 'height', '60px'),
+				A2($elm$html$Html$Attributes$style, 'left', '460px'),
 				A2($elm$html$Html$Attributes$style, 'line-height', '60px'),
 				A2($elm$html$Html$Attributes$style, 'outline', 'none'),
 				A2($elm$html$Html$Attributes$style, 'padding', '0'),
+				A2($elm$html$Html$Attributes$style, 'top', '700px'),
 				A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
 				A2($elm$html$Html$Attributes$style, 'width', '600px'),
 				$elm$html$Html$Events$onClick(msg)
@@ -8344,6 +8451,7 @@ var $author$project$View$renderGameButton = function (model) {
 				$elm$html$Html$text(txt)
 			]));
 };
+var $elm$html$Html$embed = _VirtualDom_node('embed');
 var $author$project$View$renderMusic = function (model) {
 	var music = function () {
 		var _v0 = model.music;
@@ -8361,24 +8469,14 @@ var $author$project$View$renderMusic = function (model) {
 		}
 	}();
 	return A2(
-		$elm$html$Html$div,
+		$elm$html$Html$embed,
 		_List_fromArray(
 			[
-				A2($elm$html$Html$Attributes$style, 'top', '700px'),
-				A2($elm$html$Html$Attributes$style, 'left', '1000px'),
-				A2($elm$html$Html$Attributes$style, 'position', 'absolute')
+				A2($elm$html$Html$Attributes$style, 'height', '50px'),
+				A2($elm$html$Html$Attributes$style, 'width', '100px'),
+				$elm$html$Html$Attributes$src(music)
 			]),
-		_List_fromArray(
-			[
-				A2(
-				$elm$html$Html$audio,
-				_List_fromArray(
-					[
-						$elm$html$Html$Attributes$src(music),
-						$elm$html$Html$Attributes$controls(true)
-					]),
-				_List_Nil)
-			]));
+		_List_Nil);
 };
 var $author$project$Object$renderPaddle = F4(
 	function (point, wid, hei, pic) {
@@ -8525,6 +8623,34 @@ var $author$project$Object$renderRowBrick = F6(
 			A6($author$project$Object$renderColumnBrick, model, point, wid, hei, num1, num2),
 			A6($author$project$Object$renderRowBrick, model, point, wid, hei, num1, num2 - 1)) : _List_Nil;
 	});
+var $elm$html$Html$Attributes$autoplay = $elm$html$Html$Attributes$boolProperty('autoplay');
+var $elm$html$Html$Attributes$loop = $elm$html$Html$Attributes$boolProperty('loop');
+var $author$project$View$renderSE = function (model) {
+	var music = function () {
+		var _v0 = model.se;
+		switch (_v0.$) {
+			case 'Quite':
+				return '';
+			case 'Fire':
+				return 'assets/musics/SE/Fire.mp3';
+			case 'Frozen':
+				return 'assets/musics/SE/Frozen.mp3';
+			default:
+				return 'assets/musics/SE/Ordinary.mp3';
+		}
+	}();
+	return A2(
+		$elm$html$Html$audio,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'height', '50px'),
+				A2($elm$html$Html$Attributes$style, 'width', '100px'),
+				$elm$html$Html$Attributes$src(music),
+				$elm$html$Html$Attributes$autoplay(true),
+				$elm$html$Html$Attributes$loop(true)
+			]),
+		_List_Nil);
+};
 var $elm$svg$Svg$Attributes$fillOpacity = _VirtualDom_attribute('fill-opacity');
 var $elm$svg$Svg$Attributes$d = _VirtualDom_attribute('d');
 var $elm$svg$Svg$path = $elm$svg$Svg$trustedNode('path');
@@ -9188,6 +9314,13 @@ var $author$project$View$view = function (model) {
 			_List_fromArray(
 				[
 					$author$project$View$renderMusic(model)
+				])),
+			A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$author$project$View$renderSE(model)
 				]))
 		]);
 };

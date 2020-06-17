@@ -1,6 +1,6 @@
 module Model exposing (..)
 import Message exposing (Msg)
-import Outlooks exposing (Music(..),Difficulty(..))
+import Outlooks exposing (Music(..),Difficulty(..),SE(..))
 import Url
 import Browser.Navigation as Nav
 
@@ -82,6 +82,7 @@ type alias Model =
     , page : Page
     , music : Outlooks.Music
     , difficulty: Outlooks.Difficulty
+    , se : Outlooks.SE
     }
 
 initial : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
@@ -122,5 +123,6 @@ initial flags url key =
       , page = Home
       , music = ReturnOfAncients
       , difficulty = Normal
+      , se = Quite
     }, Cmd.none)
 

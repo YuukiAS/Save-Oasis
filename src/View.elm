@@ -30,9 +30,11 @@ view model =
                 (renderBall (Point model.ball_x model.ball_y) 2 2 outBall),
                 (renderPaddle (Point model.pad_x 40) 12 1 outPaddle)
 
-            ])],
-          div [][renderGameButton model]
+            ])]
+         , div [][renderGameButton model]
          , div [][renderMusic model]
+         , div [][renderSE model]
+         --, embed [style "height" "50px", style "width" "100px", src "assets/musics/In Search of Life.mp3"][]
         ]
 
 
@@ -65,26 +67,39 @@ renderGameButton model =
                   , style "font-family" "Helvetica, Arial, sans-serif"
                   , style "font-size" "18px"
                   , style "font-weight" "300"
-                  , style "height" "600x"
-                  , style "left" "330px"
+                  , style "height" "60px"
+                  , style "left" "460px"
                   , style "line-height" "60px"
                   , style "outline" "none"
                   , style "padding" "0"
+                  , style "top" "700px"
                   , style "position" "absolute"
                   , style "width" "600px"
         , onClick msg
         ]
         [ text txt ]
 
-renderMusic : Model -> Html Msg
-renderMusic model =
+renderSE : Model -> Html Msg
+renderSE model =
     let
         music =
-            case model.music of
-                Null -> ""
-                ReturnOfAncients -> "assets/musics/Return of Ancients.mp3"
-                TheOasis -> "assets/musics/The Oasis.mp3"
-                TheChordOfSpring -> "assets/musics/The Chord of Spring.mp3"
-                InSearchOfLife ->"assets/musics/In Search of Life.mp3"
+            case model.se of
+                Quite -> ""
+                Fire -> "assets/musics/SE/Fire.mp3"
+                Frozen -> "assets/musics/SE/Frozen.mp3"
+                Ordinary -> "assets/musics/SE/Ordinary.mp3"
     in
-        div [style "top" "700px" , style "left" "1000px", style "position" "absolute"][audio [src music,controls True][]]
+        audio [style "height" "50px", style "width" "100px", src music,autoplay True,loop True][]
+
+renderMusic : Model -> Html Msg
+renderMusic model =
+      let
+            music =
+                case model.music of
+                    Null -> ""
+                    ReturnOfAncients -> "assets/musics/Return of Ancients.mp3"
+                    TheOasis -> "assets/musics/The Oasis.mp3"
+                    TheChordOfSpring -> "assets/musics/The Chord of Spring.mp3"
+                    InSearchOfLife ->"assets/musics/In Search of Life.mp3"
+      in
+         embed [style "height" "50px", style "width" "100px", src music][]
