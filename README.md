@@ -1,5 +1,5 @@
 # VG100_Project1
-Project1 -- A breakout game
+Project1 -- Save Oasis (A breakout game)
 
 Version 0.1 ~ 0.6 : A basic implementation (Milestone 1 + 2)
 
