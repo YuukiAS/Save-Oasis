@@ -17,6 +17,7 @@ type Msg
     | NewPoint (Int,Int)
     | Tick Time.Posix
     | GoHome
+    | GoGame
     | GoHelp
     | LinkClicked Browser.UrlRequest
     | UrlChanged Url.Url

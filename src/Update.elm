@@ -130,6 +130,8 @@ update msg model =
 
         GoHome -> ({model| page = Home},Cmd.none)
 
+        GoGame -> ({model| page = Game},Cmd.none)
+
         ChangeMusic music -> ({model|music = music},Cmd.none)
 
         ChangeDifficulty difficulty -> ({model|difficulty = difficulty},Cmd.none)

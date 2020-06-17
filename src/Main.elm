@@ -9,7 +9,7 @@ import Browser.Events exposing (onAnimationFrameDelta, onKeyDown, onKeyUp, onRes
 import Json.Decode as D
 import Update
 import Time
--- MAIN
+import View
 
 
 main : Program () Model Msg
@@ -44,15 +44,17 @@ view model =
             case model.page of
                 Home -> Home.view
                 Help -> Help.view model
-                _ -> Home.view
+                Game -> View.view model
+
         title =
             case model.page of
                 Home -> "Save Oasis"
                 Help -> "Settings"
                 Game -> "Let's save the oasis!"
     in
-        { title = title          --* 这样改变标题
-        , body =  body
+        {
+            title = title          --* 这样改变标题
+          , body =  body
         }
 
 

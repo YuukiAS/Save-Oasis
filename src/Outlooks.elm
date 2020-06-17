@@ -1,5 +1,7 @@
 module Outlooks exposing (..)
 
+-- This module includes some resources and some types
+
 outBall = "assets/main/ball.png"
 outBall2 = "assets/main/ball2.png"
 outPaddle = "assets/main/pd.png"
