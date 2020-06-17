@@ -2,34 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3edad3ad-0371-41b1-a7b2-4efa31bd61d4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/build/assets/musics/SE/Fire.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/musics/SE/Frozen.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/musics/SE/Ordinary.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/elm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/game_example.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Calculate.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Calculate.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Check.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Check.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Dashboard.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Dashboard.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Main.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Main.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Model.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Model.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Model.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Model.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Object.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Object.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Outlooks.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Outlooks.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Outlooks.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Outlooks.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Update.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Update.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Update.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Update.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/d.dat" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/d.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Help.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Help.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Outlooks.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Outlooks.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Update.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Update.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/View.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +39,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -238,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592396516438</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Version 0.97&#10;- Sound effects and other modifications.">
+      <created>1592409144997</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1592409144997</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -269,7 +250,8 @@
     <MESSAGE value="Version 0.95&#10;- Manage to make a single page game." />
     <MESSAGE value="Version 0.96&#10;- Update README.md" />
     <MESSAGE value="Version 0.96a&#10;- Update README.md" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 0.96a&#10;- Update README.md" />
+    <MESSAGE value="Version 0.97&#10;- Sound effects and other modifications." />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 0.97&#10;- Sound effects and other modifications." />
   </component>
   <component name="WindowStateProjectService">
     <state x="367" y="75" key="#Notifications" timestamp="1590563789642">
@@ -280,10 +262,10 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="30" y="74" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1590942094357" />
-    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1592396515920">
+    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1592409142759">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1592396515920" />
+    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1592409142759" />
     <state x="520" y="307" key="EnvironmentVariablesDialog" timestamp="1590727828040">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
