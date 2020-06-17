@@ -2,8 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3edad3ad-0371-41b1-a7b2-4efa31bd61d4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/build/assets/main/attack.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/background.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/ball2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/bendpaddle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/blackhole.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/brick.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/brighten.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/button.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/circular.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/diamond45.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/downleft.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/downright.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/gameover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/mainhalf.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/maze.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/omain.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/onone.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/onone1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/ovice.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/paddle2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/ran.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/reactor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/shootpaddle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/stage1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/stage2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/stage3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/stage4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/stage5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/trans1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/upleft.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/upright.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/vicehalf.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/vkernelfrag.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/assets/main/trans.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/main/trans.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Outlooks.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Outlooks.elm" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
