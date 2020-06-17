@@ -2,154 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3edad3ad-0371-41b1-a7b2-4efa31bd61d4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/musics/In Search of Life.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/musics/The Chord of Spring.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Calculate.elmi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Calculate.elmo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Check.elmi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Check.elmo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Color.elmi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Color.elmo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Dashboard.elmi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Dashboard.elmo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Main.elmi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Main.elmo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Model.elmi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Model.elmo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Object.elmi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Object.elmo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Outlooks.elmi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Outlooks.elmo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Range.elmi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Range.elmo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Test.elmi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Test.elmo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Update.elmi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Update.elmo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmo" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Tetris/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Tetris/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Tetris/elm-tetris.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Tetris/elm.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Tetris/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Tetris/scripts/deploy.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Tetris/src/Color.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Tetris/src/Grid.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Tetris/src/Messages.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Tetris/src/Model.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Tetris/src/Tetriminos.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Tetris/src/Tetris.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Tetris/src/Update.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Tetris/src/View.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/.idea/part9.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/.travis.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/assets/icons/android-chrome-192x192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/assets/icons/android-chrome-512x512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/assets/icons/apple-touch-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/assets/icons/browserconfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/assets/icons/favicon-16x16.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/assets/icons/favicon-32x32.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/assets/icons/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/assets/icons/mstile-144x144.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/assets/icons/mstile-150x150.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/assets/icons/mstile-310x150.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/assets/icons/mstile-310x310.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/assets/icons/mstile-70x70.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/assets/icons/safari-pinned-tab.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/assets/images/error.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/assets/images/loading.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/assets/site.webmanifest" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/elm.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Api.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Article.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Article/Body.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Article/Comment.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Article/Feed.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Article/FeedSources.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Article/Slug.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Article/Tag.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Asset.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Author.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Avatar.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/CommentId.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Email.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Loading.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Log.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Main.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Page.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Page/Article.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Page/Article/Editor.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Page/Blank.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Page/Home.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Page/Login.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Page/NotFound.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Page/Profile.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Page/Register.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Page/Settings.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/PaginatedList.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Profile.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Route.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Session.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Timestamp.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Username.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Viewer.elm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/Web/src/Viewer/Cred.elm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/game_example.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Home.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/game.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/game.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Calculate.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Calculate.elmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Check.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Check.elmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Dashboard.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Dashboard.elmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Main.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Main.elmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Main.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Main.elmo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Model.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Model.elmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Model.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Model.elmo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Object.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Object.elmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Outlooks.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Outlooks.elmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Outlooks.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Outlooks.elmo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Test.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Test.elmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Test.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Test.elmo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Update.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Update.elmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Update.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Update.elmo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmi" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/d.dat" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/d.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/help.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/help.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/game.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Breakout.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Breakout.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Check.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Check.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/build/favicon.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Dashboard.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dashboard.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Help.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Help.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Message.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Message.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Outlooks.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Outlooks.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Update.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Update.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/View.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/main/acceleration.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/main/acceleration.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/main/addBall.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/main/addBall.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/main/addPaddle.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/main/addPaddle.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/main/ball.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/main/ball.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/main/bkp.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/main/bkp.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/main/boss.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/main/boss.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/main/frozen.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/main/frozen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/main/gameinter.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/main/gameinter.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/main/n.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/main/n.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/main/o.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/main/o.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/main/paddle.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/main/paddle.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/main/pd.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/main/pd.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/main/trans.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/main/trans.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/musics/Return of Ancients.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/musics/Return of Ancients.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/musics/The Oasis.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/musics/The Oasis.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/skills/Trait_boss.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/skills/Trait_boss.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/skills/Trait_charismatic.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/skills/Trait_charismatic.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/skills/Trait_cybernetic.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/skills/Trait_cybernetic.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/skills/Trait_enduring.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/skills/Trait_enduring.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/skills/Trait_erudite.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/skills/Trait_erudite.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/skills/Trait_intelligent.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/skills/Trait_intelligent.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/skills/Trait_psionic.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/skills/Trait_psionic.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/skills/Trait_rapid_speed.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/skills/Trait_rapid_speed.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/skills/Trait_strong.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/skills/Trait_strong.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/skills/Trait_very_cybernetic.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/skills/Trait_very_cybernetic.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/skills/Trait_very_enduring.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/skills/Trait_very_enduring.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/skills/Trait_very_intelligent.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/skills/Trait_very_intelligent.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/skills/Trait_very_strong.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/skills/Trait_very_strong.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,10 +96,14 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/elm.json" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Projects\VG100_Project1\src" />
+      <recent name="D:\Projects\VG100_Project1\build" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Projects\VG100_Project1\build" />
     </key>
@@ -319,7 +209,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590943193365</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Version 0.93&#10;- Some minor modification.">
+      <created>1592373298304</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1592373298304</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -345,7 +242,8 @@
     <MESSAGE value="Basic Structure v0.10&#10;- Some new objects" />
     <MESSAGE value="Basic Structure v0.20&#10;- The original interface" />
     <MESSAGE value="Basic Structure v0.20a&#10;- Fail to handle the scale problem" />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic Structure v0.20a&#10;- Fail to handle the scale problem" />
+    <MESSAGE value="Version 0.93&#10;- Some minor modification." />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 0.93&#10;- Some minor modification." />
   </component>
   <component name="WindowStateProjectService">
     <state x="367" y="75" key="#Notifications" timestamp="1590563789642">
@@ -356,10 +254,10 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="30" y="74" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1590942094357" />
-    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1592358224780">
+    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1592373296930">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1592358224780" />
+    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1592373296930" />
     <state x="520" y="307" key="EnvironmentVariablesDialog" timestamp="1590727828040">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -392,5 +290,9 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="563" y="46" key="git4idea.branch.GitSmartOperationDialog/0.0.1549.831@0.0.1549.831" timestamp="1590943417002" />
+    <state x="179" y="140" key="new project wizard" timestamp="1592385547011">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state x="179" y="140" key="new project wizard/0.0.1549.831@0.0.1549.831" timestamp="1592385547011" />
   </component>
 </project>

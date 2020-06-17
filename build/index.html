@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Breakout</title>
+  <title>Main</title>
   <style>body { padding: 0; margin: 0; }</style>
 </head>
 
@@ -4452,6 +4452,111 @@ var _Bitwise_shiftRightZfBy = F2(function(offset, a)
 {
 	return a >>> offset;
 });
+
+
+
+
+// VIRTUAL-DOM WIDGETS
+
+
+var _Markdown_toHtml = F3(function(options, factList, rawMarkdown)
+{
+	return _VirtualDom_custom(
+		factList,
+		{
+			a: options,
+			b: rawMarkdown
+		},
+		_Markdown_render,
+		_Markdown_diff
+	);
+});
+
+
+
+// WIDGET IMPLEMENTATION
+
+
+function _Markdown_render(model)
+{
+	return A2(_Markdown_replace, model, _VirtualDom_doc.createElement('div'));
+}
+
+
+function _Markdown_diff(x, y)
+{
+	return x.b === y.b && x.a === y.a
+		? false
+		: _Markdown_replace(y);
+}
+
+
+var _Markdown_replace = F2(function(model, div)
+{
+	div.innerHTML = _Markdown_marked(model.b, _Markdown_formatOptions(model.a));
+	return div;
+});
+
+
+
+// ACTUAL MARKDOWN PARSER
+
+
+var _Markdown_marked = function() {
+	// catch the `marked` object regardless of the outer environment.
+	// (ex. a CommonJS module compatible environment.)
+	// note that this depends on marked's implementation of environment detection.
+	var module = {};
+	var exports = module.exports = {};
+
+	/**
+	 * marked - a markdown parser
+	 * Copyright (c) 2011-2014, Christopher Jeffrey. (MIT Licensed)
+	 * https://github.com/chjj/marked
+	 * commit cd2f6f5b7091154c5526e79b5f3bfb4d15995a51
+	 */
+	(function(){var block={newline:/^\n+/,code:/^( {4}[^\n]+\n*)+/,fences:noop,hr:/^( *[-*_]){3,} *(?:\n+|$)/,heading:/^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/,nptable:noop,lheading:/^([^\n]+)\n *(=|-){2,} *(?:\n+|$)/,blockquote:/^( *>[^\n]+(\n(?!def)[^\n]+)*\n*)+/,list:/^( *)(bull) [\s\S]+?(?:hr|def|\n{2,}(?! )(?!\1bull )\n*|\s*$)/,html:/^ *(?:comment *(?:\n|\s*$)|closed *(?:\n{2,}|\s*$)|closing *(?:\n{2,}|\s*$))/,def:/^ *\[([^\]]+)\]: *<?([^\s>]+)>?(?: +["(]([^\n]+)[")])? *(?:\n+|$)/,table:noop,paragraph:/^((?:[^\n]+\n?(?!hr|heading|lheading|blockquote|tag|def))+)\n*/,text:/^[^\n]+/};block.bullet=/(?:[*+-]|\d+\.)/;block.item=/^( *)(bull) [^\n]*(?:\n(?!\1bull )[^\n]*)*/;block.item=replace(block.item,"gm")(/bull/g,block.bullet)();block.list=replace(block.list)(/bull/g,block.bullet)("hr","\\n+(?=\\1?(?:[-*_] *){3,}(?:\\n+|$))")("def","\\n+(?="+block.def.source+")")();block.blockquote=replace(block.blockquote)("def",block.def)();block._tag="(?!(?:"+"a|em|strong|small|s|cite|q|dfn|abbr|data|time|code"+"|var|samp|kbd|sub|sup|i|b|u|mark|ruby|rt|rp|bdi|bdo"+"|span|br|wbr|ins|del|img)\\b)\\w+(?!:/|[^\\w\\s@]*@)\\b";block.html=replace(block.html)("comment",/<!--[\s\S]*?-->/)("closed",/<(tag)[\s\S]+?<\/\1>/)("closing",/<tag(?:"[^"]*"|'[^']*'|[^'">])*?>/)(/tag/g,block._tag)();block.paragraph=replace(block.paragraph)("hr",block.hr)("heading",block.heading)("lheading",block.lheading)("blockquote",block.blockquote)("tag","<"+block._tag)("def",block.def)();block.normal=merge({},block);block.gfm=merge({},block.normal,{fences:/^ *(`{3,}|~{3,})[ \.]*(\S+)? *\n([\s\S]*?)\s*\1 *(?:\n+|$)/,paragraph:/^/,heading:/^ *(#{1,6}) +([^\n]+?) *#* *(?:\n+|$)/});block.gfm.paragraph=replace(block.paragraph)("(?!","(?!"+block.gfm.fences.source.replace("\\1","\\2")+"|"+block.list.source.replace("\\1","\\3")+"|")();block.tables=merge({},block.gfm,{nptable:/^ *(\S.*\|.*)\n *([-:]+ *\|[-| :]*)\n((?:.*\|.*(?:\n|$))*)\n*/,table:/^ *\|(.+)\n *\|( *[-:]+[-| :]*)\n((?: *\|.*(?:\n|$))*)\n*/});function Lexer(options){this.tokens=[];this.tokens.links={};this.options=options||marked.defaults;this.rules=block.normal;if(this.options.gfm){if(this.options.tables){this.rules=block.tables}else{this.rules=block.gfm}}}Lexer.rules=block;Lexer.lex=function(src,options){var lexer=new Lexer(options);return lexer.lex(src)};Lexer.prototype.lex=function(src){src=src.replace(/\r\n|\r/g,"\n").replace(/\t/g,"    ").replace(/\u00a0/g," ").replace(/\u2424/g,"\n");return this.token(src,true)};Lexer.prototype.token=function(src,top,bq){var src=src.replace(/^ +$/gm,""),next,loose,cap,bull,b,item,space,i,l;while(src){if(cap=this.rules.newline.exec(src)){src=src.substring(cap[0].length);if(cap[0].length>1){this.tokens.push({type:"space"})}}if(cap=this.rules.code.exec(src)){src=src.substring(cap[0].length);cap=cap[0].replace(/^ {4}/gm,"");this.tokens.push({type:"code",text:!this.options.pedantic?cap.replace(/\n+$/,""):cap});continue}if(cap=this.rules.fences.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"code",lang:cap[2],text:cap[3]||""});continue}if(cap=this.rules.heading.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"heading",depth:cap[1].length,text:cap[2]});continue}if(top&&(cap=this.rules.nptable.exec(src))){src=src.substring(cap[0].length);item={type:"table",header:cap[1].replace(/^ *| *\| *$/g,"").split(/ *\| */),align:cap[2].replace(/^ *|\| *$/g,"").split(/ *\| */),cells:cap[3].replace(/\n$/,"").split("\n")};for(i=0;i<item.align.length;i++){if(/^ *-+: *$/.test(item.align[i])){item.align[i]="right"}else if(/^ *:-+: *$/.test(item.align[i])){item.align[i]="center"}else if(/^ *:-+ *$/.test(item.align[i])){item.align[i]="left"}else{item.align[i]=null}}for(i=0;i<item.cells.length;i++){item.cells[i]=item.cells[i].split(/ *\| */)}this.tokens.push(item);continue}if(cap=this.rules.lheading.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"heading",depth:cap[2]==="="?1:2,text:cap[1]});continue}if(cap=this.rules.hr.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"hr"});continue}if(cap=this.rules.blockquote.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"blockquote_start"});cap=cap[0].replace(/^ *> ?/gm,"");this.token(cap,top,true);this.tokens.push({type:"blockquote_end"});continue}if(cap=this.rules.list.exec(src)){src=src.substring(cap[0].length);bull=cap[2];this.tokens.push({type:"list_start",ordered:bull.length>1});cap=cap[0].match(this.rules.item);next=false;l=cap.length;i=0;for(;i<l;i++){item=cap[i];space=item.length;item=item.replace(/^ *([*+-]|\d+\.) +/,"");if(~item.indexOf("\n ")){space-=item.length;item=!this.options.pedantic?item.replace(new RegExp("^ {1,"+space+"}","gm"),""):item.replace(/^ {1,4}/gm,"")}if(this.options.smartLists&&i!==l-1){b=block.bullet.exec(cap[i+1])[0];if(bull!==b&&!(bull.length>1&&b.length>1)){src=cap.slice(i+1).join("\n")+src;i=l-1}}loose=next||/\n\n(?!\s*$)/.test(item);if(i!==l-1){next=item.charAt(item.length-1)==="\n";if(!loose)loose=next}this.tokens.push({type:loose?"loose_item_start":"list_item_start"});this.token(item,false,bq);this.tokens.push({type:"list_item_end"})}this.tokens.push({type:"list_end"});continue}if(cap=this.rules.html.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:this.options.sanitize?"paragraph":"html",pre:!this.options.sanitizer&&(cap[1]==="pre"||cap[1]==="script"||cap[1]==="style"),text:cap[0]});continue}if(!bq&&top&&(cap=this.rules.def.exec(src))){src=src.substring(cap[0].length);this.tokens.links[cap[1].toLowerCase()]={href:cap[2],title:cap[3]};continue}if(top&&(cap=this.rules.table.exec(src))){src=src.substring(cap[0].length);item={type:"table",header:cap[1].replace(/^ *| *\| *$/g,"").split(/ *\| */),align:cap[2].replace(/^ *|\| *$/g,"").split(/ *\| */),cells:cap[3].replace(/(?: *\| *)?\n$/,"").split("\n")};for(i=0;i<item.align.length;i++){if(/^ *-+: *$/.test(item.align[i])){item.align[i]="right"}else if(/^ *:-+: *$/.test(item.align[i])){item.align[i]="center"}else if(/^ *:-+ *$/.test(item.align[i])){item.align[i]="left"}else{item.align[i]=null}}for(i=0;i<item.cells.length;i++){item.cells[i]=item.cells[i].replace(/^ *\| *| *\| *$/g,"").split(/ *\| */)}this.tokens.push(item);continue}if(top&&(cap=this.rules.paragraph.exec(src))){src=src.substring(cap[0].length);this.tokens.push({type:"paragraph",text:cap[1].charAt(cap[1].length-1)==="\n"?cap[1].slice(0,-1):cap[1]});continue}if(cap=this.rules.text.exec(src)){src=src.substring(cap[0].length);this.tokens.push({type:"text",text:cap[0]});continue}if(src){throw new Error("Infinite loop on byte: "+src.charCodeAt(0))}}return this.tokens};var inline={escape:/^\\([\\`*{}\[\]()#+\-.!_>])/,autolink:/^<([^ >]+(@|:\/)[^ >]+)>/,url:noop,tag:/^<!--[\s\S]*?-->|^<\/?\w+(?:"[^"]*"|'[^']*'|[^'">])*?>/,link:/^!?\[(inside)\]\(href\)/,reflink:/^!?\[(inside)\]\s*\[([^\]]*)\]/,nolink:/^!?\[((?:\[[^\]]*\]|[^\[\]])*)\]/,strong:/^_\_([\s\S]+?)_\_(?!_)|^\*\*([\s\S]+?)\*\*(?!\*)/,em:/^\b_((?:[^_]|_\_)+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,code:/^(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/,br:/^ {2,}\n(?!\s*$)/,del:noop,text:/^[\s\S]+?(?=[\\<!\[_*`]| {2,}\n|$)/};inline._inside=/(?:\[[^\]]*\]|[^\[\]]|\](?=[^\[]*\]))*/;inline._href=/\s*<?([\s\S]*?)>?(?:\s+['"]([\s\S]*?)['"])?\s*/;inline.link=replace(inline.link)("inside",inline._inside)("href",inline._href)();inline.reflink=replace(inline.reflink)("inside",inline._inside)();inline.normal=merge({},inline);inline.pedantic=merge({},inline.normal,{strong:/^_\_(?=\S)([\s\S]*?\S)_\_(?!_)|^\*\*(?=\S)([\s\S]*?\S)\*\*(?!\*)/,em:/^_(?=\S)([\s\S]*?\S)_(?!_)|^\*(?=\S)([\s\S]*?\S)\*(?!\*)/});inline.gfm=merge({},inline.normal,{escape:replace(inline.escape)("])","~|])")(),url:/^(https?:\/\/[^\s<]+[^<.,:;"')\]\s])/,del:/^~~(?=\S)([\s\S]*?\S)~~/,text:replace(inline.text)("]|","~]|")("|","|https?://|")()});inline.breaks=merge({},inline.gfm,{br:replace(inline.br)("{2,}","*")(),text:replace(inline.gfm.text)("{2,}","*")()});function InlineLexer(links,options){this.options=options||marked.defaults;this.links=links;this.rules=inline.normal;this.renderer=this.options.renderer||new Renderer;this.renderer.options=this.options;if(!this.links){throw new Error("Tokens array requires a `links` property.")}if(this.options.gfm){if(this.options.breaks){this.rules=inline.breaks}else{this.rules=inline.gfm}}else if(this.options.pedantic){this.rules=inline.pedantic}}InlineLexer.rules=inline;InlineLexer.output=function(src,links,options){var inline=new InlineLexer(links,options);return inline.output(src)};InlineLexer.prototype.output=function(src){var out="",link,text,href,cap;while(src){if(cap=this.rules.escape.exec(src)){src=src.substring(cap[0].length);out+=cap[1];continue}if(cap=this.rules.autolink.exec(src)){src=src.substring(cap[0].length);if(cap[2]==="@"){text=cap[1].charAt(6)===":"?this.mangle(cap[1].substring(7)):this.mangle(cap[1]);href=this.mangle("mailto:")+text}else{text=escape(cap[1]);href=text}out+=this.renderer.link(href,null,text);continue}if(!this.inLink&&(cap=this.rules.url.exec(src))){src=src.substring(cap[0].length);text=escape(cap[1]);href=text;out+=this.renderer.link(href,null,text);continue}if(cap=this.rules.tag.exec(src)){if(!this.inLink&&/^<a /i.test(cap[0])){this.inLink=true}else if(this.inLink&&/^<\/a>/i.test(cap[0])){this.inLink=false}src=src.substring(cap[0].length);out+=this.options.sanitize?this.options.sanitizer?this.options.sanitizer(cap[0]):escape(cap[0]):cap[0];continue}if(cap=this.rules.link.exec(src)){src=src.substring(cap[0].length);this.inLink=true;out+=this.outputLink(cap,{href:cap[2],title:cap[3]});this.inLink=false;continue}if((cap=this.rules.reflink.exec(src))||(cap=this.rules.nolink.exec(src))){src=src.substring(cap[0].length);link=(cap[2]||cap[1]).replace(/\s+/g," ");link=this.links[link.toLowerCase()];if(!link||!link.href){out+=cap[0].charAt(0);src=cap[0].substring(1)+src;continue}this.inLink=true;out+=this.outputLink(cap,link);this.inLink=false;continue}if(cap=this.rules.strong.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.strong(this.output(cap[2]||cap[1]));continue}if(cap=this.rules.em.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.em(this.output(cap[2]||cap[1]));continue}if(cap=this.rules.code.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.codespan(escape(cap[2],true));continue}if(cap=this.rules.br.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.br();continue}if(cap=this.rules.del.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.del(this.output(cap[1]));continue}if(cap=this.rules.text.exec(src)){src=src.substring(cap[0].length);out+=this.renderer.text(escape(this.smartypants(cap[0])));continue}if(src){throw new Error("Infinite loop on byte: "+src.charCodeAt(0))}}return out};InlineLexer.prototype.outputLink=function(cap,link){var href=escape(link.href),title=link.title?escape(link.title):null;return cap[0].charAt(0)!=="!"?this.renderer.link(href,title,this.output(cap[1])):this.renderer.image(href,title,escape(cap[1]))};InlineLexer.prototype.smartypants=function(text){if(!this.options.smartypants)return text;return text.replace(/---/g,"—").replace(/--/g,"–").replace(/(^|[-\u2014\/(\[{"\s])'/g,"$1‘").replace(/'/g,"’").replace(/(^|[-\u2014\/(\[{\u2018\s])"/g,"$1“").replace(/"/g,"”").replace(/\.{3}/g,"…")};InlineLexer.prototype.mangle=function(text){if(!this.options.mangle)return text;var out="",l=text.length,i=0,ch;for(;i<l;i++){ch=text.charCodeAt(i);if(Math.random()>.5){ch="x"+ch.toString(16)}out+="&#"+ch+";"}return out};function Renderer(options){this.options=options||{}}Renderer.prototype.code=function(code,lang,escaped){if(this.options.highlight){var out=this.options.highlight(code,lang);if(out!=null&&out!==code){escaped=true;code=out}}if(!lang){return"<pre><code>"+(escaped?code:escape(code,true))+"\n</code></pre>"}return'<pre><code class="'+this.options.langPrefix+escape(lang,true)+'">'+(escaped?code:escape(code,true))+"\n</code></pre>\n"};Renderer.prototype.blockquote=function(quote){return"<blockquote>\n"+quote+"</blockquote>\n"};Renderer.prototype.html=function(html){return html};Renderer.prototype.heading=function(text,level,raw){return"<h"+level+' id="'+this.options.headerPrefix+raw.toLowerCase().replace(/[^\w]+/g,"-")+'">'+text+"</h"+level+">\n"};Renderer.prototype.hr=function(){return this.options.xhtml?"<hr/>\n":"<hr>\n"};Renderer.prototype.list=function(body,ordered){var type=ordered?"ol":"ul";return"<"+type+">\n"+body+"</"+type+">\n"};Renderer.prototype.listitem=function(text){return"<li>"+text+"</li>\n"};Renderer.prototype.paragraph=function(text){return"<p>"+text+"</p>\n"};Renderer.prototype.table=function(header,body){return"<table>\n"+"<thead>\n"+header+"</thead>\n"+"<tbody>\n"+body+"</tbody>\n"+"</table>\n"};Renderer.prototype.tablerow=function(content){return"<tr>\n"+content+"</tr>\n"};Renderer.prototype.tablecell=function(content,flags){var type=flags.header?"th":"td";var tag=flags.align?"<"+type+' style="text-align:'+flags.align+'">':"<"+type+">";return tag+content+"</"+type+">\n"};Renderer.prototype.strong=function(text){return"<strong>"+text+"</strong>"};Renderer.prototype.em=function(text){return"<em>"+text+"</em>"};Renderer.prototype.codespan=function(text){return"<code>"+text+"</code>"};Renderer.prototype.br=function(){return this.options.xhtml?"<br/>":"<br>"};Renderer.prototype.del=function(text){return"<del>"+text+"</del>"};Renderer.prototype.link=function(href,title,text){if(this.options.sanitize){try{var prot=decodeURIComponent(unescape(href)).replace(/[^\w:]/g,"").toLowerCase()}catch(e){return""}if(prot.indexOf("javascript:")===0||prot.indexOf("vbscript:")===0||prot.indexOf("data:")===0){return""}}var out='<a href="'+href+'"';if(title){out+=' title="'+title+'"'}out+=">"+text+"</a>";return out};Renderer.prototype.image=function(href,title,text){var out='<img src="'+href+'" alt="'+text+'"';if(title){out+=' title="'+title+'"'}out+=this.options.xhtml?"/>":">";return out};Renderer.prototype.text=function(text){return text};function Parser(options){this.tokens=[];this.token=null;this.options=options||marked.defaults;this.options.renderer=this.options.renderer||new Renderer;this.renderer=this.options.renderer;this.renderer.options=this.options}Parser.parse=function(src,options,renderer){var parser=new Parser(options,renderer);return parser.parse(src)};Parser.prototype.parse=function(src){this.inline=new InlineLexer(src.links,this.options,this.renderer);this.tokens=src.reverse();var out="";while(this.next()){out+=this.tok()}return out};Parser.prototype.next=function(){return this.token=this.tokens.pop()};Parser.prototype.peek=function(){return this.tokens[this.tokens.length-1]||0};Parser.prototype.parseText=function(){var body=this.token.text;while(this.peek().type==="text"){body+="\n"+this.next().text}return this.inline.output(body)};Parser.prototype.tok=function(){switch(this.token.type){case"space":{return""}case"hr":{return this.renderer.hr()}case"heading":{return this.renderer.heading(this.inline.output(this.token.text),this.token.depth,this.token.text)}case"code":{return this.renderer.code(this.token.text,this.token.lang,this.token.escaped)}case"table":{var header="",body="",i,row,cell,flags,j;cell="";for(i=0;i<this.token.header.length;i++){flags={header:true,align:this.token.align[i]};cell+=this.renderer.tablecell(this.inline.output(this.token.header[i]),{header:true,align:this.token.align[i]})}header+=this.renderer.tablerow(cell);for(i=0;i<this.token.cells.length;i++){row=this.token.cells[i];cell="";for(j=0;j<row.length;j++){cell+=this.renderer.tablecell(this.inline.output(row[j]),{header:false,align:this.token.align[j]})}body+=this.renderer.tablerow(cell)}return this.renderer.table(header,body)}case"blockquote_start":{var body="";while(this.next().type!=="blockquote_end"){body+=this.tok()}return this.renderer.blockquote(body)}case"list_start":{var body="",ordered=this.token.ordered;while(this.next().type!=="list_end"){body+=this.tok()}return this.renderer.list(body,ordered)}case"list_item_start":{var body="";while(this.next().type!=="list_item_end"){body+=this.token.type==="text"?this.parseText():this.tok()}return this.renderer.listitem(body)}case"loose_item_start":{var body="";while(this.next().type!=="list_item_end"){body+=this.tok()}return this.renderer.listitem(body)}case"html":{var html=!this.token.pre&&!this.options.pedantic?this.inline.output(this.token.text):this.token.text;return this.renderer.html(html)}case"paragraph":{return this.renderer.paragraph(this.inline.output(this.token.text))}case"text":{return this.renderer.paragraph(this.parseText())}}};function escape(html,encode){return html.replace(!encode?/&(?!#?\w+;)/g:/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}function unescape(html){return html.replace(/&(#(?:\d+)|(?:#x[0-9A-Fa-f]+)|(?:\w+));?/g,function(_,n){n=n.toLowerCase();if(n==="colon")return":";if(n.charAt(0)==="#"){return n.charAt(1)==="x"?String.fromCharCode(parseInt(n.substring(2),16)):String.fromCharCode(+n.substring(1))}return""})}function replace(regex,opt){regex=regex.source;opt=opt||"";return function self(name,val){if(!name)return new RegExp(regex,opt);val=val.source||val;val=val.replace(/(^|[^\[])\^/g,"$1");regex=regex.replace(name,val);return self}}function noop(){}noop.exec=noop;function merge(obj){var i=1,target,key;for(;i<arguments.length;i++){target=arguments[i];for(key in target){if(Object.prototype.hasOwnProperty.call(target,key)){obj[key]=target[key]}}}return obj}function marked(src,opt,callback){if(callback||typeof opt==="function"){if(!callback){callback=opt;opt=null}opt=merge({},marked.defaults,opt||{});var highlight=opt.highlight,tokens,pending,i=0;try{tokens=Lexer.lex(src,opt)}catch(e){return callback(e)}pending=tokens.length;var done=function(err){if(err){opt.highlight=highlight;return callback(err)}var out;try{out=Parser.parse(tokens,opt)}catch(e){err=e}opt.highlight=highlight;return err?callback(err):callback(null,out)};if(!highlight||highlight.length<3){return done()}delete opt.highlight;if(!pending)return done();for(;i<tokens.length;i++){(function(token){if(token.type!=="code"){return--pending||done()}return highlight(token.text,token.lang,function(err,code){if(err)return done(err);if(code==null||code===token.text){return--pending||done()}token.text=code;token.escaped=true;--pending||done()})})(tokens[i])}return}try{if(opt)opt=merge({},marked.defaults,opt);return Parser.parse(Lexer.lex(src,opt),opt)}catch(e){e.message+="\nPlease report this to https://github.com/chjj/marked.";if((opt||marked.defaults).silent){return"<p>An error occured:</p><pre>"+escape(e.message+"",true)+"</pre>"}throw e}}marked.options=marked.setOptions=function(opt){merge(marked.defaults,opt);return marked};marked.defaults={gfm:true,tables:true,breaks:false,pedantic:false,sanitize:false,sanitizer:null,mangle:true,smartLists:false,silent:false,highlight:null,langPrefix:"lang-",smartypants:false,headerPrefix:"",renderer:new Renderer,xhtml:false};marked.Parser=Parser;marked.parser=Parser.parse;marked.Renderer=Renderer;marked.Lexer=Lexer;marked.lexer=Lexer.lex;marked.InlineLexer=InlineLexer;marked.inlineLexer=InlineLexer.output;marked.parse=marked;if(typeof module!=="undefined"&&typeof exports==="object"){module.exports=marked}else if(typeof define==="function"&&define.amd){define(function(){return marked})}else{this.marked=marked}}).call(function(){return this||(typeof window!=="undefined"?window:global)}());
+
+	return module.exports;
+}();
+
+
+// FORMAT OPTIONS FOR MARKED IMPLEMENTATION
+
+function _Markdown_formatOptions(options)
+{
+	function toHighlight(code, lang)
+	{
+		if (!lang && $elm$core$Maybe$isJust(options.defaultHighlighting))
+		{
+			lang = options.defaultHighlighting.a;
+		}
+
+		if (typeof hljs !== 'undefined' && lang && hljs.listLanguages().indexOf(lang) >= 0)
+		{
+			return hljs.highlight(lang, code, true).value;
+		}
+
+		return code;
+	}
+
+	var gfm = options.githubFlavored.a;
+
+	return {
+		highlight: toHighlight,
+		gfm: gfm,
+		tables: gfm && gfm.tables,
+		breaks: gfm && gfm.breaks,
+		sanitize: options.sanitize,
+		smartypants: options.smartypants
+	};
+}
+var $author$project$Message$LinkClicked = function (a) {
+	return {$: 'LinkClicked', a: a};
+};
+var $author$project$Message$UrlChanged = function (a) {
+	return {$: 'UrlChanged', a: a};
+};
 var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
@@ -5240,8 +5345,11 @@ var $elm$core$Task$perform = F2(
 			$elm$core$Task$Perform(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
-var $elm$browser$Browser$element = _Browser_element;
+var $elm$browser$Browser$application = _Browser_application;
+var $author$project$Model$Home = {$: 'Home'};
+var $author$project$Outlooks$Normal = {$: 'Normal'};
 var $author$project$Outlooks$Red = {$: 'Red'};
+var $author$project$Outlooks$ReturnOfAncients = {$: 'ReturnOfAncients'};
 var $author$project$Model$Stopped = {$: 'Stopped'};
 var $elm$core$Basics$negate = function (n) {
 	return -n;
@@ -5276,100 +5384,106 @@ var $author$project$Model$Keys = function (enter) {
 var $author$project$Model$nokeys = $author$project$Model$Keys(false)(false)(false)(false)(false)(false)(false)(false)(false)(false)(false)(false)(false);
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $author$project$Model$initial = function (_v0) {
-	return _Utils_Tuple2(
-		{
-			ball_vx: 0.5,
-			ball_vy: -0.5,
-			ball_x: 50,
-			ball_y: 37.5,
-			blueBricks: _List_fromArray(
-				[
-					_Utils_Tuple2(0, 0),
-					_Utils_Tuple2(0, 1),
-					_Utils_Tuple2(0, 2),
-					_Utils_Tuple2(0, 3),
-					_Utils_Tuple2(0, 4),
-					_Utils_Tuple2(0, 5),
-					_Utils_Tuple2(0, 6),
-					_Utils_Tuple2(0, 7),
-					_Utils_Tuple2(0, 8),
-					_Utils_Tuple2(0, 9),
-					_Utils_Tuple2(0, 10),
-					_Utils_Tuple2(0, 11),
-					_Utils_Tuple2(1, 0),
-					_Utils_Tuple2(1, 1),
-					_Utils_Tuple2(1, 2),
-					_Utils_Tuple2(1, 3),
-					_Utils_Tuple2(1, 4),
-					_Utils_Tuple2(1, 5),
-					_Utils_Tuple2(1, 6),
-					_Utils_Tuple2(1, 7),
-					_Utils_Tuple2(1, 8),
-					_Utils_Tuple2(1, 9),
-					_Utils_Tuple2(1, 10),
-					_Utils_Tuple2(1, 11),
-					_Utils_Tuple2(2, 0),
-					_Utils_Tuple2(2, 1),
-					_Utils_Tuple2(2, 2),
-					_Utils_Tuple2(2, 3),
-					_Utils_Tuple2(2, 4),
-					_Utils_Tuple2(2, 5),
-					_Utils_Tuple2(2, 6),
-					_Utils_Tuple2(2, 7),
-					_Utils_Tuple2(2, 8),
-					_Utils_Tuple2(2, 9),
-					_Utils_Tuple2(2, 10),
-					_Utils_Tuple2(2, 11),
-					_Utils_Tuple2(3, 0),
-					_Utils_Tuple2(3, 1),
-					_Utils_Tuple2(3, 2),
-					_Utils_Tuple2(3, 3),
-					_Utils_Tuple2(3, 4),
-					_Utils_Tuple2(3, 5),
-					_Utils_Tuple2(3, 6),
-					_Utils_Tuple2(3, 7),
-					_Utils_Tuple2(3, 8),
-					_Utils_Tuple2(3, 9),
-					_Utils_Tuple2(3, 10),
-					_Utils_Tuple2(3, 11),
-					_Utils_Tuple2(4, 0),
-					_Utils_Tuple2(4, 1),
-					_Utils_Tuple2(4, 2),
-					_Utils_Tuple2(4, 3),
-					_Utils_Tuple2(4, 4),
-					_Utils_Tuple2(4, 5),
-					_Utils_Tuple2(4, 6),
-					_Utils_Tuple2(4, 7),
-					_Utils_Tuple2(4, 8),
-					_Utils_Tuple2(4, 9),
-					_Utils_Tuple2(4, 10),
-					_Utils_Tuple2(4, 11)
-				]),
-			combo: 0,
-			cyanBricks: _List_Nil,
-			emptyBricks: _List_Nil,
-			exp: 0,
-			keys: $author$project$Model$nokeys,
-			leaf: 0,
-			life: 5,
-			max_life: 5,
-			minute: 0,
-			nextBrick: $author$project$Outlooks$Red,
-			nextPoint: _Utils_Tuple2(0, 0),
-			pad_vx: 0,
-			pad_x: 44,
-			pinkBricks: _List_Nil,
-			redBricks: _List_Nil,
-			second: 0,
-			skills_cost: _List_fromArray(
-				[25, 27, 29, 31, 33, 35, 40, 45, 50, 100]),
-			skills_ok: _List_fromArray(
-				[false, false, false, false, false, false, false, false, false, false]),
-			state: $author$project$Model$Stopped
-		},
-		$elm$core$Platform$Cmd$none);
-};
+var $author$project$Model$initial = F3(
+	function (flags, url, key) {
+		return _Utils_Tuple2(
+			{
+				ball_vx: 0.5,
+				ball_vy: -0.5,
+				ball_x: 50,
+				ball_y: 37.5,
+				blueBricks: _List_fromArray(
+					[
+						_Utils_Tuple2(0, 0),
+						_Utils_Tuple2(0, 1),
+						_Utils_Tuple2(0, 2),
+						_Utils_Tuple2(0, 3),
+						_Utils_Tuple2(0, 4),
+						_Utils_Tuple2(0, 5),
+						_Utils_Tuple2(0, 6),
+						_Utils_Tuple2(0, 7),
+						_Utils_Tuple2(0, 8),
+						_Utils_Tuple2(0, 9),
+						_Utils_Tuple2(0, 10),
+						_Utils_Tuple2(0, 11),
+						_Utils_Tuple2(1, 0),
+						_Utils_Tuple2(1, 1),
+						_Utils_Tuple2(1, 2),
+						_Utils_Tuple2(1, 3),
+						_Utils_Tuple2(1, 4),
+						_Utils_Tuple2(1, 5),
+						_Utils_Tuple2(1, 6),
+						_Utils_Tuple2(1, 7),
+						_Utils_Tuple2(1, 8),
+						_Utils_Tuple2(1, 9),
+						_Utils_Tuple2(1, 10),
+						_Utils_Tuple2(1, 11),
+						_Utils_Tuple2(2, 0),
+						_Utils_Tuple2(2, 1),
+						_Utils_Tuple2(2, 2),
+						_Utils_Tuple2(2, 3),
+						_Utils_Tuple2(2, 4),
+						_Utils_Tuple2(2, 5),
+						_Utils_Tuple2(2, 6),
+						_Utils_Tuple2(2, 7),
+						_Utils_Tuple2(2, 8),
+						_Utils_Tuple2(2, 9),
+						_Utils_Tuple2(2, 10),
+						_Utils_Tuple2(2, 11),
+						_Utils_Tuple2(3, 0),
+						_Utils_Tuple2(3, 1),
+						_Utils_Tuple2(3, 2),
+						_Utils_Tuple2(3, 3),
+						_Utils_Tuple2(3, 4),
+						_Utils_Tuple2(3, 5),
+						_Utils_Tuple2(3, 6),
+						_Utils_Tuple2(3, 7),
+						_Utils_Tuple2(3, 8),
+						_Utils_Tuple2(3, 9),
+						_Utils_Tuple2(3, 10),
+						_Utils_Tuple2(3, 11),
+						_Utils_Tuple2(4, 0),
+						_Utils_Tuple2(4, 1),
+						_Utils_Tuple2(4, 2),
+						_Utils_Tuple2(4, 3),
+						_Utils_Tuple2(4, 4),
+						_Utils_Tuple2(4, 5),
+						_Utils_Tuple2(4, 6),
+						_Utils_Tuple2(4, 7),
+						_Utils_Tuple2(4, 8),
+						_Utils_Tuple2(4, 9),
+						_Utils_Tuple2(4, 10),
+						_Utils_Tuple2(4, 11)
+					]),
+				combo: 0,
+				cyanBricks: _List_Nil,
+				difficulty: $author$project$Outlooks$Normal,
+				emptyBricks: _List_Nil,
+				exp: 0,
+				key: key,
+				keys: $author$project$Model$nokeys,
+				leaf: 0,
+				life: 5,
+				max_life: 5,
+				minute: 0,
+				music: $author$project$Outlooks$ReturnOfAncients,
+				nextBrick: $author$project$Outlooks$Red,
+				nextPoint: _Utils_Tuple2(0, 0),
+				pad_vx: 0,
+				pad_x: 44,
+				page: $author$project$Model$Home,
+				pinkBricks: _List_Nil,
+				redBricks: _List_Nil,
+				second: 0,
+				skills_cost: _List_fromArray(
+					[25, 27, 29, 31, 33, 35, 40, 45, 50, 100]),
+				skills_ok: _List_fromArray(
+					[false, false, false, false, false, false, false, false, false, false]),
+				state: $author$project$Model$Stopped,
+				url: url
+			},
+			$elm$core$Platform$Cmd$none);
+	});
 var $author$project$Message$KeyChanged = F2(
 	function (a, b) {
 		return {$: 'KeyChanged', a: a, b: b};
@@ -6125,7 +6239,7 @@ var $elm$browser$Browser$Events$on = F3(
 var $elm$browser$Browser$Events$onKeyDown = A2($elm$browser$Browser$Events$on, $elm$browser$Browser$Events$Document, 'keydown');
 var $elm$browser$Browser$Events$onKeyUp = A2($elm$browser$Browser$Events$on, $elm$browser$Browser$Events$Document, 'keyup');
 var $elm$json$Json$Decode$string = _Json_decodeString;
-var $author$project$Breakout$subscriptions = function (model) {
+var $author$project$Main$subscriptions = function (model) {
 	return $elm$core$Platform$Sub$batch(
 		_List_fromArray(
 			[
@@ -6149,6 +6263,7 @@ var $author$project$Message$DrawBrick = function (a) {
 var $author$project$Message$DrawPoint = function (a) {
 	return {$: 'DrawPoint', a: a};
 };
+var $author$project$Model$Help = {$: 'Help'};
 var $author$project$Message$NewBrick = function (a) {
 	return {$: 'NewBrick', a: a};
 };
@@ -6386,6 +6501,51 @@ var $author$project$Update$pointGenerator = A3(
 	$elm$core$Tuple$pair,
 	A2($elm$random$Random$int, 0, 4),
 	A2($elm$random$Random$int, 0, 11));
+var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
+var $elm$url$Url$addPort = F2(
+	function (maybePort, starter) {
+		if (maybePort.$ === 'Nothing') {
+			return starter;
+		} else {
+			var port_ = maybePort.a;
+			return starter + (':' + $elm$core$String$fromInt(port_));
+		}
+	});
+var $elm$url$Url$addPrefixed = F3(
+	function (prefix, maybeSegment, starter) {
+		if (maybeSegment.$ === 'Nothing') {
+			return starter;
+		} else {
+			var segment = maybeSegment.a;
+			return _Utils_ap(
+				starter,
+				_Utils_ap(prefix, segment));
+		}
+	});
+var $elm$url$Url$toString = function (url) {
+	var http = function () {
+		var _v0 = url.protocol;
+		if (_v0.$ === 'Http') {
+			return 'http://';
+		} else {
+			return 'https://';
+		}
+	}();
+	return A3(
+		$elm$url$Url$addPrefixed,
+		'#',
+		url.fragment,
+		A3(
+			$elm$url$Url$addPrefixed,
+			'?',
+			url.query,
+			_Utils_ap(
+				A2(
+					$elm$url$Url$addPort,
+					url.port_,
+					_Utils_ap(http, url.host)),
+				url.path)));
+};
 var $author$project$Update$updateKeys = F3(
 	function (isDown, key, keys) {
 		switch (key) {
@@ -7502,147 +7662,61 @@ var $author$project$Update$update = F2(
 								A2($elm$core$Task$perform, $author$project$Message$DrawBrick, $elm$time$Time$now),
 								A2($elm$core$Task$perform, $author$project$Message$DrawPoint, $elm$time$Time$now)
 							])));
+			case 'LinkClicked':
+				var urlRequest = msg.a;
+				if (urlRequest.$ === 'Internal') {
+					var url = urlRequest.a;
+					return _Utils_Tuple2(
+						model,
+						A2(
+							$elm$browser$Browser$Navigation$pushUrl,
+							model.key,
+							$elm$url$Url$toString(url)));
+				} else {
+					var href = urlRequest.a;
+					return _Utils_Tuple2(
+						model,
+						$elm$browser$Browser$Navigation$load(href));
+				}
+			case 'UrlChanged':
+				var url = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{url: url}),
+					$elm$core$Platform$Cmd$none);
+			case 'GoHelp':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{page: $author$project$Model$Help}),
+					$elm$core$Platform$Cmd$none);
 			case 'GoHome':
 				return _Utils_Tuple2(
-					model,
-					$elm$browser$Browser$Navigation$load('home.html'));
-			default:
+					_Utils_update(
+						model,
+						{page: $author$project$Model$Home}),
+					$elm$core$Platform$Cmd$none);
+			case 'ChangeMusic':
+				var music = msg.a;
 				return _Utils_Tuple2(
-					model,
-					$elm$browser$Browser$Navigation$load('help.html'));
+					_Utils_update(
+						model,
+						{music: music}),
+					$elm$core$Platform$Cmd$none);
+			default:
+				var difficulty = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{difficulty: difficulty}),
+					$elm$core$Platform$Cmd$none);
 		}
 	});
-var $author$project$Model$Point = F2(
-	function (x, y) {
-		return {x: x, y: y};
-	});
-var $elm$html$Html$audio = _VirtualDom_node('audio');
-var $elm$json$Json$Encode$bool = _Json_wrap;
-var $elm$html$Html$Attributes$boolProperty = F2(
-	function (key, bool) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$bool(bool));
-	});
-var $elm$html$Html$Attributes$controls = $elm$html$Html$Attributes$boolProperty('controls');
-var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm_community$list_extra$List$Extra$reverseAppend = F2(
-	function (list1, list2) {
-		return A3($elm$core$List$foldl, $elm$core$List$cons, list2, list1);
-	});
-var $elm_community$list_extra$List$Extra$interweaveHelp = F3(
-	function (acc, list1, list2) {
-		interweaveHelp:
-		while (true) {
-			var _v0 = _Utils_Tuple2(list1, list2);
-			if (_v0.a.b) {
-				if (_v0.b.b) {
-					var _v1 = _v0.a;
-					var x = _v1.a;
-					var xs = _v1.b;
-					var _v2 = _v0.b;
-					var y = _v2.a;
-					var ys = _v2.b;
-					var $temp$acc = A2(
-						$elm$core$List$cons,
-						y,
-						A2($elm$core$List$cons, x, acc)),
-						$temp$list1 = xs,
-						$temp$list2 = ys;
-					acc = $temp$acc;
-					list1 = $temp$list1;
-					list2 = $temp$list2;
-					continue interweaveHelp;
-				} else {
-					return A2($elm_community$list_extra$List$Extra$reverseAppend, acc, list1);
-				}
-			} else {
-				return A2($elm_community$list_extra$List$Extra$reverseAppend, acc, list2);
-			}
-		}
-	});
-var $elm_community$list_extra$List$Extra$interweave = $elm_community$list_extra$List$Extra$interweaveHelp(_List_Nil);
-var $author$project$Outlooks$outBall = 'assets/main/ball.png';
-var $author$project$Outlooks$outBkg = 'assets/main/bkp.png';
-var $author$project$Outlooks$outInterface = 'assets/main/gameinter.png';
-var $author$project$Outlooks$outPaddle = 'assets/main/pd.png';
-var $elm$core$String$fromFloat = _String_fromNumber;
-var $elm$svg$Svg$Attributes$height = _VirtualDom_attribute('height');
-var $elm$svg$Svg$trustedNode = _VirtualDom_nodeNS('http://www.w3.org/2000/svg');
-var $elm$svg$Svg$image = $elm$svg$Svg$trustedNode('image');
-var $elm$svg$Svg$Attributes$width = _VirtualDom_attribute('width');
-var $elm$svg$Svg$Attributes$x = _VirtualDom_attribute('x');
-var $elm$svg$Svg$Attributes$xlinkHref = function (value) {
-	return A3(
-		_VirtualDom_attributeNS,
-		'http://www.w3.org/1999/xlink',
-		'xlink:href',
-		_VirtualDom_noJavaScriptUri(value));
+var $author$project$Message$ChangeMusic = function (a) {
+	return {$: 'ChangeMusic', a: a};
 };
-var $elm$svg$Svg$Attributes$y = _VirtualDom_attribute('y');
-var $author$project$Object$renderBackground = F4(
-	function (point, wid, hei, pic) {
-		return A2(
-			$elm$svg$Svg$image,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$xlinkHref(pic),
-					$elm$svg$Svg$Attributes$x(
-					$elm$core$String$fromFloat(point.x) + '%'),
-					$elm$svg$Svg$Attributes$y(
-					$elm$core$String$fromFloat(point.y) + '%'),
-					$elm$svg$Svg$Attributes$width(
-					$elm$core$String$fromFloat(wid) + '%'),
-					$elm$svg$Svg$Attributes$height(
-					$elm$core$String$fromFloat(hei) + '%')
-				]),
-			_List_Nil);
-	});
-var $author$project$Object$renderBall = F4(
-	function (point, side1, side2, pic) {
-		return A2(
-			$elm$svg$Svg$image,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$xlinkHref(pic),
-					$elm$svg$Svg$Attributes$x(
-					$elm$core$String$fromFloat(point.x - 1) + '%'),
-					$elm$svg$Svg$Attributes$y(
-					$elm$core$String$fromFloat(point.y - 1) + '%'),
-					$elm$svg$Svg$Attributes$width(
-					$elm$core$String$fromFloat(side1) + '%'),
-					$elm$svg$Svg$Attributes$height(
-					$elm$core$String$fromFloat(side2) + '%')
-				]),
-			_List_Nil);
-	});
-var $elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
-var $elm$svg$Svg$Attributes$opacity = _VirtualDom_attribute('opacity');
-var $elm$svg$Svg$rect = $elm$svg$Svg$trustedNode('rect');
-var $author$project$Dashboard$renderDashboard = F3(
-	function (point, wid, hei) {
-		return A2(
-			$elm$svg$Svg$rect,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$x(
-					$elm$core$String$fromFloat(point.x) + '%'),
-					$elm$svg$Svg$Attributes$y(
-					$elm$core$String$fromFloat(point.y) + '%'),
-					$elm$svg$Svg$Attributes$width(
-					$elm$core$String$fromFloat(wid) + '%'),
-					$elm$svg$Svg$Attributes$height(
-					$elm$core$String$fromFloat(hei) + '%'),
-					$elm$svg$Svg$Attributes$fill('white'),
-					$elm$svg$Svg$Attributes$opacity('0.5')
-				]),
-			_List_Nil);
-	});
-var $author$project$Message$Keep = {$: 'Keep'};
-var $author$project$Message$Pause = {$: 'Pause'};
-var $author$project$Message$Resume = {$: 'Resume'};
-var $author$project$Message$Start = {$: 'Start'};
+var $author$project$Outlooks$TheOasis = {$: 'TheOasis'};
 var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
@@ -7665,212 +7739,170 @@ var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
-var $elm$core$Debug$toString = _Debug_toString;
-var $author$project$View$renderGameButton = function (model) {
-	var _v0 = function () {
-		var _v1 = model.state;
-		switch (_v1.$) {
-			case 'Stopped':
-				return _Utils_Tuple2('New game', $author$project$Message$Pause);
-			case 'Playing':
-				return _Utils_Tuple2(
-					'Enjoy the game! You now have ' + ($elm$core$Debug$toString(model.life) + ' lives.'),
-					$author$project$Message$Keep);
-			default:
-				return (model.life > 1) ? _Utils_Tuple2(
-					'Continue, you still have ' + ($elm$core$Debug$toString(model.life) + ' lives.'),
-					$author$project$Message$Start) : ((model.life === 1) ? _Utils_Tuple2(
-					'Continue, you still have ' + ($elm$core$Debug$toString(model.life) + ' life.'),
-					$author$project$Message$Start) : _Utils_Tuple2('Game Over. Click here to restart.', $author$project$Message$Resume));
-		}
-	}();
-	var txt = _v0.a;
-	var msg = _v0.b;
-	return A2(
-		$elm$html$Html$button,
-		_List_fromArray(
-			[
-				A2($elm$html$Html$Attributes$style, 'background', '#f8f4f4'),
-				A2($elm$html$Html$Attributes$style, 'border', '0'),
-				A2($elm$html$Html$Attributes$style, 'bottom', '30px'),
-				A2($elm$html$Html$Attributes$style, 'color', '#0ca101'),
-				A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
-				A2($elm$html$Html$Attributes$style, 'display', 'block'),
-				A2($elm$html$Html$Attributes$style, 'font-family', 'Helvetica, Arial, sans-serif'),
-				A2($elm$html$Html$Attributes$style, 'font-size', '18px'),
-				A2($elm$html$Html$Attributes$style, 'font-weight', '300'),
-				A2($elm$html$Html$Attributes$style, 'height', '600x'),
-				A2($elm$html$Html$Attributes$style, 'left', '330px'),
-				A2($elm$html$Html$Attributes$style, 'line-height', '60px'),
-				A2($elm$html$Html$Attributes$style, 'outline', 'none'),
-				A2($elm$html$Html$Attributes$style, 'padding', '0'),
-				A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
-				A2($elm$html$Html$Attributes$style, 'width', '600px'),
-				$elm$html$Html$Events$onClick(msg)
-			]),
-		_List_fromArray(
-			[
-				$elm$html$Html$text(txt)
-			]));
+var $author$project$Help$renderButton1 = A2(
+	$elm$html$Html$button,
+	_List_fromArray(
+		[
+			A2($elm$html$Html$Attributes$style, 'background', '#f8f4f4'),
+			A2($elm$html$Html$Attributes$style, 'color', '#25a194'),
+			A2($elm$html$Html$Attributes$style, 'display', 'block'),
+			A2($elm$html$Html$Attributes$style, 'height', '600x'),
+			A2($elm$html$Html$Attributes$style, 'left', '430px'),
+			A2($elm$html$Html$Attributes$style, 'top', '630px'),
+			A2($elm$html$Html$Attributes$style, 'width', '200px'),
+			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
+			$elm$html$Html$Events$onClick(
+			$author$project$Message$ChangeMusic($author$project$Outlooks$TheOasis))
+		]),
+	_List_fromArray(
+		[
+			$elm$html$Html$text('Try \"The Oasis\"! (From movie \"Ready Player One\")')
+		]));
+var $author$project$Help$renderButton2 = A2(
+	$elm$html$Html$button,
+	_List_fromArray(
+		[
+			A2($elm$html$Html$Attributes$style, 'background', '#f8f4f4'),
+			A2($elm$html$Html$Attributes$style, 'color', '#25a194'),
+			A2($elm$html$Html$Attributes$style, 'display', 'block'),
+			A2($elm$html$Html$Attributes$style, 'height', '600x'),
+			A2($elm$html$Html$Attributes$style, 'left', '630px'),
+			A2($elm$html$Html$Attributes$style, 'top', '630px'),
+			A2($elm$html$Html$Attributes$style, 'width', '200px'),
+			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
+			$elm$html$Html$Events$onClick(
+			$author$project$Message$ChangeMusic($author$project$Outlooks$ReturnOfAncients))
+		]),
+	_List_fromArray(
+		[
+			$elm$html$Html$text('Try \"Return of Ancients\"! (From game \"WarcraftIII\")')
+		]));
+var $author$project$Outlooks$InSearchOfLife = {$: 'InSearchOfLife'};
+var $author$project$Help$renderButton3 = A2(
+	$elm$html$Html$button,
+	_List_fromArray(
+		[
+			A2($elm$html$Html$Attributes$style, 'background', '#f8f4f4'),
+			A2($elm$html$Html$Attributes$style, 'color', '#25a194'),
+			A2($elm$html$Html$Attributes$style, 'display', 'block'),
+			A2($elm$html$Html$Attributes$style, 'height', '600x'),
+			A2($elm$html$Html$Attributes$style, 'left', '830px'),
+			A2($elm$html$Html$Attributes$style, 'top', '630px'),
+			A2($elm$html$Html$Attributes$style, 'width', '200px'),
+			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
+			$elm$html$Html$Events$onClick(
+			$author$project$Message$ChangeMusic($author$project$Outlooks$InSearchOfLife))
+		]),
+	_List_fromArray(
+		[
+			$elm$html$Html$text('Try \"In Search of Life\"! (From game \"Stellaris\")')
+		]));
+var $author$project$Outlooks$TheChordOfSpring = {$: 'TheChordOfSpring'};
+var $author$project$Help$renderButton4 = A2(
+	$elm$html$Html$button,
+	_List_fromArray(
+		[
+			A2($elm$html$Html$Attributes$style, 'background', '#f8f4f4'),
+			A2($elm$html$Html$Attributes$style, 'color', '#25a194'),
+			A2($elm$html$Html$Attributes$style, 'display', 'block'),
+			A2($elm$html$Html$Attributes$style, 'height', '600x'),
+			A2($elm$html$Html$Attributes$style, 'left', '1030px'),
+			A2($elm$html$Html$Attributes$style, 'top', '630px'),
+			A2($elm$html$Html$Attributes$style, 'width', '200px'),
+			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
+			$elm$html$Html$Events$onClick(
+			$author$project$Message$ChangeMusic($author$project$Outlooks$TheChordOfSpring))
+		]),
+	_List_fromArray(
+		[
+			$elm$html$Html$text('Try \"The Chord of Spring\"! (From game \"Arknights\")')
+		]));
+var $author$project$Message$ChangeDifficulty = function (a) {
+	return {$: 'ChangeDifficulty', a: a};
 };
-var $author$project$Object$renderPaddle = F4(
-	function (point, wid, hei, pic) {
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
 		return A2(
-			$elm$svg$Svg$image,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$xlinkHref(pic),
-					$elm$svg$Svg$Attributes$x(
-					$elm$core$String$fromFloat(point.x) + '%'),
-					$elm$svg$Svg$Attributes$y(
-					$elm$core$String$fromFloat(point.y) + '%'),
-					$elm$svg$Svg$Attributes$width(
-					$elm$core$String$fromFloat(wid) + '%'),
-					$elm$svg$Svg$Attributes$height(
-					$elm$core$String$fromFloat(hei) + '%')
-				]),
-			_List_Nil);
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
 	});
-var $author$project$Outlooks$outOriginal = 'assets/main/o.png';
-var $author$project$Object$renderBlueBrick = F5(
-	function (num1, num2, point, wid, hei) {
-		var b = point.y + ((hei + 0.175) * num2);
-		var a = point.x + ((wid + 0.175) * num1);
-		return A2(
-			$elm$svg$Svg$image,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$xlinkHref($author$project$Outlooks$outOriginal),
-					$elm$svg$Svg$Attributes$x(
-					$elm$core$String$fromFloat(a) + '%'),
-					$elm$svg$Svg$Attributes$y(
-					$elm$core$String$fromFloat(b) + '%'),
-					$elm$svg$Svg$Attributes$width(
-					$elm$core$String$fromFloat(wid) + '%'),
-					$elm$svg$Svg$Attributes$height(
-					$elm$core$String$fromFloat(hei) + '%')
-				]),
-			_List_Nil);
-	});
-var $author$project$Outlooks$outHit = 'assets/main/n.png';
-var $author$project$Object$renderCyanBrick = F5(
-	function (num1, num2, point, wid, hei) {
-		var b = point.y + ((hei + 0.175) * num2);
-		var a = point.x + ((wid + 0.175) * num1);
-		return A2(
-			$elm$svg$Svg$image,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$xlinkHref($author$project$Outlooks$outHit),
-					$elm$svg$Svg$Attributes$x(
-					$elm$core$String$fromFloat(a) + '%'),
-					$elm$svg$Svg$Attributes$y(
-					$elm$core$String$fromFloat(b) + '%'),
-					$elm$svg$Svg$Attributes$width(
-					$elm$core$String$fromFloat(wid) + '%'),
-					$elm$svg$Svg$Attributes$height(
-					$elm$core$String$fromFloat(hei) + '%')
-				]),
-			_List_Nil);
-	});
-var $author$project$Outlooks$outIncrease = 'assets/main/acceleration.png';
-var $author$project$Object$renderPinkBrick = F5(
-	function (num1, num2, point, wid, hei) {
-		var b = point.y + ((hei + 0.175) * num2);
-		var a = point.x + ((wid + 0.175) * num1);
-		return A2(
-			$elm$svg$Svg$image,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$xlinkHref($author$project$Outlooks$outIncrease),
-					$elm$svg$Svg$Attributes$x(
-					$elm$core$String$fromFloat(a) + '%'),
-					$elm$svg$Svg$Attributes$y(
-					$elm$core$String$fromFloat(b) + '%'),
-					$elm$svg$Svg$Attributes$width(
-					$elm$core$String$fromFloat(wid) + '%'),
-					$elm$svg$Svg$Attributes$height(
-					$elm$core$String$fromFloat(hei) + '%')
-				]),
-			_List_Nil);
-	});
-var $author$project$Outlooks$outDecrease = 'assets/main/frozen.png';
-var $author$project$Object$renderRedBrick = F5(
-	function (num1, num2, point, wid, hei) {
-		var b = point.y + ((hei + 0.175) * num2);
-		var a = point.x + ((wid + 0.175) * num1);
-		return A2(
-			$elm$svg$Svg$image,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$xlinkHref($author$project$Outlooks$outDecrease),
-					$elm$svg$Svg$Attributes$x(
-					$elm$core$String$fromFloat(a) + '%'),
-					$elm$svg$Svg$Attributes$y(
-					$elm$core$String$fromFloat(b) + '%'),
-					$elm$svg$Svg$Attributes$width(
-					$elm$core$String$fromFloat(wid) + '%'),
-					$elm$svg$Svg$Attributes$height(
-					$elm$core$String$fromFloat(hei) + '%')
-				]),
-			_List_Nil);
-	});
-var $elm$core$Tuple$second = function (_v0) {
-	var y = _v0.b;
-	return y;
-};
-var $author$project$Object$renderABrick = F5(
-	function (model, a, point, wid, hei) {
-		return (A2($elm$core$List$member, a, model.cyanBricks) && (!A2($elm$core$List$member, a, model.emptyBricks))) ? _List_fromArray(
-			[
-				A5($author$project$Object$renderCyanBrick, a.b, a.a, point, wid, hei)
-			]) : ((A2($elm$core$List$member, a, model.pinkBricks) && (!A2($elm$core$List$member, a, model.emptyBricks))) ? _List_fromArray(
-			[
-				A5($author$project$Object$renderPinkBrick, a.b, a.a, point, wid, hei)
-			]) : ((A2($elm$core$List$member, a, model.redBricks) && (!A2($elm$core$List$member, a, model.emptyBricks))) ? _List_fromArray(
-			[
-				A5($author$project$Object$renderRedBrick, a.b, a.a, point, wid, hei)
-			]) : (((!A2($elm$core$List$member, a, model.cyanBricks)) && ((!A2($elm$core$List$member, a, model.pinkBricks)) && ((!A2($elm$core$List$member, a, model.redBricks)) && (!A2($elm$core$List$member, a, model.emptyBricks))))) ? _List_fromArray(
-			[
-				A5($author$project$Object$renderBlueBrick, a.b, a.a, point, wid, hei)
-			]) : _List_fromArray(
-			[
-				A2($elm$html$Html$div, _List_Nil, _List_Nil)
-			]))));
-	});
-var $author$project$Object$renderColumnBrick = F6(
-	function (model, point, wid, hei, num1, num2) {
-		return (num1 >= 0) ? A2(
-			$elm_community$list_extra$List$Extra$interweave,
-			A5(
-				$author$project$Object$renderABrick,
-				model,
-				_Utils_Tuple2(num1, num2),
-				point,
-				wid,
-				hei),
-			A6($author$project$Object$renderColumnBrick, model, point, wid, hei, num1 - 1, num2)) : _List_Nil;
-	});
-var $author$project$Object$renderRowBrick = F6(
-	function (model, point, wid, hei, num1, num2) {
-		return (num2 >= 0) ? A2(
-			$elm_community$list_extra$List$Extra$interweave,
-			A6($author$project$Object$renderColumnBrick, model, point, wid, hei, num1, num2),
-			A6($author$project$Object$renderRowBrick, model, point, wid, hei, num1, num2 - 1)) : _List_Nil;
-	});
-var $author$project$Message$GoHelp = {$: 'GoHelp'};
+var $elm$html$Html$Attributes$title = $elm$html$Html$Attributes$stringProperty('title');
+var $author$project$Help$renderDifficulty1 = A2(
+	$elm$html$Html$button,
+	_List_fromArray(
+		[
+			A2($elm$html$Html$Attributes$style, 'background', '#f8f4f4'),
+			A2($elm$html$Html$Attributes$style, 'color', '#2fa11a'),
+			A2($elm$html$Html$Attributes$style, 'display', 'block'),
+			A2($elm$html$Html$Attributes$style, 'height', '600x'),
+			A2($elm$html$Html$Attributes$style, 'left', '500px'),
+			A2($elm$html$Html$Attributes$style, 'top', '730px'),
+			A2($elm$html$Html$Attributes$style, 'width', '200px'),
+			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
+			$elm$html$Html$Events$onClick(
+			$author$project$Message$ChangeDifficulty($author$project$Outlooks$Normal)),
+			$elm$html$Html$Attributes$title('A wise choice.')
+		]),
+	_List_fromArray(
+		[
+			$elm$html$Html$text('Try \"The Chord of Spring\"! (From game \"Arknights\")')
+		]));
+var $author$project$Outlooks$Hard = {$: 'Hard'};
+var $author$project$Help$renderDifficulty2 = A2(
+	$elm$html$Html$button,
+	_List_fromArray(
+		[
+			A2($elm$html$Html$Attributes$style, 'background', '#f8f4f4'),
+			A2($elm$html$Html$Attributes$style, 'color', '#a19e32'),
+			A2($elm$html$Html$Attributes$style, 'display', 'block'),
+			A2($elm$html$Html$Attributes$style, 'height', '600x'),
+			A2($elm$html$Html$Attributes$style, 'left', '700px'),
+			A2($elm$html$Html$Attributes$style, 'top', '730px'),
+			A2($elm$html$Html$Attributes$style, 'width', '200px'),
+			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
+			$elm$html$Html$Events$onClick(
+			$author$project$Message$ChangeDifficulty($author$project$Outlooks$Hard)),
+			$elm$html$Html$Attributes$title('Emm.')
+		]),
+	_List_fromArray(
+		[
+			$elm$html$Html$text('Try \"The Chord of Spring\"! (From game \"Arknights\")')
+		]));
+var $author$project$Outlooks$Nightmare = {$: 'Nightmare'};
+var $author$project$Help$renderDifficulty3 = A2(
+	$elm$html$Html$button,
+	_List_fromArray(
+		[
+			A2($elm$html$Html$Attributes$style, 'background', '#f8f4f4'),
+			A2($elm$html$Html$Attributes$style, 'color', '#a12b19'),
+			A2($elm$html$Html$Attributes$style, 'display', 'block'),
+			A2($elm$html$Html$Attributes$style, 'height', '600x'),
+			A2($elm$html$Html$Attributes$style, 'left', '900px'),
+			A2($elm$html$Html$Attributes$style, 'top', '730px'),
+			A2($elm$html$Html$Attributes$style, 'width', '200px'),
+			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
+			$elm$html$Html$Events$onClick(
+			$author$project$Message$ChangeDifficulty($author$project$Outlooks$Nightmare)),
+			$elm$html$Html$Attributes$title('Do\'nt try it.')
+		]),
+	_List_fromArray(
+		[
+			$elm$html$Html$text('Try \"The Chord of Spring\"! (From game \"Arknights\")')
+		]));
 var $author$project$Message$GoHome = {$: 'GoHome'};
-var $elm$svg$Svg$Attributes$fillOpacity = _VirtualDom_attribute('fill-opacity');
+var $elm$html$Html$div = _VirtualDom_node('div');
 var $author$project$Color$RGBA = F4(
 	function (red, green, blue, alpha) {
 		return {alpha: alpha, blue: blue, green: green, red: red};
 	});
 var $author$project$Color$grey = A4($author$project$Color$RGBA, 200 / 255, 214 / 255, 229 / 255, 1);
-var $elm$svg$Svg$Attributes$d = _VirtualDom_attribute('d');
 var $elm$core$Basics$clamp = F3(
 	function (low, high, number) {
 		return (_Utils_cmp(number, low) < 0) ? low : ((_Utils_cmp(number, high) > 0) ? high : number);
 	});
+var $elm$core$String$fromFloat = _String_fromNumber;
 var $j_panasiuk$elm_ionicons$Ionicon$Internal$toAlphaString = function (value) {
 	return A2(
 		$elm$core$String$left,
@@ -7910,11 +7942,18 @@ var $j_panasiuk$elm_ionicons$Ionicon$Internal$fill = function (_v0) {
 	var values = _v1.b;
 	return colorSpace + ('(' + (A2($elm$core$String$join, ',', values) + ')'));
 };
-var $elm$svg$Svg$path = $elm$svg$Svg$trustedNode('path');
+var $elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
+var $elm$svg$Svg$Attributes$points = _VirtualDom_attribute('points');
+var $elm$svg$Svg$trustedNode = _VirtualDom_nodeNS('http://www.w3.org/2000/svg');
+var $elm$svg$Svg$polygon = $elm$svg$Svg$trustedNode('polygon');
 var $elm$svg$Svg$Attributes$enableBackground = _VirtualDom_attribute('enable-background');
+var $elm$svg$Svg$Attributes$height = _VirtualDom_attribute('height');
 var $elm$svg$Svg$svg = $elm$svg$Svg$trustedNode('svg');
 var $elm$svg$Svg$Attributes$version = _VirtualDom_attribute('version');
 var $elm$svg$Svg$Attributes$viewBox = _VirtualDom_attribute('viewBox');
+var $elm$svg$Svg$Attributes$width = _VirtualDom_attribute('width');
+var $elm$svg$Svg$Attributes$x = _VirtualDom_attribute('x');
+var $elm$svg$Svg$Attributes$y = _VirtualDom_attribute('y');
 var $j_panasiuk$elm_ionicons$Ionicon$Internal$svg = function (size) {
 	return $elm$svg$Svg$svg(
 		_List_fromArray(
@@ -7930,27 +7969,6 @@ var $j_panasiuk$elm_ionicons$Ionicon$Internal$svg = function (size) {
 				$elm$svg$Svg$Attributes$enableBackground('new 0 0 512 512')
 			]));
 };
-var $j_panasiuk$elm_ionicons$Ionicon$Internal$p = F3(
-	function (d, size, color) {
-		return A2(
-			$j_panasiuk$elm_ionicons$Ionicon$Internal$svg,
-			size,
-			_List_fromArray(
-				[
-					A2(
-					$elm$svg$Svg$path,
-					_List_fromArray(
-						[
-							$elm$svg$Svg$Attributes$d(d),
-							$elm$svg$Svg$Attributes$fill(
-							$j_panasiuk$elm_ionicons$Ionicon$Internal$fill(color))
-						]),
-					_List_Nil)
-				]));
-	});
-var $j_panasiuk$elm_ionicons$Ionicon$help = $j_panasiuk$elm_ionicons$Ionicon$Internal$p('M345.1,77.1C317.6,56.2,286.6,49,247.3,49c-29.8,0-55.3,6.1-75.5,19.7C142,89,128,123.1,128,177h76.8c0-14.4-1.4-29.9,7-43.2c8.4-13.3,20.1-23.5,40.2-23.5c20.4,0,30.9,5.9,40.8,18.1c8.4,10.4,11.6,22.8,11.6,36c0,11.4-5.8,21.9-12.7,31.4c-3.8,5.6-8.8,10.6-15.1,15.4c0,0-41.5,24.7-56.1,48.1c-10.9,17.4-14.8,39.2-15.7,65.3c-0.1,1.9,0.6,5.8,7.2,5.8c6.5,0,56,0,61.8,0c5.8,0,7-4.4,7.1-6.2c0.4-9.5,1.6-24.1,3.3-29.6c3.3-10.4,9.7-19.5,19.7-27.3l20.7-14.3c18.7-14.6,33.6-26.5,40.2-35.9c11.3-15.4,19.2-34.4,19.2-56.9C384,123.5,370.5,96.4,345.1,77.1zM242,370.2c-25.9-0.8-47.3,17.2-48.2,45.3c-0.8,28.2,19.5,46.7,45.5,47.5c27,0.8,47.9-16.6,48.7-44.7C288.8,390.2,269,371,242,370.2z');
-var $elm$svg$Svg$Attributes$points = _VirtualDom_attribute('points');
-var $elm$svg$Svg$polygon = $elm$svg$Svg$trustedNode('polygon');
 var $j_panasiuk$elm_ionicons$Ionicon$Internal$pg = F3(
 	function (points, size, color) {
 		return A2(
@@ -7970,679 +7988,224 @@ var $j_panasiuk$elm_ionicons$Ionicon$Internal$pg = F3(
 				]));
 	});
 var $j_panasiuk$elm_ionicons$Ionicon$home = $j_panasiuk$elm_ionicons$Ionicon$Internal$pg('448,288 256,64 64,288 112,288 112,448 208,448 208,320 304,320 304,448 400,448 400,288');
-var $elm$svg$Svg$Events$onClick = function (msg) {
-	return A2(
-		$elm$html$Html$Events$on,
-		'click',
-		$elm$json$Json$Decode$succeed(msg));
-};
-var $elm$svg$Svg$g = $elm$svg$Svg$trustedNode('g');
-var $j_panasiuk$elm_ionicons$Ionicon$Internal$ps = F3(
-	function (ds, size, color) {
-		return A2(
-			$j_panasiuk$elm_ionicons$Ionicon$Internal$svg,
-			size,
-			_List_fromArray(
-				[
-					A2(
-					$elm$svg$Svg$g,
-					_List_Nil,
-					A2(
-						$elm$core$List$map,
-						function (d) {
-							return A2(
-								$elm$svg$Svg$path,
-								_List_fromArray(
-									[
-										$elm$svg$Svg$Attributes$d(d),
-										$elm$svg$Svg$Attributes$fill(
-										$j_panasiuk$elm_ionicons$Ionicon$Internal$fill(color))
-									]),
-								_List_Nil);
-						},
-						ds))
-				]));
-	});
-var $j_panasiuk$elm_ionicons$Ionicon$pause = $j_panasiuk$elm_ionicons$Ionicon$Internal$ps(
-	_List_fromArray(
-		['M224,435.8V76.1c0-6.7-5.4-12.1-12.2-12.1h-71.6c-6.8,0-12.2,5.4-12.2,12.1v359.7c0,6.7,5.4,12.2,12.2,12.2h71.6C218.6,448,224,442.6,224,435.8z', 'M371.8,64h-71.6c-6.7,0-12.2,5.4-12.2,12.1v359.7c0,6.7,5.4,12.2,12.2,12.2h71.6c6.7,0,12.2-5.4,12.2-12.2V76.1 C384,69.4,378.6,64,371.8,64z']));
-var $j_panasiuk$elm_ionicons$Ionicon$refresh = $j_panasiuk$elm_ionicons$Ionicon$Internal$p('M416,352l96-111.9h-64.7c-2.3-27.9-10.5-54-23.5-77.3c-27.4-49.2-75.8-85.1-133-95.6c-0.7-0.1-1.5-0.3-2.2-0.4c-0.5-0.1-0.9-0.2-1.4-0.2C277.1,64.9,266.6,64,256,64c-0.1,0-0.3,0-0.4,0c0,0,0,0,0,0c-90.9,0.2-167,63.6-186.7,148.6c0,0,0,0.1,0,0.1c-0.3,1.1-0.5,2.2-0.7,3.3c-0.1,0.5-0.2,0.9-0.3,1.4c-0.1,0.7-0.3,1.4-0.4,2.1c-0.2,0.9-0.3,1.7-0.5,2.6c-0.1,0.4-0.1,0.7-0.2,1.1c-0.2,1.2-0.4,2.4-0.6,3.6c0,0.1,0,0.1,0,0.2c-1,6.3-1.6,12.7-1.9,19.1c0,0.3,0,0.6,0,0.8c-0.1,1.4-0.1,2.7-0.2,4.1c0,1.6-0.1,3.3-0.1,5c0,1.7,0,3.3,0.1,5c0,1.4,0.1,2.7,0.2,4.1c0,0.3,0,0.6,0,0.9c0.3,6.5,1,12.9,1.9,19.1c0,0.1,0,0.1,0,0.2c0.2,1.2,0.4,2.4,0.6,3.6c0.1,0.4,0.1,0.7,0.2,1.1c0.2,0.9,0.3,1.8,0.5,2.6c0.1,0.7,0.3,1.4,0.4,2.1c0.1,0.5,0.2,1,0.3,1.4c0.2,1.1,0.5,2.2,0.7,3.2c0,0,0,0.1,0,0.1c19.7,85,96.1,148.4,187.1,148.6c42.9-0.1,83.1-14.2,116.9-40.7l7.5-5.9l-43.2-46.2l-6.2,4.6c-22.1,16.3-47.5,24.2-75,24.2c-70.6,0-128-57-128-128c0-71,57.4-128,128-128c66.4,0,122.8,46.6,129.5,112H312L416,352z');
-var $j_panasiuk$elm_ionicons$Ionicon$Internal$g = F3(
-	function (elements, size, color) {
-		return A2(
-			$j_panasiuk$elm_ionicons$Ionicon$Internal$svg,
-			size,
-			_List_fromArray(
-				[
-					A2(
-					$elm$svg$Svg$g,
-					_List_Nil,
-					A2(
-						$elm$core$List$map,
-						function (el) {
-							return el(color);
-						},
-						elements))
-				]));
-	});
-var $j_panasiuk$elm_ionicons$Ionicon$Internal$p1 = F2(
-	function (d, color) {
-		return A2(
-			$elm$svg$Svg$path,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$d(d),
-					$elm$svg$Svg$Attributes$fill(
-					$j_panasiuk$elm_ionicons$Ionicon$Internal$fill(color))
-				]),
-			_List_Nil);
-	});
-var $j_panasiuk$elm_ionicons$Ionicon$Internal$pg1 = F2(
-	function (points, color) {
-		return A2(
-			$elm$svg$Svg$polygon,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$points(points),
-					$elm$svg$Svg$Attributes$fill(
-					$j_panasiuk$elm_ionicons$Ionicon$Internal$fill(color))
-				]),
-			_List_Nil);
-	});
-var $j_panasiuk$elm_ionicons$Ionicon$volumeMedium = $j_panasiuk$elm_ionicons$Ionicon$Internal$g(
+var $author$project$Help$renderHome = A2(
+	$elm$html$Html$div,
 	_List_fromArray(
 		[
-			$j_panasiuk$elm_ionicons$Ionicon$Internal$pg1('270,407.7 270,104.4 175.3,192 71,192 71,320 175.3,320'),
-			$j_panasiuk$elm_ionicons$Ionicon$Internal$p1('M326.3,355.6c20.5-27.8,32.8-62.3,32.8-99.6c0-37.4-12.3-71.8-32.8-99.6l-20.4,15.3c17.4,23.6,27.8,52.7,27.8,84.3 c0,31.6-10.4,60.7-27.8,84.3L326.3,355.6z'),
-			$j_panasiuk$elm_ionicons$Ionicon$Internal$p1('M392.8,401.6c30-40.7,48-91,48-145.6s-18-104.9-48-145.6l-20.4,15.3c26.9,36.4,43,81.4,43,130.3c0,48.9-16.1,93.8-43,130.3 L392.8,401.6z')
-		]));
-var $j_panasiuk$elm_ionicons$Ionicon$volumeMute = $j_panasiuk$elm_ionicons$Ionicon$Internal$g(
+			A2($elm$html$Html$Attributes$style, 'top', '30px'),
+			A2($elm$html$Html$Attributes$style, 'left', '30px'),
+			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
+			$elm$html$Html$Attributes$title('Is everything OK?'),
+			$elm$html$Html$Events$onClick($author$project$Message$GoHome)
+		]),
 	_List_fromArray(
 		[
-			$j_panasiuk$elm_ionicons$Ionicon$Internal$pg1('255.9,217 191,217 191,295 255.9,295 303,346.3 303,165.7'),
-			$j_panasiuk$elm_ionicons$Ionicon$Internal$p1('M364.5,60.1c-0.4-0.2-0.7-0.4-1.1-0.6C331.5,42,294.9,32,256,32C132.3,32,32,132.3,32,256c0,84.3,46.6,157.6,115.4,195.9 c0.4,0.2,0.7,0.5,1.1,0.7C180.5,470,217.1,480,256,480c123.7,0,224-100.3,224-224C480,171.7,433.4,98.3,364.5,60.1z M393.9,355.4 L336,297.1v76.7l19.6,19.9c-28,20.3-62.3,32.7-99.5,32.7c-21.6,0-42.3-4.2-61.3-11.5c-6.5-2.5-12.9-5.3-19-8.6 c-53.6-28.7-90.1-85.2-90.1-150.3c0-37.2,12.4-71.4,32.7-99.4l35.3,35.4h76.7l-73.6-73.8c28-20.2,62.1-32.6,99.4-32.6 c21.6,0,42.2,4.2,61.3,11.5c6.1,2.4,12.2,5,17.9,8c54.2,28.5,91.3,85.3,91.3,150.8C426.5,293.3,414.2,327.4,393.9,355.4z')
-		]));
-var $author$project$Dashboard$renderSettings = function () {
-	var volumeOn = A2(
-		$elm$svg$Svg$svg,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x('59%'),
-				$elm$svg$Svg$Attributes$y('0.8%')
-			]),
-		_List_fromArray(
-			[
-				A2($j_panasiuk$elm_ionicons$Ionicon$volumeMedium, 7, $author$project$Color$grey)
-			]));
-	var volumeOff = A2(
-		$elm$svg$Svg$svg,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x('59%'),
-				$elm$svg$Svg$Attributes$y('0.8%')
-			]),
-		_List_fromArray(
-			[
-				A2($j_panasiuk$elm_ionicons$Ionicon$volumeMute, 7, $author$project$Color$grey)
-			]));
-	var refresh = A2(
-		$elm$svg$Svg$svg,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x('59%'),
-				$elm$svg$Svg$Attributes$y('2.2%')
-			]),
-		_List_fromArray(
-			[
-				A2($j_panasiuk$elm_ionicons$Ionicon$refresh, 9, $author$project$Color$grey)
-			]));
-	var play = A2(
-		$elm$svg$Svg$svg,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x('59%'),
-				$elm$svg$Svg$Attributes$y('2.8%')
-			]),
-		_List_fromArray(
-			[
-				A2($j_panasiuk$elm_ionicons$Ionicon$pause, 7, $author$project$Color$grey)
-			]));
-	var pause = A2(
-		$elm$svg$Svg$svg,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x('59%'),
-				$elm$svg$Svg$Attributes$y('2.8%')
-			]),
-		_List_fromArray(
-			[
-				A2($j_panasiuk$elm_ionicons$Ionicon$pause, 7, $author$project$Color$grey)
-			]));
-	var hype3 = A2(
-		$elm$svg$Svg$rect,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x('59%'),
-				$elm$svg$Svg$Attributes$y('2.2%'),
-				$elm$svg$Svg$Attributes$width('2%'),
-				$elm$svg$Svg$Attributes$height('2%'),
-				$elm$svg$Svg$Attributes$fillOpacity('0'),
-				$elm$svg$Svg$Events$onClick($author$project$Message$Pause)
-			]),
-		_List_Nil);
-	var hype2 = A2(
-		$elm$svg$Svg$rect,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x('62%'),
-				$elm$svg$Svg$Attributes$y('4%'),
-				$elm$svg$Svg$Attributes$width('2%'),
-				$elm$svg$Svg$Attributes$height('2%'),
-				$elm$svg$Svg$Attributes$fillOpacity('0'),
-				$elm$svg$Svg$Events$onClick($author$project$Message$GoHelp)
-			]),
-		_List_Nil);
-	var hype1 = A2(
-		$elm$svg$Svg$rect,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x('62%'),
-				$elm$svg$Svg$Attributes$y('1.2%'),
-				$elm$svg$Svg$Attributes$width('2%'),
-				$elm$svg$Svg$Attributes$height('2%'),
-				$elm$svg$Svg$Attributes$fillOpacity('0'),
-				$elm$svg$Svg$Events$onClick($author$project$Message$GoHome)
-			]),
-		_List_Nil);
-	var home = A2(
-		$elm$svg$Svg$svg,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x('62%'),
-				$elm$svg$Svg$Attributes$y('1.2%')
-			]),
-		_List_fromArray(
-			[
-				A2($j_panasiuk$elm_ionicons$Ionicon$home, 9, $author$project$Color$grey)
-			]));
-	var help = A2(
-		$elm$svg$Svg$svg,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x('62%'),
-				$elm$svg$Svg$Attributes$y('4%')
-			]),
-		_List_fromArray(
-			[
-				A2($j_panasiuk$elm_ionicons$Ionicon$help, 9, $author$project$Color$grey)
-			]));
-	return _List_fromArray(
-		[refresh, home, help, hype1, hype2, hype3]);
-}();
-var $elm$svg$Svg$Attributes$fontSize = _VirtualDom_attribute('font-size');
-var $elm$svg$Svg$text_ = $elm$svg$Svg$trustedNode('text');
-var $author$project$Dashboard$skillCost = F2(
-	function (model, num) {
-		var xx = 65 + ((num - 1) * 2.5);
-		var xxx = $elm$core$String$fromFloat(xx) + '%';
-		var req_exp = A2(
-			$elm_community$list_extra$List$Extra$getAt,
-			$elm$core$Basics$floor(num) - 1,
-			model.skills_cost);
-		return A2(
-			$elm$svg$Svg$text_,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$x(xxx),
-					$elm$svg$Svg$Attributes$y('4%'),
-					$elm$svg$Svg$Attributes$fill('black'),
-					$elm$svg$Svg$Attributes$fontSize('3')
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text(
-					'C:' + $elm$core$String$fromInt(
-						$author$project$Dashboard$fromJust(req_exp)))
-				]));
-	});
-var $author$project$Dashboard$skillStatus = F2(
-	function (model, num) {
-		var xx = 65 + ((num - 1) * 2.5);
-		var xxx = $elm$core$String$fromFloat(xx) + '%';
-		var sta = _Utils_eq(
 			A2(
-				$elm_community$list_extra$List$Extra$getAt,
-				$elm$core$Basics$floor(num) - 1,
-				model.skills_ok),
-			$elm$core$Maybe$Just(true)) ? 'Yes' : 'No';
-		return A2(
-			$elm$svg$Svg$text_,
+			$elm$html$Html$div,
+			_List_Nil,
 			_List_fromArray(
 				[
-					$elm$svg$Svg$Attributes$x(xxx),
-					$elm$svg$Svg$Attributes$y('5.5%'),
-					$elm$svg$Svg$Attributes$fill('black'),
-					$elm$svg$Svg$Attributes$fontSize('3')
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text(sta)
-				]));
-	});
-var $author$project$Outlooks$trait1 = 'assets/skills/Trait_charismatic.png';
-var $author$project$Outlooks$trait10 = 'assets/skills/Trait_intelligent.png';
-var $author$project$Outlooks$trait11 = 'assets/skills/Trait_very_intelligent.png';
-var $author$project$Outlooks$trait12 = 'assets/skills/Trait_boss.png';
-var $author$project$Outlooks$trait13 = 'assets/skills/Trait_rapid_speed.png';
-var $author$project$Outlooks$trait2 = 'assets/skills/Trait_cybernetic.png';
-var $author$project$Outlooks$trait4 = 'assets/skills/Trait_erudite.png';
-var $author$project$Outlooks$trait5 = 'assets/skills/Trait_psionic.png';
-var $author$project$Outlooks$trait6 = 'assets/skills/Trait_strong.png';
-var $author$project$Outlooks$trait8 = 'assets/skills/Trait_enduring.png';
-var $author$project$Dashboard$renderSkills = function (model) {
-	var wid = 2.5;
-	var stx = 65;
-	var t1 = A2(
-		$elm$svg$Svg$image,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x(
-				$elm$core$String$fromFloat(stx + (wid * 0)) + '%'),
-				$elm$svg$Svg$Attributes$y('1%'),
-				$elm$svg$Svg$Attributes$width('2%'),
-				$elm$svg$Svg$Attributes$height('2%'),
-				$elm$svg$Svg$Attributes$xlinkHref($author$project$Outlooks$trait8)
-			]),
-		_List_Nil);
-	var t10 = A2(
-		$elm$svg$Svg$image,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x(
-				$elm$core$String$fromFloat(stx + (wid * 9)) + '%'),
-				$elm$svg$Svg$Attributes$y('1%'),
-				$elm$svg$Svg$Attributes$width('2%'),
-				$elm$svg$Svg$Attributes$height('2%'),
-				$elm$svg$Svg$Attributes$xlinkHref($author$project$Outlooks$trait5)
-			]),
-		_List_Nil);
-	var t2 = A2(
-		$elm$svg$Svg$image,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x(
-				$elm$core$String$fromFloat(stx + (wid * 1)) + '%'),
-				$elm$svg$Svg$Attributes$y('1%'),
-				$elm$svg$Svg$Attributes$width('2%'),
-				$elm$svg$Svg$Attributes$height('2%'),
-				$elm$svg$Svg$Attributes$xlinkHref($author$project$Outlooks$trait2)
-			]),
-		_List_Nil);
-	var t3 = A2(
-		$elm$svg$Svg$image,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x(
-				$elm$core$String$fromFloat(stx + (wid * 2)) + '%'),
-				$elm$svg$Svg$Attributes$y('1%'),
-				$elm$svg$Svg$Attributes$width('2%'),
-				$elm$svg$Svg$Attributes$height('2%'),
-				$elm$svg$Svg$Attributes$xlinkHref($author$project$Outlooks$trait13)
-			]),
-		_List_Nil);
-	var t4 = A2(
-		$elm$svg$Svg$image,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x(
-				$elm$core$String$fromFloat(stx + (wid * 3)) + '%'),
-				$elm$svg$Svg$Attributes$y('1%'),
-				$elm$svg$Svg$Attributes$width('2%'),
-				$elm$svg$Svg$Attributes$height('2%'),
-				$elm$svg$Svg$Attributes$xlinkHref($author$project$Outlooks$trait11)
-			]),
-		_List_Nil);
-	var t5 = A2(
-		$elm$svg$Svg$image,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x(
-				$elm$core$String$fromFloat(stx + (wid * 4)) + '%'),
-				$elm$svg$Svg$Attributes$y('1%'),
-				$elm$svg$Svg$Attributes$width('2%'),
-				$elm$svg$Svg$Attributes$height('2%'),
-				$elm$svg$Svg$Attributes$xlinkHref($author$project$Outlooks$trait10)
-			]),
-		_List_Nil);
-	var t6 = A2(
-		$elm$svg$Svg$image,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x(
-				$elm$core$String$fromFloat(stx + (wid * 5)) + '%'),
-				$elm$svg$Svg$Attributes$y('1%'),
-				$elm$svg$Svg$Attributes$width('2%'),
-				$elm$svg$Svg$Attributes$height('2%'),
-				$elm$svg$Svg$Attributes$xlinkHref($author$project$Outlooks$trait6)
-			]),
-		_List_Nil);
-	var t7 = A2(
-		$elm$svg$Svg$image,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x(
-				$elm$core$String$fromFloat(stx + (wid * 6)) + '%'),
-				$elm$svg$Svg$Attributes$y('1%'),
-				$elm$svg$Svg$Attributes$width('2%'),
-				$elm$svg$Svg$Attributes$height('2%'),
-				$elm$svg$Svg$Attributes$xlinkHref($author$project$Outlooks$trait1)
-			]),
-		_List_Nil);
-	var t8 = A2(
-		$elm$svg$Svg$image,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x(
-				$elm$core$String$fromFloat(stx + (wid * 7)) + '%'),
-				$elm$svg$Svg$Attributes$y('1%'),
-				$elm$svg$Svg$Attributes$width('2%'),
-				$elm$svg$Svg$Attributes$height('2%'),
-				$elm$svg$Svg$Attributes$xlinkHref($author$project$Outlooks$trait12)
-			]),
-		_List_Nil);
-	var t9 = A2(
-		$elm$svg$Svg$image,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x(
-				$elm$core$String$fromFloat(stx + (wid * 8)) + '%'),
-				$elm$svg$Svg$Attributes$y('1%'),
-				$elm$svg$Svg$Attributes$width('2%'),
-				$elm$svg$Svg$Attributes$height('2%'),
-				$elm$svg$Svg$Attributes$xlinkHref($author$project$Outlooks$trait4)
-			]),
-		_List_Nil);
-	return _List_fromArray(
-		[
-			t1,
-			t2,
-			t3,
-			t4,
-			t5,
-			t6,
-			t7,
-			t8,
-			t9,
-			t10,
-			A2($author$project$Dashboard$skillCost, model, 1),
-			A2($author$project$Dashboard$skillCost, model, 2),
-			A2($author$project$Dashboard$skillCost, model, 3),
-			A2($author$project$Dashboard$skillCost, model, 4),
-			A2($author$project$Dashboard$skillCost, model, 5),
-			A2($author$project$Dashboard$skillCost, model, 6),
-			A2($author$project$Dashboard$skillCost, model, 7),
-			A2($author$project$Dashboard$skillCost, model, 8),
-			A2($author$project$Dashboard$skillCost, model, 9),
-			A2($author$project$Dashboard$skillCost, model, 10),
-			A2($author$project$Dashboard$skillStatus, model, 1),
-			A2($author$project$Dashboard$skillStatus, model, 2),
-			A2($author$project$Dashboard$skillStatus, model, 3),
-			A2($author$project$Dashboard$skillStatus, model, 4),
-			A2($author$project$Dashboard$skillStatus, model, 5),
-			A2($author$project$Dashboard$skillStatus, model, 6),
-			A2($author$project$Dashboard$skillStatus, model, 7),
-			A2($author$project$Dashboard$skillStatus, model, 8),
-			A2($author$project$Dashboard$skillStatus, model, 9),
-			A2($author$project$Dashboard$skillStatus, model, 10)
-		]);
-};
-var $j_panasiuk$elm_ionicons$Ionicon$clock = $j_panasiuk$elm_ionicons$Ionicon$Internal$ps(
-	_List_fromArray(
-		['M255.988,32C132.285,32,32,132.298,32,256c0,123.715,100.285,224,223.988,224C379.703,480,480,379.715,480,256C480,132.298,379.703,32,255.988,32zM391.761,391.765c-10.099,10.098-21.126,18.928-32.886,26.42l-15.946-27.62l-13.856,8l15.955,27.636c-24.838,13.03-52.372,20.455-81.027,21.624V416h-16v31.825c-28.656-1.166-56.191-8.59-81.03-21.62l15.958-27.641l-13.856-8l-15.949,27.625c-11.761-7.492-22.79-16.324-32.889-26.424c-10.099-10.099-18.93-21.127-26.422-32.889l27.624-15.949l-8-13.855L85.796,345.03c-13.03-24.839-20.454-52.374-21.621-81.03H96v-16H64.175c1.167-28.655,8.592-56.19,21.623-81.029l27.638,15.958l8-13.856l-27.623-15.948c7.492-11.76,16.322-22.787,26.419-32.885c10.1-10.101,21.129-18.933,32.89-26.426l15.949,27.624l13.856-8l-15.958-27.64C191.81,72.765,219.345,65.34,248,64.175V96h16V64.176c28.654,1.169,56.188,8.595,81.026,21.626l-15.954,27.634l13.856,8l15.945-27.618c11.76,7.492,22.787,16.323,32.886,26.421c10.1,10.099,18.931,21.126,26.424,32.887l-27.619,15.946l8,13.856l27.636-15.956c13.031,24.839,20.457,52.373,21.624,81.027H416v16h31.824c-1.167,28.655-8.592,56.189-21.622,81.028l-27.637-15.957l-8,13.856l27.621,15.947C410.693,370.637,401.861,381.665,391.761,391.765z', 'M400,241H284.268c-2.818-5.299-7.083-9.708-12.268-12.708V160h-32v68.292c-9.562,5.534-16,15.866-16,27.708 c0,17.673,14.327,32,32,32c11.425,0,21.444-5.992,27.106-15H400V241z']));
-var $author$project$Color$deep_grey = A4($author$project$Color$RGBA, 87 / 255, 101 / 255, 116 / 255, 1);
-var $author$project$Color$green = A4($author$project$Color$RGBA, 29 / 255, 209 / 255, 161 / 255, 1);
-var $j_panasiuk$elm_ionicons$Ionicon$heart = $j_panasiuk$elm_ionicons$Ionicon$Internal$p('M429.9,95.6c-40.4-42.1-106-42.1-146.4,0L256,124.1l-27.5-28.6c-40.5-42.1-106-42.1-146.4,0c-45.5,47.3-45.5,124.1,0,171.4L256,448l173.9-181C475.4,219.7,475.4,142.9,429.9,95.6z');
-var $j_panasiuk$elm_ionicons$Ionicon$leaf = $j_panasiuk$elm_ionicons$Ionicon$Internal$p('M456.7,378.7c-52.5-8-56.5-15.7-56.5-15.7c10.8-64.9-22.7-147.1-77.4-191.6c-72.8-59.2-183.5-16.2-269.7-106.2c-20.1-21-8.4,235.5,99.5,332.7c78.9,71,171.8,49.2,197.3,37.6c23.1-10.6,39.3-29.9,39.3-29.9c42.1,13,62.9,12.2,62.9,12.2C466.9,419.6,474.4,381.4,456.7,378.7zM360.6,383.1c-138.2-40.9-242.1-184.5-242.1-184.5s91.2,107.7,252,160.2C370.7,366.9,365.9,378.5,360.6,383.1z');
-var $author$project$Color$red = A4($author$project$Color$RGBA, 255 / 255, 107 / 255, 107 / 255, 1);
-var $j_panasiuk$elm_ionicons$Ionicon$star = $j_panasiuk$elm_ionicons$Ionicon$Internal$pg('480,200 308.519,200 256.029,32 203.519,200 32,200 170.946,304.209 116,480 256,368 396,480 341.073,304.195');
-var $author$project$Color$yellow = A4($author$project$Color$RGBA, 254 / 255, 202 / 255, 87 / 255, 1);
-var $author$project$Dashboard$renderStatus = function (model) {
-	var star = A2(
-		$elm$svg$Svg$svg,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x('40%'),
-				$elm$svg$Svg$Attributes$y('4%')
-			]),
-		_List_fromArray(
-			[
-				A2($j_panasiuk$elm_ionicons$Ionicon$star, 7, $author$project$Color$yellow)
-			]));
-	var out_second = $elm$core$String$fromInt(model.second);
-	var out_minute = $elm$core$String$fromInt(model.minute);
-	var life = A2(
-		$elm$svg$Svg$svg,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x('40%'),
-				$elm$svg$Svg$Attributes$y('1%')
-			]),
-		_List_fromArray(
-			[
-				A2($j_panasiuk$elm_ionicons$Ionicon$heart, 7, $author$project$Color$red)
-			]));
-	var leaf = A2(
-		$elm$svg$Svg$svg,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x('48%'),
-				$elm$svg$Svg$Attributes$y('1%')
-			]),
-		_List_fromArray(
-			[
-				A2($j_panasiuk$elm_ionicons$Ionicon$leaf, 7, $author$project$Color$green)
-			]));
-	var clock = A2(
-		$elm$svg$Svg$svg,
-		_List_fromArray(
-			[
-				$elm$svg$Svg$Attributes$x('48%'),
-				$elm$svg$Svg$Attributes$y('4%')
-			]),
-		_List_fromArray(
-			[
-				A2($j_panasiuk$elm_ionicons$Ionicon$clock, 7, $author$project$Color$deep_grey)
-			]));
-	return _List_fromArray(
-		[
-			life,
-			A2(
-			$elm$svg$Svg$text_,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$x('42%'),
-					$elm$svg$Svg$Attributes$y('2.5%'),
-					$elm$svg$Svg$Attributes$fill('black'),
-					$elm$svg$Svg$Attributes$fontSize('4')
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text(
-					'Life: ' + ($elm$core$String$fromInt(model.life) + ('/' + $elm$core$String$fromInt(model.max_life))))
-				])),
-			star,
-			A2(
-			$elm$svg$Svg$text_,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$x('42%'),
-					$elm$svg$Svg$Attributes$y('5.5%'),
-					$elm$svg$Svg$Attributes$fill('black'),
-					$elm$svg$Svg$Attributes$fontSize('4')
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text(
-					'Exp: ' + $elm$core$String$fromInt(model.exp))
-				])),
-			leaf,
-			(model.leaf !== 1) ? A2(
-			$elm$svg$Svg$text_,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$x('50%'),
-					$elm$svg$Svg$Attributes$y('2.5%'),
-					$elm$svg$Svg$Attributes$fill('black'),
-					$elm$svg$Svg$Attributes$fontSize('4')
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text(
-					$elm$core$String$fromInt(model.leaf) + ' Lines cleared')
-				])) : A2(
-			$elm$svg$Svg$text_,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$x('50%'),
-					$elm$svg$Svg$Attributes$y('2.5%'),
-					$elm$svg$Svg$Attributes$fill('black'),
-					$elm$svg$Svg$Attributes$fontSize('4')
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text(
-					$elm$core$String$fromInt(model.leaf) + ' Line cleared')
-				])),
-			clock,
-			A2(
-			$elm$svg$Svg$text_,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$x('50%'),
-					$elm$svg$Svg$Attributes$y('5.5%'),
-					$elm$svg$Svg$Attributes$fill('black'),
-					$elm$svg$Svg$Attributes$fontSize('4')
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text('Time Played' + (':' + (out_minute + (':' + out_second))))
+					A2($j_panasiuk$elm_ionicons$Ionicon$home, 50, $author$project$Color$grey)
 				]))
-		]);
+		]));
+var $elm_explorations$markdown$Markdown$defaultOptions = {
+	defaultHighlighting: $elm$core$Maybe$Nothing,
+	githubFlavored: $elm$core$Maybe$Just(
+		{breaks: false, tables: false}),
+	sanitize: true,
+	smartypants: false
 };
-var $elm$json$Json$Encode$string = _Json_wrap;
-var $elm$html$Html$Attributes$stringProperty = F2(
-	function (key, string) {
+var $elm$core$Maybe$isJust = function (maybe) {
+	if (maybe.$ === 'Just') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var $elm_explorations$markdown$Markdown$toHtmlWith = _Markdown_toHtml;
+var $elm_explorations$markdown$Markdown$toHtml = $elm_explorations$markdown$Markdown$toHtmlWith($elm_explorations$markdown$Markdown$defaultOptions);
+var $author$project$Help$renderInfo = A2(
+	$elm$html$Html$div,
+	_List_fromArray(
+		[
+			A2($elm$html$Html$Attributes$style, 'background', 'rgba(236, 240, 241, 0.85)'),
+			A2($elm$html$Html$Attributes$style, 'color', '#090004'),
+			A2($elm$html$Html$Attributes$style, 'height', '300px'),
+			A2($elm$html$Html$Attributes$style, 'left', '200px'),
+			A2($elm$html$Html$Attributes$style, 'top', '100px'),
+			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
+			A2($elm$html$Html$Attributes$style, 'width', '1000px')
+		]),
+	_List_fromArray(
+		[
+			A2($elm_explorations$markdown$Markdown$toHtml, _List_Nil, '\r\n        # This is the page of help.\r\n\r\n        ## Background\r\n        This is the background.\r\n\r\n        ## How to play the game\r\n        The method to play the game.\r\n\r\n        ## The status\r\n        Status includes life, exp, leaf, and so on\r\n\r\n        ## The skills\r\n        There are more than 10 skills for you to choose. Of course, you must pay some price for them!\r\n\r\n        ## About the game\r\n        This game is powered by **Team Clover**!\r\n\r\n        ')
+		]));
+var $elm$html$Html$audio = _VirtualDom_node('audio');
+var $elm$json$Json$Encode$bool = _Json_wrap;
+var $elm$html$Html$Attributes$boolProperty = F2(
+	function (key, bool) {
 		return A2(
 			_VirtualDom_property,
 			key,
-			$elm$json$Json$Encode$string(string));
+			$elm$json$Json$Encode$bool(bool));
 	});
+var $elm$html$Html$Attributes$controls = $elm$html$Html$Attributes$boolProperty('controls');
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
-var $author$project$View$view = function (model) {
+var $author$project$Help$renderMusic = function (model) {
+	var music = function () {
+		var _v0 = model.music;
+		switch (_v0.$) {
+			case 'Null':
+				return '';
+			case 'ReturnOfAncients':
+				return 'assets/musics/Return of Ancients.mp3';
+			case 'TheOasis':
+				return 'assets/musics/The Oasis.mp3';
+			case 'TheChordOfSpring':
+				return 'assets/musics/The Chord of Spring.mp3';
+			default:
+				return 'assets/musics/In Search of Life.mp3';
+		}
+	}();
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				A2($elm$html$Html$Attributes$style, 'backgroundColor', '#1d1d1d')
+				A2($elm$html$Html$Attributes$style, 'top', '430px'),
+				A2($elm$html$Html$Attributes$style, 'left', '530px'),
+				A2($elm$html$Html$Attributes$style, 'position', 'absolute')
 			]),
 		_List_fromArray(
 			[
 				A2(
-				$elm$svg$Svg$svg,
+				$elm$html$Html$audio,
 				_List_fromArray(
 					[
-						$elm$svg$Svg$Attributes$viewBox('0 0 400 400')
+						$elm$html$Html$Attributes$src(music),
+						$elm$html$Html$Attributes$controls(true)
 					]),
+				_List_Nil)
+			]));
+};
+var $author$project$Help$view = function (model) {
+	return _List_fromArray(
+		[
+			$author$project$Help$renderInfo,
+			$author$project$Help$renderMusic(model),
+			$author$project$Help$renderButton1,
+			$author$project$Help$renderButton2,
+			$author$project$Help$renderButton3,
+			$author$project$Help$renderButton4,
+			$author$project$Help$renderDifficulty1,
+			$author$project$Help$renderDifficulty2,
+			$author$project$Help$renderDifficulty3,
+			$author$project$Help$renderHome
+		]);
+};
+var $author$project$Message$GoHelp = {$: 'GoHelp'};
+var $elm$html$Html$a = _VirtualDom_node('a');
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
+var $elm$html$Html$li = _VirtualDom_node('li');
+var $elm$html$Html$ul = _VirtualDom_node('ul');
+var $author$project$Home$view = _List_fromArray(
+	[
+		$elm$html$Html$text('Welcome to game \"Save Oasis\"! '),
+		A2(
+		$elm$html$Html$ul,
+		_List_Nil,
+		_List_fromArray(
+			[
 				A2(
-					$elm_community$list_extra$List$Extra$interweave,
-					A2(
-						$elm$core$List$append,
-						A2(
-							$elm$core$List$append,
-							A2(
-								$elm$core$List$append,
-								$author$project$Dashboard$renderSettings,
-								$author$project$Dashboard$renderStatus(model)),
-							A6(
-								$author$project$Object$renderRowBrick,
-								model,
-								A2($author$project$Model$Point, 10, 8),
-								6.5,
-								2.5,
-								4,
-								11)),
-						$author$project$Dashboard$renderSkills(model)),
-					_List_fromArray(
-						[
-							A3(
-							$author$project$Dashboard$renderDashboard,
-							A2($author$project$Model$Point, 40, 0.5),
-							50,
-							6),
-							A4(
-							$author$project$Object$renderBackground,
-							A2($author$project$Model$Point, 0, 0),
-							100,
-							65,
-							$author$project$Outlooks$outBkg),
-							A4(
-							$author$project$Object$renderBackground,
-							A2($author$project$Model$Point, 9, 8),
-							82,
-							37,
-							$author$project$Outlooks$outInterface),
-							A4(
-							$author$project$Object$renderBall,
-							A2($author$project$Model$Point, model.ball_x, model.ball_y),
-							2,
-							2,
-							$author$project$Outlooks$outBall),
-							A4(
-							$author$project$Object$renderPaddle,
-							A2($author$project$Model$Point, model.pad_x, 40),
-							12,
-							1,
-							$author$project$Outlooks$outPaddle)
-						]))),
-				A2(
-				$elm$html$Html$div,
+				$elm$html$Html$li,
 				_List_Nil,
 				_List_fromArray(
 					[
-						$author$project$View$renderGameButton(model)
+						A2(
+						$elm$html$Html$button,
+						_List_fromArray(
+							[
+								$elm$html$Html$Events$onClick($author$project$Message$GoHome)
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Play')
+							]))
 					])),
 				A2(
-				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						A2($elm$html$Html$Attributes$style, 'top', '700px'),
-						A2($elm$html$Html$Attributes$style, 'left', '1000px'),
-						A2($elm$html$Html$Attributes$style, 'position', 'absolute')
-					]),
+				$elm$html$Html$li,
+				_List_Nil,
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$audio,
+						$elm$html$Html$button,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$src('assets/musics/Return of Ancients.mp3'),
-								$elm$html$Html$Attributes$controls(true)
+								$elm$html$Html$Events$onClick($author$project$Message$GoHelp)
 							]),
-						_List_Nil)
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Help')
+							]))
+					])),
+				A2(
+				$elm$html$Html$li,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$a,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$href('https://github.com/YuukiAS/VG100_Project1')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Want to have a look on the source code?')
+							]))
 					]))
-			]));
+			]))
+	]);
+var $author$project$Main$view = function (model) {
+	var title = function () {
+		var _v1 = model.page;
+		switch (_v1.$) {
+			case 'Home':
+				return 'Save Oasis';
+			case 'Help':
+				return 'Settings';
+			default:
+				return 'Let\'s save the oasis!';
+		}
+	}();
+	var body = function () {
+		var _v0 = model.page;
+		switch (_v0.$) {
+			case 'Home':
+				return $author$project$Home$view;
+			case 'Help':
+				return $author$project$Help$view(model);
+			default:
+				return $author$project$Home$view;
+		}
+	}();
+	return {body: body, title: title};
 };
-var $author$project$Breakout$main = $elm$browser$Browser$element(
-	{init: $author$project$Model$initial, subscriptions: $author$project$Breakout$subscriptions, update: $author$project$Update$update, view: $author$project$View$view});
-_Platform_export({'Breakout':{'init':$author$project$Breakout$main(
+var $author$project$Main$main = $elm$browser$Browser$application(
+	{init: $author$project$Model$initial, onUrlChange: $author$project$Message$UrlChanged, onUrlRequest: $author$project$Message$LinkClicked, subscriptions: $author$project$Main$subscriptions, update: $author$project$Update$update, view: $author$project$Main$view});
+_Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));
 
-  var app = Elm.Breakout.init({ node: document.getElementById("elm") });
+  var app = Elm.Main.init({ node: document.getElementById("elm") });
 }
 catch (e)
 {

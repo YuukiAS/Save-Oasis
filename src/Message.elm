@@ -1,6 +1,8 @@
 module Message exposing (Msg(..))
 import Outlooks
 import Time
+import Url
+import Browser
 
 type Msg
     = Start
@@ -16,3 +18,7 @@ type Msg
     | Tick Time.Posix
     | GoHome
     | GoHelp
+    | LinkClicked Browser.UrlRequest
+    | UrlChanged Url.Url
+    | ChangeDifficulty Outlooks.Difficulty
+    | ChangeMusic Outlooks.Music

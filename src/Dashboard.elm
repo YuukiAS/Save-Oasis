@@ -43,7 +43,7 @@ renderStatus model =
 renderSettings : List(Html Msg)
 renderSettings =
     let
-         volumeOn = svg[x "59%", y"0.8%"][Ionicon.volumeMedium 7 grey]  --todo onclick
+         volumeOn = svg[x "59%", y"0.8%"][Ionicon.volumeMedium 7 grey]
          volumeOff = svg[x "59%", y"0.8%"][Ionicon.volumeMute 7 grey]
          pause = svg[x "59%", y"2.8%"][Ionicon.pause 7 grey]
          play = svg[x "59%", y"2.8%"][Ionicon.pause 7 grey]

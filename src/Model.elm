@@ -1,11 +1,10 @@
 module Model exposing (..)
 import Message exposing (Msg)
-import Outlooks
-import Time
-import Task
-import Message
-import Json.Decode as Decode
-import Json.Encode as Encode
+import Outlooks exposing (Music(..),Difficulty(..))
+import Url
+import Browser.Navigation as Nav
+
+
 type alias Point =  --*这个不是给方块用的
     {
         x : Float
@@ -35,7 +34,10 @@ nokeys: Keys
 nokeys =
     Keys False False False False False False False False False False False False False
 
-
+type Page
+    = Home
+    | Help
+    | Game
 
 type State
     = Paused
@@ -75,10 +77,15 @@ type alias Model =
     , second : Int
     , skills_ok : List(Bool)
     , skills_cost : List(Int)
+    , key : Nav.Key
+    , url : Url.Url
+    , page : Page
+    , music : Outlooks.Music
+    , difficulty: Outlooks.Difficulty
     }
 
-initial : () -> (Model, Cmd Msg)
-initial _ =
+initial : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
+initial flags url key =
     ({
         keys = nokeys
       , pad_x = 44
@@ -110,5 +117,10 @@ initial _ =
       , state = Stopped
       , minute = 0
       , second =  0
+      , key = key
+      , url = url
+      , page = Home
+      , music = ReturnOfAncients
+      , difficulty = Normal
     }, Cmd.none)
 

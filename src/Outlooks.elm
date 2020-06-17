@@ -38,3 +38,14 @@ type Brick   --* 放在update或model中会导致import cycle!!
     | ABall
     | Boss
 
+type Music
+    = Null
+    | TheOasis
+    | ReturnOfAncients
+    | InSearchOfLife
+    | TheChordOfSpring
+
+type Difficulty
+    = Normal
+    | Hard
+    | Nightmare

@@ -7,43 +7,17 @@ import Json.Decode as Json
 import Markdown
 import Ionicon exposing (home)
 import Color exposing (grey)
+import Message exposing (Msg(..))
+import Outlooks exposing (Difficulty(..),Music(..))
+import Model exposing (Model)
 
 
-type Music
-    = Null
-    | TheOasis
-    | ReturnOfAncients
-    | InSearchOfLife
-    | TheChordOfSpring
+{-main =
+      Browser.sandbox { init = init, update = update, view = view }-}
 
-type Difficulty
-    = Normal
-    | Hard
-    | Nightmare
 
-type Msg
-    = ChangeMusic Music
-    | ChangeDifficulty Difficulty
-
-type alias Model =
-    {
-        music :Music,
-        difficulty: Difficulty
-    }
-
-main =
-      Browser.sandbox { init = init, update = update, view = view }
-
-init: Model
-init =
-    {
-        music = Null,
-        difficulty = Normal
-    }
-
-view: Model->Html Msg
+view: Model-> List (Html Msg)
 view model =
-    div[]
     [
       renderInfo,
       renderMusic model,
@@ -56,16 +30,6 @@ view model =
       renderDifficulty3,
       renderHome
     ]
-
-
-
-
-update : Msg  -> Model-> Model
-update msg model =
-    case msg of
-        ChangeMusic music -> {model|music = music}
-        ChangeDifficulty difficulty -> {model|difficulty = difficulty}
-
 
 
 renderInfo :  Html Msg
@@ -156,7 +120,8 @@ renderButton4 =
           , style "top" "630px"
           , style "width" "200px"
           , style "position" "absolute"
-        , onClick (ChangeMusic TheChordOfSpring)
+          , onClick (ChangeMusic TheChordOfSpring)
+          --, onClick GoHome
         ]
         [ text "Try \"The Chord of Spring\"! (From game \"Arknights\")" ]
 
@@ -237,5 +202,6 @@ renderHome =
    , style "left" "30px"
    , style "position" "absolute"
    , title "Is everything OK?"
+   , onClick GoHome
    ]
-    [a [ href "home.html" ] [div[][home 50 grey]]]
+    [div[][home 50 grey]]

@@ -1,96 +1,59 @@
 module Main exposing (..)
-import Html exposing (Html)
 import Browser
-import Browser.Navigation as Nav
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Url
-
-
-
+import Help
+import Home
+import Message exposing (..)
+import Outlooks exposing (Music(..),Difficulty(..))
+import Model exposing (Model,Page(..))
+import Browser.Events exposing (onAnimationFrameDelta, onKeyDown, onKeyUp, onResize)
+import Json.Decode as D
+import Update
+import Time
 -- MAIN
 
 
 main : Program () Model Msg
 main =
   Browser.application
-    { init = init
+    { init = Model.initial
     , view = view
-    , update = update
+    , update = Update.update
     , subscriptions = subscriptions
     , onUrlChange = UrlChanged
     , onUrlRequest = LinkClicked
     }
 
-
-
--- MODEL
-
-
-type alias Model =
-  { key : Nav.Key
-  , url : Url.Url
-  }
-
-
-init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
-init flags url key =
-  ( Model key url, Cmd.none )
-
-
-
--- UPDATE
-
-
-type Msg
-  = LinkClicked Browser.UrlRequest
-  | UrlChanged Url.Url
-
-
-update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
-  case msg of
-    LinkClicked urlRequest ->
-      case urlRequest of   -- 内部和外部网页的不同应对
-        Browser.Internal url ->
-          ( model, Nav.pushUrl model.key (Url.toString url) )
-          --( model, Nav.load (Url.toString url) )
-
-        Browser.External href ->
-          ( model, Nav.load href )
-
-    UrlChanged url ->
-      ( { model | url = url }
-      , Cmd.none
-      )
-
-
-
 -- SUBSCRIPTIONS
-
-
 subscriptions : Model -> Sub Msg
-subscriptions _ =
-  Sub.none
-
-
-
--- VIEW
+subscriptions model =
+    Sub.batch
+        [  if model.state == Model.Playing then
+          Browser.Events.onAnimationFrameDelta TimeDelta
+          else Sub.none
+          ,if model.state == Model.Playing then  Time.every 1000 Tick
+          else Sub.none
+          ,   Browser.Events.onKeyUp (D.map (KeyChanged False) (D.field "key" D.string))  -- 读取输入
+          ,   Browser.Events.onKeyDown  (D.map (KeyChanged True) (D.field "key" D.string))
+        ]
 
 
 view : Model -> Browser.Document Msg
 view model =
-  { title = "\"Save Oasis\"! "          --* 这样改变标题
-  , body =
-      [ text "Welcome to game \"Save Oasis\"! "
-      , ul []
-          [
-            li [] [ a [ href "game.html" ] [ text"Play" ] ]
-          , li [] [ a [ href "help.html" ] [ text "Help" ] ]
-          , li [] [ a [ href "https://cn.bing.com/" ] [ text "Bing!" ] ]
-          ]
-      ]
-  }
+    let
+        body =
+            case model.page of
+                Home -> Home.view
+                Help -> Help.view model
+                _ -> Home.view
+        title =
+            case model.page of
+                Home -> "Save Oasis"
+                Help -> "Settings"
+                Game -> "Let's save the oasis!"
+    in
+        { title = title          --* 这样改变标题
+        , body =  body
+        }
 
 
 

@@ -13,6 +13,8 @@ import Task
 import Outlooks exposing (..)
 import List.Extra exposing (getAt,count,setAt)
 import Dashboard
+import Browser
+import Url
 
 pointGenerator: Random.Generator (Int,Int)
 pointGenerator =
@@ -110,9 +112,28 @@ update msg model =
               , Cmd.batch[Task.perform DrawBrick Time.now,Task.perform DrawPoint Time.now]
               )
 
-        GoHome -> ( model, Nav.load "home.html" )
+        LinkClicked urlRequest ->
+              case urlRequest of   -- 内部和外部网页的不同应对
+                Browser.Internal url ->
+                  ( model, Nav.pushUrl model.key (Url.toString url) )  -- 只加载不跳转
+                  --( model, Nav.load (Url.toString url) )
 
-        GoHelp -> ( model, Nav.load "help.html" )
+                Browser.External href ->
+                  ( model, Nav.load href )
+
+        UrlChanged url ->
+          ( { model | url = url }
+          , Cmd.none
+          )
+
+        GoHelp -> ({model| page = Help},Cmd.none)
+
+        GoHome -> ({model| page = Home},Cmd.none)
+
+        ChangeMusic music -> ({model|music = music},Cmd.none)
+
+        ChangeDifficulty difficulty -> ({model|difficulty = difficulty},Cmd.none)
+
 
 
 
