@@ -47,20 +47,18 @@ renderSettings =
          volumeOff = svg[x "59%", y"0.8%"][Ionicon.volumeMute 7 grey]
          pause = svg[x "59%", y"2.8%"][Ionicon.pause 7 grey]
          play = svg[x "59%", y"2.8%"][Ionicon.pause 7 grey]
-         refresh = svg[x "59%", y"4.8%"][Ionicon.refresh 7 grey]
+         refresh = svg[x "59%", y"2.2%"][Ionicon.refresh 9 grey]
          home = svg[x "62%", y"1.2%"][Ionicon.home 9 grey]
          help = svg[x "62%", y"4%"][Ionicon.help 9 grey]
-         hype = rect[x "62%", y"1.2%",width"2%",height"2%",fillOpacity"0",onClick GoHome][]  -- 对于home和help的超链接
+         hype1 = rect[x "62%", y"1.2%",width"2%",height"2%",fillOpacity"0",onClick GoHome][]  -- 对于home和help的超链接
          hype2 = rect[x "62%", y"4%",width"2%",height"2%",fillOpacity"0",onClick GoHelp][] --* hidden和fill none 都不行!
-         hype3 = rect[x "59%", y"4.8%",width"2%",height"2%",fillOpacity"0",onClick Pause][]
+         hype3 = rect[x "59%", y"2.2%",width"2%",height"2%",fillOpacity"0",onClick Pause][]
     in
             [
-                 volumeOn
-                ,pause
-                ,refresh
+                refresh
                 ,home
                 ,help
-                ,hype
+                ,hype1
                 ,hype2
                 ,hype3
             ]
@@ -71,12 +69,12 @@ renderSkills model =
     let
         stx = 65
         wid = 2.5
-        t1 = image[x ((String.fromFloat (stx+wid*0))++"%"), y"1%",width "2%", height"2%",xlinkHref trait8][]  -- 生命上限+2(一次性)
+        t1 = image[x ((String.fromFloat (stx+wid*0))++"%"), y"1%",width "2%", height"2%",xlinkHref trait8][]  -- 生命值+1生命上限+1(一次性)
         t2 = image[x ((String.fromFloat (stx+wid*1))++"%"), y"1%",width "2%", height"2%",xlinkHref trait2][] -- 球减速(一次性)
         t3 = image[x ((String.fromFloat (stx+wid*2))++"%"), y"1%",width "2%", height"2%",xlinkHref trait13][] -- 踏板加速(持续性)
         t4 = image[x ((String.fromFloat (stx+wid*3))++"%"), y"1%",width "2%", height"2%",xlinkHref trait11][] -- 技能花费-10 (一次性)
         t5 = image[x ((String.fromFloat (stx+wid*4))++"%"), y"1%",width "2%", height"2%",xlinkHref trait10][] -- 经验值获得增加(持续性)
-        t6 = image[x ((String.fromFloat (stx+wid*5))++"%"), y"1%",width "2%", height"2%",xlinkHref trait6][] -- 定时不掉血(持续性)
+        t6 = image[x ((String.fromFloat (stx+wid*5))++"%"), y"1%",width "2%", height"2%",xlinkHref trait6][] -- 打红色不掉血(持续性)
         t7 = image[x ((String.fromFloat (stx+wid*6))++"%"), y"1%",width "2%", height"2%",xlinkHref trait1][] -- 定时回血(持续)
         t8 = image[x ((String.fromFloat (stx+wid*7))++"%"), y"1%",width "2%", height"2%",xlinkHref trait12][] -- 打boss用(暂时未定)(持续性)
         t9 = image[x ((String.fromFloat (stx+wid*8))++"%"), y"1%",width "2%", height"2%",xlinkHref trait4][] -- 定时消失方块(持续性)

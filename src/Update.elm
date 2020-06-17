@@ -110,9 +110,9 @@ update msg model =
               , Cmd.batch[Task.perform DrawBrick Time.now,Task.perform DrawPoint Time.now]
               )
 
-        GoHome -> ( model, Nav.load "/VG100_Project1/home.html" )
+        GoHome -> ( model, Nav.load "home.html" )
 
-        GoHelp -> ( model, Nav.load "/VG100_Project1/help.html" )
+        GoHelp -> ( model, Nav.load "help.html" )
 
 
 
@@ -142,7 +142,7 @@ updateTime model dt =
     let
         ski_3_eff = if getAt 2 model.skills_ok == Just True then True else False
         ski_5_eff = if getAt 4 model.skills_ok == Just True then True else False
-        ski_6_eff = if getAt 5 model.skills_ok == Just True && (model.second > 40 && model.second == 50)then True else False
+        ski_6_eff = if getAt 5 model.skills_ok == Just True then True else False
         ski_7_eff = if getAt 6 model.skills_ok == Just True && (model.second == 0 || model.second == 30)then True else False
         ski_8_eff = if getAt 7 model.skills_ok == Just True then True else False
         ski_9_eff = if getAt 8 model.skills_ok == Just True  && (model.second == 10 || model.second == 20 ||model.second == 40) then True else False
@@ -294,20 +294,20 @@ updateTime model dt =
 
         life0 =
               if cGameOver model && model.life > 0 then
-                    if isRed == True then model.life - 2
+                    if isRed == True then if ski_6_eff then model.life - 1 else model.life - 2
                     else if isPink == True then model.life
                     else  model.life - 1
               else
-                   if isRed == True then model.life - 1
+                   if isRed == True then if ski_6_eff then model.life else model.life - 1
                    else if isPink == True then if model.life +1 <= model.max_life then model.life+1 else model.life
                    else model.life
 
-        life = if ski_6_eff && (life0 < model.life) then if ski_7_eff then min (life0+2) (max model.life model.max_life - 2) else model.life -- skill 技能6
-               else
-                    if ski_7_eff then min (life0+1) (max model.life model.max_life - 2) else life0  -- skill技能7
+        life1 =  if ski_7_eff then min (life0+2) (max life0 model.max_life - 2) else life0  -- skill技能7
+
+        life = if ski_1_get then life1 + 1 else life1
 
 
-        max_life = if ski_1_get == True then 7   --skill 技能1
+        max_life = if ski_1_get == True then 6   --skill 技能1
                     else model.max_life
 
         state =
@@ -328,7 +328,9 @@ updateTime model dt =
 
 
         leaf = if((cUpBricks model || cLeftBricks model || cRightBricks model)  && cDownPaddle model == False)
-                then if cClearLine model (4- model.leaf) == True then model.leaf+1 else model.leaf
+                then
+                    let next_leaf =  cClearLine model 1 + cClearLine model 2 + cClearLine model 3 + cClearLine model 4
+                    in next_leaf
                 else model.leaf
 
         dxp =

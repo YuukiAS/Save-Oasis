@@ -53,8 +53,8 @@ update msg model =
     LinkClicked urlRequest ->
       case urlRequest of   -- 内部和外部网页的不同应对
         Browser.Internal url ->
-          --( model, Nav.pushUrl model.key (Url.toString url) )
-          ( model, Nav.load (Url.toString url) )
+          ( model, Nav.pushUrl model.key (Url.toString url) )
+          --( model, Nav.load (Url.toString url) )
 
         Browser.External href ->
           ( model, Nav.load href )
@@ -85,9 +85,9 @@ view model =
       [ text "Welcome to game \"Save Oasis\"! "
       , ul []
           [
-            li [] [ a [ href "/VG100_Project1/game.html" ] [ text"Play" ] ]
-          , li [] [ a [ href "/VG100_Project1/help.html" ] [ text "Help" ] ]
-          , li [] [ a [ href "https://cn.bing.com/" ] [ text "Bing" ] ]
+            li [] [ a [ href "game.html" ] [ text"Play" ] ]
+          , li [] [ a [ href "help.html" ] [ text "Help" ] ]
+          , li [] [ a [ href "https://cn.bing.com/" ] [ text "Bing!" ] ]
           ]
       ]
   }

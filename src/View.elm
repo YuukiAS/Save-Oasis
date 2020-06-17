@@ -28,15 +28,16 @@ view model =
             (interweave  --? List.append会导致无法加载brick,但interweave可以
             (List.append (List.append(List.append renderSettings (renderStatus model)) (renderRowBrick model (Point 10 8) 6.5 2.5 4 11)) (renderSkills model))
             [
+                (renderDashboard (Point 40 0.5) 50 6),
                 (renderBackground (Point 0 0) 100 65 outBkg),
                 (renderBackground (Point 9 8) 82 37 outInterface),
                 (renderBall (Point model.ball_x model.ball_y) 2 2 outBall),
-                (renderPaddle (Point model.pad_x 40) 12 1 outPaddle),
-                (renderDashboard (Point 40 0.5) 50 6)
+                (renderPaddle (Point model.pad_x 40) 12 1 outPaddle)
+
             ])
 
          , div [][renderGameButton model]
-         , div [style "top" "700px" , style "left" "1000px", style "position" "absolute"][audio [src "src/assets/musics/Return of Ancients.mp3",controls True][]]
+         , div [style "top" "700px" , style "left" "1000px", style "position" "absolute"][audio [src "assets/musics/Return of Ancients.mp3",controls True][]]
         ]
 
 
@@ -47,7 +48,7 @@ renderGameButton : Model -> Html Msg
 renderGameButton model =
     let
         ( txt, msg ) =
-            case model.state of    --todo 这里命名有点混乱,我都改成开始/重开时需要按两次了(也就是初始为pause),应该可以把两个合并一下?
+            case model.state of
                 Model.Stopped ->
                     ( "New game", Pause ) -- 刚开始是Pause
 

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="a34633fa-be10-4d9f-99c9-1b7c64e04554" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../elm.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../part1/Main.elm" beforeDir="false" afterPath="$PROJECT_DIR$/../part1/Main.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../part1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../part1/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../part2/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../part2/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../part2/src/Main.elm" beforeDir="false" afterPath="$PROJECT_DIR$/../part2/src/Main.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../part3/elm.json" beforeDir="false" afterPath="$PROJECT_DIR$/../part3/elm.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../part3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../part3/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../part3/src/Main.elm" beforeDir="false" afterPath="$PROJECT_DIR$/../part3/src/Main.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../part4/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../part4/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../part4/src/Main.elm" beforeDir="false" afterPath="$PROJECT_DIR$/../part4/src/Main.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../part5/src/Page/Register.elm" beforeDir="false" afterPath="$PROJECT_DIR$/../part5/src/Page/Register.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../part6/src/Avatar.elm" beforeDir="false" afterPath="$PROJECT_DIR$/../part6/src/Avatar.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../part6/src/Page/Article/Editor.elm" beforeDir="false" afterPath="$PROJECT_DIR$/../part6/src/Page/Article/Editor.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../part7/src/Article.elm" beforeDir="false" afterPath="$PROJECT_DIR$/../part7/src/Article.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/data/articles.db" beforeDir="false" afterPath="$PROJECT_DIR$/../server/data/articles.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/data/follows.db" beforeDir="false" afterPath="$PROJECT_DIR$/../server/data/follows.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../server/data/users.db" beforeDir="false" afterPath="$PROJECT_DIR$/../server/data/users.db" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ElmWorkspace">
+    <elmProjects>
+      <project path="$PROJECT_DIR$/elm.json" />
+    </elmProjects>
+    <settings elmCompilerPath="C:\Program Files\Elm\0.19.1\bin\elm.exe" elmFormatPath="C:\Program Files (x86)\Elm\0.19.1\bin\elm-format.exe" elmTestPath="" isElmFormatOnSaveEnabled="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\Users\DELL\Documents\Freshman_spring\Introduction_to_Engineering\lab\l2\part9\.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1ctJjGXuWKNK1AaGv5t7o0lfmGf" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/elm.json" />
+    <property name="settings.editor.selected.configurable" value="org.elm.workspace.ui.ElmWorkspaceConfigurable" />
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a34633fa-be10-4d9f-99c9-1b7c64e04554" name="Default Changelist" comment="" />
+      <created>1591342089588</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1591342089588</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="555" y="171" key="FileChooserDialogImpl" timestamp="1591342114996">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state x="555" y="171" key="FileChooserDialogImpl/0.0.1549.831@0.0.1549.831" timestamp="1591342114996" />
+    <state x="284" y="58" key="SettingsEditor" timestamp="1591342110173">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state x="284" y="58" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1591342110173" />
+    <state x="388" y="99" width="773" height="632" key="find.popup" timestamp="1591978811786">
+      <screen x="0" y="0" width="1549" height="831" />
+    </state>
+    <state x="388" y="99" width="773" height="632" key="find.popup/0.0.1549.831@0.0.1549.831" timestamp="1591978811786" />
+  </component>
+</project>

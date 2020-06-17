@@ -5,7 +5,6 @@ import Message exposing (..)
 import Browser
 import Browser.Events
 import Json.Decode as D
-import Task
 ----------------------- From src
 import Update
 import Model
@@ -28,7 +27,9 @@ main =
     ,   view = View.view
     ,   subscriptions = subscriptions
     }
-subscriptions : Model.Model -> Sub Msg
+
+
+subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.batch
         [  if model.state == Model.Playing then
