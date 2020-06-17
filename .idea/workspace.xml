@@ -3,95 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3edad3ad-0371-41b1-a7b2-4efa31bd61d4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Home.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Home.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Main.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Main.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Update.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Update.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/d.dat" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/d.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Tetris/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Tetris/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Tetris/elm-tetris.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Tetris/elm.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Tetris/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Tetris/scripts/deploy.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Tetris/src/Color.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Tetris/src/Grid.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Tetris/src/Messages.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Tetris/src/Model.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Tetris/src/Tetriminos.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Tetris/src/Tetris.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Tetris/src/Update.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Tetris/src/View.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/.idea/part9.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/assets/icons/android-chrome-192x192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/assets/icons/android-chrome-512x512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/assets/icons/apple-touch-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/assets/icons/browserconfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/assets/icons/favicon-16x16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/assets/icons/favicon-32x32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/assets/icons/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/assets/icons/mstile-144x144.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/assets/icons/mstile-150x150.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/assets/icons/mstile-310x150.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/assets/icons/mstile-310x310.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/assets/icons/mstile-70x70.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/assets/icons/safari-pinned-tab.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/assets/images/error.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/assets/images/loading.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/assets/site.webmanifest" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/elm.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Api.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Article.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Article/Body.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Article/Comment.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Article/Feed.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Article/FeedSources.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Article/Slug.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Article/Tag.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Asset.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Author.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Avatar.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/CommentId.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Email.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Loading.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Log.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Main.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Page.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Page/Article.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Page/Article/Editor.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Page/Blank.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Page/Home.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Page/Login.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Page/NotFound.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Page/Profile.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Page/Register.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Page/Settings.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/PaginatedList.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Profile.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Route.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Session.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Timestamp.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Username.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Viewer.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/Web/src/Viewer/Cred.elm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Home.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Home.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Message.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Message.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Outlooks.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Outlooks.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Update.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Update.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/View.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,7 +191,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592395131134</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Version 0.95&#10;- Manage to make a single page game.">
+      <created>1592396033470</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1592396033470</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -307,7 +226,8 @@
     <MESSAGE value="Basic Structure v0.20a&#10;- Fail to handle the scale problem" />
     <MESSAGE value="Version 0.93&#10;- Some minor modification." />
     <MESSAGE value="Version 0.94&#10;- Single page step1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version 0.94&#10;- Single page step1" />
+    <MESSAGE value="Version 0.95&#10;- Manage to make a single page game." />
+    <option name="LAST_COMMIT_MESSAGE" value="Version 0.95&#10;- Manage to make a single page game." />
   </component>
   <component name="WindowStateProjectService">
     <state x="367" y="75" key="#Notifications" timestamp="1590563789642">
@@ -334,10 +254,10 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="148" y="72" key="MergeDialog/0.0.1549.831@0.0.1549.831" timestamp="1590943423958" />
-    <state x="479" y="122" key="MultipleFileMergeDialog" timestamp="1590943423965">
+    <state x="479" y="122" key="MultipleFileMergeDialog" timestamp="1592396127162">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="479" y="122" key="MultipleFileMergeDialog/0.0.1549.831@0.0.1549.831" timestamp="1590943423965" />
+    <state x="479" y="122" key="MultipleFileMergeDialog/0.0.1549.831@0.0.1549.831" timestamp="1592396127162" />
     <state x="335" y="117" key="SettingsEditor" timestamp="1591003444030">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
