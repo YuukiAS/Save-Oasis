@@ -468,7 +468,7 @@ updateTime model dt =
             (-1 * (model.ball_x - 42)^2 * model.ball_vx + (model.ball_y - 14)^2 * model.ball_vx - 2 * (model.ball_x - 42) * (model.ball_y - 14) * model.ball_vy) / ((model.ball_x - 42)^2 + (model.ball_y - 14)^2)
             else if cHitB model.ball_x model.ball_y 42 46 then
             (-1 * (model.ball_x - 42)^2 * model.ball_vx + (model.ball_y - 46)^2 * model.ball_vx - 2 * (model.ball_x - 42) * (model.ball_y - 46) * model.ball_vy) / ((model.ball_x - 42)^2 + (model.ball_y - 46)^2)
-            else if cleftPillar model model.ball_x || crightPillar model model.ball_x || cupPillar model model.ball_y || cdownPillar model model.ball_y then 4 * (42 - model.ball_x) / ((42 - model.ball_x)^2 + (30 - model.ball_y)^2) ^ 0.5
+            else if cLeftPillar model model.ball_x || cRightPillar model model.ball_x || cUpPillar model model.ball_y || cDownPillar model model.ball_y then 4 * (42 - model.ball_x) / ((42 - model.ball_x)^2 + (30 - model.ball_y)^2) ^ 0.5
             else if cRightLeaf model || cLeftLeaf model then model.ball_vx * (-1)
             else model.ball_vx
 
@@ -485,7 +485,7 @@ updateTime model dt =
             (-2 * (model.ball_x - 42) * (model.ball_y - 14) * model.ball_vx + (model.ball_x - 42)^2 * model.ball_vy - (model.ball_y - 14)^2 * model.ball_vy) / ((model.ball_x - 42)^2 + (model.ball_y - 14)^2)
             else if cHitB model.ball_x model.ball_y 42 46 then
             (-2 * (model.ball_x - 42) * (model.ball_y - 46) * model.ball_vx + (model.ball_x - 42)^2 * model.ball_vy - (model.ball_y - 46)^2 * model.ball_vy) / ((model.ball_x - 42)^2 + (model.ball_y - 46)^2)
-            else if cleftPillar model model.ball_x || crightPillar model model.ball_x || cupPillar model model.ball_y || cdownPillar model model.ball_y then 4 * (30 - model.ball_y) / ((42 - model.ball_x)^2 + (30 - model.ball_y)^2) ^ 0.5
+            else if cLeftPillar model model.ball_x || cRightPillar model model.ball_x || cUpPillar model model.ball_y || cDownPillar model model.ball_y then 4 * (30 - model.ball_y) / ((42 - model.ball_x)^2 + (30 - model.ball_y)^2) ^ 0.5
             else if cUpLeaf model || cDownLeaf model then model.ball_vy * (-1)
             else model.ball_vy
 
@@ -553,7 +553,7 @@ updateTime model dt =
         attackState =
             if cValidB model.pad_angle model.block_x model.block_y 42 30 == False && cHit model.block_x model.block_y then successfulAttack
             else if (cValidB model.pad_angle model.ball_x model.ball_y 42 30 ) && cHit model.block_x model.block_y then failedAttack
-            else if (cleftPillar model model.block_x || crightPillar model model.block_x || cupPillar model model.block_y || cdownPillar model model.block_y) then overAttack
+            else if (cLeftPillar model model.block_x || cRightPillar model model.block_x || cUpPillar model model.block_y || cDownPillar model model.block_y) then overAttack
             else ongoingAttack
 
 
@@ -567,19 +567,19 @@ updateTime model dt =
         max_life = model.max_life
 
 
-        wleft =
+        wLeft =
             if model.wshell_left == 360 then dt * 10.0
             else model.wshell_left + dt * 10.0
 
-        wright =
+        wRight =
             if model.wshell_right == 360 then dt * 10.0
             else model.wshell_right + dt * 10.0
 
-        wup =
+        wUp =
             if model.wshell_up == 0 then dt * (-10.0)
             else model.wshell_up + dt * (-10.0)
 
-        wdown =
+        wDown =
             if model.wshell_down == 0 then dt * (-50.0)
             else model.wshell_down + dt * (-50.0)
 
@@ -609,10 +609,10 @@ updateTime model dt =
               , attack = attackState
               , gold_angle = ag, gold_w = wg
               , life = life
-              , wshell_left = wleft
-              , wshell_right = wright
-              , wshell_up = wup
-              , wshell_down = wdown
+              , wshell_left = wLeft
+              , wshell_right = wRight
+              , wshell_up = wUp
+              , wshell_down = wDown
               , emptyLeaves = newEmptyL
               , clover = clover
               , emptyLeaves = empty

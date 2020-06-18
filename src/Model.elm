@@ -14,9 +14,9 @@ type alias Point =  --*这个不是给方块用的
 type alias Keys =
     {
         enter: Bool
-    ,   left: Bool
+    ,   left: Bool   -- 蓝
     ,   right: Bool
-    ,   a: Bool
+    ,   a: Bool     --金
     ,   d: Bool
     ,   one : Bool
     ,   two : Bool

@@ -40,26 +40,26 @@ cValidB angle x y a b =
     then True
     else False
 
-cleftPillar: Model -> Float -> Bool
-cleftPillar model t =
+cLeftPillar: Model -> Float -> Bool
+cLeftPillar model t =
     if t <= 3
     then True
     else False
 
-crightPillar: Model -> Float -> Bool
-crightPillar model t =
+cRightPillar: Model -> Float -> Bool
+cRightPillar model t =
     if t >= 81
     then True
     else False
 
-cupPillar: Model -> Float -> Bool
-cupPillar model t =
+cUpPillar: Model -> Float -> Bool
+cUpPillar model t =
     if t <= 9
     then True
     else False
 
-cdownPillar: Model -> Float -> Bool
-cdownPillar model t =
+cDownPillar: Model -> Float -> Bool
+cDownPillar model t =
     if t >= 51
     then True
     else False
