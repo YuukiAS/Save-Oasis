@@ -12,8 +12,8 @@ import Ionicon -- some svg icons, may be helpful later
 import List.Extra exposing (interweave,count,getAt)
 
 
-renderDashboard: Point -> Float -> Float -> Html msg
-renderDashboard point wid hei =
+renderPanel: Point -> Float -> Float -> Html msg
+renderPanel point wid hei =
    rect [x ((String.fromFloat point.x)++"%"), y ((String.fromFloat point.y)++"%"), width ((String.fromFloat wid)++"%"), height ((String.fromFloat hei)++"%") ,fill "white",opacity "0.5"][]
 
 

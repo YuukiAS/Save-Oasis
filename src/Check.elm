@@ -10,168 +10,88 @@ import Html exposing (..)
 import List.Extra exposing (interweave)
 import Svg exposing (svg,rect,circle,line)
 
--- *判断碰到了什么
 
-cUpBricks: Model -> Bool
-cUpBricks model =
-    if (
-        ( model.ball_y - r - 10.5)/2.675 < toFloat (round ((model.ball_y - r - 10.5)/2.675)) &&
-        ( model.ball_y - r > 8 && model.ball_y - r < 21.2) &&
-        ( List.member (upCoordinate model) model.emptyBricks == False)
-       )
+cHit: Float -> Float -> Bool -- 别人打你
+cHit x y =
+    if (x - 42) ^ 2 + (y - 30) ^ 2 <= 6 ^ 2 then True
+    else False
+
+cHitB: Float -> Float -> Float -> Float -> Bool   -- 打到旋转的
+cHitB x y a b =
+    if (x - a) ^ 2 + (y - b) ^ 2 <= 6 ^ 2 && (x - a) ^ 2 + (y - b) ^ 2 >= 4 ^ 2 then True
+    else False
+
+cValidB: Float -> Float -> Float -> Float -> Float -> Bool    -- 和hitB搭配
+cValidB angle x y a b =
+    if
+    ( sin (degrees (angle + 180)) > 0 && cos (degrees (angle + 180 )) > 0
+    && y - b > (-1 * tan (degrees (angle + 180))) * (x - a) && y - b < (-1 * tan (degrees (angle + 90 ))) * (x - a) )
+    || (sin (degrees (angle + 180)) > 0 && cos (degrees (angle + 180 )) < 0
+    && y - b < (-1 * tan (degrees (angle + 180))) * (x - a) && y - b < (-1 * tan (degrees (angle + 90 ))) * (x - a) )
+    || (sin (degrees (angle + 180)) < 0 && cos (degrees (angle + 180 )) < 0
+    && y - b < (-1 * tan (degrees (angle + 180))) * (x - a) && y - b > (-1 * tan (degrees (angle + 90 ))) * (x - a))
+    || (sin (degrees (angle + 180)) < 0 && cos (degrees (angle + 180 )) > 0
+    && y - b > (-1 * tan (degrees (angle + 180))) * (x - a) && y - b > (-1 * tan (degrees (angle + 90 ))) * (x - a))
+    || (sin (degrees (angle + 180)) == 1 && cos (degrees (angle + 180)) < 0.000001 && y - b < 0 && x - a > 0)
+    || (sin (degrees (angle + 180)) == -1 && cos (degrees (angle + 180)) < 0.000001 && y - b > 0 && x - a < 0)
+    || (sin (degrees (angle + 180)) < 0.000001 && cos (degrees (angle + 180)) == 1 && y - b > 0 && x - a > 0)
+    || (sin (degrees (angle + 180)) < 0.000001 && cos (degrees (angle + 180)) == -1 && y - b < 0 && x - a < 0)
+
     then True
     else False
 
-
-cUpPillar: Model -> Bool
-cUpPillar model =
-    if ( model.ball_x + r <= 90 && model.ball_x - r >= 10 ) && model.ball_y - r <= 8
+cleftPillar: Model -> Float -> Bool
+cleftPillar model t =
+    if t <= 3
     then True
     else False
 
-----left
-cLeftBricks: Model -> Bool
-cLeftBricks model =
-    if ( --✨bricks
-           ( model.ball_x - r - 16.5 )/6.675 < toFloat (round ((model.ball_x - r - 16.5)/6.675))  &&
-           ( model.ball_y - r > 8 && model.ball_y < 21.2) &&
-           ( List.member (leftCoordinate model) model.emptyBricks == False)
-       )
+crightPillar: Model -> Float -> Bool
+crightPillar model t =
+    if t >= 81
     then True
     else False
 
-cLeftPillar: Model -> Bool
-cLeftPillar model =
-    if   model.ball_y + r < 45 && model.ball_y - r > 8 && model.ball_x - r <= 10
+cupPillar: Model -> Float -> Bool
+cupPillar model t =
+    if t <= 9
     then True
     else False
 
---right
-cRightBricks: Model -> Bool
-cRightBricks model =
-    if (
-           (model.ball_x + r - 10)/6.675 <= 11 && (model.ball_x + r - 10)/6.675 >= 0 &&
-           (model.ball_x + r - 10)/6.675 > toFloat (round ((model.ball_x + r - 10)/6.675))  &&
-           ( model.ball_y - r > 8 && model.ball_y < 21.2) &&
-           ( List.member (rightCoordinate model) model.emptyBricks == False)
-       )
+cdownPillar: Model -> Float -> Bool
+cdownPillar model t =
+    if t >= 51
     then True
     else False
 
-cRightPillar: Model -> Bool
-cRightPillar model =
-    if   model.ball_y + r < 45 && model.ball_y - r > 8 && model.ball_x + r >= 90
+cisCoordinate : Model -> (Int, Int)
+cisCoordinate model =
+    if cLeftLeaf model == True then ballLeftCoordinate model
+    else if cDownLeaf model == True then ballDownCoordinate model
+    else if cUpLeaf model == True then ballUpCoordinate model
+    else if cRightLeaf model == True then ballRightCoordinate model
+    else (0, 0)
+
+cLeftLeaf : Model -> Bool   -- 这四个都是打到砖块
+cLeftLeaf model =
+    if (List.member (ballLeftCoordinate model) model.blueLeaves) && (List.member (ballLeftCoordinate model) model.emptyLeaves == False)
     then True
     else False
 
-
-
-cDownPaddle: Model -> Bool
-cDownPaddle model =
-    --✨paddle
-    if (( model.ball_x >= model.pad_x && model.ball_x <= model.pad_x + 12 ) && model.ball_y + r > 40 && model.ball_y + r <= 40.5)
+cRightLeaf : Model -> Bool
+cRightLeaf model =
+    if (List.member (ballRightCoordinate model) model.blueLeaves) && (List.member (ballRightCoordinate model) model.emptyLeaves == False)
     then True
     else False
 
-
-
-{-cNextBrick: Model -> (Int, Int)-> Outlooks.Brick ->  Bool
-cNextBrick model a color =
-    case color of
-        Blue -> if List.member a model.blueBricks == True then True else False
-        Cyan -> if List.member a model.cyanBricks == True then True else False
-        Red -> if List.member a model.redBricks == True then True else False
-        Pink ->  if List.member a model.pinkBricks == True then True else False-}
-
-
-
-
-cGameOver: Model -> Bool  -- 判断是否失去生命值
-cGameOver model =
-    if ( model.ball_x + r <= 90 && model.ball_x - r >= 10 ) && model.ball_y + r >= 45
+cUpLeaf : Model -> Bool
+cUpLeaf model =
+    if (List.member (ballUpCoordinate model) model.blueLeaves) && (List.member (ballUpCoordinate model) model.emptyLeaves == False)
     then True
     else False
 
-
-cClearLine : Model -> Int -> Int
-cClearLine model num =  -- num: 0~4
-     if ( List.member (num , 0) model.emptyBricks &&
-        List.member (num , 1) model.emptyBricks &&
-        List.member (num , 2) model.emptyBricks &&
-        List.member (num , 3) model.emptyBricks &&
-        List.member (num , 4) model.emptyBricks &&
-        List.member (num , 5) model.emptyBricks &&
-        List.member (num , 6) model.emptyBricks &&
-        List.member (num , 7) model.emptyBricks &&
-        List.member (num , 8) model.emptyBricks &&
-        List.member (num , 9) model.emptyBricks &&
-        List.member (num , 10) model.emptyBricks &&
-        List.member (num , 11) model.emptyBricks ) then 1 else 0
-
-
-cWin: Model -> Bool    -- 判断是否胜利
-cWin model =
-    if ( List.member (0, 0) model.emptyBricks &&
-    List.member (0, 1) model.emptyBricks &&
-    List.member (0, 2) model.emptyBricks &&
-    List.member (0, 3) model.emptyBricks &&
-    List.member (0, 4) model.emptyBricks &&
-    List.member (0, 5) model.emptyBricks &&
-    List.member (0, 6) model.emptyBricks &&
-    List.member (0, 7) model.emptyBricks &&
-    List.member (0, 8) model.emptyBricks &&
-    List.member (0, 9) model.emptyBricks &&
-    List.member (0, 10) model.emptyBricks &&
-    List.member (0, 11) model.emptyBricks &&
-    List.member (1, 0) model.emptyBricks &&
-    List.member (1, 1) model.emptyBricks &&
-    List.member (1, 2) model.emptyBricks &&
-    List.member (1, 3) model.emptyBricks &&
-    List.member (1, 4) model.emptyBricks &&
-    List.member (1, 5) model.emptyBricks &&
-    List.member (1, 6) model.emptyBricks &&
-    List.member (1, 7) model.emptyBricks &&
-    List.member (1, 8) model.emptyBricks &&
-    List.member (1, 9) model.emptyBricks &&
-    List.member (1, 10) model.emptyBricks &&
-    List.member (1, 11) model.emptyBricks &&
-    List.member (2, 0) model.emptyBricks &&
-    List.member (2, 0) model.emptyBricks &&
-    List.member (2, 1) model.emptyBricks &&
-    List.member (2, 2) model.emptyBricks &&
-    List.member (2, 3) model.emptyBricks &&
-    List.member (2, 4) model.emptyBricks &&
-    List.member (2, 5) model.emptyBricks &&
-    List.member (2, 6) model.emptyBricks &&
-    List.member (2, 7) model.emptyBricks &&
-    List.member (2, 8) model.emptyBricks &&
-    List.member (2, 9) model.emptyBricks &&
-    List.member (2, 10) model.emptyBricks &&
-    List.member (2, 11) model.emptyBricks &&
-    List.member (3, 0) model.emptyBricks &&
-    List.member (3, 1) model.emptyBricks &&
-    List.member (3, 2) model.emptyBricks &&
-    List.member (3, 3) model.emptyBricks &&
-    List.member (3, 4) model.emptyBricks &&
-    List.member (3, 5) model.emptyBricks &&
-    List.member (3, 6) model.emptyBricks &&
-    List.member (3, 7) model.emptyBricks &&
-    List.member (3, 8) model.emptyBricks &&
-    List.member (3, 9) model.emptyBricks &&
-    List.member (3, 10) model.emptyBricks &&
-    List.member (3, 11) model.emptyBricks &&
-    List.member (4, 0) model.emptyBricks &&
-    List.member (4, 1) model.emptyBricks &&
-    List.member (4, 2) model.emptyBricks &&
-    List.member (4, 3) model.emptyBricks &&
-    List.member (4, 4) model.emptyBricks &&
-    List.member (4, 5) model.emptyBricks &&
-    List.member (4, 6) model.emptyBricks &&
-    List.member (4, 7) model.emptyBricks &&
-    List.member (4, 8) model.emptyBricks &&
-    List.member (4, 9) model.emptyBricks &&
-    List.member (4, 10) model.emptyBricks &&
-    List.member (4, 11) model.emptyBricks
-    )
+cDownLeaf : Model -> Bool
+cDownLeaf model =
+    if (List.member (ballDownCoordinate model) model.blueLeaves) && (List.member (ballDownCoordinate model) model.emptyLeaves == False)
     then True
     else False

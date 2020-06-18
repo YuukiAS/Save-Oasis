@@ -2,45 +2,36 @@ module Outlooks exposing (..)
 
 -- This module includes some resources and some types
 
-outBall = "assets/main/ball.png"
-outBall2 = "assets/main/ball2.png"
-outPaddle = "assets/main/pd.png"
-outBkg = "assets/main/bkp.png"
-outInterface = "assets/main/gameinter.png"
-outOriginal = "assets/main/o.png"        -- 未被达到
-outHit = "assets/main/n.png"            -- 已被达到
-outDecrease = "assets/main/frozen.png"     -- 减速度减命,red
-outIncrease = "assets/main/acceleration.png"   -- 加速度加命,pink
-outAddBall = "assets/main/addBall.png"
-outAddPaddle = "assets/main/addPaddle.png"
-outBoss = "assets/main/boss.png"
 
-background = "assets/main/bkp.png"
+background = "assets/main/saveOasis.png"
 interface = "assets/main/trans.png"
 ball = "assets/main/ball.png"
-vkernal5 = "assets/main/stage1.png"
-vkernal4 = "assets/main/stage2.png"
-vkernal3 = "assets/main/stage3.png"
-vkernal2 = "assets/main/stage4.png"
-vkernal1 = "assets/main/stage5.png"
-vkernal0 = "assets/main/gameover.png"
+vKernel5 = "assets/main/stage1.png"
+vKernel4 = "assets/main/stage2.png"
+vKernel3 = "assets/main/stage3.png"
+vKernel2 = "assets/main/stage4.png"
+vKernel1 = "assets/main/stage5.png"
+vKernel0 = "assets/main/stage0.png"
 pad = "assets/main/bendpaddle.png"
 gold = "assets/main/shootpaddle.png"
-attacker = "assets/main/attack.png"
-downleft = "assets/main/downleft.png"
+attacker = "assets/main/attack.png"   -- 前来攻击的球
+downleft = "assets/main/downleft.png"  -- 这四个是四周发射的
 downright = "assets/main/downright.png"
 upleft = "assets/main/upleft.png"
 upright = "assets/main/upright.png"
 circular = "assets/main/circular.png"
-circular45 = "assets/main/diamond45.png"
-vkf = "assets/main/vkernelfrag.png"
+vkf = "assets/main/clover.png"   -- 三叶草
 bright = "assets/main/brighten.png"
-leaf = "assets/main/brick.png"
+brighter = "assets/main/brighterer.png"
+nor_leaf = "assets/main/bricks/normal.png" -- leaf是brick
+inc_leaf = "assets/main/bricks/increasing.png"
+dec_leaf = "assets/main/bricks/decreasing.png"
 
-
-
-
-
+---用于dashboard
+cloverC = "assets/main/clover/core.png" -- Core
+cloverL = "assets/main/clover/left.png"
+cloverR = "assets/main/clover/right.png"
+cloverU = "assets/main/clover/up.png"
 
 
 trait1 = "assets/skills/Trait_charismatic.png"

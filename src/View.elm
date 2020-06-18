@@ -14,11 +14,61 @@ import Html.Events exposing (on, onClick, onMouseDown, onMouseUp)
 import Model exposing (Model)
 import Svg.Attributes as SvgAttrs
 import Dashboard exposing (..)
+import Check exposing (..)
 
 view: Model -> List (Html Msg)
 view model =
 
-        [
+            [
+                div [ style "backgroundColor" "#1d1d1d"]
+                [svg
+                [ viewBox "0 0 400 400" ]
+                (interweave (renderDashboard model) (interweave (renderRowBrick (Point 2 8) model 4 4 10 19)
+                [
+                        renderInterface (Point 0 0) 100 65 background
+                    ,   renderInterface (Point 2 0) 80 60 interface
+                     ,  if model.life == 5 then
+                        renderInterface (Point 38 26) 8 8 vKernel5
+                        else if model.life == 4 then
+                        renderInterface (Point 38 26) 8 8 vKernel4
+                        else if model.life == 3 then
+                        renderInterface (Point 38 26) 8 8 vKernel3
+                        else if model.life == 2 then
+                        renderInterface (Point 38 26) 8 8 vKernel2
+                        else if model.life == 1 then
+                        renderInterface (Point 38 26) 8 8 vKernel1
+                        else renderInterface (Point 38 26) 8 8 vKernel0
+                    ,   rotateCircle (Point model.pad_x model.pad_y) 10 10 pad model.pad_angle
+                    ,   rotateCircle (Point model.gold_x model.gold_y) 10 10 gold model.gold_angle
+                    ,   renderBall (Point model.ball_x model.ball_y) 2 2 ball
+                    ,   rotateCircle (Point 5 25) 10 10 circular model.wshell_left
+                    ,   rotateCircle (Point 69 25) 10 10 circular model.wshell_right
+                    ,   rotateCircle (Point 37 9) 10 10 circular model.wshell_up
+                    ,   rotateCircle (Point 37 41) 10 10 circular model.wshell_down
+                    , if model.clover.upClover == False then
+                        rotateCircle (Point 37 9) 10 10 vkf 0
+                        else svg[][]
+                    , if model.clover.leftClover == False then
+                        rotateCircle (Point 5 25) 10 10 vkf 120
+                        else svg[][]
+                    , if model.clover.rightClover == False then
+                        rotateCircle (Point 69 25) 10 10 vkf 240
+                        else svg[][]
+                    ,   if  (cValidB model.wshell_down model.ball_x model.ball_y 42 46) == True &&  model.life < 5
+                    then rotateCircle (Point 37 41) 10 10 brighter 0
+                    else rotateCircle (Point 37 41) 10 10 bright 0
+                    ,   renderRandGem (Point (model.block_x) (model.block_y)) 2 2 attacker
+                    ,   renderInterface (Point 2 8) 10 10 upleft
+                    ,   renderInterface (Point 2 42) 10 10 downleft
+                    ,   renderInterface (Point 72 8) 10 10 upright
+                    ,   renderInterface (Point 72 42) 10 10 downright
+                ]
+                ))
+                ]
+              , div [][renderMusic model]
+              , div [][renderSE model]
+            ]
+        {-[
             div[style "backgroundColor" "#1d1d1d"][svg
             [ viewBox "0 0 400 400" ]
             (interweave  --? List.append会导致无法加载brick,但interweave可以
@@ -35,11 +85,16 @@ view model =
          , div [][renderMusic model]
          , div [][renderSE model]
          --, embed [style "height" "50px", style "width" "100px", src "assets/musics/In Search of Life.mp3"][]
-        ]
+        ]-}
 
+renderDashboard: Model -> List(Html Msg)   --* 包括整个dashboard
+renderDashboard model =
+    (interweave
+        (List.append(List.append renderSettings (renderStatus model)) (renderSkills model))
+        (renderPanel (Point 40 0.5) 50 6)
+    )
 
-
-renderGameButton : Model -> Html Msg
+{-renderGameButton : Model -> Html Msg
 renderGameButton model =
     let
         ( txt, msg ) =
@@ -77,7 +132,7 @@ renderGameButton model =
                   , style "width" "600px"
         , onClick msg
         ]
-        [ text txt ]
+        [ text txt ]-}
 
 renderSE : Model -> Html Msg
 renderSE model =

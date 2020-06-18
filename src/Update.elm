@@ -19,8 +19,8 @@ import Url
 pointGenerator: Random.Generator (Int,Int)
 pointGenerator =
     Random.map2 Tuple.pair
-       (Random.int 0 4)
-       (Random.int 0 11)
+       (Random.int 0 1)
+       (Random.int 0 1)
 
 
 brickGenerator: Random.Generator Brick
@@ -48,7 +48,7 @@ update msg model =
 
         NewPoint newPoint ->({model|nextPoint = newPoint},Cmd.none)
 
-        Resume ->
+       {-} Resume ->
                      ( { model
                          | state = Paused
                          , blueBricks =
@@ -115,7 +115,7 @@ update msg model =
                      )
 
         Keep ->
-           ({ model | state = Playing }, Cmd.none )
+           ({ model | state = Playing }, Cmd.none )-}
 
         Tick newTime ->
             let
@@ -178,8 +178,8 @@ updateKeys isDown key keys =
         "ArrowLeft" -> { keys | left  = isDown }
         "ArrowRight" -> { keys | right = isDown }
         "Enter" -> { keys | enter = isDown }  -- 启动游戏
-        "a" -> { keys | left  = isDown}
-        "d" -> { keys | right = isDown }
+        "a" -> { keys | a  = isDown}
+        "d" -> { keys | d = isDown }
         "1" -> { keys | one = isDown }
         "2" -> { keys | two = isDown }
         "3" -> { keys | three = isDown }
@@ -196,6 +196,7 @@ updateKeys isDown key keys =
 updateTime: Model -> Float -> Model
 updateTime model dt =
     let
+
         ski_3_eff = if getAt 2 model.skills_ok == Just True then True else False
         ski_5_eff = if getAt 4 model.skills_ok == Just True then True else False
         ski_6_eff = if getAt 5 model.skills_ok == Just True then True else False
@@ -224,7 +225,7 @@ updateTime model dt =
         ski_4_get = if getAt 3 skills_ok /= (getAt 3 model.skills_ok) then True else False
 
 
-        exp0 =  if ((cUpBricks model || cLeftBricks model || cRightBricks model)  && cDownPaddle model == False) then  -- skill 技能5
+        exp0 =  if ((cLeftLeaf model || cRightLeaf model || cUpLeaf model || cDownLeaf model)  && cDownPaddle model == False) then  -- skill 技能5
                     if ski_5_eff then if model.combo > 0 then model.exp+ 2 + (model.combo - 1)*3 + model.leaf+1  else model.exp + 2 + model.leaf+1
                     else if model.combo > 0 then model.exp+ 2 + (model.combo - 1)*3 + model.leaf  else model.exp + 2 + model.leaf
                 else model.exp
@@ -243,7 +244,6 @@ updateTime model dt =
                 else if  getAt 9 skills_ok /= (getAt 9 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 9 skills_cost)
                 else exp0
               else exp0
-
 
         skills_cost0 =
             if(skills_ok /= model.skills_ok) then
@@ -301,8 +301,9 @@ updateTime model dt =
         empty =
             if ski_9_eff then if (List.member (model.nextPoint) model.cyanBricks == False) then List.append empty0 [model.nextPoint]else empty0
             else empty0
-
-
+        newEmptyL =
+            if cisCoordinate model /= (0, 0) then List.append model.emptyLeaves [(cisCoordinate model)]
+            else model.emptyLeaves
 
         cyan =           -- 生成cyan
             if cGameOver model then model.cyanBricks
@@ -356,7 +357,7 @@ updateTime model dt =
              else model.redBricks
 
 
-        life0 =
+        {-life0 =
               if cGameOver model && model.life > 0 then
                     if isRed == True then if ski_6_eff then model.life - 1 else model.life - 2
                     else if isPink == True then model.life
@@ -372,7 +373,7 @@ updateTime model dt =
 
 
         max_life = if ski_1_get == True then model.max_life+1   --skill 技能1
-                    else model.max_life
+                    else model.max_life-}
 
         state =
              if cWin model then
@@ -397,7 +398,7 @@ updateTime model dt =
                     in next_leaf
                 else model.leaf
 
-        dxp =
+        {-dxp =
             if cGameOver model then 0       -- skill 技能4
             else if model.keys.left then if ski_3_eff then -10.0 else -7.0
             else if model.keys.right then if ski_3_eff then 10.0 else 7.0
@@ -453,24 +454,178 @@ updateTime model dt =
             if cGameOver model then 37.5
             else if model.ball_y + dt*dyb < (8 + r) then (8 + r)
             else if model.ball_y + dt*dyb > (45 - r) then (45 - r)
-            else model.ball_y + dt*dyb
+            else model.ball_y + dt*dyb-}
 
+        dxb =
+            if cHit model.ball_x model.ball_y && cValidB model.gold_angle model.ball_x model.ball_y 42 30 && model.keys.enter  then 4 * (model.ball_x - 42) / ((42 - model.ball_x)^2 + (30 - model.ball_y)^2) ^ 0.5
+            else if cHit model.ball_x model.ball_y then
+            (-1 * (model.ball_x - 42)^2 * model.ball_vx + (model.ball_y - 30)^2 * model.ball_vx - 2 * (model.ball_x - 42) * (model.ball_y - 30) * model.ball_vy) / ((model.ball_x - 42)^2 + (model.ball_y - 30)^2)
+            else if cHitB model.ball_x model.ball_y 10 30 && cValidB  model.wshell_left model.ball_x model.ball_y 10 30  == False then
+            (-1 * (model.ball_x - 10)^2 * model.ball_vx + (model.ball_y - 30)^2 * model.ball_vx - 2 * (model.ball_x - 10) * (model.ball_y - 30) * model.ball_vy) / ((model.ball_x - 10)^2 + (model.ball_y - 30)^2)
+            else if cHitB model.ball_x model.ball_y 74 30 && cValidB  model.wshell_right model.ball_x model.ball_y 74 30  == False then
+            (-1 * (model.ball_x - 74)^2 * model.ball_vx + (model.ball_y - 30)^2 * model.ball_vx - 2 * (model.ball_x - 74) * (model.ball_y - 30) * model.ball_vy) / ((model.ball_x - 74)^2 + (model.ball_y - 30)^2)
+            else if cHitB model.ball_x model.ball_y 42 14 && cValidB  model.wshell_up model.ball_x model.ball_y 42 14 == False then
+            (-1 * (model.ball_x - 42)^2 * model.ball_vx + (model.ball_y - 14)^2 * model.ball_vx - 2 * (model.ball_x - 42) * (model.ball_y - 14) * model.ball_vy) / ((model.ball_x - 42)^2 + (model.ball_y - 14)^2)
+            else if cHitB model.ball_x model.ball_y 42 46 then
+            (-1 * (model.ball_x - 42)^2 * model.ball_vx + (model.ball_y - 46)^2 * model.ball_vx - 2 * (model.ball_x - 42) * (model.ball_y - 46) * model.ball_vy) / ((model.ball_x - 42)^2 + (model.ball_y - 46)^2)
+            else if cleftPillar model model.ball_x || crightPillar model model.ball_x || cupPillar model model.ball_y || cdownPillar model model.ball_y then 4 * (42 - model.ball_x) / ((42 - model.ball_x)^2 + (30 - model.ball_y)^2) ^ 0.5
+            else if cRightLeaf model || cLeftLeaf model then model.ball_vx * (-1)
+            else model.ball_vx
+
+
+        dyb =
+            if cHit model.ball_x model.ball_y && cValidB model.gold_angle model.ball_x model.ball_y 42 30 && model.keys.enter then 4 * (model.ball_y - 30) / ((42 - model.ball_x)^2 + (30 - model.ball_y)^2) ^ 0.5
+            else if cHit model.ball_x model.ball_y then
+            (-2 * (model.ball_x - 42) * (model.ball_y - 30) * model.ball_vx + (model.ball_x - 42)^2 * model.ball_vy - (model.ball_y - 30)^2 * model.ball_vy) / ((model.ball_x - 42)^2 + (model.ball_y - 30)^2)
+            else if cHitB model.ball_x model.ball_y 10 30  && cValidB  model.wshell_left model.ball_x model.ball_y 10 30 == False then
+            (-2 * (model.ball_x - 10) * (model.ball_y - 30) * model.ball_vx + (model.ball_x - 10)^2 * model.ball_vy - (model.ball_y - 30)^2 * model.ball_vy) / ((model.ball_x - 10)^2 + (model.ball_y - 30)^2)
+            else if cHitB model.ball_x model.ball_y 74 30 && cValidB  model.wshell_right model.ball_x model.ball_y 74 30 == False then
+            (-2 * (model.ball_x - 74) * (model.ball_y - 30) * model.ball_vx + (model.ball_x - 74)^2 * model.ball_vy - (model.ball_y - 30)^2 * model.ball_vy) / ((model.ball_x - 74)^2 + (model.ball_y - 30)^2)
+            else if cHitB model.ball_x model.ball_y 42 14 && cValidB  model.wshell_up model.ball_x model.ball_y 42 14 == False then
+            (-2 * (model.ball_x - 42) * (model.ball_y - 14) * model.ball_vx + (model.ball_x - 42)^2 * model.ball_vy - (model.ball_y - 14)^2 * model.ball_vy) / ((model.ball_x - 42)^2 + (model.ball_y - 14)^2)
+            else if cHitB model.ball_x model.ball_y 42 46 then
+            (-2 * (model.ball_x - 42) * (model.ball_y - 46) * model.ball_vx + (model.ball_x - 42)^2 * model.ball_vy - (model.ball_y - 46)^2 * model.ball_vy) / ((model.ball_x - 42)^2 + (model.ball_y - 46)^2)
+            else if cleftPillar model model.ball_x || crightPillar model model.ball_x || cupPillar model model.ball_y || cdownPillar model model.ball_y then 4 * (30 - model.ball_y) / ((42 - model.ball_x)^2 + (30 - model.ball_y)^2) ^ 0.5
+            else if cUpLeaf model || cDownLeaf model then model.ball_vy * (-1)
+            else model.ball_vy
+
+        xb =
+            if cHit model.ball_x model.ball_y && cValidB model.gold_angle model.ball_x model.ball_y 42 30 && model.keys.enter == False then 42 + 5.5 * cos(degrees (model.gold_angle + 135))
+            else model.ball_x + dt * dxb
+
+        yb =
+            if cHit model.ball_x model.ball_y && cValidB model.gold_angle model.ball_x model.ball_y 42 30 && model.keys.enter == False then 30 - 5.5 * sin(degrees (model.gold_angle + 135))
+            else model.ball_y + dt * dyb
+        -- 蓝色,角速度
+        wp =
+            if model.keys.left then 2.0
+            else if model.keys.right then -2.0
+            else 0
+
+        ap = if (model.gold_angle - model.pad_angle - 2 * wp > 90 && model.gold_angle - model.pad_angle - 2 * wp < 270) || (model.gold_angle - model.pad_angle - 2 * wp < -90 && model.gold_angle - model.pad_angle - 2 * wp > -270) then model.pad_angle + wp
+             else model.pad_angle
+
+        wg =   -- 金色,角速度
+            if model.keys.a then 2.0
+            else if model.keys.d then -2.0
+            else 0
+        -- 金色,加速度
+        ag = if (model.gold_angle + 2 * wg - model.pad_angle > 90 && model.gold_angle + 2 * wg - model.pad_angle < 270) || (model.gold_angle + 2 * wg - model.pad_angle < -90 && model.gold_angle + 2 * wg - model.pad_angle > -270) then model.gold_angle + wg
+
+             else model.gold_angle
+
+
+        vxb =
+            if (model.attack == overAttack) then
+            if (model.nextPoint == (0, 0)) || (model.nextPoint == (0, 1)) then 3
+            else if (model.nextPoint == (1, 0)) || (model.nextPoint == (1, 1))then -3
+            else model.block_vx
+            else if (cHit (model.block_x + 1) (model.block_y + 1)) then
+               (-1 * (model.block_x - 42)^2 * model.block_vx + (model.block_y - 30)^2 * model.block_vx - 2 * (model.block_x - 42) * (model.block_y - 30) * model.block_vy) / ((model.block_x - 42)^2 + (model.block_y - 30)^2)
+            else model.block_vx
+
+
+        vyb =
+            if (model.attack == overAttack) then
+            if (model.nextPoint == (0, 0)) || (model.nextPoint == (1, 0)) then 1.5
+            else if (model.nextPoint == (0, 1)) || (model.nextPoint == (1, 1)) then -1.5
+            else model.block_vy
+            else if (cHit (model.block_x + 1) (model.block_y + 1)) then
+                    (-2 * (model.block_x - 42) * (model.block_y - 30) * model.block_vx + (model.block_x - 42)^2 * model.block_vy - (model.block_y - 30)^2 * model.block_vy) / ((model.block_x - 42)^2 + (model.block_y - 30)^2)
+            else model.block_vy
+
+        xBlock =
+            if (model.attack == overAttack) then
+                    if (model.nextPoint == (0, 0)) || (model.nextPoint == (0, 1)) then 5 + dt * vxb
+                    else if (model.nextPoint == (1, 0)) || (model.nextPoint == (1, 1)) then 80 + dt * vxb
+                    else model.block_x + dt * vxb
+            else model.block_x + dt * vxb
+
+
+        yBlock =
+            if (model.attack == overAttack) then
+                    if (model.nextPoint == (0, 0)) || (model.nextPoint == (1, 0)) then 10 + dt * vyb
+                    else if (model.nextPoint == (0, 1)) || (model.nextPoint == (1, 1)) then 50 + dt * vyb
+                    else model.block_y + dt * vyb
+            else model.block_y + dt * vyb
+
+
+        attackState =
+            if cValidB model.pad_angle model.block_x model.block_y 42 30 == False && cHit model.block_x model.block_y then successfulAttack
+            else if (cValidB model.pad_angle model.ball_x model.ball_y 42 30 ) && cHit model.block_x model.block_y then failedAttack
+            else if (cleftPillar model model.block_x || crightPillar model model.block_x || cupPillar model model.block_y || cdownPillar model model.block_y) then overAttack
+            else ongoingAttack
+
+
+        life =
+            if cHit (model.block_x + 1) (model.block_y + 1) && cValidB model.pad_angle (model.block_x + 1) (model.block_y + 1) 42 30 == False then model.life - 1
+            else if cHitB model.ball_x model.ball_y 42 46 && cValidB model.wshell_down model.ball_x model.ball_y 42 46 == True &&  model.life < 5
+            then model.life + 1
+            else model.life
+
+
+        max_life = model.max_life
+
+
+        wleft =
+            if model.wshell_left == 360 then dt * 10.0
+            else model.wshell_left + dt * 10.0
+
+        wright =
+            if model.wshell_right == 360 then dt * 10.0
+            else model.wshell_right + dt * 10.0
+
+        wup =
+            if model.wshell_up == 0 then dt * (-10.0)
+            else model.wshell_up + dt * (-10.0)
+
+        wdown =
+            if model.wshell_down == 0 then dt * (-50.0)
+            else model.wshell_down + dt * (-50.0)
+
+        clover =
+            let
+                leftC =
+                    if (model.ball_x - 10)^2 + (model.ball_y - 30)^2 <= 5^2 then True
+                    else model.clover.leftClover
+
+                rightC =
+                     if (model.ball_x - 74)^2 + (model.ball_y - 30)^2 <= 5^2 then True
+                     else model.clover.rightClover
+
+                upC =
+                     if (model.ball_x - 42)^2 + (model.ball_y - 14)^2 <= 5^2 then True
+                     else model.clover.upClover
+            in
+                Clover leftC rightC upC
 
     in
-        { model | pad_x = xp, pad_vx = dxp
-                , ball_x = xb, ball_y = yb
-                , ball_vx = dxb, ball_vy = dyb
-                , emptyBricks = empty
-                , cyanBricks = cyan
-                , pinkBricks = pink
-                , redBricks = red
-                , life = life
-                , max_life = max_life
-                , state = state
-                , combo = combo
-                , exp = exp
-                , leaf = leaf
-                , skills_ok = skills_ok
-                , skills_cost = skills_cost
-                , se = se
+        { model |
+                ball_x = xb, ball_y = yb
+              , ball_vx = dxb, ball_vy = dyb
+              , pad_angle = ap, pad_w = wp
+              , block_vx = vxb, block_vy = vyb
+              , block_x = xBlock, block_y = yBlock
+              , attack = attackState
+              , gold_angle = ag, gold_w = wg
+              , life = life
+              , wshell_left = wleft
+              , wshell_right = wright
+              , wshell_up = wup
+              , wshell_down = wdown
+              , emptyLeaves = newEmptyL
+              , clover = clover
+              , emptyLeaves = empty
+              , cyanLeaves = cyan
+              , pinkLeaves = pink
+              , redLeaves = red
+              , life = life
+              , max_life = max_life
+              , state = state
+              , combo = combo
+              , exp = exp
+              , leaf = leaf
+              , skills_ok = skills_ok
+              , skills_cost = skills_cost
+              , se = se
         }
