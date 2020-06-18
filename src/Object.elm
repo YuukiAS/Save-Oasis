@@ -38,12 +38,12 @@ renderSomeBrick num1 num2 point wid hei pic =
 renderABrick : (Int, Int) -> Model -> Point -> Float -> Float -> List (Html Msg) --* 决定方块颜色
 renderABrick a model point wid hei =
     if ((List.member a model.cyanLeaves == True) && (List.member a model.emptyLeaves == False) )
-    then [renderSomeBrick (Tuple.second a) (Tuple.first a) point wid hei nor_leaf]   -- cyan
+    then [renderSomeBrick (Tuple.second a) (Tuple.first a) point wid hei nor_leaf_2]   -- cyan
     else if ((List.member a model.pinkLeaves == True) && (List.member a model.emptyLeaves == False))
     then [renderSomeBrick (Tuple.second a) (Tuple.first a) point wid hei inc_leaf]
     else if ((List.member a model.redLeaves == True) && (List.member a model.emptyLeaves == False))
     then [renderSomeBrick (Tuple.second a) (Tuple.first a) point wid hei dec_leaf]
-    else if ( (List.member a model.cyanLeaves == False) && (List.member a model.pinkLeaves == False) && (List.member a model.redLeaves == False) && (List.member a model.emptyLeaves == False) )
+    else if ( (List.member a model.cyanLeaves == False) && (List.member a model.pinkLeaves == False) && (List.member a model.redLeaves == False) && (List.member a model.emptyLeaves == False) && (List.member a model.blueLeaves == True))
     then [renderSomeBrick (Tuple.second a) (Tuple.first a) point wid hei nor_leaf]  -- blue
     else [div [] []]
 

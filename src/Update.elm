@@ -22,18 +22,18 @@ pointGenerator =
         (Random.int 0 1)
         (Random.int 0 1)
 
-eraseGenerator: Random.Generator (Int,Int)   --todo 用于技能,暂时先不用
+{-eraseGenerator: Random.Generator (Int,Int)   --废弃技能
 eraseGenerator =
     Random.map2 Tuple.pair
        (Random.int 0 10)
-       (Random.uniform 4 [6,13,15])
+       (Random.uniform 4 [6,13,15])-}
 
 brickGenerator: Random.Generator Brick
 brickGenerator =
     Random.weighted
-    (80, Cyan)
-    [ (10, Red)
-    , (10, Pink)
+    (60, Cyan)
+    [ (20, Red)
+    , (20, Pink)
     ]
 
 update: Message.Msg -> Model -> (Model, Cmd Msg)
@@ -203,11 +203,12 @@ updateTime model dt =
     let
        ---* 技能及经验
         ski_3_eff = if getAt 2 model.skills_ok == Just True then True else False
+        ski_4_eff = if getAt 3 model.skills_ok == Just True then True else False
         ski_5_eff = if getAt 4 model.skills_ok == Just True then True else False
         ski_6_eff = if getAt 5 model.skills_ok == Just True then True else False
-        ski_7_eff = if getAt 6 model.skills_ok == Just True && (model.second == 0 || model.second == 30)then True else False
+        ski_7_eff = if getAt 6 model.skills_ok == Just True then True else False
         ski_8_eff = if getAt 7 model.skills_ok == Just True then True else False
-        ski_9_eff = if getAt 8 model.skills_ok == Just True  && (model.second == 10 || model.second == 20 ||model.second == 40) then True else False
+        ski_9_eff = if getAt 8 model.skills_ok == Just True then True else False
         ski_10_eff = if getAt 9 model.skills_ok == Just True then True else False
 
 
@@ -227,26 +228,26 @@ updateTime model dt =
 
         ski_1_get = if getAt 0 skills_ok /= (getAt 0 model.skills_ok) then True else False
         ski_2_get = if getAt 1 skills_ok /= (getAt 1 model.skills_ok) then True else False
-        ski_4_get = if getAt 3 skills_ok /= (getAt 3 model.skills_ok) then True else False
+
 
 
         exp0 =  if cIsCoordinate model /= (0,0) then  -- skill 技能5
-                    if ski_5_eff then if model.combo > 0 then model.exp+ 2 + (model.combo - 1)*3 + model.leaf+1  else model.exp + 2 + model.leaf+1
+                    if ski_5_eff then if model.combo > 0 then model.exp+ 2 + (model.combo - 1)*3 + model.leaf + 1  else model.exp + 2 + model.leaf + 1
                     else if model.combo > 0 then model.exp+ 2 + (model.combo - 1)*3 + model.leaf  else model.exp + 2 + model.leaf
                 else model.exp
 
 
         exp = if(skills_ok /= model.skills_ok) then
-                if getAt 0 skills_ok /= (getAt 0 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 0 skills_cost)
-                else if  getAt 1 skills_ok /= (getAt 1 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 1 skills_cost)
-                else if  getAt 2 skills_ok /= (getAt 2 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 2 skills_cost)
-                else if  getAt 3 skills_ok /= (getAt 3 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 3 skills_cost)
-                else if  getAt 4 skills_ok /= (getAt 4 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 4 skills_cost)
-                else if  getAt 5 skills_ok /= (getAt 5 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 5 skills_cost)
-                else if  getAt 6 skills_ok /= (getAt 6 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 6 skills_cost)
-                else if  getAt 7 skills_ok /= (getAt 7 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 7 skills_cost)
-                else if  getAt 8 skills_ok /= (getAt 8 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 8 skills_cost)
-                else if  getAt 9 skills_ok /= (getAt 9 model.skills_ok) then exp0 -   Dashboard.fromJust(getAt 9 skills_cost)
+                if getAt 0 skills_ok /= (getAt 0 model.skills_ok) then exp0 - Dashboard.fromJust(getAt 0 skills_cost)
+                else if  getAt 1 skills_ok /= (getAt 1 model.skills_ok) then exp0 - Dashboard.fromJust(getAt 1 skills_cost)
+                else if  getAt 2 skills_ok /= (getAt 2 model.skills_ok) then exp0 - Dashboard.fromJust(getAt 2 skills_cost)
+                else if  getAt 3 skills_ok /= (getAt 3 model.skills_ok) then exp0 - Dashboard.fromJust(getAt 3 skills_cost)
+                else if  getAt 4 skills_ok /= (getAt 4 model.skills_ok) then exp0 - Dashboard.fromJust(getAt 4 skills_cost)
+                else if  getAt 5 skills_ok /= (getAt 5 model.skills_ok) then exp0 - Dashboard.fromJust(getAt 5 skills_cost)
+                else if  getAt 6 skills_ok /= (getAt 6 model.skills_ok) then exp0 - Dashboard.fromJust(getAt 6 skills_cost)
+                else if  getAt 7 skills_ok /= (getAt 7 model.skills_ok) then exp0 - Dashboard.fromJust(getAt 7 skills_cost)
+                else if  getAt 8 skills_ok /= (getAt 8 model.skills_ok) then exp0 - Dashboard.fromJust(getAt 8 skills_cost)
+                else if  getAt 9 skills_ok /= (getAt 9 model.skills_ok) then exp0 - Dashboard.fromJust(getAt 9 skills_cost)
                 else exp0
               else exp0
 
@@ -258,7 +259,7 @@ updateTime model dt =
                     List.map (\a->a+tot_skill*4+2) model.skills_cost
             else model.skills_cost
 
-        skills_cost = if ski_4_get == True then (List.map(\a->a- 10) skills_cost0) else skills_cost0  -- skill 技能4
+        skills_cost = if ski_2_get == True then (List.map(\a->a- 10) skills_cost0) else skills_cost0
 
         ----* 砖块
 
@@ -273,54 +274,21 @@ updateTime model dt =
                     else False
 
 
-
-        {-empty0 =  -- skill 技能10一击致命
-            if cUpBricks model then
-                if (List.member (upCoordinate model) model.cyanBricks) || (List.member (upCoordinate model) model.pinkBricks) || (List.member (upCoordinate model) model.redBricks) || ((List.member (upCoordinate model) model.blueBricks)&&ski_10_eff)
-                    then List.append model.emptyBricks [upCoordinate model]
-                else model.emptyBricks
-            else if cLeftBricks model then
-                if List.member (leftCoordinate model) model.cyanBricks || (List.member (leftCoordinate model) model.pinkBricks) || (List.member (leftCoordinate model) model.redBricks)  || ((List.member (leftCoordinate model) model.blueBricks)&&ski_10_eff)
-                    then List.append model.emptyBricks [leftCoordinate model]
-                else model.emptyBricks
-            else if cRightBricks model then
-                if List.member (rightCoordinate model) model.cyanBricks || (List.member (rightCoordinate model) model.pinkBricks) || (List.member (rightCoordinate model) model.redBricks)  || ((List.member (rightCoordinate model) model.blueBricks)&&ski_10_eff)
-                    then List.append model.emptyBricks [rightCoordinate model]
-                else model.emptyBricks
-            else model.emptyBricks
-            {-if ski_9_eff then if (List.member (model.nextPoint) model.cyanBricks == False) then List.append empty0 [model.nextPoint]else empty0
-                        else empty0-}
-            -}
-
-
-        -- todo skill 技能9定期消失,先不用
         empty =
             if cIsCoordinate model /= (0, 0) then
-                if  List.member (cIsCoordinate model) model.cyanLeaves || List.member (cIsCoordinate model) model.pinkLeaves || List.member (cIsCoordinate model) model.redLeaves  || (List.member (cIsCoordinate model) model.blueLeaves &&ski_10_eff)
+                if  List.member (cIsCoordinate model) model.cyanLeaves || List.member (cIsCoordinate model) model.pinkLeaves || List.member (cIsCoordinate model) model.redLeaves  || (List.member (cIsCoordinate model) model.blueLeaves &&ski_9_eff)
                 then List.append   model.emptyLeaves [cIsCoordinate model] else model.emptyLeaves
             else model.emptyLeaves
 
 
-        cyan =           -- 生成cyan
+        cyan =
             if model.nextBrick /= Cyan then model.cyanLeaves
             else if cIsCoordinate model /= (0,0) then
                 if List.member (cIsCoordinate model) model.blueLeaves then List.append model.cyanLeaves [cIsCoordinate model]
                 else model.cyanLeaves
-            {-else if cUpBricks model == True then
-                if List.member (upCoordinate model) model.blueBricks
-                    then List.append model.cyanBricks [upCoordinate model]
-                else model.cyanBricks
-            else if cLeftBricks model then
-                if List.member (leftCoordinate model) model.blueBricks
-                    then List.append model.cyanBricks [leftCoordinate model]
-                else model.cyanBricks
-            else if cRightBricks model then
-                if List.member (rightCoordinate model) model.blueBricks
-                    then List.append model.cyanBricks [rightCoordinate model]
-                else model.cyanBricks-}
             else model.cyanLeaves
 
-        pink =           -- 生成pink
+        pink =
              if model.nextBrick /= Pink then model.pinkLeaves
              else if cIsCoordinate model /= (0,0) then
                 if List.member (cIsCoordinate model) model.blueLeaves then List.append model.pinkLeaves [cIsCoordinate model]
@@ -334,24 +302,6 @@ updateTime model dt =
                 else model.redLeaves
              else model.redLeaves
 
-        {-life0 =
-              if cGameOver model && model.life > 0 then
-                    if isRed == True then if ski_6_eff then model.life - 1 else model.life - 2
-                    else if isPink == True then model.life
-                    else  model.life - 1
-              else
-                   if isRed == True then if ski_6_eff then model.life else model.life - 1
-                   else if isPink == True then if model.life +1 <= model.max_life then model.life+1 else model.life
-                   else model.life
-
-        life1 =  if ski_7_eff then min (life0+2) (max life0 model.max_life - 2) else life0  -- skill技能7
-
-        life = if ski_1_get then life1 + 1 else life1
-
-
-        max_life = if ski_1_get == True then model.max_life+1   --skill 技能1
-                    else model.max_life-}
-
         state =
              if cIsWin model || cIsLose model then
                  Stopped
@@ -364,65 +314,9 @@ updateTime model dt =
             if (cLeftPillar model model.block_x || cRightPillar model model.block_x || cUpPillar model model.block_y || cDownPillar model model.block_y) then overAttack
             else ongoingAttack
 
-        {-dxp =
-            if cGameOver model then 0       -- skill 技能4
-            else if model.keys.left then if ski_3_eff then -10.0 else -7.0
-            else if model.keys.right then if ski_3_eff then 10.0 else 7.0
-            else
-                0.0
-        xp =
-            if cGameOver model then 44
-            else if model.pad_x + dt*dxp > 78 then 78  -- 90-12
-            else if model.pad_x + dt*dxp < 10 then 10
-            else model.pad_x + dt*dxp
------------* 开始计算碰撞
-        --ball
-        dxb0 =
-            if cGameOver model then 0
 
-            else if (cLeftBricks model || cLeftPillar model || cRightBricks model || cRightPillar model)
-            then
-                if isCyan == True then -1.05 * model.ball_vx
-                else if isRed == True then -0.8 * model.ball_vx
-                else if isPink == True then -1.2 * model.ball_vx
-                else -1 * model.ball_vx
-
-            else if cDownPaddle model
-            then model.ball_vx + 0.05 * model.pad_vx
-
-            else model.ball_vx
-
-        dyb0 =
-            if cGameOver model then 0
-
-            else if ( cUpBricks model || cUpPillar model || cDownPaddle model )
-            then
-                 if isCyan == True then -1.05 * model.ball_vy
-                 else if isRed == True then -0.8 * model.ball_vy
-                 else if isPink == True then -1.2 * model.ball_vy
-                 else -1 * model.ball_vy
-
-            else model.ball_vy
-
-        dxb1 = if ski_2_get then dxb0 * 0.5 else dxb0  -- skill 技能2
-        dyb1 = if ski_2_get then dyb0 *0.5 else dyb0
-
-        dxb = if ski_8_eff && (isCyan||isCyan) then dxb0 * 0.97 else dxb1  -- skill 技能2
-        dyb = if ski_8_eff && (isCyan||isCyan) then dyb0 *0.97 else dyb1
-
-        xb =
-            if cGameOver model then 50
-            else if model.ball_x + dt*dxb > (90 - r) then (90 - r)
-            else if model.ball_x + dt*dxb < (10 + r) then (10 + r)
-            else model.ball_x + dt*dxb
-
-        yb =
-            if cGameOver model then 37.5
-            else if model.ball_y + dt*dyb < (8 + r) then (8 + r)
-            else if model.ball_y + dt*dyb > (45 - r) then (45 - r)
-            else model.ball_y + dt*dyb-}
        ------  *黄球
-        dxb =
+        dxb0 =
             if cHit model.ball_x model.ball_y && cValidB model.gold_angle model.ball_x model.ball_y 42 30 && model.keys.enter  then 4 * (model.ball_x - 42) / ((42 - model.ball_x)^2 + (30 - model.ball_y)^2) ^ 0.5
             else if cHit model.ball_x model.ball_y then
             (-1 * (model.ball_x - 42)^2 * model.ball_vx + (model.ball_y - 30)^2 * model.ball_vx - 2 * (model.ball_x - 42) * (model.ball_y - 30) * model.ball_vy) / ((model.ball_x - 42)^2 + (model.ball_y - 30)^2)
@@ -438,7 +332,7 @@ updateTime model dt =
             else if cRightLeaf model || cLeftLeaf model then model.ball_vx * (-1)
             else model.ball_vx
 
-        dyb =
+        dyb0 =
             if cHit model.ball_x model.ball_y && cValidB model.gold_angle model.ball_x model.ball_y 42 30 && model.keys.enter then 4 * (model.ball_y - 30) / ((42 - model.ball_x)^2 + (30 - model.ball_y)^2) ^ 0.5
             else if cHit model.ball_x model.ball_y then
             (-2 * (model.ball_x - 42) * (model.ball_y - 30) * model.ball_vx + (model.ball_x - 42)^2 * model.ball_vy - (model.ball_y - 30)^2 * model.ball_vy) / ((model.ball_x - 42)^2 + (model.ball_y - 30)^2)
@@ -454,6 +348,15 @@ updateTime model dt =
             else if cUpLeaf model || cDownLeaf model then model.ball_vy * (-1)
             else model.ball_vy
 
+        dxb = if isRed then dxb0 * 1.1
+              else if isPink then dxb0 * 0.9
+              else dxb0
+
+        dyb = if isRed then dyb0 * 1.1
+              else if isPink then dyb0 * 0.9
+              else dyb0
+
+
         xb =
             if cIsHitGold model  && model.keys.enter == False then 42 + 5.5 * cos(degrees (model.gold_angle + 135))
             else model.ball_x + dt * dxb
@@ -464,16 +367,16 @@ updateTime model dt =
 
         -----  *踏板
         wp =  -- 蓝色,角速度
-            if model.keys.left then 2.0
-            else if model.keys.right then -2.0
+            if model.keys.left then if ski_3_eff then 3.0 else 2.0
+            else if model.keys.right then if ski_3_eff then -3.0 else -2.0
             else 0
 
         ap = if (model.gold_angle - model.pad_angle - 2 * wp > 90 && model.gold_angle - model.pad_angle - 2 * wp < 270) || (model.gold_angle - model.pad_angle - 2 * wp < -90 && model.gold_angle - model.pad_angle - 2 * wp > -270) then model.pad_angle + wp
              else model.pad_angle
 
         wg =   -- 金色,角速度
-            if model.keys.a then 2.0
-            else if model.keys.d then -2.0
+            if model.keys.a then if ski_3_eff then 3.0 else 2.0
+            else if model.keys.d then if ski_3_eff then -3.0 else -2.0
             else 0
 
         ag =   -- 金色,加速度
@@ -481,54 +384,56 @@ updateTime model dt =
              else model.gold_angle
 
         -----* 蓝球
+        next_point = if ski_4_eff && model.nextPoint == (0,0) then (1,0) else model.nextPoint
+
         vxb =
             if (model.attack == overAttack) then
-            if (model.nextPoint == (0, 0)) || (model.nextPoint == (0, 1)) then 3
-            else if (model.nextPoint == (1, 0)) || (model.nextPoint == (1, 1))then -3
-            else model.block_vx
+                if (next_point == (0, 0)) || (next_point == (0, 1)) then if ski_6_eff then 2.5 else 3.5
+                else if (next_point == (1, 0)) || (next_point == (1, 1))then if ski_6_eff then -2.5 else -3.5
+                else model.block_vx
             else if (cHit (model.block_x + 1) (model.block_y + 1)) then
                (-1 * (model.block_x - 42)^2 * model.block_vx + (model.block_y - 30)^2 * model.block_vx - 2 * (model.block_x - 42) * (model.block_y - 30) * model.block_vy) / ((model.block_x - 42)^2 + (model.block_y - 30)^2)
             else model.block_vx
 
         vyb =
             if (model.attack == overAttack) then
-            if (model.nextPoint == (0, 0)) || (model.nextPoint == (1, 0)) then 1.5
-            else if (model.nextPoint == (0, 1)) || (model.nextPoint == (1, 1)) then -1.5
-            else model.block_vy
+                if (next_point == (0, 0)) || (next_point == (1, 0)) then if ski_6_eff then 1.5 else 2
+                else if (next_point == (0, 1)) || (next_point == (1, 1)) then if ski_6_eff then -1.5 else -2
+                else model.block_vy
             else if (cHit (model.block_x + 1) (model.block_y + 1)) then
                     (-2 * (model.block_x - 42) * (model.block_y - 30) * model.block_vx + (model.block_x - 42)^2 * model.block_vy - (model.block_y - 30)^2 * model.block_vy) / ((model.block_x - 42)^2 + (model.block_y - 30)^2)
             else model.block_vy
 
         xBlock =
             if (model.attack == overAttack) then
-                    if (model.nextPoint == (0, 0)) || (model.nextPoint == (0, 1)) then 5 + dt * vxb
-                    else if (model.nextPoint == (1, 0)) || (model.nextPoint == (1, 1)) then 80 + dt * vxb
+                    if (next_point == (0, 0)) || (next_point == (0, 1)) then 5 + dt * vxb
+                    else if (next_point == (1, 0)) || (next_point == (1, 1)) then 80 + dt * vxb
                     else model.block_x + dt * vxb
             else model.block_x + dt * vxb
 
         yBlock =
             if (model.attack == overAttack) then
-                    if (model.nextPoint == (0, 0)) || (model.nextPoint == (1, 0)) then 10 + dt * vyb
-                    else if (model.nextPoint == (0, 1)) || (model.nextPoint == (1, 1)) then 50 + dt * vyb
+                    if (next_point == (0, 0)) || (next_point == (1, 0)) then 10 + dt * vyb
+                    else if (next_point == (0, 1)) || (next_point == (1, 1)) then 50 + dt * vyb
                     else model.block_y + dt * vyb
             else model.block_y + dt * vyb
 
         ----    *那几个壳子转的速度
         wLeft =
-            if model.wShell_left == 360 then dt * 10.0
-            else model.wShell_left + dt * 10.0
+            if model.wShell_left == 360 then if ski_8_eff then dt * 8.5 else dt * 10.0
+            else  if ski_8_eff then model.wShell_left + dt * 8.5 else model.wShell_left + dt * 10.0
 
         wRight =
-            if model.wShell_right == 360 then dt * 10.0
-            else model.wShell_right + dt * 10.0
+            if model.wShell_right == 360 then  if ski_8_eff then dt * 8.5 else dt * 10.0
+            else if ski_8_eff then model.wShell_right + dt * 8.5 else model.wShell_right + dt * 10.0
 
         wUp =
-            if model.wShell_up == 360 then dt * (-10.0)
-            else model.wShell_up + dt * (-10.0)
+            if model.wShell_up == 360 then  if ski_8_eff then dt * -(8.5) else dt * (-10.0)
+            else if ski_8_eff then model.wShell_up + dt * (-8.5) else model.wShell_up + dt * (-10.0)
 
         wDown =
-            if model.wShell_down == 360 then dt * (-50.0)
-            else model.wShell_down + dt * (-50.0)
+            if model.wShell_down == 360 then  if ski_8_eff then dt *(-40.0) else dt * (-50.0)
+            else  if ski_8_eff then model.wShell_down + dt * (-40.0) else model.wShell_down + dt * (-50.0)
 
 
         ----- * 其他
@@ -541,12 +446,16 @@ updateTime model dt =
         leaf =   --! 先把leaf变成combo
            combo
 
-        life =
-            if cIsHitKernel model  && cIsHitBlue model == False then model.life - 1
-            else if cHitB model.ball_x model.ball_y 42 46 && cValidB model.wShell_down model.ball_x model.ball_y 42 46 == True &&  model.life < 5  then model.life + 1   -- 击中下面的亮球
+        life0 =
+            if cIsHitKernel model  && cIsHitBlue model == False then if ski_10_eff && cIsHitGold model == True then model.life else model.life - 1
+            else if cHitB model.ball_x model.ball_y 42 46 && cValidB model.wShell_down model.ball_x model.ball_y 42 46 == True &&  model.life < 5  then if ski_7_eff then model.life + 2 else  model.life + 1   -- 击中下面的亮球
             else model.life
 
-        max_life = model.max_life
+        life = if ski_1_get then life0 + 1 else life0
+
+        max_life =
+            if ski_1_get then model.max_life + 1
+            else model.max_life
 
         clover =
             let
@@ -580,7 +489,6 @@ updateTime model dt =
               , block_x = xBlock, block_y = yBlock
               , attack = attackState
               , gold_angle = ag, gold_w = wg
-              , life = life
               , wShell_left = wLeft
               , wShell_right = wRight
               , wShell_up = wUp

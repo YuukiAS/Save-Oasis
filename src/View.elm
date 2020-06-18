@@ -27,7 +27,7 @@ view model =
                 [
                         renderInterface (Point 0 0) 100 65 background
                     ,   renderInterface (Point 2 0) 80 60 interface
-                     ,  if model.life == 5 then
+                     ,  if model.life >= 5 then
                         renderInterface (Point 38 26) 8 8 vKernel5
                         else if model.life == 4 then
                         renderInterface (Point 38 26) 8 8 vKernel4
@@ -41,10 +41,10 @@ view model =
                     ,   rotateCircle (Point model.pad_x model.pad_y) 10 10 pad model.pad_angle
                     ,   rotateCircle (Point model.gold_x model.gold_y) 10 10 gold model.gold_angle
                     ,   renderBall (Point model.ball_x model.ball_y) 2 2 ball
-                    ,   rotateCircle (Point 5 25) 10 10 circular model.wshell_left
-                    ,   rotateCircle (Point 69 25) 10 10 circular model.wshell_right
-                    ,   rotateCircle (Point 37 9) 10 10 circular model.wshell_up
-                    ,   rotateCircle (Point 37 41) 10 10 circular model.wshell_down
+                    ,   rotateCircle (Point 5 25) 10 10 circular model.wShell_left
+                    ,   rotateCircle (Point 69 25) 10 10 circular model.wShell_right
+                    ,   rotateCircle (Point 37 9) 10 10 circular model.wShell_up
+                    ,   rotateCircle (Point 37 41) 10 10 circular model.wShell_down
                     , if model.clover.upClover == False then
                         rotateCircle (Point 37 9) 10 10 vkf 0
                         else svg[][]
@@ -54,7 +54,7 @@ view model =
                     , if model.clover.rightClover == False then
                         rotateCircle (Point 69 25) 10 10 vkf 240
                         else svg[][]
-                    ,   if  (cValidB model.wshell_down model.ball_x model.ball_y 42 46) == True &&  model.life < 5
+                    ,   if  (cValidB model.wShell_down model.ball_x model.ball_y 42 46) == True &&  model.life < 5
                     then rotateCircle (Point 37 41) 10 10 brighter 0
                     else rotateCircle (Point 37 41) 10 10 bright 0
                     ,   renderRandGem (Point (model.block_x) (model.block_y)) 2 2 attacker
@@ -68,30 +68,12 @@ view model =
               , div [][renderMusic model]
               , div [][renderSE model]
             ]
-        {-[
-            div[style "backgroundColor" "#1d1d1d"][svg
-            [ viewBox "0 0 400 400" ]
-            (interweave  --? List.append会导致无法加载brick,但interweave可以
-            (List.append (List.append(List.append renderSettings (renderStatus model)) (renderRowBrick model (Point 10 8) 6.5 2.5 4 11)) (renderSkills model))
-            [
-                (renderDashboard (Point 40 0.5) 50 6),
-                (renderBackground (Point 0 0) 100 65 outBkg),
-                (renderBackground (Point 9 8) 82 37 outInterface),
-                (renderBall (Point model.ball_x model.ball_y) 2 2 outBall),
-                (renderPaddle (Point model.pad_x 40) 12 1 outPaddle)
-
-            ])]
-         , div [][renderGameButton model]
-         , div [][renderMusic model]
-         , div [][renderSE model]
-         --, embed [style "height" "50px", style "width" "100px", src "assets/musics/In Search of Life.mp3"][]
-        ]-}
 
 renderDashboard: Model -> List(Html Msg)   --* 包括整个dashboard
 renderDashboard model =
     (interweave
         (List.append(List.append renderSettings (renderStatus model)) (renderSkills model))
-        (renderPanel (Point 40 0.5) 50 6)
+        [renderPanel (Point 40 0.5) 50 6]
     )
 
 {-renderGameButton : Model -> Html Msg
@@ -157,4 +139,4 @@ renderMusic model =
                     TheChordOfSpring -> "assets/musics/The Chord of Spring.mp3"
                     InSearchOfLife ->"assets/musics/In Search of Life.mp3"
       in
-         embed [style "height" "50px", style "width" "100px", src music][]
+         embed [style "height" "50px", style "width" "100px", src music,loop True][]

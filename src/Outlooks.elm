@@ -24,6 +24,7 @@ vkf = "assets/main/clover.png"   -- 三叶草
 bright = "assets/main/brighten.png"
 brighter = "assets/main/brighterer.png"
 nor_leaf = "assets/main/bricks/normal.png" -- leaf是brick
+nor_leaf_2 = "assets/main/bricks/normal2.png"
 inc_leaf = "assets/main/bricks/increasing.png"
 dec_leaf = "assets/main/bricks/decreasing.png"
 

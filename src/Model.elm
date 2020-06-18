@@ -41,7 +41,6 @@ type Page
 
 type State
     = Playing -- 正在进行
-    | Paused  -- 暂停
     | Stopped -- 结束,等待再次开始(已胜利/失败)
 
 
@@ -188,12 +187,12 @@ initial flags url key =
       , minute = 0
       , second =  0
       , skills_ok = [False,False,False,False,False,False,False,False,False,False]
-      , skills_cost = [25,27,29,31,33,35,40,45,50,100]
+      , skills_cost = [20,30,30,30,40,40,50,50,75,100]
 
       , key = key
       , url = url
       , page = Home
-      , music = ReturnOfAncients
+      , music = TheOasis
       , difficulty = Normal
       , se = Quite
     }, Cmd.none)

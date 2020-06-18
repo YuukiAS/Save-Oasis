@@ -34,25 +34,26 @@ renderStatus model =
             ,star
             ,text_[x "42%", y"5.5%",fill "black",fontSize "4"][text ("Exp: "++String.fromInt model.exp)]
             ,leaf
-            ,if model.leaf /= 1 then text_[x "50%", y"2.5%",fill "black",fontSize "4"][text (String.fromInt model.leaf ++ " Lines cleared")] else text_[x "50%", y"2.5%",fill "black",fontSize "4"][text (String.fromInt model.leaf ++ " Line cleared")]
+            ,if model.leaf /= 1 then text_[x "50%", y"2.5%",fill "black",fontSize "4"][text (String.fromInt model.leaf ++ " Clovers collect")] else text_[x "50%", y"2.5%",fill "black",fontSize "4"][text (String.fromInt model.leaf ++ " Clover collect")]
             ,clock
             ,text_[x "50%", y"5.5%",fill "black",fontSize "4"][ text ("Time Played" ++ ":" ++ (out_minute) ++ ":" ++ out_second)]
+            --,text_[x "50%", y"6.5%",fill "black",fontSize "4"][ text ("Next Attack: " ++ next_pos)]
         ]
 
 
 renderSettings : List(Html Msg)
 renderSettings =
     let
-         volumeOn = svg[x "59%", y"0.8%"][Ionicon.volumeMedium 7 grey]
+         {-volumeOn = svg[x "59%", y"0.8%"][Ionicon.volumeMedium 7 grey]
          volumeOff = svg[x "59%", y"0.8%"][Ionicon.volumeMute 7 grey]
          pause = svg[x "59%", y"2.8%"][Ionicon.pause 7 grey]
-         play = svg[x "59%", y"2.8%"][Ionicon.pause 7 grey]
+         play = svg[x "59%", y"2.8%"][Ionicon.pause 7 grey]-}
          refresh = svg[x "59%", y"2.2%"][Ionicon.refresh 9 grey]
-         home = svg[x "62%", y"1.2%"][Ionicon.home 9 grey]
-         help = svg[x "62%", y"4%"][Ionicon.help 9 grey]
+         home = svg[x "62%", y"1%"][Ionicon.home 9 grey]
+         help = svg[x "62%", y"3.8%"][Ionicon.help 9 grey]
          hype1 = rect[x "62%", y"1.2%",width"2%",height"2%",fillOpacity"0",onClick GoHome][]  -- 对于home和help的超链接
          hype2 = rect[x "62%", y"4%",width"2%",height"2%",fillOpacity"0",onClick GoHelp][] --* hidden和fill none 都不行!
-         hype3 = rect[x "59%", y"2.2%",width"2%",height"2%",fillOpacity"0",onClick Pause][]
+         --hype3 = rect[x "59%", y"2.2%",width"2%",height"2%",fillOpacity"0",onClick Pause][]  --todo 实现pause
     in
             [
                 refresh
@@ -60,7 +61,7 @@ renderSettings =
                 ,help
                 ,hype1
                 ,hype2
-                ,hype3
+                --,hype3
             ]
 
 
@@ -70,15 +71,15 @@ renderSkills model =
         stx = 65
         wid = 2.5
         t1 = image[x ((String.fromFloat (stx+wid*0))++"%"), y"1%",width "2%", height"2%",xlinkHref trait8][]  -- 生命值+1生命上限+1(一次性)
-        t2 = image[x ((String.fromFloat (stx+wid*1))++"%"), y"1%",width "2%", height"2%",xlinkHref trait2][] -- 球减速(一次性)
+        t2 = image[x ((String.fromFloat (stx+wid*1))++"%"), y"1%",width "2%", height"2%",xlinkHref trait11][] -- 技能花费-10(一次性)
         t3 = image[x ((String.fromFloat (stx+wid*2))++"%"), y"1%",width "2%", height"2%",xlinkHref trait13][] -- 踏板加速(持续性)
-        t4 = image[x ((String.fromFloat (stx+wid*3))++"%"), y"1%",width "2%", height"2%",xlinkHref trait11][] -- 技能花费-10 (一次性)
+        t4 = image[x ((String.fromFloat (stx+wid*3))++"%"), y"1%",width "2%", height"2%",xlinkHref trait2][] --  禁止一个发射口(持续性)
         t5 = image[x ((String.fromFloat (stx+wid*4))++"%"), y"1%",width "2%", height"2%",xlinkHref trait10][] -- 经验值获得增加(持续性)
-        t6 = image[x ((String.fromFloat (stx+wid*5))++"%"), y"1%",width "2%", height"2%",xlinkHref trait6][] -- 打红色不掉血(持续性)
-        t7 = image[x ((String.fromFloat (stx+wid*6))++"%"), y"1%",width "2%", height"2%",xlinkHref trait1][] -- 定时回血(持续)
-        t8 = image[x ((String.fromFloat (stx+wid*7))++"%"), y"1%",width "2%", height"2%",xlinkHref trait12][] --不加速(持续性)
-        t9 = image[x ((String.fromFloat (stx+wid*8))++"%"), y"1%",width "2%", height"2%",xlinkHref trait4][] -- 定时消失方块(持续性)
-        t10 = image[x ((String.fromFloat (stx+wid*9))++"%"), y"1%",width "2%", height"2%",xlinkHref trait5][] -- 打一次=两次(持续性)
+        t6 = image[x ((String.fromFloat (stx+wid*5))++"%"), y"1%",width "2%", height"2%",xlinkHref trait6][] -- 蓝球减速(持续性)
+        t7 = image[x ((String.fromFloat (stx+wid*6))++"%"), y"1%",width "2%", height"2%",xlinkHref trait1][] -- 击中+2血(持续性)
+        t8 = image[x ((String.fromFloat (stx+wid*7))++"%"), y"1%",width "2%", height"2%",xlinkHref trait12][] --壳转速下降(持续性)
+        t9 = image[x ((String.fromFloat (stx+wid*8))++"%"), y"1%",width "2%", height"2%",xlinkHref trait4][] -- 一击致命(持续性)
+        t10 = image[x ((String.fromFloat (stx+wid*9))++"%"), y"1%",width "2%", height"2%",xlinkHref trait5][] -- 金色踏板可以防御(持续性)
     in
          [
             t1,t2,t3,t4,t5,t6,t7,t8,t9,t10,
@@ -105,10 +106,12 @@ skillCost model num =
 skillStatus: Model->Float-> Html Msg
 skillStatus model num =
     let
-        sta = if (getAt (floor(num) - 1) model.skills_ok == Just True) then "Yes" else "No"
+       -- sta = if (getAt (floor(num) - 1) model.skills_ok == Just True) then "Yes" else "No"
+        sta = if (getAt (floor(num) - 1) model.skills_ok == Just True) then Ionicon.checkmarkRound 4 green else Ionicon.closeRound 4 red
         xx = 65+ (num - 1) * 2.5
         xxx = (String.fromFloat xx) ++ "%"
     in
-        text_[x xxx, y"5.5%",fill "black",fontSize "3"][text sta]
+       -- text_[x xxx, y"5.5%",fill "black",fontSize "3"][text sta] --todo 改成图标
+       svg[x xxx, y"5.2%"][sta]
 
 
