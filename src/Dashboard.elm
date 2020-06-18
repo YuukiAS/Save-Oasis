@@ -76,7 +76,7 @@ renderSkills model =
         t5 = image[x ((String.fromFloat (stx+wid*4))++"%"), y"1%",width "2%", height"2%",xlinkHref trait10][] -- 经验值获得增加(持续性)
         t6 = image[x ((String.fromFloat (stx+wid*5))++"%"), y"1%",width "2%", height"2%",xlinkHref trait6][] -- 打红色不掉血(持续性)
         t7 = image[x ((String.fromFloat (stx+wid*6))++"%"), y"1%",width "2%", height"2%",xlinkHref trait1][] -- 定时回血(持续)
-        t8 = image[x ((String.fromFloat (stx+wid*7))++"%"), y"1%",width "2%", height"2%",xlinkHref trait12][] -- 打boss用(暂时未定)(持续性)
+        t8 = image[x ((String.fromFloat (stx+wid*7))++"%"), y"1%",width "2%", height"2%",xlinkHref trait12][] --不加速(持续性)
         t9 = image[x ((String.fromFloat (stx+wid*8))++"%"), y"1%",width "2%", height"2%",xlinkHref trait4][] -- 定时消失方块(持续性)
         t10 = image[x ((String.fromFloat (stx+wid*9))++"%"), y"1%",width "2%", height"2%",xlinkHref trait5][] -- 打一次=两次(持续性)
     in
@@ -94,8 +94,6 @@ fromJust x = case x of
 skillCost: Model->Float-> Html Msg
 skillCost model num =
     let
-        --tot_skill = count ((==) False) model.skills_ok
-        --req_exp = 25 + 10*tot_skill + floor(num)*5
         req_exp = getAt (floor(num) - 1) model.skills_cost
         xx = 65+ (num - 1) * 2.5
         xxx = (String.fromFloat xx) ++ "%"

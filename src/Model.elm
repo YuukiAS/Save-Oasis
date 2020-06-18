@@ -40,9 +40,9 @@ type Page
     | Game
 
 type State
-    = Paused
-    | Playing
-    | Stopped
+    = Playing -- 正在进行
+    | Paused  -- 暂停
+    | Stopped -- 结束,等待再次开始(已胜利/失败)
 
 
 type alias AttackState =
@@ -51,6 +51,13 @@ type alias AttackState =
     ,   success: Bool
     }
 
+ongoingAttack: AttackState
+ongoingAttack =
+    AttackState True False
+
+overAttack: AttackState
+overAttack =
+    AttackState False False
 type alias Clover =
   {
       leftClover : Bool  -- 判断是否打到
@@ -58,21 +65,7 @@ type alias Clover =
     , upClover : Bool
   }
 
-ongoingAttack: AttackState
-ongoingAttack =
-    AttackState True False
 
-successfulAttack: AttackState
-successfulAttack =
-    AttackState True True
-
-failedAttack: AttackState
-failedAttack =
-    AttackState True False
-
-overAttack: AttackState
-overAttack =
-    AttackState False False
 
 type alias Model =
     { keys : Keys
@@ -97,10 +90,10 @@ type alias Model =
     , block_x : Float
     , block_y : Float
 
-    , wshell_left : Float
-    , wshell_up : Float
-    , wshell_right : Float
-    , wshell_down : Float
+    , wShell_left : Float
+    , wShell_up : Float
+    , wShell_right : Float
+    , wShell_down : Float
 
 
     , clover : Clover
@@ -142,7 +135,7 @@ initial : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 initial flags url key =
     ({
         keys = nokeys
-      , state = Paused
+      , state = Playing
       , pad_x = 37
       , pad_y = 25
       , pad_angle = 0 -- 加速度
@@ -163,10 +156,10 @@ initial flags url key =
       , block_x = 10
       , block_y = 10
 
-      , wshell_left = 0
-      , wshell_up = 120
-      , wshell_right = 240
-      , wshell_down = 0
+      , wShell_left = 0
+      , wShell_up = 120
+      , wShell_right = 240
+      , wShell_down = 0
 
       , clover = Clover False False False
 
@@ -174,26 +167,16 @@ initial flags url key =
       , blueLeaves =
       [
        (0, 4), (1, 4), (2, 4), (3, 4), (4, 4), (5, 4), (6, 4), (7, 4), (8, 4), (9, 4), (10, 4),
+       (0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5), (6, 5), (7, 5), (8, 5), (9, 5), (10, 5),
        (0, 6), (1, 6), (2, 6), (3, 6), (4, 6), (5, 6), (6, 6), (7, 6), (8, 6), (9, 6), (10, 6),
        (0, 13), (1, 13), (2, 13), (3, 13), (4, 13), (5, 13), (6, 13), (7, 13), (8, 13), (9, 13), (10, 13),
+       (0, 14), (1, 14), (2, 14), (3, 14), (4, 14), (5, 14), (6, 14), (7, 14), (8, 14), (9, 14), (10, 14),
        (0, 15), (1, 15), (2, 15), (3, 15), (4, 15), (5, 15), (6, 15), (7, 15), (8, 15), (9, 15), (10, 15)
        ]
        , cyanLeaves = []
        , pinkLeaves = []
        , redLeaves = []
        , attack = ongoingAttack
-      {-, blueBricks =
-        [ (0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (0, 9), (0, 10), (0, 11)
-        , (1, 0), (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11)
-        , (2, 0), (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11)
-        , (3, 0), (3, 1), (3, 2), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10), (3, 11)
-        , (4, 0), (4, 1), (4, 2), (4, 3), (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9), (4, 10), (4, 11)
-        ]
-      , cyanBricks = []
-      , pinkBricks = []
-      , redBricks = []
-      , emptyBricks = []-}
-
       , nextBrick = Outlooks.Red
       , nextPoint = (0, 0)
 

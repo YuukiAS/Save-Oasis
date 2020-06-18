@@ -48,9 +48,9 @@ view model =
 
         title =
             case model.page of
-                Home -> "Save Oasis"
-                Help -> "Settings"
-                Game -> "Let's save the oasis!"
+                Home -> "Save Oasis-Home"
+                Help -> "Save Oasis-Settings"
+                Game -> "Save the oasis!"
     in
         {
             title = title          --* 这样改变标题

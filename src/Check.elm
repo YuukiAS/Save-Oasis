@@ -64,14 +64,6 @@ cDownPillar model t =
     then True
     else False
 
-cisCoordinate : Model -> (Int, Int)
-cisCoordinate model =
-    if cLeftLeaf model == True then ballLeftCoordinate model
-    else if cDownLeaf model == True then ballDownCoordinate model
-    else if cUpLeaf model == True then ballUpCoordinate model
-    else if cRightLeaf model == True then ballRightCoordinate model
-    else (0, 0)
-
 cLeftLeaf : Model -> Bool   -- 这四个都是打到砖块
 cLeftLeaf model =
     if (List.member (ballLeftCoordinate model) model.blueLeaves) && (List.member (ballLeftCoordinate model) model.emptyLeaves == False)
@@ -95,3 +87,40 @@ cDownLeaf model =
     if (List.member (ballDownCoordinate model) model.blueLeaves) && (List.member (ballDownCoordinate model) model.emptyLeaves == False)
     then True
     else False
+
+
+cIsCoordinate : Model -> (Int, Int)
+cIsCoordinate model =
+    if cLeftLeaf model == True then ballLeftCoordinate model
+    else if cDownLeaf model == True then ballDownCoordinate model
+    else if cUpLeaf model == True then ballUpCoordinate model
+    else if cRightLeaf model == True then ballRightCoordinate model
+    else (0, 0)  -- * cIsHitLeaf 判断是否接触砖块
+
+cIsHitKernel: Model -> Bool   --* 这只代表会碰到,不代表一定掉血
+cIsHitKernel model =
+    if cHit (model.block_x + 1) (model.block_y + 1) then True else False
+
+cIsHitBlue : Model -> Bool
+cIsHitBlue model =
+    if cValidB model.pad_angle (model.block_x + 1) (model.block_y + 1) 42 30 then True else False
+
+cIsHitGold : Model -> Bool
+cIsHitGold model =
+    if cHit model.ball_x model.ball_y && cValidB model.gold_angle model.ball_x model.ball_y 42 30 then True else False
+
+cIsHitShell : Model -> Bool   -- 撞到保护外壳
+cIsHitShell model =
+    if cHitB model.ball_x model.ball_y 10 30 && cValidB  model.wShell_left model.ball_x model.ball_y 10 30  == False then True
+    else if  cHitB model.ball_x model.ball_y 74 30 && cValidB  model.wShell_right model.ball_x model.ball_y 74 30  == False then True
+    else if cHitB model.ball_x model.ball_y 42 14 && cValidB  model.wShell_up model.ball_x model.ball_y 42 14 == False then True
+    else if cHitB model.ball_x model.ball_y 42 46 == True then True
+    else False
+
+cIsWin: Model -> Bool
+cIsWin model =
+    if  model.clover.leftClover && model.clover.rightClover && model.clover.upClover then True else False
+
+cIsLose: Model -> Bool
+cIsLose model =
+    if model.life <= 0 then True else False
