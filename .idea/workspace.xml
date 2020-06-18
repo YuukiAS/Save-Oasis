@@ -68,7 +68,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -308,10 +308,10 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="30" y="74" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1590942094357" />
-    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1592470722454">
+    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1592493791195">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1592470722454" />
+    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1592493791195" />
     <state x="520" y="307" key="EnvironmentVariablesDialog" timestamp="1590727828040">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
