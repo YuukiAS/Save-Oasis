@@ -1,25 +1,25 @@
 # Save Oasis Instructions
-![1](D:\Projects\VG100_Project1\README.assets\1.jpg)
+![1](README.assets\1.jpg)
 
-![2](D:\Projects\VG100_Project1\README.assets\2.jpg)
+![2](README.assets\2.jpg)
 
 
 
-![3](D:\Projects\VG100_Project1\README.assets\3.jpg)
+![3](README.assets\3.jpg)
 
-![4](D:\Projects\VG100_Project1\README.assets\4.jpg)
+![4](README.assets\4.jpg)
 
-![5](D:\Projects\VG100_Project1\README.assets\5.jpg)
+![5](README.assets\5.jpg)
 
-![6](D:\Projects\VG100_Project1\README.assets\6.jpg)
+![6](README.assets\6.jpg)
 
-![7](D:\Projects\VG100_Project1\README.assets\7.jpg)
+![7](README.assets\7.jpg)
 
-![8](D:\Projects\VG100_Project1\README.assets\8.jpg)
+![8](README.assets\8.jpg)
 
-![9](D:\Projects\VG100_Project1\README.assets\9.jpg)
+![9](README.assets\9.jpg)
 
-![10](D:\Projects\VG100_Project1\README.assets\10.jpg)
+![10](README.assets\10.jpg)
 
 # Have a good time!
 
