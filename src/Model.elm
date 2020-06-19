@@ -1,6 +1,6 @@
 module Model exposing (..)
 import Message exposing (Msg)
-import Outlooks exposing (Music(..),Difficulty(..),SE(..))
+import Outlooks exposing (..)
 import Url
 import Browser.Navigation as Nav
 
@@ -128,13 +128,15 @@ type alias Model =
     , music : Outlooks.Music
     , difficulty: Outlooks.Difficulty
     , se : Outlooks.SE
+    , booklet : Outlooks.Page
+    , showingpage : String
     }
 
 initial : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 initial flags url key =
     ({
         keys = nokeys
-      , state = Playing
+      , state = Stopped
       , pad_x = 37
       , pad_y = 25
       , pad_angle = 0 -- 加速度
@@ -187,7 +189,7 @@ initial flags url key =
       , minute = 0
       , second =  0
       , skills_ok = [False,False,False,False,False,False,False,False,False,False]
-      , skills_cost = [20,30,30,30,40,40,50,50,75,100]
+      , skills_cost = [10,15,20,25,30,40,50,60,70,80]
 
       , key = key
       , url = url
@@ -195,5 +197,7 @@ initial flags url key =
       , music = TheOasis
       , difficulty = Normal
       , se = Quite
+      , booklet = Initi
+      , showingpage = page1
     }, Cmd.none)
 

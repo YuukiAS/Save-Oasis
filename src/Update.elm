@@ -1,5 +1,6 @@
 module Update exposing (..)
 
+import Help exposing (bookletList, nextOne, previousOne)
 import Model exposing (..)
 import Message exposing (..)
 import Check exposing (..)
@@ -53,74 +54,70 @@ update msg model =
 
         NewPoint newPoint ->({model|nextPoint = newPoint},Cmd.none)
 
-       {-} Resume ->
-                     ( { model
-                         | state = Paused
-                         , blueBricks =
-                         [ (0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (0, 7), (0, 8), (0, 9), (0, 10), (0, 11)
-                         , (1, 0), (1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1, 7), (1, 8), (1, 9), (1, 10), (1, 11)
-                         , (2, 0), (2, 1), (2, 2), (2, 3), (2, 4), (2, 5), (2, 6), (2, 7), (2, 8), (2, 9), (2, 10), (2, 11)
-                         , (3, 0), (3, 1), (3, 2), (3, 3), (3, 4), (3, 5), (3, 6), (3, 7), (3, 8), (3, 9), (3, 10), (3, 11)
-                         , (4, 0), (4, 1), (4, 2), (4, 3), (4, 4), (4, 5), (4, 6), (4, 7), (4, 8), (4, 9), (4, 10), (4, 11)
-                         ]
-                         , cyanBricks = []
-                         , redBricks = []
-                         , pinkBricks = []
-                         , emptyBricks = []
-                         , ball_vx = 1
-                         , ball_vy = -1
-                         , ball_x = 50
-                         , ball_y = 37.5
-                         , pad_x = 44
-                         , pad_vx = 0
-                       }
-                     , Cmd.none
-                     )
-
-        Pause ->    -- 开始时是Pause
-            let
-                life = case model.difficulty of
-                        Normal -> 5
-                        Hard -> 3
-                        Nightmare -> 1
-                max_life = case model.difficulty of
-                        Normal -> 5
-                        Hard -> 3
-                        Nightmare -> 1
-                expN = case model.difficulty of
-                       Normal -> 1
-                       Hard -> 2
-                       Nightmare -> 3
-            in
-                ({ model | state = Paused
-                , cyanBricks = []
-                 , redBricks = []
-                 , pinkBricks = []
-                 , emptyBricks = []
-                , ball_x = 50
-                , pad_x = 44
-                , pad_vx = 0
-                , ball_y = 37.5
-                , life = life
-                , exp = 0
-                , max_life = max_life
-                , skills_ok = [False,False,False,False,False,False,False,False,False,False]
-                , skills_cost = [25*expN,27*expN,29*expN,31*expN,33*expN,35*expN,40*expN,45*expN,50*expN,100*expN]
-                }, Cmd.none)
+        Alterpage booklet -> (updateBooklet model, Cmd.none)
 
         Start ->
                     ({ model |
                      state = Playing
-                     , ball_y = 37.5
-                     , ball_x = 50
-                     , ball_vx = 3
-                     , ball_vy = -3
-                     , se = Quite
-                     }, Cmd.none
-                     )
+                     , pad_x = 37
+                           , pad_y = 25
+                           , pad_angle = 0 -- 加速度
+                           , pad_w = 0
+
+                           , gold_x = 37
+                           , gold_y = 25
+                           , gold_angle = 180
+                           , gold_w = 0
+
+                           , ball_x = 47
+                           , ball_y = 35
+                           , ball_vx = -3.0
+                           , ball_vy = -3.0
+
+                           , block_vx = 3
+                           , block_vy = 1.5
+                           , block_x = 10
+                           , block_y = 10
+
+                           , wShell_left = 0
+                           , wShell_up = 120
+                           , wShell_right = 240
+                           , wShell_down = 0
+
+                           , clover = Clover False False False
+
+                           , emptyLeaves = []
+                           , blueLeaves =
+                           [
+                            (0, 4), (1, 4), (2, 4), (3, 4), (4, 4), (5, 4), (6, 4), (7, 4), (8, 4), (9, 4), (10, 4),
+                            (0, 5), (1, 5), (2, 5), (3, 5), (4, 5), (5, 5), (6, 5), (7, 5), (8, 5), (9, 5), (10, 5),
+                            (0, 6), (1, 6), (2, 6), (3, 6), (4, 6), (5, 6), (6, 6), (7, 6), (8, 6), (9, 6), (10, 6),
+                            (0, 13), (1, 13), (2, 13), (3, 13), (4, 13), (5, 13), (6, 13), (7, 13), (8, 13), (9, 13), (10, 13),
+                            (0, 14), (1, 14), (2, 14), (3, 14), (4, 14), (5, 14), (6, 14), (7, 14), (8, 14), (9, 14), (10, 14),
+                            (0, 15), (1, 15), (2, 15), (3, 15), (4, 15), (5, 15), (6, 15), (7, 15), (8, 15), (9, 15), (10, 15)
+                            ]
+                            , cyanLeaves = []
+                            , pinkLeaves = []
+                            , redLeaves = []
+                            , attack = ongoingAttack
+                           , nextBrick = Outlooks.Red
+                           , nextPoint = (0, 0)
+
+                           , life = 5
+                           , max_life = 5
+                           , exp = 0
+                           , leaf = 0
+                           , combo = 0
+                           , minute = 0
+                           , second =  0
+                           , skills_ok = [False,False,False,False,False,False,False,False,False,False]
+                           , skills_cost = [10,15,20,25,30,40,50,60,70,80]
+
+                           , se = Quite
+                         }, Cmd.none)
 
         Keep ->
-           ({ model | state = Playing }, Cmd.none )-}
+           ({ model | state = Playing }, Cmd.none )
 
         Tick newTime ->
             let
@@ -176,6 +173,22 @@ update msg model =
                     , skills_cost = [25*expN,27*expN,29*expN,31*expN,33*expN,35*expN,40*expN,45*expN,50*expN,100*expN]
                 },Cmd.none)
 
+
+updateBooklet : Model -> Model
+updateBooklet model =
+    let
+        booklet =
+            case model.booklet of
+                 Initi -> List.head bookletList
+                 Previousone ->
+                     if model.showingpage == Maybe.withDefault "a"(List.head bookletList) then List.head(List.reverse bookletList)
+                     else previousOne model bookletList
+                 Nextone ->
+                     if model.showingpage == Maybe.withDefault "a"(List.head (List.reverse bookletList)) then List.head bookletList
+                     else nextOne model bookletList
+
+    in
+        {model | showingpage = Maybe.withDefault "a"(booklet) }
 
 updateKeys : Bool -> String -> Keys -> Keys
 updateKeys isDown key keys =
@@ -444,7 +457,13 @@ updateTime model dt =
                 else model.combo
 
         leaf =   --! 先把leaf变成combo
-           combo
+            if (model.clover.leftClover == False && model.clover.rightClover == False && model.clover.upClover == False)
+            then 0
+            else if ((model.clover.leftClover == True && model.clover.rightClover == False && model.clover.upClover == False) || (model.clover.leftClover == False && model.clover.rightClover == True && model.clover.upClover == False) || (model.clover.leftClover == False && model.clover.rightClover == False && model.clover.upClover == True))
+            then 1
+            else if ((model.clover.leftClover == True && model.clover.rightClover == True && model.clover.upClover == False) || (model.clover.leftClover == False && model.clover.rightClover == True && model.clover.upClover == True) || (model.clover.leftClover == True && model.clover.rightClover == False && model.clover.upClover == True))
+            then 2
+            else 3
 
         life0 =
             if cIsHitKernel model  && cIsHitBlue model == False then if ski_10_eff && cIsHitGold model == True then model.life else model.life - 1

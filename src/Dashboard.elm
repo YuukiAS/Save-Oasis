@@ -14,7 +14,7 @@ import List.Extra exposing (interweave,count,getAt)
 
 renderPanel: Point -> Float -> Float -> Html msg
 renderPanel point wid hei =
-   rect [x ((String.fromFloat point.x)++"%"), y ((String.fromFloat point.y)++"%"), width ((String.fromFloat wid)++"%"), height ((String.fromFloat hei)++"%") ,fill "white",opacity "0.5"][]
+   rect [x ((String.fromFloat point.x)++"%"), y ((String.fromFloat point.y)++"%"), width ((String.fromFloat wid)++"%"), height ((String.fromFloat hei)++"%") ,fill "#393938f3",opacity "0.5"][]
 
 
 
@@ -30,13 +30,13 @@ renderStatus model =
      in
         [
              life
-            ,text_[x "42%", y"2.5%",fill "black",fontSize "4"][text  ("Life: "++ String.fromInt model.life ++ "/" ++ String.fromInt model.max_life)]
+            ,text_[x "42%", y"2.5%",fill "white",fontSize "4"][text  ("Life: "++ String.fromInt model.life ++ "/" ++ String.fromInt model.max_life)]
             ,star
-            ,text_[x "42%", y"5.5%",fill "black",fontSize "4"][text ("Exp: "++String.fromInt model.exp)]
+            ,text_[x "42%", y"5.5%",fill "white",fontSize "4"][text ("Exp: "++String.fromInt model.exp)]
             ,leaf
-            ,if model.leaf /= 1 then text_[x "50%", y"2.5%",fill "black",fontSize "4"][text (String.fromInt model.leaf ++ " Clovers collect")] else text_[x "50%", y"2.5%",fill "black",fontSize "4"][text (String.fromInt model.leaf ++ " Clover collect")]
+            ,if model.leaf /= 1 then text_[x "50%", y"2.5%",fill "white",fontSize "4"][text (String.fromInt model.leaf ++ " Clovers collect")] else text_[x "50%", y"2.5%",fill "white",fontSize "4"][text (String.fromInt model.leaf ++ " Clover collect")]
             ,clock
-            ,text_[x "50%", y"5.5%",fill "black",fontSize "4"][ text ("Time Played" ++ ":" ++ (out_minute) ++ ":" ++ out_second)]
+            ,text_[x "50%", y"5.5%",fill "white",fontSize "4"][ text ("Time Played" ++ ":" ++ (out_minute) ++ ":" ++ out_second)]
             --,text_[x "50%", y"6.5%",fill "black",fontSize "4"][ text ("Next Attack: " ++ next_pos)]
         ]
 
@@ -44,24 +44,22 @@ renderStatus model =
 renderSettings : List(Html Msg)
 renderSettings =
     let
-         {-volumeOn = svg[x "59%", y"0.8%"][Ionicon.volumeMedium 7 grey]
-         volumeOff = svg[x "59%", y"0.8%"][Ionicon.volumeMute 7 grey]
-         pause = svg[x "59%", y"2.8%"][Ionicon.pause 7 grey]
-         play = svg[x "59%", y"2.8%"][Ionicon.pause 7 grey]-}
+
          refresh = svg[x "59%", y"2.2%"][Ionicon.refresh 9 grey]
          home = svg[x "62%", y"1%"][Ionicon.home 9 grey]
          help = svg[x "62%", y"3.8%"][Ionicon.help 9 grey]
          hype1 = rect[x "62%", y"1.2%",width"2%",height"2%",fillOpacity"0",onClick GoHome][]  -- 对于home和help的超链接
          hype2 = rect[x "62%", y"4%",width"2%",height"2%",fillOpacity"0",onClick GoHelp][] --* hidden和fill none 都不行!
-         --hype3 = rect[x "59%", y"2.2%",width"2%",height"2%",fillOpacity"0",onClick Pause][]  --todo 实现pause
+         hype3 = rect[x "59%", y"2.2%",width"2%",height"2%",fillOpacity"0",onClick Start][]
     in
             [
                 refresh
                 ,home
-                ,help
                 ,hype1
                 ,hype2
-                --,hype3
+                ,hype3
+                ,help
+
             ]
 
 
@@ -99,7 +97,7 @@ skillCost model num =
         xx = 65+ (num - 1) * 2.5
         xxx = (String.fromFloat xx) ++ "%"
     in
-        text_[x xxx, y"4%",fill "black",fontSize "3"][text ("C:"++(String.fromInt (fromJust req_exp)))]
+        text_[x xxx, y"4%",fill "white",fontSize "3"][text ("C:"++(String.fromInt (fromJust req_exp)))]
 
 
 

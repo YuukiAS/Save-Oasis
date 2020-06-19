@@ -33,6 +33,7 @@ cloverC = "assets/main/clover/core.png" -- Core
 cloverL = "assets/main/clover/left.png"
 cloverR = "assets/main/clover/right.png"
 cloverU = "assets/main/clover/up.png"
+forclover = "assets/main/clover/forclover.png"
 
 
 trait1 = "assets/skills/Trait_charismatic.png"
@@ -48,6 +49,19 @@ trait10 = "assets/skills/Trait_intelligent.png"
 trait11 = "assets/skills/Trait_very_intelligent.png"
 trait12 = "assets/skills/Trait_boss.png"
 trait13 = "assets/skills/Trait_rapid_speed.png"
+
+page1 = "assets/booklet/1.jpg"
+page2 = "assets/booklet/2.jpg"
+page3 = "assets/booklet/3.jpg"
+page4 = "assets/booklet/4.jpg"
+page5 = "assets/booklet/5.jpg"
+page6 = "assets/booklet/6.jpg"
+page7 = "assets/booklet/7.jpg"
+page8 = "assets/booklet/8.jpg"
+page9 = "assets/booklet/9.jpg"
+page10 = "assets/booklet/10.jpg"
+page11 = "assets/booklet/11.jpg"
+
 
 
 
@@ -74,3 +88,12 @@ type Difficulty
     = Normal
     | Hard
     | Nightmare
+
+
+type Page
+    = Previousone
+    | Nextone
+    | Initi
+
+--
+viewbackground = "assets/views/viewbkg.png"

@@ -62,6 +62,10 @@ renderRowBrick point model wid hei num1 num2 =
     else
         []
 
+renderBooklet: Point -> Float -> Float -> String -> Html msg
+renderBooklet point wid hei pic =
+    image [xlinkHref pic, x ((String.fromFloat point.x)++"%"), y ((String.fromFloat point.y)++"%"), width ((String.fromFloat wid)++"%"), height ((String.fromFloat hei)++"%")][]
+
 
 {-
 

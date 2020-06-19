@@ -5351,10 +5351,11 @@ var $author$project$Model$Clover = F3(
 		return {leftClover: leftClover, rightClover: rightClover, upClover: upClover};
 	});
 var $author$project$Model$Home = {$: 'Home'};
+var $author$project$Outlooks$Initi = {$: 'Initi'};
 var $author$project$Outlooks$Normal = {$: 'Normal'};
-var $author$project$Model$Playing = {$: 'Playing'};
 var $author$project$Outlooks$Quite = {$: 'Quite'};
 var $author$project$Outlooks$Red = {$: 'Red'};
+var $author$project$Model$Stopped = {$: 'Stopped'};
 var $author$project$Outlooks$TheOasis = {$: 'TheOasis'};
 var $elm$core$Basics$negate = function (n) {
 	return -n;
@@ -5398,6 +5399,7 @@ var $author$project$Model$AttackState = F2(
 		return {ongoing: ongoing, success: success};
 	});
 var $author$project$Model$ongoingAttack = A2($author$project$Model$AttackState, true, false);
+var $author$project$Outlooks$page1 = 'assets/booklet/1.jpg';
 var $author$project$Model$initial = F3(
 	function (flags, url, key) {
 		return _Utils_Tuple2(
@@ -5480,6 +5482,7 @@ var $author$project$Model$initial = F3(
 						_Utils_Tuple2(9, 15),
 						_Utils_Tuple2(10, 15)
 					]),
+				booklet: $author$project$Outlooks$Initi,
 				clover: A3($author$project$Model$Clover, false, false, false),
 				combo: 0,
 				cyanLeaves: _List_Nil,
@@ -5508,11 +5511,12 @@ var $author$project$Model$initial = F3(
 				redLeaves: _List_Nil,
 				se: $author$project$Outlooks$Quite,
 				second: 0,
+				showingpage: $author$project$Outlooks$page1,
 				skills_cost: _List_fromArray(
-					[20, 30, 30, 30, 40, 40, 50, 50, 75, 100]),
+					[10, 15, 20, 25, 30, 40, 50, 60, 70, 80]),
 				skills_ok: _List_fromArray(
 					[false, false, false, false, false, false, false, false, false, false]),
-				state: $author$project$Model$Playing,
+				state: $author$project$Model$Stopped,
 				url: url,
 				wShell_down: 0,
 				wShell_left: 0,
@@ -5525,6 +5529,7 @@ var $author$project$Message$KeyChanged = F2(
 	function (a, b) {
 		return {$: 'KeyChanged', a: a, b: b};
 	});
+var $author$project$Model$Playing = {$: 'Playing'};
 var $author$project$Message$Tick = function (a) {
 	return {$: 'Tick', a: a};
 };
@@ -6582,6 +6587,137 @@ var $elm$url$Url$toString = function (url) {
 					_Utils_ap(http, url.host)),
 				url.path)));
 };
+var $author$project$Outlooks$page10 = 'assets/booklet/10.jpg';
+var $author$project$Outlooks$page11 = 'assets/booklet/11.jpg';
+var $author$project$Outlooks$page2 = 'assets/booklet/2.jpg';
+var $author$project$Outlooks$page3 = 'assets/booklet/3.jpg';
+var $author$project$Outlooks$page4 = 'assets/booklet/4.jpg';
+var $author$project$Outlooks$page5 = 'assets/booklet/5.jpg';
+var $author$project$Outlooks$page6 = 'assets/booklet/6.jpg';
+var $author$project$Outlooks$page7 = 'assets/booklet/7.jpg';
+var $author$project$Outlooks$page8 = 'assets/booklet/8.jpg';
+var $author$project$Outlooks$page9 = 'assets/booklet/9.jpg';
+var $author$project$Help$bookletList = _List_fromArray(
+	[$author$project$Outlooks$page1, $author$project$Outlooks$page2, $author$project$Outlooks$page3, $author$project$Outlooks$page4, $author$project$Outlooks$page5, $author$project$Outlooks$page6, $author$project$Outlooks$page7, $author$project$Outlooks$page8, $author$project$Outlooks$page9, $author$project$Outlooks$page10, $author$project$Outlooks$page11]);
+var $elm$core$List$head = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(x);
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $elm$core$List$drop = F2(
+	function (n, list) {
+		drop:
+		while (true) {
+			if (n <= 0) {
+				return list;
+			} else {
+				if (!list.b) {
+					return list;
+				} else {
+					var x = list.a;
+					var xs = list.b;
+					var $temp$n = n - 1,
+						$temp$list = xs;
+					n = $temp$n;
+					list = $temp$list;
+					continue drop;
+				}
+			}
+		}
+	});
+var $elm$core$Maybe$withDefault = F2(
+	function (_default, maybe) {
+		if (maybe.$ === 'Just') {
+			var value = maybe.a;
+			return value;
+		} else {
+			return _default;
+		}
+	});
+var $author$project$Help$nextOne = F2(
+	function (model, bookletL) {
+		nextOne:
+		while (true) {
+			if (_Utils_eq(
+				A2(
+					$elm$core$Maybe$withDefault,
+					'a',
+					$elm$core$List$head(
+						A2(
+							$elm$core$List$drop,
+							1,
+							$elm$core$List$reverse(bookletL)))),
+				model.showingpage)) {
+				return $elm$core$List$head(
+					$elm$core$List$reverse(bookletL));
+			} else {
+				var $temp$model = model,
+					$temp$bookletL = $elm$core$List$reverse(
+					A2(
+						$elm$core$List$drop,
+						1,
+						$elm$core$List$reverse(bookletL)));
+				model = $temp$model;
+				bookletL = $temp$bookletL;
+				continue nextOne;
+			}
+		}
+	});
+var $author$project$Help$previousOne = F2(
+	function (model, bookletL) {
+		previousOne:
+		while (true) {
+			if (_Utils_eq(
+				A2(
+					$elm$core$Maybe$withDefault,
+					'a',
+					$elm$core$List$head(
+						A2($elm$core$List$drop, 1, bookletL))),
+				model.showingpage)) {
+				return $elm$core$List$head(bookletL);
+			} else {
+				var $temp$model = model,
+					$temp$bookletL = A2($elm$core$List$drop, 1, bookletL);
+				model = $temp$model;
+				bookletL = $temp$bookletL;
+				continue previousOne;
+			}
+		}
+	});
+var $author$project$Update$updateBooklet = function (model) {
+	var booklet = function () {
+		var _v0 = model.booklet;
+		switch (_v0.$) {
+			case 'Initi':
+				return $elm$core$List$head($author$project$Help$bookletList);
+			case 'Previousone':
+				return _Utils_eq(
+					model.showingpage,
+					A2(
+						$elm$core$Maybe$withDefault,
+						'a',
+						$elm$core$List$head($author$project$Help$bookletList))) ? $elm$core$List$head(
+					$elm$core$List$reverse($author$project$Help$bookletList)) : A2($author$project$Help$previousOne, model, $author$project$Help$bookletList);
+			default:
+				return _Utils_eq(
+					model.showingpage,
+					A2(
+						$elm$core$Maybe$withDefault,
+						'a',
+						$elm$core$List$head(
+							$elm$core$List$reverse($author$project$Help$bookletList)))) ? $elm$core$List$head($author$project$Help$bookletList) : A2($author$project$Help$nextOne, model, $author$project$Help$bookletList);
+		}
+	}();
+	return _Utils_update(
+		model,
+		{
+			showingpage: A2($elm$core$Maybe$withDefault, 'a', booklet)
+		});
+};
 var $author$project$Update$updateKeys = F3(
 	function (isDown, key, keys) {
 		switch (key) {
@@ -6652,7 +6788,6 @@ var $author$project$Update$updateKeys = F3(
 var $author$project$Outlooks$Fire = {$: 'Fire'};
 var $author$project$Outlooks$Frozen = {$: 'Frozen'};
 var $author$project$Outlooks$Ordinary = {$: 'Ordinary'};
-var $author$project$Model$Stopped = {$: 'Stopped'};
 var $elm$core$List$append = F2(
 	function (xs, ys) {
 		if (!ys.b) {
@@ -6870,36 +7005,6 @@ var $author$project$Dashboard$fromJust = function (x) {
 		return y;
 	} else {
 		return 0;
-	}
-};
-var $elm$core$List$drop = F2(
-	function (n, list) {
-		drop:
-		while (true) {
-			if (n <= 0) {
-				return list;
-			} else {
-				if (!list.b) {
-					return list;
-				} else {
-					var x = list.a;
-					var xs = list.b;
-					var $temp$n = n - 1,
-						$temp$list = xs;
-					n = $temp$n;
-					list = $temp$list;
-					continue drop;
-				}
-			}
-		}
-	});
-var $elm$core$List$head = function (list) {
-	if (list.b) {
-		var x = list.a;
-		var xs = list.b;
-		return $elm$core$Maybe$Just(x);
-	} else {
-		return $elm$core$Maybe$Nothing;
 	}
 };
 var $elm_community$list_extra$List$Extra$getAt = F2(
@@ -7143,10 +7248,10 @@ var $author$project$Update$updateTime = F2(
 		var ski_8_eff = _Utils_eq(
 			A2($elm_community$list_extra$List$Extra$getAt, 7, model.skills_ok),
 			$elm$core$Maybe$Just(true)) ? true : false;
-		var wDown = (model.wShell_down === 360) ? (ski_8_eff ? (dt * (-40.0)) : (dt * (-50.0))) : (ski_8_eff ? (model.wShell_down + (dt * (-40.0))) : (model.wShell_left + (dt * (-50.0))));
+		var wDown = (model.wShell_down === 360) ? (ski_8_eff ? (dt * (-40.0)) : (dt * (-50.0))) : (ski_8_eff ? (model.wShell_down + (dt * (-40.0))) : (model.wShell_down + (dt * (-50.0))));
 		var wLeft = (model.wShell_left === 360) ? (ski_8_eff ? (dt * 8.5) : (dt * 10.0)) : (ski_8_eff ? (model.wShell_left + (dt * 8.5)) : (model.wShell_left + (dt * 10.0)));
-		var wRight = (model.wShell_right === 360) ? (ski_8_eff ? (dt * 8.5) : (dt * 10.0)) : (ski_8_eff ? (model.wShell_right + (dt * 8.5)) : (model.wShell_left + (dt * 10.0)));
-		var wUp = (model.wShell_up === 360) ? (ski_8_eff ? (dt * 8.5) : (dt * (-10.0))) : (ski_8_eff ? (model.wShell_up + (dt * (-8.5))) : (model.wShell_left + (dt * (-10.0))));
+		var wRight = (model.wShell_right === 360) ? (ski_8_eff ? (dt * 8.5) : (dt * 10.0)) : (ski_8_eff ? (model.wShell_right + (dt * 8.5)) : (model.wShell_right + (dt * 10.0)));
+		var wUp = (model.wShell_up === 360) ? (ski_8_eff ? (dt * (-8.5)) : (dt * (-10.0))) : (ski_8_eff ? (model.wShell_up + (dt * (-8.5))) : (model.wShell_up + (dt * (-10.0))));
 		var ski_7_eff = _Utils_eq(
 			A2($elm_community$list_extra$List$Extra$getAt, 6, model.skills_ok),
 			$elm$core$Maybe$Just(true)) ? true : false;
@@ -7245,6 +7350,7 @@ var $author$project$Update$updateTime = F2(
 		var max_life = ski_1_get ? (model.max_life + 1) : model.max_life;
 		var life0 = ($author$project$Check$cIsHitKernel(model) && (!$author$project$Check$cIsHitBlue(model))) ? ((ski_10_eff && $author$project$Check$cIsHitGold(model)) ? model.life : (model.life - 1)) : ((A4($author$project$Check$cHitB, model.ball_x, model.ball_y, 42, 46) && (A5($author$project$Check$cValidB, model.wShell_down, model.ball_x, model.ball_y, 42, 46) && (model.life < 5))) ? (ski_7_eff ? (model.life + 2) : (model.life + 1)) : model.life);
 		var life = ski_1_get ? (life0 + 1) : life0;
+		var leaf = ((!model.clover.leftClover) && ((!model.clover.rightClover) && (!model.clover.upClover))) ? 0 : (((model.clover.leftClover && ((!model.clover.rightClover) && (!model.clover.upClover))) || (((!model.clover.leftClover) && (model.clover.rightClover && (!model.clover.upClover))) || ((!model.clover.leftClover) && ((!model.clover.rightClover) && model.clover.upClover)))) ? 1 : (((model.clover.leftClover && (model.clover.rightClover && (!model.clover.upClover))) || (((!model.clover.leftClover) && (model.clover.rightClover && model.clover.upClover)) || (model.clover.leftClover && ((!model.clover.rightClover) && model.clover.upClover)))) ? 2 : 3));
 		var isRed = ((!_Utils_eq(
 			$author$project$Check$cIsCoordinate(model),
 			_Utils_Tuple2(0, 0))) && A2(
@@ -7354,7 +7460,6 @@ var $author$project$Update$updateTime = F2(
 		var combo = ((!_Utils_eq(
 			$author$project$Check$cIsCoordinate(model),
 			_Utils_Tuple2(0, 0))) && ((!$author$project$Check$cIsHitGold(model)) && ((!$author$project$Check$cIsHitBlue(model)) && (!$author$project$Check$cIsHitShell(model))))) ? (model.combo + 1) : (($author$project$Check$cIsHitGold(model) || ($author$project$Check$cIsHitBlue(model) || (!$author$project$Check$cIsHitShell(model)))) ? 0 : model.combo);
-		var leaf = combo;
 		var clover = function () {
 			var upC = (_Utils_cmp(
 				A2($elm$core$Basics$pow, model.ball_x - 42, 2) + A2($elm$core$Basics$pow, model.ball_y - 14, 2),
@@ -7415,6 +7520,134 @@ var $author$project$Update$update = F2(
 					_Utils_update(
 						model,
 						{nextPoint: newPoint}),
+					$elm$core$Platform$Cmd$none);
+			case 'Alterpage':
+				var booklet = msg.a;
+				return _Utils_Tuple2(
+					$author$project$Update$updateBooklet(model),
+					$elm$core$Platform$Cmd$none);
+			case 'Start':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							attack: $author$project$Model$ongoingAttack,
+							ball_vx: -3.0,
+							ball_vy: -3.0,
+							ball_x: 47,
+							ball_y: 35,
+							block_vx: 3,
+							block_vy: 1.5,
+							block_x: 10,
+							block_y: 10,
+							blueLeaves: _List_fromArray(
+								[
+									_Utils_Tuple2(0, 4),
+									_Utils_Tuple2(1, 4),
+									_Utils_Tuple2(2, 4),
+									_Utils_Tuple2(3, 4),
+									_Utils_Tuple2(4, 4),
+									_Utils_Tuple2(5, 4),
+									_Utils_Tuple2(6, 4),
+									_Utils_Tuple2(7, 4),
+									_Utils_Tuple2(8, 4),
+									_Utils_Tuple2(9, 4),
+									_Utils_Tuple2(10, 4),
+									_Utils_Tuple2(0, 5),
+									_Utils_Tuple2(1, 5),
+									_Utils_Tuple2(2, 5),
+									_Utils_Tuple2(3, 5),
+									_Utils_Tuple2(4, 5),
+									_Utils_Tuple2(5, 5),
+									_Utils_Tuple2(6, 5),
+									_Utils_Tuple2(7, 5),
+									_Utils_Tuple2(8, 5),
+									_Utils_Tuple2(9, 5),
+									_Utils_Tuple2(10, 5),
+									_Utils_Tuple2(0, 6),
+									_Utils_Tuple2(1, 6),
+									_Utils_Tuple2(2, 6),
+									_Utils_Tuple2(3, 6),
+									_Utils_Tuple2(4, 6),
+									_Utils_Tuple2(5, 6),
+									_Utils_Tuple2(6, 6),
+									_Utils_Tuple2(7, 6),
+									_Utils_Tuple2(8, 6),
+									_Utils_Tuple2(9, 6),
+									_Utils_Tuple2(10, 6),
+									_Utils_Tuple2(0, 13),
+									_Utils_Tuple2(1, 13),
+									_Utils_Tuple2(2, 13),
+									_Utils_Tuple2(3, 13),
+									_Utils_Tuple2(4, 13),
+									_Utils_Tuple2(5, 13),
+									_Utils_Tuple2(6, 13),
+									_Utils_Tuple2(7, 13),
+									_Utils_Tuple2(8, 13),
+									_Utils_Tuple2(9, 13),
+									_Utils_Tuple2(10, 13),
+									_Utils_Tuple2(0, 14),
+									_Utils_Tuple2(1, 14),
+									_Utils_Tuple2(2, 14),
+									_Utils_Tuple2(3, 14),
+									_Utils_Tuple2(4, 14),
+									_Utils_Tuple2(5, 14),
+									_Utils_Tuple2(6, 14),
+									_Utils_Tuple2(7, 14),
+									_Utils_Tuple2(8, 14),
+									_Utils_Tuple2(9, 14),
+									_Utils_Tuple2(10, 14),
+									_Utils_Tuple2(0, 15),
+									_Utils_Tuple2(1, 15),
+									_Utils_Tuple2(2, 15),
+									_Utils_Tuple2(3, 15),
+									_Utils_Tuple2(4, 15),
+									_Utils_Tuple2(5, 15),
+									_Utils_Tuple2(6, 15),
+									_Utils_Tuple2(7, 15),
+									_Utils_Tuple2(8, 15),
+									_Utils_Tuple2(9, 15),
+									_Utils_Tuple2(10, 15)
+								]),
+							clover: A3($author$project$Model$Clover, false, false, false),
+							combo: 0,
+							cyanLeaves: _List_Nil,
+							emptyLeaves: _List_Nil,
+							exp: 0,
+							gold_angle: 180,
+							gold_w: 0,
+							gold_x: 37,
+							gold_y: 25,
+							leaf: 0,
+							life: 5,
+							max_life: 5,
+							minute: 0,
+							nextBrick: $author$project$Outlooks$Red,
+							nextPoint: _Utils_Tuple2(0, 0),
+							pad_angle: 0,
+							pad_w: 0,
+							pad_x: 37,
+							pad_y: 25,
+							pinkLeaves: _List_Nil,
+							redLeaves: _List_Nil,
+							se: $author$project$Outlooks$Quite,
+							second: 0,
+							skills_cost: _List_fromArray(
+								[10, 15, 20, 25, 30, 40, 50, 60, 70, 80]),
+							skills_ok: _List_fromArray(
+								[false, false, false, false, false, false, false, false, false, false]),
+							state: $author$project$Model$Playing,
+							wShell_down: 0,
+							wShell_left: 0,
+							wShell_right: 240,
+							wShell_up: 120
+						}),
+					$elm$core$Platform$Cmd$none);
+			case 'Keep':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{state: $author$project$Model$Playing}),
 					$elm$core$Platform$Cmd$none);
 			case 'Tick':
 				var newTime = msg.a;
@@ -7563,7 +7796,6 @@ var $author$project$Help$renderButton1 = A2(
 			A2($elm$html$Html$Attributes$style, 'left', '430px'),
 			A2($elm$html$Html$Attributes$style, 'top', '630px'),
 			A2($elm$html$Html$Attributes$style, 'width', '200px'),
-			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
 			$elm$html$Html$Events$onClick(
 			$author$project$Message$ChangeMusic($author$project$Outlooks$TheOasis))
 		]),
@@ -7583,7 +7815,6 @@ var $author$project$Help$renderButton2 = A2(
 			A2($elm$html$Html$Attributes$style, 'left', '630px'),
 			A2($elm$html$Html$Attributes$style, 'top', '630px'),
 			A2($elm$html$Html$Attributes$style, 'width', '200px'),
-			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
 			$elm$html$Html$Events$onClick(
 			$author$project$Message$ChangeMusic($author$project$Outlooks$ReturnOfAncients))
 		]),
@@ -7603,7 +7834,6 @@ var $author$project$Help$renderButton3 = A2(
 			A2($elm$html$Html$Attributes$style, 'left', '830px'),
 			A2($elm$html$Html$Attributes$style, 'top', '630px'),
 			A2($elm$html$Html$Attributes$style, 'width', '200px'),
-			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
 			$elm$html$Html$Events$onClick(
 			$author$project$Message$ChangeMusic($author$project$Outlooks$InSearchOfLife))
 		]),
@@ -7623,13 +7853,53 @@ var $author$project$Help$renderButton4 = A2(
 			A2($elm$html$Html$Attributes$style, 'left', '1030px'),
 			A2($elm$html$Html$Attributes$style, 'top', '630px'),
 			A2($elm$html$Html$Attributes$style, 'width', '200px'),
-			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
 			$elm$html$Html$Events$onClick(
 			$author$project$Message$ChangeMusic($author$project$Outlooks$TheChordOfSpring))
 		]),
 	_List_fromArray(
 		[
 			$elm$html$Html$text('Try \"The Chord of Spring\"! (From game \"Arknights\")')
+		]));
+var $author$project$Message$Alterpage = function (a) {
+	return {$: 'Alterpage', a: a};
+};
+var $author$project$Outlooks$Previousone = {$: 'Previousone'};
+var $author$project$Help$renderButtonLeft = A2(
+	$elm$html$Html$button,
+	_List_fromArray(
+		[
+			A2($elm$html$Html$Attributes$style, 'background', '#f8f4f4'),
+			A2($elm$html$Html$Attributes$style, 'color', '#25a194'),
+			A2($elm$html$Html$Attributes$style, 'display', 'block'),
+			A2($elm$html$Html$Attributes$style, 'height', '600x'),
+			A2($elm$html$Html$Attributes$style, 'left', '430px'),
+			A2($elm$html$Html$Attributes$style, 'top', '630px'),
+			A2($elm$html$Html$Attributes$style, 'width', '200px'),
+			$elm$html$Html$Events$onClick(
+			$author$project$Message$Alterpage($author$project$Outlooks$Previousone))
+		]),
+	_List_fromArray(
+		[
+			$elm$html$Html$text('Previous Page')
+		]));
+var $author$project$Outlooks$Nextone = {$: 'Nextone'};
+var $author$project$Help$renderButtonRight = A2(
+	$elm$html$Html$button,
+	_List_fromArray(
+		[
+			A2($elm$html$Html$Attributes$style, 'background', '#f8f4f4'),
+			A2($elm$html$Html$Attributes$style, 'color', '#25a194'),
+			A2($elm$html$Html$Attributes$style, 'display', 'block'),
+			A2($elm$html$Html$Attributes$style, 'height', '600x'),
+			A2($elm$html$Html$Attributes$style, 'left', '430px'),
+			A2($elm$html$Html$Attributes$style, 'top', '630px'),
+			A2($elm$html$Html$Attributes$style, 'width', '200px'),
+			$elm$html$Html$Events$onClick(
+			$author$project$Message$Alterpage($author$project$Outlooks$Nextone))
+		]),
+	_List_fromArray(
+		[
+			$elm$html$Html$text('Next Page')
 		]));
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $author$project$Help$renderDifficulty = function (model) {
@@ -7649,8 +7919,7 @@ var $author$project$Help$renderDifficulty = function (model) {
 		_List_fromArray(
 			[
 				A2($elm$html$Html$Attributes$style, 'left', '500px'),
-				A2($elm$html$Html$Attributes$style, 'top', '600px'),
-				A2($elm$html$Html$Attributes$style, 'position', 'absolute')
+				A2($elm$html$Html$Attributes$style, 'top', '600px')
 			]),
 		_List_fromArray(
 			[
@@ -7680,7 +7949,6 @@ var $author$project$Help$renderDifficulty1 = A2(
 			A2($elm$html$Html$Attributes$style, 'left', '500px'),
 			A2($elm$html$Html$Attributes$style, 'top', '730px'),
 			A2($elm$html$Html$Attributes$style, 'width', '200px'),
-			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
 			$elm$html$Html$Events$onClick(
 			$author$project$Message$ChangeDifficulty($author$project$Outlooks$Normal)),
 			$elm$html$Html$Attributes$title('A wise choice.')
@@ -7701,7 +7969,6 @@ var $author$project$Help$renderDifficulty2 = A2(
 			A2($elm$html$Html$Attributes$style, 'left', '700px'),
 			A2($elm$html$Html$Attributes$style, 'top', '730px'),
 			A2($elm$html$Html$Attributes$style, 'width', '200px'),
-			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
 			$elm$html$Html$Events$onClick(
 			$author$project$Message$ChangeDifficulty($author$project$Outlooks$Hard)),
 			$elm$html$Html$Attributes$title('Emm.')
@@ -7722,7 +7989,6 @@ var $author$project$Help$renderDifficulty3 = A2(
 			A2($elm$html$Html$Attributes$style, 'left', '900px'),
 			A2($elm$html$Html$Attributes$style, 'top', '730px'),
 			A2($elm$html$Html$Attributes$style, 'width', '200px'),
-			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
 			$elm$html$Html$Events$onClick(
 			$author$project$Message$ChangeDifficulty($author$project$Outlooks$Nightmare)),
 			$elm$html$Html$Attributes$title('Do not try it.')
@@ -7833,7 +8099,6 @@ var $author$project$Help$renderHome = A2(
 		[
 			A2($elm$html$Html$Attributes$style, 'top', '30px'),
 			A2($elm$html$Html$Attributes$style, 'left', '30px'),
-			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
 			$elm$html$Html$Attributes$title('Is everything OK?'),
 			$elm$html$Html$Events$onClick($author$project$Message$GoHome)
 		]),
@@ -7867,12 +8132,11 @@ var $author$project$Help$renderInfo = A2(
 	$elm$html$Html$div,
 	_List_fromArray(
 		[
-			A2($elm$html$Html$Attributes$style, 'background', 'rgba(236, 240, 241, 0.85)'),
-			A2($elm$html$Html$Attributes$style, 'color', '#090004'),
+			A2($elm$html$Html$Attributes$style, 'background', '#1d1d1d'),
+			A2($elm$html$Html$Attributes$style, 'color', '#ffffff'),
 			A2($elm$html$Html$Attributes$style, 'height', '300px'),
 			A2($elm$html$Html$Attributes$style, 'left', '200px'),
 			A2($elm$html$Html$Attributes$style, 'top', '100px'),
-			A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
 			A2($elm$html$Html$Attributes$style, 'width', '1000px')
 		]),
 	_List_fromArray(
@@ -7916,8 +8180,7 @@ var $author$project$Help$renderMusic = function (model) {
 		_List_fromArray(
 			[
 				A2($elm$html$Html$Attributes$style, 'top', '430px'),
-				A2($elm$html$Html$Attributes$style, 'left', '530px'),
-				A2($elm$html$Html$Attributes$style, 'position', 'absolute')
+				A2($elm$html$Html$Attributes$style, 'left', '530px')
 			]),
 		_List_fromArray(
 			[
@@ -7931,9 +8194,66 @@ var $author$project$Help$renderMusic = function (model) {
 				_List_Nil)
 			]));
 };
+var $author$project$Model$Point = F2(
+	function (x, y) {
+		return {x: x, y: y};
+	});
+var $elm$svg$Svg$image = $elm$svg$Svg$trustedNode('image');
+var $elm$svg$Svg$Attributes$xlinkHref = function (value) {
+	return A3(
+		_VirtualDom_attributeNS,
+		'http://www.w3.org/1999/xlink',
+		'xlink:href',
+		_VirtualDom_noJavaScriptUri(value));
+};
+var $author$project$Object$renderBooklet = F4(
+	function (point, wid, hei, pic) {
+		return A2(
+			$elm$svg$Svg$image,
+			_List_fromArray(
+				[
+					$elm$svg$Svg$Attributes$xlinkHref(pic),
+					$elm$svg$Svg$Attributes$x(
+					$elm$core$String$fromFloat(point.x) + '%'),
+					$elm$svg$Svg$Attributes$y(
+					$elm$core$String$fromFloat(point.y) + '%'),
+					$elm$svg$Svg$Attributes$width(
+					$elm$core$String$fromFloat(wid) + '%'),
+					$elm$svg$Svg$Attributes$height(
+					$elm$core$String$fromFloat(hei) + '%')
+				]),
+			_List_Nil);
+	});
+var $author$project$Help$renderNiceOutlook = function (model) {
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'backgroundColor', '#1d1d1d')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$svg$Svg$svg,
+				_List_fromArray(
+					[
+						$elm$svg$Svg$Attributes$viewBox('0 0 400 400')
+					]),
+				_List_fromArray(
+					[
+						A4(
+						$author$project$Object$renderBooklet,
+						A2($author$project$Model$Point, 0, 0),
+						100,
+						65,
+						model.showingpage)
+					]))
+			]));
+};
 var $author$project$Help$view = function (model) {
 	return _List_fromArray(
 		[
+			$author$project$Help$renderNiceOutlook(model),
 			$author$project$Help$renderInfo,
 			$author$project$Help$renderMusic(model),
 			$author$project$Help$renderButton1,
@@ -7944,90 +8264,147 @@ var $author$project$Help$view = function (model) {
 			$author$project$Help$renderDifficulty2,
 			$author$project$Help$renderDifficulty3,
 			$author$project$Help$renderHome,
-			$author$project$Help$renderDifficulty(model)
+			$author$project$Help$renderDifficulty(model),
+			$author$project$Help$renderButtonLeft,
+			$author$project$Help$renderButtonRight
 		]);
 };
 var $author$project$Message$GoGame = {$: 'GoGame'};
 var $author$project$Message$GoHelp = {$: 'GoHelp'};
-var $elm$html$Html$a = _VirtualDom_node('a');
-var $elm$html$Html$Attributes$href = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
-};
+var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$li = _VirtualDom_node('li');
+var $author$project$Object$renderInterface = F4(
+	function (point, wid, hei, pic) {
+		return A2(
+			$elm$svg$Svg$image,
+			_List_fromArray(
+				[
+					$elm$svg$Svg$Attributes$xlinkHref(pic),
+					$elm$svg$Svg$Attributes$x(
+					$elm$core$String$fromFloat(point.x) + '%'),
+					$elm$svg$Svg$Attributes$y(
+					$elm$core$String$fromFloat(point.y) + '%'),
+					$elm$svg$Svg$Attributes$width(
+					$elm$core$String$fromFloat(wid) + '%'),
+					$elm$svg$Svg$Attributes$height(
+					$elm$core$String$fromFloat(hei) + '%')
+				]),
+			_List_Nil);
+	});
 var $elm$html$Html$ul = _VirtualDom_node('ul');
+var $author$project$Outlooks$viewbackground = 'assets/views/viewbkg.png';
 var $author$project$Home$view = _List_fromArray(
 	[
-		$elm$html$Html$text('Welcome to game \"Save Oasis\"! '),
 		A2(
-		$elm$html$Html$ul,
-		_List_Nil,
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'backgroundColor', '#1d1d1d')
+			]),
 		_List_fromArray(
 			[
 				A2(
-				$elm$html$Html$li,
-				_List_Nil,
+				$elm$svg$Svg$svg,
 				_List_fromArray(
 					[
-						A2(
-						$elm$html$Html$button,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick($author$project$Message$GoGame)
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Play')
-							]))
-					])),
+						$elm$svg$Svg$Attributes$viewBox('0 0 400 400')
+					]),
+				_List_fromArray(
+					[
+						A4(
+						$author$project$Object$renderInterface,
+						A2($author$project$Model$Point, 0, 0),
+						100,
+						65,
+						$author$project$Outlooks$viewbackground)
+					]))
+			])),
+		A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'backgroundColor', '#1d1d1d')
+			]),
+		_List_fromArray(
+			[
+				A2($elm$html$Html$img, _List_Nil, _List_Nil),
 				A2(
-				$elm$html$Html$li,
+				$elm$html$Html$ul,
 				_List_Nil,
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$button,
+						$elm$html$Html$li,
+						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$Events$onClick($author$project$Message$GoHelp)
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Help')
-							]))
-					])),
-				A2(
-				$elm$html$Html$li,
-				_List_Nil,
-				_List_fromArray(
-					[
+								A2(
+								$elm$html$Html$button,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'background', '#02020299'),
+										A2($elm$html$Html$Attributes$style, 'color', '#8acce7'),
+										A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
+										A2($elm$html$Html$Attributes$style, 'font-family', 'Chalkduster'),
+										A2($elm$html$Html$Attributes$style, 'font-size', '40px'),
+										A2($elm$html$Html$Attributes$style, 'font-weight', '300'),
+										A2($elm$html$Html$Attributes$style, 'height', '90px'),
+										A2($elm$html$Html$Attributes$style, 'width', '350px'),
+										A2($elm$html$Html$Attributes$style, 'left', '580px'),
+										A2($elm$html$Html$Attributes$style, 'bottom', '450px'),
+										A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
+										A2($elm$html$Html$Attributes$style, 'border', '0'),
+										$elm$html$Html$Events$onClick($author$project$Message$GoGame)
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Play')
+									]))
+							])),
 						A2(
-						$elm$html$Html$a,
+						$elm$html$Html$li,
+						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$href('https://github.com/YuukiAS/VG100_Project1')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Want to have a look at the source code?')
+								A2(
+								$elm$html$Html$button,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'background', '#02020299'),
+										A2($elm$html$Html$Attributes$style, 'color', '#8acce7'),
+										A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
+										A2($elm$html$Html$Attributes$style, 'font-family', 'Chalkduster'),
+										A2($elm$html$Html$Attributes$style, 'font-size', '40px'),
+										A2($elm$html$Html$Attributes$style, 'font-weight', '300'),
+										A2($elm$html$Html$Attributes$style, 'height', '90px'),
+										A2($elm$html$Html$Attributes$style, 'width', '350px'),
+										A2($elm$html$Html$Attributes$style, 'left', '580px'),
+										A2($elm$html$Html$Attributes$style, 'bottom', '300px'),
+										A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
+										A2($elm$html$Html$Attributes$style, 'border', '0'),
+										$elm$html$Html$Events$onClick($author$project$Message$GoHelp)
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Help')
+									]))
 							]))
 					]))
 			]))
 	]);
-var $author$project$Model$Point = F2(
-	function (x, y) {
-		return {x: x, y: y};
-	});
 var $author$project$Outlooks$attacker = 'assets/main/attack.png';
 var $author$project$Outlooks$background = 'assets/main/saveOasis.png';
 var $author$project$Outlooks$ball = 'assets/main/ball.png';
 var $author$project$Outlooks$bright = 'assets/main/brighten.png';
 var $author$project$Outlooks$brighter = 'assets/main/brighterer.png';
 var $author$project$Outlooks$circular = 'assets/main/circular.png';
+var $author$project$Outlooks$cloverC = 'assets/main/clover/core.png';
+var $author$project$Outlooks$cloverL = 'assets/main/clover/left.png';
+var $author$project$Outlooks$cloverR = 'assets/main/clover/right.png';
+var $author$project$Outlooks$cloverU = 'assets/main/clover/up.png';
 var $author$project$Outlooks$downleft = 'assets/main/downleft.png';
 var $author$project$Outlooks$downright = 'assets/main/downright.png';
+var $author$project$Outlooks$forclover = 'assets/main/clover/forclover.png';
 var $author$project$Outlooks$gold = 'assets/main/shootpaddle.png';
 var $author$project$Outlooks$interface = 'assets/main/trans.png';
 var $elm_community$list_extra$List$Extra$reverseAppend = F2(
@@ -8067,15 +8444,7 @@ var $elm_community$list_extra$List$Extra$interweaveHelp = F3(
 	});
 var $elm_community$list_extra$List$Extra$interweave = $elm_community$list_extra$List$Extra$interweaveHelp(_List_Nil);
 var $author$project$Outlooks$pad = 'assets/main/bendpaddle.png';
-var $elm$svg$Svg$image = $elm$svg$Svg$trustedNode('image');
 var $author$project$Object$r = 1;
-var $elm$svg$Svg$Attributes$xlinkHref = function (value) {
-	return A3(
-		_VirtualDom_attributeNS,
-		'http://www.w3.org/1999/xlink',
-		'xlink:href',
-		_VirtualDom_noJavaScriptUri(value));
-};
 var $author$project$Object$renderBall = F4(
 	function (point, side1, side2, pic) {
 		return A2(
@@ -8094,27 +8463,7 @@ var $author$project$Object$renderBall = F4(
 				]),
 			_List_Nil);
 	});
-var $elm$svg$Svg$Attributes$opacity = _VirtualDom_attribute('opacity');
-var $elm$svg$Svg$rect = $elm$svg$Svg$trustedNode('rect');
-var $author$project$Dashboard$renderPanel = F3(
-	function (point, wid, hei) {
-		return A2(
-			$elm$svg$Svg$rect,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$x(
-					$elm$core$String$fromFloat(point.x) + '%'),
-					$elm$svg$Svg$Attributes$y(
-					$elm$core$String$fromFloat(point.y) + '%'),
-					$elm$svg$Svg$Attributes$width(
-					$elm$core$String$fromFloat(wid) + '%'),
-					$elm$svg$Svg$Attributes$height(
-					$elm$core$String$fromFloat(hei) + '%'),
-					$elm$svg$Svg$Attributes$fill('white'),
-					$elm$svg$Svg$Attributes$opacity('0.5')
-				]),
-			_List_Nil);
-	});
+var $author$project$Message$Start = {$: 'Start'};
 var $elm$svg$Svg$Attributes$fillOpacity = _VirtualDom_attribute('fill-opacity');
 var $elm$svg$Svg$Attributes$d = _VirtualDom_attribute('d');
 var $elm$svg$Svg$path = $elm$svg$Svg$trustedNode('path');
@@ -8143,6 +8492,7 @@ var $elm$svg$Svg$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
+var $elm$svg$Svg$rect = $elm$svg$Svg$trustedNode('rect');
 var $j_panasiuk$elm_ionicons$Ionicon$refresh = $j_panasiuk$elm_ionicons$Ionicon$Internal$p('M416,352l96-111.9h-64.7c-2.3-27.9-10.5-54-23.5-77.3c-27.4-49.2-75.8-85.1-133-95.6c-0.7-0.1-1.5-0.3-2.2-0.4c-0.5-0.1-0.9-0.2-1.4-0.2C277.1,64.9,266.6,64,256,64c-0.1,0-0.3,0-0.4,0c0,0,0,0,0,0c-90.9,0.2-167,63.6-186.7,148.6c0,0,0,0.1,0,0.1c-0.3,1.1-0.5,2.2-0.7,3.3c-0.1,0.5-0.2,0.9-0.3,1.4c-0.1,0.7-0.3,1.4-0.4,2.1c-0.2,0.9-0.3,1.7-0.5,2.6c-0.1,0.4-0.1,0.7-0.2,1.1c-0.2,1.2-0.4,2.4-0.6,3.6c0,0.1,0,0.1,0,0.2c-1,6.3-1.6,12.7-1.9,19.1c0,0.3,0,0.6,0,0.8c-0.1,1.4-0.1,2.7-0.2,4.1c0,1.6-0.1,3.3-0.1,5c0,1.7,0,3.3,0.1,5c0,1.4,0.1,2.7,0.2,4.1c0,0.3,0,0.6,0,0.9c0.3,6.5,1,12.9,1.9,19.1c0,0.1,0,0.1,0,0.2c0.2,1.2,0.4,2.4,0.6,3.6c0.1,0.4,0.1,0.7,0.2,1.1c0.2,0.9,0.3,1.8,0.5,2.6c0.1,0.7,0.3,1.4,0.4,2.1c0.1,0.5,0.2,1,0.3,1.4c0.2,1.1,0.5,2.2,0.7,3.2c0,0,0,0.1,0,0.1c19.7,85,96.1,148.4,187.1,148.6c42.9-0.1,83.1-14.2,116.9-40.7l7.5-5.9l-43.2-46.2l-6.2,4.6c-22.1,16.3-47.5,24.2-75,24.2c-70.6,0-128-57-128-128c0-71,57.4-128,128-128c66.4,0,122.8,46.6,129.5,112H312L416,352z');
 var $author$project$Dashboard$renderSettings = function () {
 	var refresh = A2(
@@ -8156,6 +8506,18 @@ var $author$project$Dashboard$renderSettings = function () {
 			[
 				A2($j_panasiuk$elm_ionicons$Ionicon$refresh, 9, $author$project$Color$grey)
 			]));
+	var hype3 = A2(
+		$elm$svg$Svg$rect,
+		_List_fromArray(
+			[
+				$elm$svg$Svg$Attributes$x('59%'),
+				$elm$svg$Svg$Attributes$y('2.2%'),
+				$elm$svg$Svg$Attributes$width('2%'),
+				$elm$svg$Svg$Attributes$height('2%'),
+				$elm$svg$Svg$Attributes$fillOpacity('0'),
+				$elm$svg$Svg$Events$onClick($author$project$Message$Start)
+			]),
+		_List_Nil);
 	var hype2 = A2(
 		$elm$svg$Svg$rect,
 		_List_fromArray(
@@ -8203,7 +8565,7 @@ var $author$project$Dashboard$renderSettings = function () {
 				A2($j_panasiuk$elm_ionicons$Ionicon$help, 9, $author$project$Color$grey)
 			]));
 	return _List_fromArray(
-		[refresh, home, help, hype1, hype2]);
+		[refresh, home, hype1, hype2, hype3, help]);
 }();
 var $elm$svg$Svg$Attributes$fontSize = _VirtualDom_attribute('font-size');
 var $elm$svg$Svg$text_ = $elm$svg$Svg$trustedNode('text');
@@ -8221,7 +8583,7 @@ var $author$project$Dashboard$skillCost = F2(
 				[
 					$elm$svg$Svg$Attributes$x(xxx),
 					$elm$svg$Svg$Attributes$y('4%'),
-					$elm$svg$Svg$Attributes$fill('black'),
+					$elm$svg$Svg$Attributes$fill('white'),
 					$elm$svg$Svg$Attributes$fontSize('3')
 				]),
 			_List_fromArray(
@@ -8513,7 +8875,7 @@ var $author$project$Dashboard$renderStatus = function (model) {
 				[
 					$elm$svg$Svg$Attributes$x('42%'),
 					$elm$svg$Svg$Attributes$y('2.5%'),
-					$elm$svg$Svg$Attributes$fill('black'),
+					$elm$svg$Svg$Attributes$fill('white'),
 					$elm$svg$Svg$Attributes$fontSize('4')
 				]),
 			_List_fromArray(
@@ -8528,7 +8890,7 @@ var $author$project$Dashboard$renderStatus = function (model) {
 				[
 					$elm$svg$Svg$Attributes$x('42%'),
 					$elm$svg$Svg$Attributes$y('5.5%'),
-					$elm$svg$Svg$Attributes$fill('black'),
+					$elm$svg$Svg$Attributes$fill('white'),
 					$elm$svg$Svg$Attributes$fontSize('4')
 				]),
 			_List_fromArray(
@@ -8543,26 +8905,26 @@ var $author$project$Dashboard$renderStatus = function (model) {
 				[
 					$elm$svg$Svg$Attributes$x('50%'),
 					$elm$svg$Svg$Attributes$y('2.5%'),
-					$elm$svg$Svg$Attributes$fill('black'),
+					$elm$svg$Svg$Attributes$fill('white'),
 					$elm$svg$Svg$Attributes$fontSize('4')
 				]),
 			_List_fromArray(
 				[
 					$elm$html$Html$text(
-					$elm$core$String$fromInt(model.leaf) + ' Clovers collected')
+					$elm$core$String$fromInt(model.leaf) + ' Clovers collect')
 				])) : A2(
 			$elm$svg$Svg$text_,
 			_List_fromArray(
 				[
 					$elm$svg$Svg$Attributes$x('50%'),
 					$elm$svg$Svg$Attributes$y('2.5%'),
-					$elm$svg$Svg$Attributes$fill('black'),
+					$elm$svg$Svg$Attributes$fill('white'),
 					$elm$svg$Svg$Attributes$fontSize('4')
 				]),
 			_List_fromArray(
 				[
 					$elm$html$Html$text(
-					$elm$core$String$fromInt(model.leaf) + ' Clover collected')
+					$elm$core$String$fromInt(model.leaf) + ' Clover collect')
 				])),
 			clock,
 			A2(
@@ -8571,7 +8933,7 @@ var $author$project$Dashboard$renderStatus = function (model) {
 				[
 					$elm$svg$Svg$Attributes$x('50%'),
 					$elm$svg$Svg$Attributes$y('5.5%'),
-					$elm$svg$Svg$Attributes$fill('black'),
+					$elm$svg$Svg$Attributes$fill('white'),
 					$elm$svg$Svg$Attributes$fontSize('4')
 				]),
 			_List_fromArray(
@@ -8582,41 +8944,46 @@ var $author$project$Dashboard$renderStatus = function (model) {
 };
 var $author$project$View$renderDashboard = function (model) {
 	return A2(
-		$elm_community$list_extra$List$Extra$interweave,
+		$elm$core$List$append,
 		A2(
 			$elm$core$List$append,
-			A2(
-				$elm$core$List$append,
-				$author$project$Dashboard$renderSettings,
-				$author$project$Dashboard$renderStatus(model)),
-			$author$project$Dashboard$renderSkills(model)),
+			$author$project$Dashboard$renderSettings,
+			$author$project$Dashboard$renderStatus(model)),
+		$author$project$Dashboard$renderSkills(model));
+};
+var $author$project$Message$Keep = {$: 'Keep'};
+var $author$project$View$renderGameButton = function (model) {
+	var _v0 = (_Utils_eq(model.state, $author$project$Model$Stopped) && ((!model.minute) && (!model.second))) ? _Utils_Tuple2('New game', $author$project$Message$Start) : ((_Utils_eq(model.state, $author$project$Model$Stopped) && (((!(!model.minute)) || (!(!model.second))) && (!model.life))) ? _Utils_Tuple2('Failure. Start again!', $author$project$Message$Start) : ((_Utils_eq(model.state, $author$project$Model$Stopped) && (((!(!model.minute)) || (!(!model.second))) && (!(!model.life)))) ? _Utils_Tuple2('Victory!', $author$project$Message$Start) : _Utils_Tuple2('Enjoy the game!', $author$project$Message$Keep)));
+	var txt = _v0.a;
+	var msg = _v0.b;
+	return A2(
+		$elm$html$Html$button,
 		_List_fromArray(
 			[
-				A3(
-				$author$project$Dashboard$renderPanel,
-				A2($author$project$Model$Point, 40, 0.5),
-				50,
-				6)
+				A2($elm$html$Html$Attributes$style, 'background', '#39393880'),
+				A2($elm$html$Html$Attributes$style, 'border', '0'),
+				A2($elm$html$Html$Attributes$style, 'top', '1%'),
+				A2($elm$html$Html$Attributes$style, 'color', '#12ec02'),
+				A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
+				A2($elm$html$Html$Attributes$style, 'display', 'block'),
+				A2($elm$html$Html$Attributes$style, 'font-family', 'Chalkduster'),
+				A2($elm$html$Html$Attributes$style, 'font-size', '30px'),
+				A2($elm$html$Html$Attributes$style, 'font-weight', '300'),
+				A2($elm$html$Html$Attributes$style, 'height', '7%'),
+				A2($elm$html$Html$Attributes$style, 'left', '2%'),
+				A2($elm$html$Html$Attributes$style, 'line-height', '40px'),
+				A2($elm$html$Html$Attributes$style, 'outline', 'none'),
+				A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
+				A2($elm$html$Html$Attributes$style, 'padding', '0'),
+				A2($elm$html$Html$Attributes$style, 'width', '30%'),
+				A2($elm$html$Html$Attributes$style, 'z-index', '1'),
+				$elm$html$Html$Events$onClick(msg)
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text(txt)
 			]));
 };
-var $author$project$Object$renderInterface = F4(
-	function (point, wid, hei, pic) {
-		return A2(
-			$elm$svg$Svg$image,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$xlinkHref(pic),
-					$elm$svg$Svg$Attributes$x(
-					$elm$core$String$fromFloat(point.x) + '%'),
-					$elm$svg$Svg$Attributes$y(
-					$elm$core$String$fromFloat(point.y) + '%'),
-					$elm$svg$Svg$Attributes$width(
-					$elm$core$String$fromFloat(wid) + '%'),
-					$elm$svg$Svg$Attributes$height(
-					$elm$core$String$fromFloat(hei) + '%')
-				]),
-			_List_Nil);
-	});
 var $elm$html$Html$embed = _VirtualDom_node('embed');
 var $elm$html$Html$Attributes$loop = $elm$html$Html$Attributes$boolProperty('loop');
 var $author$project$View$renderMusic = function (model) {
@@ -8832,6 +9199,12 @@ var $author$project$View$view = function (model) {
 									80,
 									60,
 									$author$project$Outlooks$interface),
+									A4(
+									$author$project$Object$renderInterface,
+									A2($author$project$Model$Point, 87, 32),
+									10,
+									10,
+									$author$project$Outlooks$forclover),
 									(model.life >= 5) ? A4(
 									$author$project$Object$renderInterface,
 									A2($author$project$Model$Point, 38, 26),
@@ -8911,6 +9284,34 @@ var $author$project$View$view = function (model) {
 									10,
 									$author$project$Outlooks$circular,
 									model.wShell_down),
+									A5(
+									$author$project$Object$rotateCircle,
+									A2($author$project$Model$Point, 87, 32),
+									10,
+									10,
+									$author$project$Outlooks$cloverC,
+									0),
+									model.clover.leftClover ? A5(
+									$author$project$Object$rotateCircle,
+									A2($author$project$Model$Point, 87, 32),
+									10,
+									10,
+									$author$project$Outlooks$cloverL,
+									0) : A2($elm$svg$Svg$svg, _List_Nil, _List_Nil),
+									model.clover.rightClover ? A5(
+									$author$project$Object$rotateCircle,
+									A2($author$project$Model$Point, 87, 32),
+									10,
+									10,
+									$author$project$Outlooks$cloverR,
+									0) : A2($elm$svg$Svg$svg, _List_Nil, _List_Nil),
+									model.clover.upClover ? A5(
+									$author$project$Object$rotateCircle,
+									A2($author$project$Model$Point, 87, 32),
+									10,
+									10,
+									$author$project$Outlooks$cloverU,
+									0) : A2($elm$svg$Svg$svg, _List_Nil, _List_Nil),
 									(!model.clover.upClover) ? A5(
 									$author$project$Object$rotateCircle,
 									A2($author$project$Model$Point, 37, 9),
@@ -8990,6 +9391,13 @@ var $author$project$View$view = function (model) {
 			_List_fromArray(
 				[
 					$author$project$View$renderSE(model)
+				])),
+			A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$author$project$View$renderGameButton(model)
 				]))
 		]);
 };

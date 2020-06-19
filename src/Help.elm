@@ -1,6 +1,6 @@
 module Help exposing (..)
 import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html.Attributes exposing (controls, src, style, title)
 import Html.Events exposing (onClick)
 import Browser
 import Json.Decode as Json
@@ -8,8 +8,11 @@ import Markdown
 import Ionicon exposing (home)
 import Color exposing (grey)
 import Message exposing (Msg(..))
-import Outlooks exposing (Difficulty(..),Music(..))
-import Model exposing (Model)
+import Object exposing (renderBooklet, renderInterface)
+import Outlooks exposing (..)
+import Model exposing (..)
+import Svg exposing (image, svg)
+import Svg.Attributes exposing (viewBox)
 
 
 {-main =
@@ -19,6 +22,7 @@ import Model exposing (Model)
 view: Model-> List (Html Msg)
 view model =
     [
+      renderNiceOutlook model,
       renderInfo,
       renderMusic model,
       renderButton1,
@@ -29,20 +33,30 @@ view model =
       renderDifficulty2,
       renderDifficulty3,
       renderHome,
-      renderDifficulty model
+      renderDifficulty model,
+      renderButtonLeft,
+      renderButtonRight
     ]
+
+
+renderNiceOutlook : Model -> Html Msg
+renderNiceOutlook model =
+    div [ style "backgroundColor" "#1d1d1d"]
+                        [svg
+                        [ viewBox "0 0 400 400" ][
+                        renderBooklet (Point 0 0) 100 65 model.showingpage
+                        ]]
 
 
 renderInfo :  Html Msg
 renderInfo  =
     div
         [
-          style "background" "rgba(236, 240, 241, 0.85)"
-        , style "color" "#090004"
+          style "background" "#1d1d1d"
+        , style "color" "#ffffff"
         , style "height" "300px"
         , style "left" "200px"
         , style "top" "100px"
-        , style "position" "absolute"
         , style "width" "1000px"
         ]
         [ Markdown.toHtml [] """
@@ -70,6 +84,53 @@ renderInfo  =
         """
         ]
 
+renderButtonLeft: Html Msg
+renderButtonLeft =
+    button
+    [  style "background" "#f8f4f4"
+    , style "color" "#25a194"
+    , style "display" "block"
+    , style "height" "600x"
+    , style "left" "430px"
+    , style "top" "630px"
+    , style "width" "200px"
+    , onClick (Alterpage Previousone)
+    ]
+    [ text "Previous Page"]
+
+renderButtonRight: Html Msg
+renderButtonRight =
+    button
+        [ style "background" "#f8f4f4"
+        , style "color" "#25a194"
+        , style "display" "block"
+        , style "height" "600x"
+        , style "left" "430px"
+        , style "top" "630px"
+        , style "width" "200px"
+        , onClick (Alterpage Nextone)
+        ]
+        [ text "Next Page" ]
+
+
+
+
+previousOne : Model -> List String -> Maybe String
+previousOne model bookletL =
+    if Maybe.withDefault "a"(List.head (List.drop 1 bookletL)) == model.showingpage then List.head bookletL
+    else previousOne model (List.drop 1 bookletL)
+
+nextOne : Model -> List String -> Maybe String
+nextOne model bookletL =
+    if Maybe.withDefault "a"(List.head (List.drop 1 (List.reverse bookletL))) == model.showingpage then List.head (List.reverse bookletL)
+    else nextOne model (List.reverse(List.drop 1 (List.reverse bookletL)))
+
+bookletList : List String
+bookletList = [page1, page2, page3, page4, page5, page6, page7, page8, page9, page10, page11]
+
+
+
+
 renderButton1 : Html Msg
 renderButton1 =
         button
@@ -80,7 +141,6 @@ renderButton1 =
         , style "left" "430px"
         , style "top" "630px"
         , style "width" "200px"
-        , style "position" "absolute"
         , onClick (ChangeMusic TheOasis)
         ]
         [ text "Try \"The Oasis\"! (From movie \"Ready Player One\")" ]
@@ -94,7 +154,6 @@ renderButton2 =
           , style "left" "630px"
           , style "top" "630px"
           , style "width" "200px"
-          , style "position" "absolute"
         , onClick (ChangeMusic ReturnOfAncients)
         ]
         [ text "Try \"Return of Ancients\"! (From game \"WarcraftIII\")" ]
@@ -109,7 +168,6 @@ renderButton3 =
           , style "left" "830px"
           , style "top" "630px"
           , style "width" "200px"
-          , style "position" "absolute"
         , onClick (ChangeMusic InSearchOfLife)
         ]
         [ text "Try \"In Search of Life\"! (From game \"Stellaris\")" ]
@@ -124,7 +182,6 @@ renderButton4 =
           , style "left" "1030px"
           , style "top" "630px"
           , style "width" "200px"
-          , style "position" "absolute"
           , onClick (ChangeMusic TheChordOfSpring)
           --, onClick GoHome
         ]
@@ -142,7 +199,6 @@ renderDifficulty model =
     div[
         style "left" "500px"
       , style "top" "600px"
-      , style "position" "absolute"
       ]
       [text ("Current Difficulty: " ++content)]
 
@@ -156,7 +212,6 @@ renderDifficulty1 =
           , style "left" "500px"
           , style "top" "730px"
           , style "width" "200px"
-          , style "position" "absolute"
           , onClick (ChangeDifficulty Normal)
           , title "A wise choice."
         ]
@@ -171,7 +226,6 @@ renderDifficulty2 =
           , style "left" "700px"
           , style "top" "730px"
           , style "width" "200px"
-          , style "position" "absolute"
           , onClick (ChangeDifficulty Hard)
           , title "Emm."
         ]
@@ -187,7 +241,6 @@ renderDifficulty3 =
           , style "left" "900px"
           , style "top" "730px"
           , style "width" "200px"
-          , style "position" "absolute"
           , onClick (ChangeDifficulty Nightmare)
           , title "Do not try it."
         ]
@@ -195,7 +248,7 @@ renderDifficulty3 =
 
 
 
-renderMusic : Model ->Html Msg
+renderMusic : Model -> Html Msg
 renderMusic model =
     let
         music =
@@ -208,8 +261,7 @@ renderMusic model =
     in
         div[
           style "top" "430px"
-        , style "left" "530px"
-        , style "position" "absolute"]
+        , style "left" "530px"]
         [audio
             [ src music
             , controls True
@@ -222,7 +274,6 @@ renderHome =
     [
      style "top" "30px"
    , style "left" "30px"
-   , style "position" "absolute"
    , title "Is everything OK?"
    , onClick GoHome
    ]

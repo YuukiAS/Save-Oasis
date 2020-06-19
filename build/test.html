@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <style>body { padding: 0; margin: 0; }</style>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <style type = "text/css">
+html {
+  height:100%
+}
+
+body {
+  height:100%;
+  background:teal;
+  overflow:hidden;
+}
+
+.drop {
+  background:white;
+  width:1px;
+  height:36px;
+  position:absolute;
+  bottom:200px;
+  animation: fall 4s linear infinite;
+}
+
+@keyframes fall {
+  to {
+    margin-top:900px;
+  }
+}
+    </style>
+    <!--link rel="stylesheet" href="effect.css" type="text/css"-->
+    <!--script type="text/javascript" src="elm.js"></script-->
+    <!--script type="text/javascript" src="effect.js"></script-->
+</head>
+
+<body>
+<section class='rain'></section>
+</body>
+
+<!--script type="text/javascript">
+var app = Elm.Main.init({
+    node: document.getElementById('main')
+});
+</script-->
+<script>
+var nbDrop = 500;
+
+function randRange(minNum, maxNum){
+  return (Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum);
+}
+
+function createRain(){
+  for (var i = 0; i < nbDrop; i++){
+    var dropLeft = randRange(0,1600);
+    var dropTop = randRange(-1000, 1400);
+    console.log(dropTop);
+    console.log(dropLeft);
+
+    $('.rain').append('<div class="drop" id="drop'+i+'"></div>');
+
+    var currentDrop = $('#drop' + i.toString());
+
+    var grabDropJS = document.getElementById('drop'+i.toString());
+    // console.log('drop'+i);
+    // console.log(grabDropJS);
+    //grabDropJS.style.background = 'white';
+    grabDropJS.style.left = dropLeft + 'px';
+    //console.log(grabDropJS.style.left);
+    //grabDropJS.style.top = dropTop + 'px';
+
+    //$('#drop' + i).css('color', 'red');
+    $('#drop' + i).css('left', dropLeft);
+    $('#drop' + i).css('top', dropTop);
+  }
+  //console.log($('#drop16'));
+}
+
+createRain();
+
+</script>
+
+</html>
+
