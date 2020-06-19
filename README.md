@@ -1,7 +1,7 @@
 # Save Oasis Instructions
-![1](README.assets\1.jpg)
+![1](https://github.com/YuukiAS/VG100_Project1/blob/master/README.assets/1.jpg)
 
-![2](README.assets\2.jpg)
+![2](https://github.com/YuukiAS/VG100_Project1/blob/master/README.assets/2.jpg)
 
 
 
