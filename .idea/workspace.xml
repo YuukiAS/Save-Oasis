@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3edad3ad-0371-41b1-a7b2-4efa31bd61d4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Help.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Help.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Home.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Home.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -249,7 +249,21 @@
       <option name="project" value="LOCAL" />
       <updated>1592537363944</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Version 0.99&#10;- Nearly Complete">
+      <created>1592537509429</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1592537509429</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Version 0.99&#10;- Nearly Complete">
+      <created>1592537626418</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1592537626418</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,10 +316,10 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="542" y="206" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1549.831@0.0.1549.831" timestamp="1592536669635" />
-    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1592537508661">
+    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1592537625709">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1592537508661" />
+    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1592537625709" />
     <state x="520" y="307" key="EnvironmentVariablesDialog" timestamp="1590727828040">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -332,10 +346,10 @@
     <state x="335" y="117" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1592532154934" />
     <state x="311" y="140" key="SettingsEditor/0.23.1440.847@0.23.1440.847" timestamp="1592515991773" />
     <state x="311" y="143" key="SettingsEditor/0.23.1440.849@0.23.1440.849" timestamp="1592496398462" />
-    <state x="367" y="145" key="Vcs.Push.Dialog.v2" timestamp="1592537511961">
+    <state x="367" y="145" key="Vcs.Push.Dialog.v2" timestamp="1592537628269">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="367" y="145" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1592537511961" />
+    <state x="367" y="145" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1592537628269" />
     <state x="746" y="114" width="774" height="632" key="find.popup" timestamp="1592465499018">
       <screen x="0" y="0" width="1549" height="831" />
     </state>

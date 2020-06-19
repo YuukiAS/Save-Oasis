@@ -15,11 +15,11 @@
 
 ![7](README.assets\7.jpg)
 
-![8](README.assets\8.jpg)
+![8](https://gitee.com/YuukiAS/FigureBed/raw/master/20200619113541.jpg)
 
-![9](README.assets\9.jpg)
+![9](https://gitee.com/YuukiAS/FigureBed/raw/master/20200619113500.jpg)
 
-![10](README.assets\10.jpg)
+![10](https://gitee.com/YuukiAS/FigureBed/raw/master/20200619113452.jpg)
 
 # Have a good time!
 
