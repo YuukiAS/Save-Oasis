@@ -1,6 +1,6 @@
 module Help exposing (..)
 import Html exposing (..)
-import Html.Attributes exposing (controls, src, style, title)
+import Html.Attributes exposing (controls, src, style, title,href)
 import Html.Events exposing (onClick)
 import Browser
 import Json.Decode as Json
@@ -35,7 +35,8 @@ view model =
       renderHome,
       renderDifficulty model,
       renderButtonLeft,
-      renderButtonRight
+      renderButtonRight,
+      a[href "https://github.com/YuukiAS/VG100_Project1"][text "Go to instructions"]
     ]
 
 

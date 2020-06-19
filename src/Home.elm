@@ -48,7 +48,6 @@ view =
                   , style "position" "absolute"
                   , style "border" "0"
                   ,onClick GoHelp][text "Help"]]
-
   ]
 
   ]
