@@ -48,7 +48,7 @@ view =
                   , style "position" "absolute"
                   , style "border" "0"
                   ,onClick GoHelp][text "Help"]]
-  , embed [style "height" "50px", style "width" "100px", src "assets/musics/The Oasis.mp3",loop True][]
+  , embed [style "height" "50px", style "width" "100px", src" assets/musics/The Oasis.mp3",loop True][]
 
   ]
 

@@ -189,7 +189,7 @@ renderDifficulty model =
 renderDifficulty1 : Html Msg
 renderDifficulty1 =
         button
-        [   style "background" "#e0d4d499"
+        [   style "background" "#524f4f99"
           , style "color" "#2fa11a"
           , style "display" "block"
           , style "height" "30px"
@@ -220,7 +220,7 @@ renderDifficulty2 =
 renderDifficulty3 : Html Msg
 renderDifficulty3 =
         button
-        [   style "background" "#524f4f99"
+        [   style "background" "#e0d4d499"
           , style "color" "#841707"
           , style "display" "block"
           , style "height" "30px"

@@ -50,7 +50,7 @@ renderSettings =
          help = svg[x "62%", y"3.8%"][Ionicon.help 9 grey]
          hype1 = rect[x "62%", y"1.2%",width"2%",height"2%",fillOpacity"0",onClick GoHome][]  -- 对于home和help的超链接
          hype2 = rect[x "62%", y"4%",width"2%",height"2%",fillOpacity"0",onClick GoHelp][] --* hidden和fill none 都不行!
-         hype3 = rect[x "59%", y"2.2%",width"2%",height"2%",fillOpacity"0",onClick Start][]
+         hype3 = rect[x "59%", y"2.2%",width"2%",height"2%",fillOpacity"0",onClick Start][] --* hidden和fill none 都不行!
     in
             [
                 refresh

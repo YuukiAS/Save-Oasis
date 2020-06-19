@@ -1,68 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3edad3ad-0371-41b1-a7b2-4efa31bd61d4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Version10.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.assets/1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.assets/10.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.assets/2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.assets/3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.assets/4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.assets/5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.assets/6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.assets/7.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.assets/8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.assets/9.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/booklet/1.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/booklet/10.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/booklet/11.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/booklet/2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/booklet/3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/booklet/4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/booklet/5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/booklet/6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/booklet/7.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/booklet/8.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/booklet/9.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/main/clover/forclover.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/assets/views/viewbkg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/effect.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/elm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/test.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/elm.js" afterDir="false" />
+    <list default="true" id="b4996331-7205-4906-9fd9-cbe005695bd4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/assets/main/brighten.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/main/brighten.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Calculate.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Calculate.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Check.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Check.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Dashboard.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Dashboard.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Dashboard.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Dashboard.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Home.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Home.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Main.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Main.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Model.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Model.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Model.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Model.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Object.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Object.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Object.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Object.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Outlooks.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Outlooks.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Outlooks.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Outlooks.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Update.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Update.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Update.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Update.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/d.dat" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/d.dat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/Version7" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Dashboard.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dashboard.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Help.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Help.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Home.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Home.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Message.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Message.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Object.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Object.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Outlooks.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Outlooks.elm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Update.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Update.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/View.elm" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
