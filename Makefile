@@ -1,3 +1,4 @@
 all:
-	elm make src/Main.elm
-	mv index.html build/index.html
+	ls
+	#elm make src/Main.elm
+	#mv index.html build/index.html

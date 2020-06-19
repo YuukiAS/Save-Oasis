@@ -26,7 +26,8 @@ view model =
                 (interweave (renderDashboard model) (interweave (renderRowBrick (Point 2 8) model 4 4 10 19)
                 [
                         renderInterface (Point 0 0) 100 65 background
-                    ,   renderInterface (Point 2 0) 80 60 interface
+                     ,  renderInterface (Point 2 0) 80 60 interface
+                     ,  renderInterface (Point 87 32) 10 10 forclover
                      ,  if model.life >= 5 then
                         renderInterface (Point 38 26) 8 8 vKernel5
                         else if model.life == 4 then
@@ -45,6 +46,13 @@ view model =
                     ,   rotateCircle (Point 69 25) 10 10 circular model.wShell_right
                     ,   rotateCircle (Point 37 9) 10 10 circular model.wShell_up
                     ,   rotateCircle (Point 37 41) 10 10 circular model.wShell_down
+                    ,   rotateCircle (Point 87 32) 10 10 cloverC 0
+                    ,   if model.clover.leftClover==True then rotateCircle (Point 87 32) 10 10 cloverL 0
+                    else svg[][]
+                    ,   if model.clover.rightClover==True then rotateCircle (Point 87 32) 10 10 cloverR 0
+                    else svg[][]
+                    ,   if model.clover.upClover==True then rotateCircle (Point 87 32) 10 10 cloverU 0
+                    else svg[][]
                     , if model.clover.upClover == False then
                         rotateCircle (Point 37 9) 10 10 vkf 0
                         else svg[][]
@@ -62,19 +70,19 @@ view model =
                     ,   renderInterface (Point 2 42) 10 10 downleft
                     ,   renderInterface (Point 72 8) 10 10 upright
                     ,   renderInterface (Point 72 42) 10 10 downright
+                    ,   hype
                 ]
                 ))
                 ]
               , div [][renderMusic model]
               , div [][renderSE model]
+              , div [][renderGameButton model]
             ]
 
 renderDashboard: Model -> List(Html Msg)   --* 包括整个dashboard
 renderDashboard model =
-    (interweave
-        (List.append(List.append renderSettings (renderStatus model)) (renderSkills model))
-        [renderPanel (Point 40 0.5) 50 6]
-    )
+        List.append(List.append renderSettings (renderStatus model)) (renderSkills model)
+
 
 {-renderGameButton : Model -> Html Msg
 renderGameButton model =
@@ -140,3 +148,41 @@ renderMusic model =
                     InSearchOfLife ->"assets/musics/In Search of Life.mp3"
       in
          embed [style "height" "50px", style "width" "100px", src music,loop True][]
+
+
+renderGameButton : Model -> Html Msg
+renderGameButton model =
+    let
+        ( txt, msg ) =
+            if model.state == Model.Stopped && model.minute == 0 && model.second == 0
+                    then ( "New game", Start )
+            else if model.state == Model.Stopped && (model.minute /= 0 || model.second /=0 ) && model.life == 0
+                   then ( "Failure. Start again!", Start)
+            else if model.state == Model.Stopped && (model.minute /= 0 || model.second /=0 ) && model.life /= 0
+                    then ( "Victory!", Start)
+            else
+                    ( "Enjoy the game!", Keep )
+
+    in
+    button
+        [ style "background" "#39393880"
+                , style "border" "0"
+                , style "top" "1%"
+                , style "color" "#12ec02"
+                , style "cursor" "pointer"
+                , style "display" "block"
+                , style "font-family" "Chalkduster"
+                , style "font-size" "30px"
+                , style "font-weight" "300"
+                , style "height" "7%"
+                , style "left" "2%"
+                , style "line-height" "40px"
+                , style "outline" "none"
+                , style "position" "absolute"
+                , style "padding" "0"
+                , style "width" "30%"
+                , style "z-index" "1"
+                , onClick msg
+                ]
+        [ text txt ]
+

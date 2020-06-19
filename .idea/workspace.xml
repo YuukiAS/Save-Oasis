@@ -2,18 +2,46 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3edad3ad-0371-41b1-a7b2-4efa31bd61d4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/build/assets/main/bricks/normal2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/Version10.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.assets/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.assets/10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.assets/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.assets/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.assets/4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.assets/5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.assets/6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.assets/7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.assets/8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.assets/9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/booklet/1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/booklet/10.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/booklet/11.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/booklet/2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/booklet/3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/booklet/4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/booklet/5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/booklet/6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/booklet/7.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/booklet/8.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/booklet/9.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/main/clover/forclover.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/assets/views/viewbkg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/effect.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/elm.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/test.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/elm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/assets/main/brighten.png" beforeDir="false" afterPath="$PROJECT_DIR$/build/assets/main/brighten.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Calculate.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Calculate.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Calculate.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Calculate.elmo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Check.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Check.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Check.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Check.elmo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Dashboard.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Dashboard.elmi" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Dashboard.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Dashboard.elmo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Help.elmo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Home.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Home.elmo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Main.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Main.elmi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Main.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Main.elmo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmi" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Message.elmo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/Model.elmi" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/Model.elmi" afterDir="false" />
@@ -28,6 +56,9 @@
       <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmo" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/View.elmo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/elm-stuff/0.19.1/d.dat" beforeDir="false" afterPath="$PROJECT_DIR$/elm-stuff/0.19.1/d.dat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Dashboard.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dashboard.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Help.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Help.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Home.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Home.elm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Message.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Message.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Object.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Object.elm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Outlooks.elm" beforeDir="false" afterPath="$PROJECT_DIR$/src/Outlooks.elm" afterDir="false" />
@@ -87,14 +118,14 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/elm.json" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="org.elm.workspace.ui.ElmWorkspaceConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -108,7 +139,7 @@
   </component>
   <component name="RunManager">
     <configuration default="true" type="ELM_TEST_RUN_CONFIGURATION" factoryName="Elm Test configuration factory">
-      <ElmTestRunConfiguration elm-folder="D:\Projects\VG100_Project1" />
+      <ElmTestRunConfiguration elm-folder="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
     <configuration name="Run Elm" type="ShConfigurationType">
@@ -150,6 +181,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1590561480467</updated>
+      <workItem from="1592496340312" duration="2571000" />
+      <workItem from="1592499243788" duration="37000" />
+      <workItem from="1592499310335" duration="5336000" />
+      <workItem from="1592509234210" duration="840000" />
+      <workItem from="1592515981453" duration="11808000" />
+      <workItem from="1592532449953" duration="189000" />
+      <workItem from="1592532849779" duration="4973000" />
     </task>
     <task id="LOCAL-00001" summary="Basic Structure v0">
       <created>1590561589847</created>
@@ -266,6 +304,9 @@
     <option name="localTasksCounter" value="17" />
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -308,18 +349,21 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="30" y="74" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1549.831@0.0.1549.831" timestamp="1590942094357" />
-    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1592493791195">
+    <state x="424" y="0" key="CommitChangelistDialog2" timestamp="1592493802168">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1592493791195" />
+    <state x="424" y="0" key="CommitChangelistDialog2/0.0.1549.831@0.0.1549.831" timestamp="1592493802168" />
     <state x="520" y="307" key="EnvironmentVariablesDialog" timestamp="1590727828040">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="520" y="307" key="EnvironmentVariablesDialog/0.0.1549.831@0.0.1549.831" timestamp="1590727828040" />
-    <state x="555" y="171" key="FileChooserDialogImpl" timestamp="1592463680410">
+    <state x="555" y="171" key="FileChooserDialogImpl" timestamp="1592539960683">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="555" y="171" key="FileChooserDialogImpl/0.0.1549.831@0.0.1549.831" timestamp="1592463680410" />
+    <state x="550" y="170" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592509292513" />
+    <state x="555" y="171" key="FileChooserDialogImpl/0.0.1549.831@0.0.1549.831" timestamp="1592539960683" />
+    <state x="516" y="198" key="FileChooserDialogImpl/0.23.1440.847@0.23.1440.847" timestamp="1592516000238" />
+    <state x="516" y="198" key="FileChooserDialogImpl/0.23.1440.849@0.23.1440.849" timestamp="1592496405520" />
     <state x="148" y="72" key="MergeDialog" timestamp="1590943423958">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
@@ -328,14 +372,17 @@
       <screen x="0" y="0" width="1549" height="831" />
     </state>
     <state x="479" y="122" key="MultipleFileMergeDialog/0.0.1549.831@0.0.1549.831" timestamp="1592396127162" />
-    <state x="335" y="117" key="SettingsEditor" timestamp="1592447976791">
+    <state x="335" y="117" key="SettingsEditor" timestamp="1592539955860">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="335" y="117" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1592447976791" />
-    <state x="367" y="145" key="Vcs.Push.Dialog.v2" timestamp="1592461243488">
+    <state x="332" y="114" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592509276816" />
+    <state x="335" y="117" key="SettingsEditor/0.0.1549.831@0.0.1549.831" timestamp="1592539955860" />
+    <state x="311" y="140" key="SettingsEditor/0.23.1440.847@0.23.1440.847" timestamp="1592515991773" />
+    <state x="311" y="143" key="SettingsEditor/0.23.1440.849@0.23.1440.849" timestamp="1592496398462" />
+    <state x="367" y="145" key="Vcs.Push.Dialog.v2" timestamp="1592493807292">
       <screen x="0" y="0" width="1549" height="831" />
     </state>
-    <state x="367" y="145" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1592461243488" />
+    <state x="367" y="145" key="Vcs.Push.Dialog.v2/0.0.1549.831@0.0.1549.831" timestamp="1592493807292" />
     <state x="746" y="114" width="774" height="632" key="find.popup" timestamp="1592465499018">
       <screen x="0" y="0" width="1549" height="831" />
     </state>

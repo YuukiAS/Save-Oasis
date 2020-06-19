@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <style>body { padding: 0; margin: 0; }</style>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <!--link rel="stylesheet" href="effect.css" type="text/css"-->
+
+    <!--script type="text/javascript" src="elm.js"></script-->
+
+</head>
+
+<body>
+
+<script>
+    $(document).ready(function() {
+  var div = document.createElement('div'),
+      canvas = document.createElement('canvas'),
+      ctx = canvas.getContext('2d'),
+      w,
+      h,
+      msTimer = 0.0,
+      lightningTimer,
+      lightningAlpha,
+      rainArr = [50],
+      rainSpeed = 4;
+
+  // initialize
+  function init() {
+    document.body.appendChild(div);
+    div.style.position = "fixed";
+    div.appendChild(canvas);
+    UpdatePosition();
+    create_rain();
+    lightningTimer = 8000.0;
+    lightningAlpha = 0.0;
+
+    // 1 frame every 30ms
+    if (typeof game_loop != "undefined") clearInterval(game_loop);
+    game_loop = setInterval(mainLoop, 30);
+  }
+  init();
+
+  function create_rain() {
+    var length = 500;
+    rainArr = []; //Empty array to start with
+    for (var i = length - 1; i >= 0; i--) {
+      rainArr.push({
+        x: 1,
+        y: 0,
+        z: 0
+      });
+    }
+
+    for (var j = 0; j < 500; j++) {
+      rainArr[j].x = Math.floor((Math.random() * 820) - 9);
+      rainArr[j].y = Math.floor((Math.random() * 520) - 9);
+      rainArr[j].z = Math.floor((Math.random() * 2) + 1);
+      rainArr[j].w = Math.floor((Math.random() * 3) + 2);
+    }
+  }
+
+  function mainLoop() {
+    UpdatePosition();
+    msTimer += 30;
+
+    if (lightningTimer < 0.0)  {
+      lightningTimer = 8000.0;
+    }
+    else {
+      lightningTimer -= 30.0;
+    }
+
+    ctx.fillStyle = "#202426";
+    ctx.fillRect(0,0,w,h);
+
+    rain();
+
+    if (lightningTimer < 500.0) {
+      weather(lightningTimer);
+    }
+
+    ctx.fillStyle = 'rgba(255, 255, 255, .1)';
+    ctx.font = '30px Sans-Serif';
+    ctx.fillText(".rain", w - 70, 492);
+  }
+
+
+  // canvas positioning and sizing
+  function UpdatePosition () {
+    var bodyWidth = document.documentElement.clientWidth,
+        bodyHeight = document.documentElement.clientHeight;
+    w = canvas.width = Math.max(500,bodyWidth);
+    h = canvas.height = Math.max(500,bodyHeight);
+    div.style.left=div.style.right=
+      div.style.top=div.style.bottom="0";
+  }
+
+  function rain() {
+    for (var i = 0; i < 500; i++) {
+      if  (rainArr[i].y >= 482) {
+        rainArr[i].y-=500;
+      }
+      if  (rainArr[i].x < -10) {
+        rainArr[i].x+=w;
+      }
+      else {
+        rainArr[i].y += rainArr[i].w * rainSpeed;
+        rainArr[i].x -= 5 + Math.floor(rainArr[i].y / 250) - rainArr[i].w;
+      }
+      var grd = ctx.createRadialGradient(250, 450, 140, 250, 300, 600);
+      grd.addColorStop(0.000, 'rgba(100, 170, 160, 0.2)');
+      grd.addColorStop(0.1, 'rgba(100, 160, 160, 0.12)');
+      grd.addColorStop(0.2, 'rgba(100, 150, 150, 0.1)');
+      grd.addColorStop(1, 'rgba(100, 140, 140, .08)');
+      ctx.fillStyle = grd;
+      ctx.fillRect(rainArr[i].x, rainArr[i].y, rainArr[i].z, 4);
+    }
+  }
+
+  // function to create a lightning effect on a timer
+  function weather(_lTimer) {
+
+    lightningAlpha = 0.0;
+
+    if ( _lTimer > 350.0) {
+      lightningAlpha = (500.0 - _lTimer) * 0.004;
+    }
+
+    else if (_lTimer < 350.0 && _lTimer > 250.0) {
+      lightningAlpha = (_lTimer - 250.0) * 0.006;
+    }
+
+    else if (_lTimer < 250.0 && _lTimer >= 100.0) {
+      lightningAlpha = (250.0 - _lTimer) * 0.004;
+    }
+
+    else if (_lTimer < 100.0 && _lTimer >= 0.0) {
+      lightningAlpha = _lTimer * 0.006;
+    }
+
+    if (lightningAlpha > 0.0) {
+      ctx.fillStyle = 'rgba(250, 250, 245, ' + lightningAlpha + ')';
+      ctx.fillRect(0,0,w,h);
+    }
+  }
+})
+</script>
+
+
+
+
+<!--script type="text/javascript">
+var app = Elm.Main.init({
+    node: document.getElementById('main')
+});
+</script-->
+
+
+
+
+</body>
+</html>
+

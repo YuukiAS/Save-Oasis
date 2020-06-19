@@ -1,6 +1,6 @@
 module Help exposing (..)
 import Html exposing (..)
-import Html.Attributes exposing (..)
+import Html.Attributes exposing (controls, src, style, title)
 import Html.Events exposing (onClick)
 import Browser
 import Json.Decode as Json
@@ -8,8 +8,11 @@ import Markdown
 import Ionicon exposing (home)
 import Color exposing (grey)
 import Message exposing (Msg(..))
-import Outlooks exposing (Difficulty(..),Music(..))
-import Model exposing (Model)
+import Object exposing (renderBooklet, renderInterface)
+import Outlooks exposing (..)
+import Model exposing (..)
+import Svg exposing (image, svg)
+import Svg.Attributes exposing (viewBox)
 
 
 {-main =
@@ -19,8 +22,9 @@ import Model exposing (Model)
 view: Model-> List (Html Msg)
 view model =
     [
-      renderInfo,
-      renderMusic model,
+      renderNiceOutlook model,
+      div[style "backgroundColor" "#1d1d1d"]
+      [renderMusic model,
       renderButton1,
       renderButton2,
       renderButton3,
@@ -29,72 +33,104 @@ view model =
       renderDifficulty2,
       renderDifficulty3,
       renderHome,
-      renderDifficulty model
+      renderDifficulty model,
+      renderButtonLeft,
+      renderButtonRight]
     ]
 
 
-renderInfo :  Html Msg
-renderInfo  =
-    div
-        [
-          style "background" "rgba(236, 240, 241, 0.85)"
-        , style "color" "#090004"
-        , style "height" "300px"
-        , style "left" "200px"
-        , style "top" "100px"
+renderNiceOutlook : Model -> Html Msg
+renderNiceOutlook model =
+    div [ style "backgroundColor" "#1d1d1d"]
+                        [svg
+                        [ viewBox "0 0 400 200" ][
+                        renderBooklet (Point 0 0) 80 100  model.showingpage
+                        ]]
+
+
+renderButtonLeft: Html Msg
+renderButtonLeft =
+    button
+        [ style "background" "#02020299"
+        , style "color" "#8acce7"
+        , style "cursor" "pointer"
+        , style "font-family" "Chalkduster"
+        , style "font-size" "40px"
+        , style "font-weight" "300"
+        , style "height" "90px"
+        , style "width" "350px"
+        , style "left" "1000px"
+        , style "bottom" "600px"
         , style "position" "absolute"
-        , style "width" "1000px"
+        , style "border" "0"
+    , onClick (Alterpage Previousone)
+    ]
+    [ text "Previous Page"]
+
+renderButtonRight: Html Msg
+renderButtonRight =
+    button
+        [ style "background" "#02020299"
+        , style "color" "#8acce7"
+        , style "cursor" "pointer"
+        , style "font-family" "Chalkduster"
+        , style "font-size" "40px"
+        , style "font-weight" "300"
+        , style "height" "90px"
+        , style "width" "350px"
+        , style "left" "1000px"
+        , style "bottom" "200px"
+        , style "position" "absolute"
+        , style "border" "0"
+        , onClick (Alterpage Nextone)
         ]
-        [ Markdown.toHtml [] """
-        # This is the page of help.
+        [ text "Next Page" ]
 
-        ## Background
-        This is the background.
 
-        ## How to play the game
-        The method to play the game.
 
-        ## The status
-        Status includes life, exp, leaf, and so on
 
-        ## The skills
-        There are more than 10 skills for you to choose. Of course, you must pay some price for them!
-        Skill1: You will gain 1 life and 1 max_life; Skill2: The speed of ball will be half immediately; Skill3: Your paddle will move faster;
-        Skill4: The cost of all skills - 10; Skills5: The gain of exp will be faster; Skills6: You will not lose life when being frozen;
-        Skill7: You will periodically gain some life(depending on the current one); Skill8: The acceleration of ball will be slower; Skill9: Some bricks will disappear randomly.
-        Skill10: You can get the kernel by one hit!
+previousOne : Model -> List String -> Maybe String
+previousOne model bookletL =
+    if Maybe.withDefault "a"(List.head (List.drop 1 bookletL)) == model.showingpage then List.head bookletL
+    else previousOne model (List.drop 1 bookletL)
 
-        ## About the game
-        This game is powered by **Team Clover**!
+nextOne : Model -> List String -> Maybe String
+nextOne model bookletL =
+    if Maybe.withDefault "a"(List.head (List.drop 1 (List.reverse bookletL))) == model.showingpage then List.head (List.reverse bookletL)
+    else nextOne model (List.reverse(List.drop 1 (List.reverse bookletL)))
 
-        """
-        ]
+bookletList : List String
+bookletList = [page1, page2, page3, page4, page5, page6, page7, page8, page9, page10, page11]
+
+
+
+
 
 renderButton1 : Html Msg
 renderButton1 =
         button
-        [  style "background" "#f8f4f4"
-        , style "color" "#25a194"
+        [  style "background" "#02020299"
+        , style "color" "#28b8a9"
         , style "display" "block"
-        , style "height" "600x"
+        , style "height" "60px"
         , style "left" "430px"
         , style "top" "630px"
         , style "width" "200px"
-        , style "position" "absolute"
+        , style "border" "0"
         , onClick (ChangeMusic TheOasis)
         ]
         [ text "Try \"The Oasis\"! (From movie \"Ready Player One\")" ]
 renderButton2 : Html Msg
 renderButton2 =
         button
-        [   style "background" "#f8f4f4"
-          , style "color" "#25a194"
+        [   style "background" "#0202024d"
+          , style "color" "#28b8a9"
           , style "display" "block"
-          , style "height" "600x"
+          , style "height" "60px"
           , style "left" "630px"
           , style "top" "630px"
           , style "width" "200px"
-          , style "position" "absolute"
+          , style "border" "0"
         , onClick (ChangeMusic ReturnOfAncients)
         ]
         [ text "Try \"Return of Ancients\"! (From game \"WarcraftIII\")" ]
@@ -102,14 +138,14 @@ renderButton2 =
 renderButton3 : Html Msg
 renderButton3 =
         button
-        [   style "background" "#f8f4f4"
-          , style "color" "#25a194"
+        [   style "background" "#02020299"
+          , style "color" "#28b8a9"
           , style "display" "block"
-          , style "height" "600x"
+          , style "height" "60px"
           , style "left" "830px"
           , style "top" "630px"
           , style "width" "200px"
-          , style "position" "absolute"
+          , style "border" "0"
         , onClick (ChangeMusic InSearchOfLife)
         ]
         [ text "Try \"In Search of Life\"! (From game \"Stellaris\")" ]
@@ -117,14 +153,14 @@ renderButton3 =
 renderButton4 : Html Msg
 renderButton4 =
         button
-        [   style "background" "#f8f4f4"
-          , style "color" "#25a194"
+        [   style "background" "#0202024d"
+          , style "color" "#28b8a9"
           , style "display" "block"
-          , style "height" "600x"
+          , style "height" "60px"
           , style "left" "1030px"
           , style "top" "630px"
           , style "width" "200px"
-          , style "position" "absolute"
+          , style "border" "0"
           , onClick (ChangeMusic TheChordOfSpring)
           --, onClick GoHome
         ]
@@ -140,23 +176,27 @@ renderDifficulty model =
                 Nightmare -> "Nightmare"
     in
     div[
-        style "left" "500px"
-      , style "top" "600px"
-      , style "position" "absolute"
+        style "color" "#ffffff"
+              , style "display" "block"
+                  , style "height" "600x"
+                  , style "left" "500px"
+                  , style "top" "730px"
+                  , style "width" "200px"
+                  , style "border" "0"
       ]
       [text ("Current Difficulty: " ++content)]
 
 renderDifficulty1 : Html Msg
 renderDifficulty1 =
         button
-        [   style "background" "#f8f4f4"
+        [   style "background" "#e0d4d499"
           , style "color" "#2fa11a"
           , style "display" "block"
-          , style "height" "600x"
+          , style "height" "30px"
           , style "left" "500px"
           , style "top" "730px"
           , style "width" "200px"
-          , style "position" "absolute"
+          , style "border" "0"
           , onClick (ChangeDifficulty Normal)
           , title "A wise choice."
         ]
@@ -164,14 +204,14 @@ renderDifficulty1 =
 renderDifficulty2 : Html Msg
 renderDifficulty2 =
         button
-        [   style "background" "#f8f4f4"
-          , style "color" "#a19e32"
+        [   style "background" "#adadad99"
+          , style "color" "#e0dc48"
           , style "display" "block"
-          , style "height" "600x"
+          , style "height" "30px"
           , style "left" "700px"
           , style "top" "730px"
           , style "width" "200px"
-          , style "position" "absolute"
+          , style "border" "0"
           , onClick (ChangeDifficulty Hard)
           , title "Emm."
         ]
@@ -180,14 +220,14 @@ renderDifficulty2 =
 renderDifficulty3 : Html Msg
 renderDifficulty3 =
         button
-        [   style "background" "#f8f4f4"
-          , style "color" "#a12b19"
+        [   style "background" "#524f4f99"
+          , style "color" "#841707"
           , style "display" "block"
-          , style "height" "600x"
+          , style "height" "30px"
           , style "left" "900px"
           , style "top" "730px"
           , style "width" "200px"
-          , style "position" "absolute"
+          , style "border" "0"
           , onClick (ChangeDifficulty Nightmare)
           , title "Do not try it."
         ]
@@ -195,7 +235,7 @@ renderDifficulty3 =
 
 
 
-renderMusic : Model ->Html Msg
+renderMusic : Model -> Html Msg
 renderMusic model =
     let
         music =
@@ -208,8 +248,7 @@ renderMusic model =
     in
         div[
           style "top" "430px"
-        , style "left" "530px"
-        , style "position" "absolute"]
+        , style "left" "530px"]
         [audio
             [ src music
             , controls True
@@ -222,8 +261,8 @@ renderHome =
     [
      style "top" "30px"
    , style "left" "30px"
-   , style "position" "absolute"
    , title "Is everything OK?"
+   , style "position" "absolute"
    , onClick GoHome
    ]
     [div[][home 50 grey]]
