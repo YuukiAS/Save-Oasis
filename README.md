@@ -3,23 +3,21 @@
 
 ![2](https://github.com/YuukiAS/VG100_Project1/blob/master/README.assets/2.jpg)
 
+![3](https://github.com/YuukiAS/VG100_Project1/blob/master/README.assets/3.jpg)
 
+![4](https://github.com/YuukiAS/VG100_Project1/blob/master/README.assets/4.jpg)
 
-![3](README.assets\3.jpg)
+![5](https://github.com/YuukiAS/VG100_Project1/blob/master/README.assets/5.jpg)
 
-![4](README.assets\4.jpg)
+![6](https://github.com/YuukiAS/VG100_Project1/blob/master/README.assets/6.jpg)
 
-![5](README.assets\5.jpg)
+![7](https://github.com/YuukiAS/VG100_Project1/blob/master/README.assets/7.jpg)
 
-![6](README.assets\6.jpg)
+![8](https://github.com/YuukiAS/VG100_Project1/blob/master/README.assets/8.jpg)
 
-![7](README.assets\7.jpg)
+![9](https://github.com/YuukiAS/VG100_Project1/blob/master/README.assets/9.jpg)
 
-![8](https://gitee.com/YuukiAS/FigureBed/raw/master/20200619113541.jpg)
-
-![9](https://gitee.com/YuukiAS/FigureBed/raw/master/20200619113500.jpg)
-
-![10](https://gitee.com/YuukiAS/FigureBed/raw/master/20200619113452.jpg)
+![10](https://github.com/YuukiAS/VG100_Project1/blob/master/README.assets/10.jpg)
 
 # Have a good time!
 
